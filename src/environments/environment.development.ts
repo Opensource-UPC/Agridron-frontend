@@ -4,4 +4,8 @@ export const environment = {
   AgriDronProviderProductsEndpointPath: '/products',
   AgriDronProviderCartsEndpointPath: '/carts',
   AgriDronProviderUsersEndpointPath: '/users',
+  AgriDronProviderFarmsEndpointPath: '/farms',
+  AgriDronProviderParcelsEndpointPath: '/parcels',
+  AgriDronProviderFumigationAreasEndpointPath: '/fumigation-areas',
+  AgriDronProviderCropsEndpointPath: '/crops',
 };
