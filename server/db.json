@@ -1,0 +1,98 @@
+{
+  "weather": [
+    {
+      "id": 1,
+      "location": "Cañete",
+      "temperature": 24.5,
+      "humidity": 68,
+      "windSpeed": 12.3,
+      "precipitation": 0,
+      "observedAt": "2026-10-02T08:00:00",
+      "alerts": []
+    },
+    {
+      "id": 2,
+      "location": "Ica",
+      "temperature": 31.2,
+      "humidity": 35,
+      "windSpeed": 27.8,
+      "precipitation": 0,
+      "observedAt": "2026-10-02T08:00:00",
+      "alerts": [
+        {
+          "id": 1,
+          "severity": "HIGH",
+          "message": "Viento superior a 25 km/h: no se recomienda la fumigación con dron.",
+          "createdAt": "2026-10-02T08:05:00"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "location": "Piura",
+      "temperature": 29,
+      "humidity": 82,
+      "windSpeed": 9.1,
+      "precipitation": 6.4,
+      "observedAt": "2026-10-02T08:00:00",
+      "alerts": [
+        {
+          "id": 2,
+          "severity": "MEDIUM",
+          "message": "Precipitación detectada: posponer la misión hasta que cese la lluvia.",
+          "createdAt": "2026-10-02T08:05:00"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "location": "Huaral",
+      "temperature": 18,
+      "humidity": 65,
+      "windSpeed": 12,
+      "precipitation": 0,
+      "observedAt": "2026-10-02T08:00:00",
+      "alerts": []
+    },
+    {
+      "id": 5,
+      "location": "Arequipa",
+      "temperature": 12.4,
+      "humidity": 45,
+      "windSpeed": 15.6,
+      "precipitation": 0,
+      "observedAt": "2026-10-02T08:00:00",
+      "alerts": [
+        {
+          "id": 3,
+          "severity": "LOW",
+          "message": "Temperatura baja: vigilar la evaporación y la deriva del producto.",
+          "createdAt": "2026-10-02T08:05:00"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "location": "Tarapoto",
+      "temperature": 33.8,
+      "humidity": 90,
+      "windSpeed": 28.4,
+      "precipitation": 14.2,
+      "observedAt": "2026-10-02T08:00:00",
+      "alerts": [
+        {
+          "id": 4,
+          "severity": "HIGH",
+          "message": "Viento superior a 25 km/h: no se recomienda la fumigación con dron.",
+          "createdAt": "2026-10-02T08:05:00"
+        },
+        {
+          "id": 5,
+          "severity": "HIGH",
+          "message": "Precipitación intensa: misión no apta hasta nuevo aviso.",
+          "createdAt": "2026-10-02T08:05:00"
+        }
+      ]
+    }
+  ]
+}

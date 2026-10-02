@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/shared/presentation/components/footer-content/footer-content.css"],
+  "sourcesContent": [".footer-content {\r\n  bottom: 0;\r\n  width: 100%;\r\n  height: 90px;\r\n  background-color: #3f51b5;\r\n  color: white;\r\n  text-align: center;\r\n  margin: 0;\r\n  padding: 5px;\r\n}\r\n"],
+  "mappings": ";AAAA,CAAC;AACC,UAAQ;AACR,SAAO;AACP,UAAQ;AACR,oBAAkB;AAClB,SAAO;AACP,cAAY;AACZ,UAAQ;AACR,WAAS;AACX;",
+  "names": []
+}

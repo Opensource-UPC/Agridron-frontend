@@ -1,0 +1,132 @@
+{
+  "hash": "cfb81059",
+  "configHash": "e8795349",
+  "lockfileHash": "06ea7936",
+  "browserHash": "952f2569",
+  "optimized": {
+    "@angular/cdk/bidi": {
+      "src": "../../../../../../node_modules/@angular/cdk/fesm2022/bidi.mjs",
+      "file": "@angular_cdk_bidi.js",
+      "fileHash": "f97b4d80",
+      "needsInterop": false
+    },
+    "@angular/common": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
+      "file": "@angular_common.js",
+      "fileHash": "d81ade20",
+      "needsInterop": false
+    },
+    "@angular/common/http": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
+      "file": "@angular_common_http.js",
+      "fileHash": "513e43f9",
+      "needsInterop": false
+    },
+    "@angular/core": {
+      "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "753901d2",
+      "needsInterop": false
+    },
+    "@angular/material/button-toggle": {
+      "src": "../../../../../../node_modules/@angular/material/fesm2022/button-toggle.mjs",
+      "file": "@angular_material_button-toggle.js",
+      "fileHash": "67ec1021",
+      "needsInterop": false
+    },
+    "@angular/material/button": {
+      "src": "../../../../../../node_modules/@angular/material/fesm2022/button.mjs",
+      "file": "@angular_material_button.js",
+      "fileHash": "272cc724",
+      "needsInterop": false
+    },
+    "@angular/material/icon": {
+      "src": "../../../../../../node_modules/@angular/material/fesm2022/icon.mjs",
+      "file": "@angular_material_icon.js",
+      "fileHash": "7b703144",
+      "needsInterop": false
+    },
+    "@angular/material/toolbar": {
+      "src": "../../../../../../node_modules/@angular/material/fesm2022/toolbar.mjs",
+      "file": "@angular_material_toolbar.js",
+      "fileHash": "a51d8ba7",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "dc4fdf7d",
+      "needsInterop": false
+    },
+    "@angular/router": {
+      "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
+      "file": "@angular_router.js",
+      "fileHash": "8371af07",
+      "needsInterop": false
+    },
+    "@ngx-translate/core": {
+      "src": "../../../../../../node_modules/@ngx-translate/core/fesm2022/ngx-translate-core.mjs",
+      "file": "@ngx-translate_core.js",
+      "fileHash": "d02cbab2",
+      "needsInterop": false
+    },
+    "@ngx-translate/http-loader": {
+      "src": "../../../../../../node_modules/@ngx-translate/http-loader/fesm2022/ngx-translate-http-loader.mjs",
+      "file": "@ngx-translate_http-loader.js",
+      "fileHash": "248921cb",
+      "needsInterop": false
+    },
+    "rxjs": {
+      "src": "../../../../../../node_modules/rxjs/dist/esm5/index.js",
+      "file": "rxjs.js",
+      "fileHash": "c9ee46cc",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "_ripple-module-chunk-Ha2JLyCV": {
+      "file": "_ripple-module-chunk-Ha2JLyCV.js",
+      "isDynamicEntry": false
+    },
+    "_xhr-chunk-D_QOsesM": {
+      "file": "_xhr-chunk-D_QOsesM.js",
+      "isDynamicEntry": false
+    },
+    "bidi-COGFN9bY": {
+      "file": "bidi-COGFN9bY.js",
+      "isDynamicEntry": false
+    },
+    "common-BOxu8ben": {
+      "file": "common-BOxu8ben.js",
+      "isDynamicEntry": false
+    },
+    "core-CABa1ZRZ": {
+      "file": "core-CABa1ZRZ.js",
+      "isDynamicEntry": false
+    },
+    "esm5-DYNb5pjm": {
+      "file": "esm5-DYNb5pjm.js",
+      "isDynamicEntry": false
+    },
+    "http-Brf_r3Wf": {
+      "file": "http-Brf_r3Wf.js",
+      "isDynamicEntry": false
+    },
+    "ngx-translate-core-IFVUNeUH": {
+      "file": "ngx-translate-core-IFVUNeUH.js",
+      "isDynamicEntry": false
+    },
+    "platform-7nNNYRkn": {
+      "file": "platform-7nNNYRkn.js",
+      "isDynamicEntry": false
+    },
+    "platform-browser-D6uEv5NI": {
+      "file": "platform-browser-D6uEv5NI.js",
+      "isDynamicEntry": false
+    },
+    "private-DE6hT6sO": {
+      "file": "private-DE6hT6sO.js",
+      "isDynamicEntry": false
+    }
+  }
+}

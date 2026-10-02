@@ -4,4 +4,6 @@ export const environment = {
   AgriDronProviderProductsEndpointPath: '/products',
   AgriDronProviderCartsEndpointPath: '/carts',
   AgriDronProviderUsersEndpointPath: '/users',
+  weatherApiBaseUrl: 'http://localhost:3000',
+  weatherEndpointPath: '/weather',
 };
