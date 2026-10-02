@@ -1,0 +1,68 @@
+{
+  "farms": [
+    {
+      "id": 1,
+      "name": "Finca San Rafael",
+      "location": "Ica, Peru",
+      "ownerId": 1
+    },
+    {
+      "id": 2,
+      "name": "Finca La Esperanza",
+      "location": "Mendoza, Argentina",
+      "ownerId": 2
+    }
+  ],
+  "parcels": [
+    {
+      "id": 1,
+      "name": "Parcela Norte",
+      "area": 12.5,
+      "geometry": "{\"type\":\"Polygon\",\"coordinates\":[[[-76.14,-14.07],[-76.13,-14.07],[-76.13,-14.06],[-76.14,-14.06],[-76.14,-14.07]]]}",
+      "farmId": 1,
+      "cropId": 1
+    },
+    {
+      "id": 2,
+      "name": "Parcela Sur",
+      "area": 8.3,
+      "geometry": "{\"type\":\"Polygon\",\"coordinates\":[[[-76.14,-14.07],[-76.13,-14.07],[-76.13,-14.08],[-76.14,-14.08],[-76.14,-14.07]]]}",
+      "farmId": 1,
+      "cropId": 2
+    },
+    {
+      "id": 3,
+      "name": "Parcela Este",
+      "area": 20.0,
+      "geometry": "{\"type\":\"Polygon\",\"coordinates\":[[[-68.84,-32.89],[-68.83,-32.89],[-68.83,-32.90],[-68.84,-32.90],[-68.84,-32.89]]]}",
+      "farmId": 2,
+      "cropId": 1
+    }
+  ],
+  "fumigationAreas": [
+    {
+      "id": 1,
+      "parcelId": 1,
+      "geometry": "{\"type\":\"Polygon\",\"coordinates\":[[[-76.135,-14.065],[-76.135,-14.065],[-76.135,-14.065],[-76.135,-14.065]]]}",
+      "area": 3.2
+    },
+    {
+      "id": 2,
+      "parcelId": 3,
+      "geometry": "{\"type\":\"Polygon\",\"coordinates\":[[[-68.835,-32.895],[-68.835,-32.895],[-68.835,-32.895],[-68.835,-32.895]]]}",
+      "area": 5.7
+    }
+  ],
+  "crops": [
+    {
+      "id": 1,
+      "name": "Maiz",
+      "variety": "Ambar"
+    },
+    {
+      "id": 2,
+      "name": "Papa",
+      "variety": "Cancha"
+    }
+  ]
+}

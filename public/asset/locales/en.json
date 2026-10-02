@@ -8,5 +8,20 @@
     "rights": "Copyright © 2026 AgriDron, All rights reserved",
     "intro": "Developed ",
     "author": "by AgriDron Solutions Team"
+  },
+  "option": {
+    "farm": "Farms"
+  },
+  "farm": {
+    "title": "Farms",
+    "newFarm": "New farm",
+    "empty": "No farms registered",
+    "parcelCount": "{{ count }} parcels",
+    "loading": "Loading farms...",
+    "button": {
+      "seeMore": "See more",
+      "edit": "Edit",
+      "delete": "Delete"
+    }
   }
 }
