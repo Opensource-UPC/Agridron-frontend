@@ -15,5 +15,6 @@ import { LanguageSwitcher } from '../language-switcher/language-switcher';
 export class HeaderContent {
   options = signal([
     {link: '/farms', label: 'option.farm'},
+    {link: '/analytics', label: 'option.analytics'},
   ]);
 }
