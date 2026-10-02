@@ -12,4 +12,6 @@ export const environment = {
   AgriDronProviderMissionHistoriesEndpointPath: '/mission-histories',
   AgriDronProviderOperationalMetricsEndpointPath: '/operational-metrics',
   AgriDronProviderPerformanceIndicatorsEndpointPath: '/performance-indicators',
+  weatherApiBaseUrl: 'http://localhost:3000',
+  weatherEndpointPath: '/weather',
 };

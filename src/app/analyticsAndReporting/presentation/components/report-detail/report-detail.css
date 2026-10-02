@@ -1,0 +1,17 @@
+.report-detail {
+  padding: 16px;
+}
+
+.report-detail__fields {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 8px 24px;
+}
+
+.report-detail__fields dt {
+  font-weight: 500;
+}
+
+.report-detail__fields dd {
+  margin: 0;
+}

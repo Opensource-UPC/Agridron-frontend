@@ -1,7 +1,43 @@
 {
+  "page-not-found": {
+    "title": "Page not found",
+    "content": "The path <strong>{{ invalid_path }}</strong> is not valid.",
+    "go-home": "Go Home"
+  },
   "footer": {
     "rights": "Copyright © 2026 AgriDron, All rights reserved",
     "intro": "Developed ",
     "author": "by AgriDron Solutions Team"
+  },
+"option": {
+    "farm": "Farms"
+  },
+  "farm": {
+    "title": "Farms",
+    "newFarm": "New farm",
+    "empty": "No farms registered",
+    "parcelCount": "{{ count }} parcels",
+    "loading": "Loading farms...",
+    "button": {
+      "seeMore": "See more",
+      "edit": "Edit",
+      "delete": "Delete"
+    }
+  },
+  "weather": {
+    "title": "Weather status",
+    "subtitle": "Current conditions by location",
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "precipitation": "Precipitation",
+    "observed": "Observed",
+    "alerts": "Alerts",
+    "empty": "No weather data available.",
+    "severity": {
+      "HIGH": "High",
+      "MEDIUM": "Medium",
+      "LOW": "Low"
+    }
   }
 }

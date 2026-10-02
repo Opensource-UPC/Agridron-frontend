@@ -1,0 +1,17 @@
+<mat-card class="example-card" appearance="outlined">
+    <mat-card-header>
+        <mat-card-title-group>
+            <img mat-card-sm-image src="https://material.angular.dev/assets/img/examples/shiba2.jpg" >
+            <mat-card-title>{{ farm().name }}</mat-card-title>
+            <mat-card-subtitle>{{ farm().location }}</mat-card-subtitle>
+        </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+        {{ 'farm.parcelCount' | translate:{ count: farm().parcel.length } }}
+    </mat-card-content>
+    <mat-card-actions>
+        <button matButton>{{ 'farm.button.seeMore' | translate }} <mat-icon>arrow_right_alt</mat-icon></button>
+        <button matButton>{{ 'farm.button.edit' | translate }} <mat-icon>edit</mat-icon></button>
+        <button matButton>{{ 'farm.button.delete' | translate }} <mat-icon>delete</mat-icon></button>
+    </mat-card-actions>
+</mat-card>

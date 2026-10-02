@@ -1,7 +1,43 @@
 {
+  "page-not-found": {
+    "title": "Página no encontrada",
+    "content": "La ruta <strong>{{ invalidPath }}</strong> es inválida.",
+    "go-home": "Ir a Inicio"
+  },
   "footer": {
     "rights": "Derechos de autor © 2026 AgriDron, Todos los derechos reservados",
     "intro": "Desarrollado ",
     "author": "por el Equipo AgriDron Solutions"
+  },
+"option": {
+    "farm": "Fincas"
+  },
+  "farm": {
+    "title": "Fincas",
+    "newFarm": "Nueva finca",
+    "empty": "No hay fincas registradas",
+    "parcelCount": "{{ count }} parcelas",
+    "loading": "Cargando fincas...",
+    "button": {
+      "seeMore": "Ver más",
+      "edit": "Editar",
+      "delete": "Eliminar"
+    }
+  },
+  "weather": {
+    "title": "Estado del clima",
+    "subtitle": "Condiciones actuales por ubicación",
+    "temperature": "Temperatura",
+    "humidity": "Humedad",
+    "wind": "Viento",
+    "precipitation": "Precipitación",
+    "observed": "Observado",
+    "alerts": "Alertas",
+    "empty": "Sin datos meteorológicos disponibles.",
+    "severity": {
+      "HIGH": "Alto",
+      "MEDIUM": "Medio",
+      "LOW": "Bajo"
+    }
   }
 }

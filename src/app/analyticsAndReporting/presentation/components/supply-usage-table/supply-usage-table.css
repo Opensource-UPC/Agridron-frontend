@@ -1,0 +1,8 @@
+.supply-table {
+  width: 100%;
+}
+
+.supply-table__empty {
+  text-align: center;
+  padding: 16px;
+}
