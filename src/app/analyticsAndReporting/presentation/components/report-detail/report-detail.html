@@ -1,0 +1,50 @@
+<section class="report-detail">
+  <a matButton routerLink="/analytics">
+    <mat-icon>arrow_back</mat-icon>
+    {{ 'analytics.actions.back' | translate }}
+  </a>
+
+  @if (report(); as report) {
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>{{ 'analytics.detail.title' | translate }} #{{ report.id }}</mat-card-title>
+        <mat-card-subtitle>{{ 'analytics.reportType.' + report.type | translate }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <dl class="report-detail__fields">
+          <dt>{{ 'analytics.columns.mission' | translate }}</dt>
+          <dd>MS-{{ report.missionId | number: '3.0-0' }}</dd>
+          <dt>{{ 'analytics.columns.generatedAt' | translate }}</dt>
+          <dd>{{ report.generatedAt | date: 'dd/MM/yyyy HH:mm' }}</dd>
+          <dt>{{ 'analytics.columns.area' | translate }}</dt>
+          <dd>{{ report.treatedArea | number: '1.1-1' }}</dd>
+          <dt>{{ 'analytics.columns.volume' | translate }}</dt>
+          <dd>{{ report.appliedVolume | number: '1.1-1' }}</dd>
+          <dt>{{ 'analytics.detail.observations' | translate }}</dt>
+          <dd>{{ report.observations }}</dd>
+        </dl>
+
+        <h3>{{ 'analytics.detail.metrics' | translate }}</h3>
+        @if (hasMetrics()) {
+          <ul>
+            @for (metric of report.metrics; track metric.id) {
+              <li>{{ metric.toDisplay() }}</li>
+            }
+          </ul>
+        } @else {
+          <p>{{ 'analytics.detail.noMetrics' | translate }}</p>
+        }
+      </mat-card-content>
+      <mat-card-actions>
+        <button matButton (click)="download('json')">
+          <mat-icon>download</mat-icon>{{ 'analytics.actions.exportJson' | translate }}
+        </button>
+        <button matButton (click)="download('csv')">
+          <mat-icon>download</mat-icon>{{ 'analytics.actions.exportCsv' | translate }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  } @else {
+    <p>{{ loading() ? ('analytics.loading' | translate) : (error() ?? ('analytics.detail.notFound' | translate)) }}</p>
+  }
+</section>
