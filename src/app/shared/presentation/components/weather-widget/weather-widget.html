@@ -1,0 +1,23 @@
+@if (weatherConditions()[0]; as condition) {
+  <article>
+    <h2>{{ 'weather.title' | translate }}</h2>
+    <h3>{{ condition.location }}</h3>
+    <small>{{ 'weather.observed' | translate }}: {{ condition.observedAt | date: 'dd/MM/yyyy · HH:mm' }}</small>
+
+    <p [attr.aria-label]="'weather.temperature' | translate">{{ condition.temperature }}°C</p>
+
+    <ul>
+      <li>{{ 'weather.humidity' | translate }}: <b>{{ condition.humidity }}%</b></li>
+      <li>{{ 'weather.wind' | translate }}: <b>{{ condition.windSpeed }} km/h</b></li>
+      <li>{{ 'weather.precipitation' | translate }}: <b>{{ condition.precipitation }} mm</b></li>
+    </ul>
+
+    @for (alert of condition.alerts; track alert.id) {
+      <div class="alert {{ alert.severity.toLowerCase() }}">
+        <b>{{ 'weather.severity.' + alert.severity | translate }}</b>: {{ alert.message }}
+      </div>
+    }
+  </article>
+} @else {
+  <p>{{ 'weather.empty' | translate }}</p>
+}
