@@ -4,4 +4,12 @@ export const environment = {
   AgriDronProviderProductsEndpointPath: '/products',
   AgriDronProviderCartsEndpointPath: '/carts',
   AgriDronProviderUsersEndpointPath: '/users',
+  AgriDronProviderFarmsEndpointPath: '/farms',
+  AgriDronProviderParcelsEndpointPath: '/parcels',
+  AgriDronProviderFumigationAreasEndpointPath: '/fumigation-areas',
+  AgriDronProviderCropsEndpointPath: '/crops',
+  AgriDronProviderMissionReportsEndpointPath: '/mission-reports',
+  AgriDronProviderMissionHistoriesEndpointPath: '/mission-histories',
+  AgriDronProviderOperationalMetricsEndpointPath: '/operational-metrics',
+  AgriDronProviderPerformanceIndicatorsEndpointPath: '/performance-indicators',
 };
