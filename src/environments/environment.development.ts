@@ -4,8 +4,10 @@ export const environment = {
   AgriDronProviderProductsEndpointPath: '/products',
   AgriDronProviderCartsEndpointPath: '/carts',
   AgriDronProviderUsersEndpointPath: '/users',
-  AgriDronProviderFarmsEndpointPath: '/farms',
+AgriDronProviderFarmsEndpointPath: '/farms',
   AgriDronProviderParcelsEndpointPath: '/parcels',
   AgriDronProviderFumigationAreasEndpointPath: '/fumigation-areas',
   AgriDronProviderCropsEndpointPath: '/crops',
+  weatherApiBaseUrl: 'http://localhost:3000',
+  weatherEndpointPath: '/weather',
 };

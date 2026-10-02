@@ -9,7 +9,7 @@
     "intro": "Developed ",
     "author": "by AgriDron Solutions Team"
   },
-  "option": {
+"option": {
     "farm": "Farms"
   },
   "farm": {
@@ -22,6 +22,22 @@
       "seeMore": "See more",
       "edit": "Edit",
       "delete": "Delete"
+    }
+  },
+  "weather": {
+    "title": "Weather status",
+    "subtitle": "Current conditions by location",
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "precipitation": "Precipitation",
+    "observed": "Observed",
+    "alerts": "Alerts",
+    "empty": "No weather data available.",
+    "severity": {
+      "HIGH": "High",
+      "MEDIUM": "Medium",
+      "LOW": "Low"
     }
   }
 }
