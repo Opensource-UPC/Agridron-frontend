@@ -209,5 +209,26 @@
         }
       ]
     }
+  ],
+  "mission-reports": [
+    {"id": 1, "missionId": 1, "type": "MISSION_SUMMARY", "treatedArea": 12.5, "appliedVolume": 38.0, "observations": "Mission completed without incidents.", "generatedAt": "2026-09-20T15:30:00"},
+    {"id": 2, "missionId": 1, "type": "PHYTOSANITARY", "treatedArea": 12.5, "appliedVolume": 38.0, "observations": "Fungicide applied at the recommended dose.", "generatedAt": "2026-09-20T16:10:00"},
+    {"id": 3, "missionId": 2, "type": "MISSION_SUMMARY", "treatedArea": 8.2, "appliedVolume": 24.6, "observations": "Mission paused once due to wind.", "generatedAt": "2026-09-25T11:05:00"}
+  ],
+  "mission-histories": [
+    {"id": 1, "missionId": 1, "finalStatus": "COMPLETED", "completedAt": "2026-09-20T15:20:00"},
+    {"id": 2, "missionId": 2, "finalStatus": "COMPLETED", "completedAt": "2026-09-25T11:00:00"},
+    {"id": 3, "missionId": 3, "finalStatus": "CANCELLED", "completedAt": "2026-09-28T09:15:00"}
+  ],
+  "operational-metrics": [
+    {"id": 1, "reportId": 1, "name": "Flight time", "value": 42, "unit": "min"},
+    {"id": 2, "reportId": 1, "name": "Battery used", "value": 68, "unit": "%"},
+    {"id": 3, "reportId": 2, "name": "Product concentration", "value": 2.5, "unit": "L/ha"},
+    {"id": 4, "reportId": 3, "name": "Flight time", "value": 31, "unit": "min"}
+  ],
+  "performance-indicators": [
+    {"id": 1, "name": "Hectares treated", "value": 20.7, "unit": "ha", "period": "2026-09", "calculatedAt": "2026-09-30T23:00:00"},
+    {"id": 2, "name": "Completion rate", "value": 66.7, "unit": "%", "period": "2026-09", "calculatedAt": "2026-09-30T23:00:00"},
+    {"id": 3, "name": "Average flight time", "value": 36.5, "unit": "min", "period": "2026-09", "calculatedAt": "2026-09-30T23:00:00"}
   ]
 }

@@ -12,5 +12,5 @@ import {LanguageSwitcher} from '../language-switcher/language-switcher';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderContent {
-  readonly menuToggle = input.required<() => void>();
+readonly menuToggle = input.required<() => void>();
 }

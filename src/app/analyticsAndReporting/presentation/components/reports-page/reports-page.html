@@ -1,0 +1,40 @@
+<section class="reports">
+  <h2>{{ 'analytics.title' | translate }}</h2>
+
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab [label]="'analytics.tabs.missions' | translate">
+      <ng-template matTabContent>
+        <ng-container [ngTemplateOutlet]="filterBar"/>
+        <app-mission-history-table [rows]="historyRows()" [loading]="loading()" [error]="error()"/>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab [label]="'analytics.tabs.supplyUsage' | translate">
+      <ng-template matTabContent>
+        <ng-container [ngTemplateOutlet]="filterBar"/>
+        <app-supply-usage-table [reports]="filteredReports()" [loading]="loading()"/>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab [label]="'analytics.tabs.indicators' | translate">
+      <ng-template matTabContent>
+        <app-performance-indicator-list [indicators]="indicators()" [loading]="loading()"/>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</section>
+
+<ng-template #filterBar>
+  <div class="reports__filter">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'analytics.filter.from' | translate }}</mat-label>
+      <input matInput type="date" [value]="draftFrom()" (change)="onFromChange($event)"/>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'analytics.filter.to' | translate }}</mat-label>
+      <input matInput type="date" [value]="draftTo()" (change)="onToChange($event)"/>
+    </mat-form-field>
+    <button matButton="filled" (click)="applyFilter()">{{ 'analytics.filter.apply' | translate }}</button>
+    <button matButton (click)="clearFilter()">{{ 'analytics.filter.clear' | translate }}</button>
+  </div>
+</ng-template>

@@ -13,7 +13,8 @@
     "farm": "Fincas",
     "parcel": "Parcelas",
     "crop": "Cultivos",
-    "fumigationArea": "Zonas de fumigación"
+    "fumigationArea": "Zonas de fumigación",
+    "analytics": "Reportes"
   },
   "farm": {
     "title": "Fincas",
@@ -161,5 +162,63 @@
       "MEDIUM": "Medio",
       "LOW": "Bajo"
     }
+  },
+  "analytics": {
+    "title": "Reportes e Historial",
+    "tabs": {
+      "missions": "Misiones",
+      "supplyUsage": "Uso de insumos",
+      "indicators": "Indicadores"
+    },
+    "filter": {
+      "from": "Desde",
+      "to": "Hasta",
+      "apply": "Filtrar",
+      "clear": "Limpiar"
+    },
+    "columns": {
+      "id": "ID",
+      "mission": "Misión",
+      "date": "Fecha",
+      "status": "Estado",
+      "area": "Área (ha)",
+      "actions": "Acciones",
+      "type": "Tipo",
+      "volume": "Volumen (L)",
+      "density": "L/ha",
+      "generatedAt": "Generado"
+    },
+    "status": {
+      "PLANNED": "Programada",
+      "AUTHORIZED": "Autorizada",
+      "IN_PROGRESS": "En curso",
+      "PAUSED": "En pausa",
+      "COMPLETED": "Completada",
+      "CANCELLED": "Cancelada"
+    },
+    "reportType": {
+      "MISSION_SUMMARY": "Resumen de misión",
+      "PHYTOSANITARY": "Fitosanitario"
+    },
+    "actions": {
+      "download": "Descargar reporte",
+      "detail": "Ver detalle",
+      "back": "Volver a reportes",
+      "exportJson": "Exportar JSON",
+      "exportCsv": "Exportar CSV"
+    },
+    "indicators": {
+      "period": "Periodo",
+      "empty": "No hay indicadores disponibles."
+    },
+    "detail": {
+      "title": "Reporte",
+      "observations": "Observaciones",
+      "metrics": "Métricas operativas",
+      "noMetrics": "Sin métricas registradas.",
+      "notFound": "Reporte no encontrado."
+    },
+    "empty": "No se encontraron registros.",
+    "loading": "Cargando..."
   }
 }

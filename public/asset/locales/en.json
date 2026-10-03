@@ -9,11 +9,12 @@
     "intro": "Developed ",
     "author": "by AgriDron Solutions Team"
   },
-"option": {
+  "option": {
     "farm": "Farms",
     "parcel": "Parcels",
     "crop": "Crops",
-    "fumigationArea": "Fumigation areas"
+    "fumigationArea": "Fumigation areas",
+    "analytics": "Reports"
   },
   "farm": {
     "title": "Farms",
@@ -161,5 +162,63 @@
       "MEDIUM": "Medium",
       "LOW": "Low"
     }
+  },
+  "analytics": {
+    "title": "Reports and history",
+    "tabs": {
+      "missions": "Missions",
+      "supplyUsage": "Supply usage",
+      "indicators": "Indicators"
+    },
+    "filter": {
+      "from": "From",
+      "to": "To",
+      "apply": "Filter",
+      "clear": "Clear"
+    },
+    "columns": {
+      "id": "ID",
+      "mission": "Mission",
+      "date": "Date",
+      "status": "Status",
+      "area": "Area (ha)",
+      "actions": "Actions",
+      "type": "Type",
+      "volume": "Volume (L)",
+      "density": "L/ha",
+      "generatedAt": "Generated"
+    },
+    "status": {
+      "PLANNED": "Planned",
+      "AUTHORIZED": "Authorized",
+      "IN_PROGRESS": "In progress",
+      "PAUSED": "Paused",
+      "COMPLETED": "Completed",
+      "CANCELLED": "Cancelled"
+    },
+    "reportType": {
+      "MISSION_SUMMARY": "Mission summary",
+      "PHYTOSANITARY": "Phytosanitary"
+    },
+    "actions": {
+      "download": "Download report",
+      "detail": "View detail",
+      "back": "Back to reports",
+      "exportJson": "Export JSON",
+      "exportCsv": "Export CSV"
+    },
+    "indicators": {
+      "period": "Period",
+      "empty": "No indicators available."
+    },
+    "detail": {
+      "title": "Report",
+      "observations": "Observations",
+      "metrics": "Operational metrics",
+      "noMetrics": "No metrics recorded.",
+      "notFound": "Report not found."
+    },
+    "empty": "No records found.",
+    "loading": "Loading..."
   }
 }
