@@ -1,6 +1,6 @@
 <header class="farm-list__header">
   <h2>{{ 'farm.title' | translate }}</h2>
-  <button matButton>
+  <button matButton="filled" class="farm-list__new-farm" (click)="newFarm()">
     <mat-icon>add_circle_outline</mat-icon>
     {{ 'farm.newFarm' | translate }}
   </button>
@@ -10,12 +10,10 @@
   <p class="farm-list__error">{{ error() }}</p>
 }
 
-<mat-grid-list cols="4" rowHeight="1:1" gutterSize="10px">
+<div class="farm-list__grid">
   @for (farm of farms(); track farm.id) {
-    <mat-grid-tile>
-      <app-farm-item [farm]="farm"/>
-    </mat-grid-tile>
+    <app-farm-item [farm]="farm" (edit)="editFarm($event)" (delete)="deleteFarm($event)"/>
   } @empty {
     <p>{{ loading() ? ('farm.loading' | translate) : ('farm.empty' | translate) }}</p>
   }
-</mat-grid-list>
+</div>

@@ -1,0 +1,17 @@
+<h1 class="title">{{ (isEdit ? 'crop.form.edit-title' : 'crop.form.new-title') | translate }}</h1>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field>
+    <mat-label>{{ 'crop.form.name' | translate }}</mat-label>
+    <input matInput formControlName="name" required>
+    @if (form.get('name')!.touched && form.get('name')!.hasError('required')) {
+      <mat-error>{{ 'crop.form.error.name-required' | translate }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ 'crop.form.variety' | translate }}</mat-label>
+    <input matInput formControlName="variety">
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+    {{ (isEdit ? 'crop.form.update' : 'crop.form.create') | translate }}
+  </button>
+</form>

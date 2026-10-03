@@ -7,14 +7,16 @@ export class Farm {
     #location!: string;
     #ownerId!: number;
     #parcel!: Parcel[];
+    #image!: string | null;
 
 
-    constructor(id: number, name: string, location: string, ownerId: number, parcel: Parcel[]) {
+    constructor(id: number, name: string, location: string, ownerId: number, parcel: Parcel[], image: string | null = null) {
         this.#id = id;
         this.#name = name;
         this.#location = location;
         this.#ownerId = ownerId;
         this.#parcel = parcel;
+        this.#image = image;
     }
 
 
@@ -56,5 +58,13 @@ export class Farm {
 
     set parcel(value: Parcel[]) {
         this.#parcel = value;
+    }
+
+    get image(): string | null {
+        return this.#image;
+    }
+
+    set image(value: string | null) {
+        this.#image = value;
     }
 }

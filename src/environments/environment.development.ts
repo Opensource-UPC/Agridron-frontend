@@ -8,10 +8,10 @@ export const environment = {
   AgriDronProviderParcelsEndpointPath: '/parcels',
   AgriDronProviderFumigationAreasEndpointPath: '/fumigation-areas',
   AgriDronProviderCropsEndpointPath: '/crops',
-  AgriDronProviderMissionReportsEndpointPath: '/mission-reports',
+AgriDronProviderMissionReportsEndpointPath: '/mission-reports',
   AgriDronProviderMissionHistoriesEndpointPath: '/mission-histories',
   AgriDronProviderOperationalMetricsEndpointPath: '/operational-metrics',
   AgriDronProviderPerformanceIndicatorsEndpointPath: '/performance-indicators',
-  weatherApiBaseUrl: 'http://localhost:3000',
+  weatherApiBaseUrl: 'http://localhost:3000/api/v1',
   weatherEndpointPath: '/weather',
 };

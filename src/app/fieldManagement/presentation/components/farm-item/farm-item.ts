@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, input, InputSignal} from "@angular/core";
+import {ChangeDetectionStrategy, Component, input, InputSignal, output} from "@angular/core";
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
@@ -16,4 +16,8 @@ import {Farm} from "../../../domain/model/farm.entity";
 })
 export class FarmItem {
   farm: InputSignal<Farm> = input.required<Farm>();
+
+  edit = output<number>();
+
+  delete = output<number>();
 }

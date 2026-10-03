@@ -4,13 +4,36 @@
       "id": 1,
       "name": "Finca San Rafael",
       "location": "Ica, Peru",
-      "ownerId": 1
+      "ownerId": 1,
+      "image": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600"
     },
     {
       "id": 2,
       "name": "Finca La Esperanza",
       "location": "Mendoza, Argentina",
-      "ownerId": 2
+      "ownerId": 2,
+      "image": "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600"
+    },
+    {
+      "id": 3,
+      "name": "Finca El Progreso",
+      "location": "Salta, Argentina",
+      "ownerId": 5,
+      "image": "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600"
+    },
+    {
+      "id": 4,
+      "name": "Los pastisales",
+      "location": "Cajamarca,Peru",
+      "ownerId": 12,
+      "image": "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600"
+    },
+    {
+      "id": 5,
+      "name": "finca estrella",
+      "location": "bogota, Colombia",
+      "ownerId": 10,
+      "image": "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600"
     }
   ],
   "parcels": [
@@ -20,7 +43,8 @@
       "area": 12.5,
       "geometry": "{\"type\":\"Polygon\",\"coordinates\":[[[-76.14,-14.07],[-76.13,-14.07],[-76.13,-14.06],[-76.14,-14.06],[-76.14,-14.07]]]}",
       "farmId": 1,
-      "cropId": 1
+      "cropId": 1,
+      "image": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=600"
     },
     {
       "id": 2,
@@ -28,18 +52,38 @@
       "area": 8.3,
       "geometry": "{\"type\":\"Polygon\",\"coordinates\":[[[-76.14,-14.07],[-76.13,-14.07],[-76.13,-14.08],[-76.14,-14.08],[-76.14,-14.07]]]}",
       "farmId": 1,
-      "cropId": 2
+      "cropId": 2,
+      "image": "https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?w=600"
     },
     {
       "id": 3,
       "name": "Parcela Este",
-      "area": 20.0,
+      "area": 20,
       "geometry": "{\"type\":\"Polygon\",\"coordinates\":[[[-68.84,-32.89],[-68.83,-32.89],[-68.83,-32.90],[-68.84,-32.90],[-68.84,-32.89]]]}",
       "farmId": 2,
-      "cropId": 1
+      "cropId": 1,
+      "image": "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=600"
+    },
+    {
+      "id": 4,
+      "name": "parcela GAto",
+      "area": 5.4,
+      "geometry": "{\"type\":\"Polygon\",\"coordinates\":[[[-76.14,-14.07],[-76.13,-14.07],[-76.13,-14.08],[-76.14,-14.08],[-76.14,-14.07]]]}",
+      "farmId": 1,
+      "cropId": 3,
+      "image": "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=600"
+    },
+    {
+      "id": 5,
+      "name": "Parcela Nube",
+      "area": 6.8,
+      "geometry": "fd",
+      "farmId": 3,
+      "cropId": 3,
+      "image": "https://previews.123rf.com/images/golf609/golf6091807/golf609180700046/105479724-cassava-field-plantation.jpg"
     }
   ],
-  "fumigationAreas": [
+  "fumigation-areas": [
     {
       "id": 1,
       "parcelId": 1,
@@ -63,6 +107,11 @@
       "id": 2,
       "name": "Papa",
       "variety": "Cancha"
+    },
+    {
+      "id": 3,
+      "name": "Yuca",
+      "variety": "tuberculo"
     }
   ],
   "weather": [

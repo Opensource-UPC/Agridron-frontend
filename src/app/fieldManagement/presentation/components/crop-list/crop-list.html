@@ -1,0 +1,19 @@
+<header class="crop-list__header">
+  <h2>{{ 'crop.title' | translate }}</h2>
+  <button matButton="filled" class="crop-list__new-crop" (click)="newCrop()">
+    <mat-icon>add_circle_outline</mat-icon>
+    {{ 'crop.newCrop' | translate }}
+  </button>
+</header>
+
+@if (error()) {
+  <p class="crop-list__error">{{ error() }}</p>
+}
+
+<div class="crop-list__grid">
+  @for (crop of crops(); track crop.id) {
+    <app-crop-item [crop]="crop" (edit)="editCrop($event)" (delete)="deleteCrop($event)"/>
+  } @empty {
+    <p>{{ emptyMessage() }}</p>
+  }
+</div>

@@ -1,0 +1,17 @@
+
+<mat-card class="parcel-card" appearance="outlined">
+    <mat-card-header>
+        <mat-card-title>{{ parcel().name }}</mat-card-title>
+        <mat-card-subtitle>{{ parcel().crop?.name ?? ('parcel.noCrop' | translate) }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="parcel().image ?? ('parcel.imagePlaceholder' | translate)" [alt]="parcel().name">
+    <mat-card-content>
+        <p>{{ 'parcel.area' | translate }}: {{ parcel().area }} ha</p>
+        <p>{{ 'parcel.farm' | translate }}: #{{ parcel().farmId }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button matButton (click)="seeMore.emit(parcel().id)">{{ 'parcel.button.seeMore' | translate }} <mat-icon>arrow_right_alt</mat-icon></button>
+        <button matButton (click)="edit.emit(parcel().id)">{{ 'parcel.button.edit' | translate }} <mat-icon>edit</mat-icon></button>
+        <button matButton (click)="delete.emit(parcel().id)">{{ 'parcel.button.delete' | translate }} <mat-icon>delete</mat-icon></button>
+    </mat-card-actions>
+</mat-card>

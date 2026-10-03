@@ -20,6 +20,10 @@ export interface FarmResource extends BaseResource {
      * Identifier of the owner of the farm.
      */
     ownerId: number;
+    /**
+     * URL of the farm image.
+     */
+    image?: string;
 }
 
 /**
@@ -60,6 +64,10 @@ export interface ParcelResource extends BaseResource {
      * Identifier of the crop assigned to this parcel.
      */
     cropId: number;
+    /**
+     * URL of the parcel image.
+     */
+    image?: string;
 }
 
 /**

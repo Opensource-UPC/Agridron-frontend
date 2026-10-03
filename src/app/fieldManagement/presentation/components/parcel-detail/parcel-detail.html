@@ -1,0 +1,11 @@
+<h1 class="title">{{ 'parcel.detail.title' | translate }}</h1>
+
+@if (parcel) {
+  <p>{{ 'parcel.detail.name' | translate }}: {{ parcel.name }}</p>
+  <p>{{ 'parcel.area' | translate }}: {{ parcel.area }} ha</p>
+  <p>{{ 'parcel.detail.geometry' | translate }}: {{ parcel.geometry }}</p>
+} @else {
+  <p>{{ 'parcel.detail.notFound' | translate }}</p>
+}
+
+<button matButton (click)="back()">{{ 'parcel.detail.back' | translate }}</button>
