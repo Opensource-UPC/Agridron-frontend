@@ -7,8 +7,8 @@ export class FarmAssembler implements BaseAssembler<Farm, FarmResource, FarmResp
         response.farms.map(resource => this.toEntityFromResource(resource));
 
     toEntityFromResource = (resource: FarmResource): Farm =>
-        new Farm(resource.id, resource.name, resource.location, resource.ownerId, []);
+        new Farm(resource.id, resource.name, resource.location, resource.ownerId, [], resource.image ?? null);
 
     toResourceFromEntity = (entity: Farm): FarmResource =>
-        ({id: entity.id, name: entity.name, location: entity.location, ownerId: entity.ownerId});
+        ({id: entity.id, name: entity.name, location: entity.location, ownerId: entity.ownerId, image: entity.image ?? undefined});
 }

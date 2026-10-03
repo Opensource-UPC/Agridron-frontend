@@ -1,12 +1,9 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+  <button mat-icon-button aria-label="Menu" (click)="menuToggle()">
     <mat-icon>menu</mat-icon>
   </button>
   <span>AgriDron</span>
-  <span class="example-spacer"></span>
-  @for (option of options(); track option.label) {
-  <a mat-button [routerLink]="option.link" routerLinkActive="active">{{ option.label | translate }}</a>
-  }
+  <span class="header-content__spacer"></span>
   <span>
     <app-language-switcher/>
   </span>

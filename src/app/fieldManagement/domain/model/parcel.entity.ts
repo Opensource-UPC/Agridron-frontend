@@ -10,15 +10,17 @@ export class Parcel {
     #farmId!: number;
     #cropId!: number;
     #crop?: Crop | null;
+    #image!: string | null;
 
 
-    constructor(id: number, name: string, area: number, geometry: string, farmId: number, cropId: number) {
+    constructor(id: number, name: string, area: number, geometry: string, farmId: number, cropId: number, image: string | null = null) {
         this.#id = id;
         this.#name = name;
         this.#area = area;
         this.#geometry = geometry;
         this.#farmId = farmId;
         this.#cropId = cropId;
+        this.#image = image;
     }
 
 
@@ -76,5 +78,13 @@ export class Parcel {
 
     set crop(value: Crop | null | undefined) {
         this.#crop = value;
+    }
+
+    get image(): string | null {
+        return this.#image;
+    }
+
+    set image(value: string | null) {
+        this.#image = value;
     }
 }

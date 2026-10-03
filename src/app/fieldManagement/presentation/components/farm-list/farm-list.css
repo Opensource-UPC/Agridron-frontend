@@ -1,3 +1,27 @@
-h2{
+.farm-list__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
 
+.farm-list__header h2 {
+  margin: 0;
+}
+
+.farm-list__new-farm {
+  --mat-button-filled-container-color: #179A7A;
+  --mat-button-filled-label-text-color: #FFFFFF;
+}
+
+.farm-list__error {
+  color: var(--mat-sys-error, #b3261e);
+  margin: 0 0 16px;
+}
+
+.farm-list__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
 }

@@ -1,0 +1,57 @@
+<h1 class="title">{{ (isEdit ? 'parcel.form.edit-title' : 'parcel.form.new-title') | translate }}</h1>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field>
+    <mat-label>{{ 'parcel.form.name' | translate }}</mat-label>
+    <input matInput formControlName="name" required>
+    @if (form.get('name')!.touched && form.get('name')!.hasError('required')) {
+      <mat-error>{{ 'parcel.form.error.name-required' | translate }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ 'parcel.form.area' | translate }}</mat-label>
+    <input matInput type="number" step="0.01" formControlName="area" required>
+    @if (form.get('area')!.touched && form.get('area')!.hasError('required')) {
+      <mat-error>{{ 'parcel.form.error.area-required' | translate }}</mat-error>
+    }
+    @if (form.get('area')!.touched && form.get('area')!.hasError('min')) {
+      <mat-error>{{ 'parcel.form.error.area-min' | translate }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ 'parcel.form.geometry' | translate }}</mat-label>
+    <textarea matInput rows="4" formControlName="geometry" required></textarea>
+    @if (form.get('geometry')!.touched && form.get('geometry')!.hasError('required')) {
+      <mat-error>{{ 'parcel.form.error.geometry-required' | translate }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ 'parcel.form.farm' | translate }}</mat-label>
+    <mat-select formControlName="farmId" required>
+      @for (farm of farms(); track farm.id) {
+        <mat-option [value]="farm.id">{{ farm.name }}</mat-option>
+      }
+    </mat-select>
+    @if (form.get('farmId')!.touched && form.get('farmId')!.hasError('required')) {
+      <mat-error>{{ 'parcel.form.error.farm-required' | translate }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ 'parcel.form.crop' | translate }}</mat-label>
+    <mat-select formControlName="cropId" required>
+      @for (crop of crops(); track crop.id) {
+        <mat-option [value]="crop.id">{{ crop.name }}</mat-option>
+      }
+    </mat-select>
+    @if (form.get('cropId')!.touched && form.get('cropId')!.hasError('required')) {
+      <mat-error>{{ 'parcel.form.error.crop-required' | translate }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ 'parcel.form.image' | translate }}</mat-label>
+    <input matInput type="url" formControlName="image">
+    <mat-hint>{{ 'parcel.form.imageHint' | translate }}</mat-hint>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+    {{ (isEdit ? 'parcel.form.update' : 'parcel.form.create') | translate }}
+  </button>
+</form>

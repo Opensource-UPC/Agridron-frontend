@@ -1,0 +1,35 @@
+<h1 class="title">{{ (isEdit ? 'farm.form.edit-title' : 'farm.form.new-title') | translate }}</h1>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field>
+    <mat-label>{{ 'farm.form.name' | translate }}</mat-label>
+    <input matInput formControlName="name" required>
+    @if (form.get('name')!.touched && form.get('name')!.hasError('required')) {
+      <mat-error>{{ 'farm.form.error.name-required' | translate }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ 'farm.form.location' | translate }}</mat-label>
+    <input matInput formControlName="location" required>
+    @if (form.get('location')!.touched && form.get('location')!.hasError('required')) {
+      <mat-error>{{ 'farm.form.error.location-required' | translate }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ 'farm.form.ownerId' | translate }}</mat-label>
+    <input matInput type="number" formControlName="ownerId" required min="1">
+    @if (form.get('ownerId')!.touched && form.get('ownerId')!.hasError('required')) {
+      <mat-error>{{ 'farm.form.error.ownerId-required' | translate }}</mat-error>
+    }
+    @if (form.get('ownerId')!.touched && form.get('ownerId')!.hasError('min')) {
+      <mat-error>{{ 'farm.form.error.ownerId-min' | translate }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ 'farm.form.image' | translate }}</mat-label>
+    <input matInput type="url" formControlName="image">
+    <mat-hint>{{ 'farm.form.imageHint' | translate }}</mat-hint>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+    {{ (isEdit ? 'farm.form.update' : 'farm.form.create') | translate }}
+  </button>
+</form>
