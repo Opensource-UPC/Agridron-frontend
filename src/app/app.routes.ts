@@ -27,6 +27,11 @@ export const routes: Routes = [
       import('./analyticsAndReporting/presentation/analyticsAndReporting.routes').then(m => m.analyticsAndReportingRoutes)
   },
   {
+    path: 'drones',
+    loadChildren: () =>
+        import('./InventoryResourceManagement/presentation/inventory-and-resource-management.routes-interceptor').then(m => m.inventoryAndResourceManagementRoutes)
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./shared/presentation/views/page-not-found/page-not-found').then(m => m.PageNotFound)

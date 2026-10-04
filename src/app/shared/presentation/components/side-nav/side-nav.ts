@@ -39,7 +39,8 @@ export class SideNav {
     {link: '/parcels', label: 'option.parcel', icon: 'grid_view'},
     {link: '/crops', label: 'option.crop', icon: 'grass'},
     {link: '/fumigation-areas', label: 'option.fumigationArea', icon: 'science'},
-    {link: '/analytics', label: 'option.analytics', icon: 'insights'}
+    {link: '/analytics', label: 'option.analytics', icon: 'insights'},
+    {link: '/drones', label: 'option.drone', icon: 'Drone'}
   ];
 
   onNavigate = (): void => {
