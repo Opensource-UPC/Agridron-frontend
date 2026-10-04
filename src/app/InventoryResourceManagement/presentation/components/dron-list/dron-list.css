@@ -1,0 +1,17 @@
+:host {
+    display: block;
+}
+
+/* Cuadrícula responsiva: tantas columnas como quepan con un mínimo de 260px por tarjeta.
+   En pantalla ancha salen 3, como en tu diseño; en pantalla angosta baja a 2 o 1. */
+.drone-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.drone-list__empty {
+    padding: 24px;
+    text-align: center;
+    color: #6b7280;
+}

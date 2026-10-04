@@ -1,0 +1,16 @@
+<mat-card class="farm-card" appearance="outlined">
+    <mat-card-header>
+        <mat-card-title-group>
+            <img mat-card-sm-image [src]="farm().image ?? ('farm.imagePlaceholder' | translate)" [alt]="farm().name">
+            <mat-card-title>{{ farm().name }}</mat-card-title>
+            <mat-card-subtitle>{{ farm().location }}</mat-card-subtitle>
+        </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+        {{ 'farm.parcelCount' | translate:{ count: farm().parcel.length } }}
+    </mat-card-content>
+    <mat-card-actions>
+        <button matButton (click)="edit.emit(farm().id)">{{ 'farm.button.edit' | translate }} <mat-icon>edit</mat-icon></button>
+        <button matButton (click)="delete.emit(farm().id)">{{ 'farm.button.delete' | translate }} <mat-icon>delete</mat-icon></button>
+    </mat-card-actions>
+</mat-card>

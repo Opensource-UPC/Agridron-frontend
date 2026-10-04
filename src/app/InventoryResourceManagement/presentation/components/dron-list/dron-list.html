@@ -1,0 +1,18 @@
+
+<!-- Si hay drones: cuadrícula. Si no: mensaje de vacío o de carga. -->
+@if (drones().length > 0) {
+    <section class="drone-grid">
+        <!-- `track drone.id`: Angular identifica cada tarjeta por su id y solo redibuja la que cambió -->
+        @for (drone of drones(); track drone.id) {
+            <app-drone-item
+                    [drone]="drone"
+                    [nozzle]="nozzlesById().get(drone.nozzleId)"
+                    (viewDetails)="viewDetails.emit($event)"
+                    (viewMaintenance)="viewMaintenance.emit($event)"/>
+        }
+    </section>
+} @else {
+    <p class="drone-list__empty">
+        {{ loading() ? ('drone.loading' | translate) : ('drone.empty' | translate) }}
+    </p>
+}

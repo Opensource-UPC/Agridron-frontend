@@ -1,3 +1,11 @@
-<app-header-content></app-header-content>
+<app-header-content [menuToggle]="toggleSidebar"/>
+<!-- Este es un comentario en HTML
+<app-weather-widget/>
+-->
+<app-side-nav [open]="sidebarOpen()" [close]="closeSidebar">
+  <main class="layout__content">
+    <router-outlet/>
+  </main>
+</app-side-nav>
 
 <app-footer-content/>

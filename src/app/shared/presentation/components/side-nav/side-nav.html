@@ -1,0 +1,18 @@
+<mat-sidenav-container class="side-nav">
+  <mat-sidenav class="side-nav__panel" [mode]="mode()" [opened]="opened()">
+    <nav class="side-nav__list">
+      @for (option of options; track option.link) {
+        <a mat-list-item
+           [routerLink]="option.link"
+           routerLinkActive="side-nav__link--active"
+           (click)="onNavigate()">
+          <mat-icon matListItemIcon>{{ option.icon }}</mat-icon>
+          <span matListItemTitle>{{ option.label | translate }}</span>
+        </a>
+      }
+    </nav>
+  </mat-sidenav>
+  <mat-sidenav-content class="side-nav__content">
+    <ng-content/>
+  </mat-sidenav-content>
+</mat-sidenav-container>

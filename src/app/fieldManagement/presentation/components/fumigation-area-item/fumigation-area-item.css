@@ -1,0 +1,11 @@
+.fumigation-card {
+  max-width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.fumigation-card__bar {
+  height: 8px;
+  border-radius: 4px;
+  background-color: var(--mat-sys-primary, #179A7A);
+}

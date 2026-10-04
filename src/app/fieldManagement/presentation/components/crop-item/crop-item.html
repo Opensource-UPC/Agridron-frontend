@@ -1,0 +1,13 @@
+<mat-card class="crop-card" appearance="outlined">
+    <mat-card-header>
+        <mat-card-title>{{ crop().name }}</mat-card-title>
+        <mat-card-subtitle>{{ 'crop.variety' | translate }}: {{ crop().variety ?? ('crop.noVariety' | translate) }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        {{ 'crop.information' | translate }}
+    </mat-card-content>
+    <mat-card-actions>
+        <button matButton (click)="edit.emit(crop().id)">{{ 'crop.button.edit' | translate }} <mat-icon>edit</mat-icon></button>
+        <button matButton (click)="delete.emit(crop().id)">{{ 'crop.button.delete' | translate }} <mat-icon>delete</mat-icon></button>
+    </mat-card-actions>
+</mat-card>

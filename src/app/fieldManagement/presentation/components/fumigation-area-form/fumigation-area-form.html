@@ -1,0 +1,34 @@
+<h1 class="title">{{ (isEdit ? 'fumigationArea.form.edit-title' : 'fumigationArea.form.new-title') | translate }}</h1>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field>
+    <mat-label>{{ 'fumigationArea.form.parcel' | translate }}</mat-label>
+    <mat-select formControlName="parcelId" required>
+      @for (parcel of parcels(); track parcel.id) {
+        <mat-option [value]="parcel.id">{{ parcel.name }}</mat-option>
+      }
+    </mat-select>
+    @if (form.get('parcelId')!.touched && form.get('parcelId')!.hasError('required')) {
+      <mat-error>{{ 'fumigationArea.form.error.parcel-required' | translate }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ 'fumigationArea.form.geometry' | translate }}</mat-label>
+    <textarea matInput rows="4" formControlName="geometry" required></textarea>
+    @if (form.get('geometry')!.touched && form.get('geometry')!.hasError('required')) {
+      <mat-error>{{ 'fumigationArea.form.error.geometry-required' | translate }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{ 'fumigationArea.form.area' | translate }}</mat-label>
+    <input matInput type="number" step="0.01" formControlName="area" required>
+    @if (form.get('area')!.touched && form.get('area')!.hasError('required')) {
+      <mat-error>{{ 'fumigationArea.form.error.area-required' | translate }}</mat-error>
+    }
+    @if (form.get('area')!.touched && form.get('area')!.hasError('min')) {
+      <mat-error>{{ 'fumigationArea.form.error.area-min' | translate }}</mat-error>
+    }
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+    {{ (isEdit ? 'fumigationArea.form.update' : 'fumigationArea.form.create') | translate }}
+  </button>
+</form>

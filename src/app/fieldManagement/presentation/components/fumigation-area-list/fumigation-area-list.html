@@ -1,0 +1,28 @@
+<header class="fumigation-area-list__header">
+  <h2>{{ 'fumigationArea.title' | translate }}</h2>
+  <button matButton="filled" class="fumigation-area-list__new-area" (click)="newFumigationArea()">
+    <mat-icon>add_circle_outline</mat-icon>
+    {{ 'fumigationArea.newFumigationArea' | translate }}
+  </button>
+</header>
+
+@if (error()) {
+  <p class="fumigation-area-list__error">{{ error() }}</p>
+}
+
+<mat-form-field class="fumigation-area-list__parcel-select">
+  <mat-label>{{ 'fumigationArea.selectParcel' | translate }}</mat-label>
+  <mat-select [value]="selectedParcelId()" (selectionChange)="onParcelSelected($event.value)">
+    @for (parcel of parcels(); track parcel.id) {
+      <mat-option [value]="parcel.id">{{ parcel.name }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
+<div class="fumigation-area-list__grid">
+  @for (fumigationArea of fumigationAreas(); track fumigationArea.id) {
+    <app-fumigation-area-item [fumigationArea]="fumigationArea" (edit)="onEdit($event)" (delete)="onDelete($event)"/>
+  } @empty {
+    <p>{{ emptyMessage() }}</p>
+  }
+</div>

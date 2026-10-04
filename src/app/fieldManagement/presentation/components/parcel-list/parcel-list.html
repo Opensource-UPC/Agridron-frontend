@@ -1,0 +1,28 @@
+<header class="parcel-list__header">
+  <h2>{{ 'parcel.title' | translate }}</h2>
+  <button matButton="filled" class="parcel-list__new-parcel" (click)="newParcel()">
+    <mat-icon>add_circle_outline</mat-icon>
+    {{ 'parcel.newParcel' | translate }}
+  </button>
+</header>
+
+@if (error()) {
+  <p class="parcel-list__error">{{ error() }}</p>
+}
+
+<mat-form-field class="parcel-list__farm-select">
+  <mat-label>{{ 'parcel.selectFarm' | translate }}</mat-label>
+  <mat-select [value]="selectedFarmId()" (selectionChange)="onFarmSelected($event.value)">
+    @for (farm of farms(); track farm.id) {
+      <mat-option [value]="farm.id">{{ farm.name }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
+<div class="parcel-list__grid">
+  @for (parcel of parcels(); track parcel.id) {
+    <app-parcel-item [parcel]="parcel" (seeMore)="seeMoreParcel($event)" (edit)="editParcel($event)" (delete)="deleteParcel($event)"/>
+  } @empty {
+    <p>{{ emptyMessage() }}</p>
+  }
+</div>

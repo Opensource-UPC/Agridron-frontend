@@ -1,0 +1,60 @@
+
+<article class="drone-card">
+
+    <div class="drone-card__top">
+        <div class="drone-card__photo">
+            @if (drone().urlimg; as src) {
+                <img [src]="src" [alt]="drone().model">
+            } @else {
+                <div class="drone-card__placeholder">{{ 'drone.noPhoto' | translate }}</div>
+            }
+
+            <!-- Mismo patrón que mission-history-table:
+                 la clase sale del status en minúsculas (AVAILABLE -> badge--available)
+                 y el texto de la traducción 'drone.status.<STATUS>'. -->
+            <span [class]="'drone-card__badge badge badge--' + drone().status.toLowerCase()">
+        {{ 'drone.status.' + drone().status | translate }}
+      </span>
+        </div>
+
+        <div class="drone-card__summary">
+            <h3 class="drone-card__title">{{ drone().model }}</h3>
+            <p>{{ 'drone.serial' | translate }}: {{ drone().serialNumber }}</p>
+
+            <div class="battery">
+                <strong>{{ 'drone.battery' | translate }}</strong>
+                <div class="battery__track">
+                    <div class="battery__fill"
+                         [class.battery__fill--low]="isLowBattery()"
+                         [style.width.%]="battery()"></div>
+                </div>
+                <span>{{ battery() }}%</span>
+            </div>
+
+            <p>
+                <strong>{{ 'drone.nozzle' | translate }}:</strong>
+                <!-- AJUSTA `name` al campo real de tu Nozzle -->
+                <small>{{ nozzle() ? nozzle()!.type : ('drone.noNozzle' | translate) }}</small>
+            </p>
+        </div>
+    </div>
+
+    <div class="drone-card__details">
+        @if (chemicals().length > 0) {
+            <p><strong>{{ 'drone.compatible' | translate }}:</strong> {{ chemicals().join(', ') }}</p>
+        }
+        <p>
+            <strong>{{ 'drone.nextService' | translate }}:</strong>
+            {{ drone().nextMaintenanceDate | date: 'dd/MM/yyyy' }}
+        </p>
+    </div>
+
+    <div class="drone-card__actions">
+        <button type="button" class="btn btn--primary" (click)="viewDetails.emit(drone().id)">
+            {{ 'drone.actions.details' | translate }}
+        </button>
+        <button type="button" class="btn btn--secondary" (click)="viewMaintenance.emit(drone().id)">
+            {{ 'drone.actions.maintenance' | translate }}
+        </button>
+    </div>
+</article>
