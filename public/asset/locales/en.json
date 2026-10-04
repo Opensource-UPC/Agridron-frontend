@@ -14,7 +14,8 @@
     "parcel": "Parcels",
     "crop": "Crops",
     "fumigationArea": "Fumigation areas",
-    "analytics": "Reports"
+    "analytics": "Reports",
+    "drone": "Drones"
   },
   "farm": {
     "title": "Farms",
@@ -220,5 +221,27 @@
     },
     "empty": "No records found.",
     "loading": "Loading..."
+  },
+  "drone": {
+    "title": "Drone fleet management",
+    "status": {
+      "AVAILABLE": "Available",
+      "IN_FLIGHT": "In flight",
+      "MAINTENANCE": "Maintenance",
+      "MAINTENANCE_SOON": "Maintenance due"
+    },
+    "serial": "SN",
+    "battery": "Battery",
+    "nozzle": "Nozzle",
+    "noNozzle": "No nozzle",
+    "compatible": "Compatible",
+    "nextService": "Next service",
+    "noPhoto": "No photo",
+    "loading": "Loading drones...",
+    "empty": "No drones to show",
+    "actions": {
+      "details": "View details",
+      "maintenance": "View maintenance"
+    }
   }
 }

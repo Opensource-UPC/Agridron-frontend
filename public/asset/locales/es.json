@@ -14,7 +14,13 @@
     "parcel": "Parcelas",
     "crop": "Cultivos",
     "fumigationArea": "Zonas de fumigación",
-    "analytics": "Reportes"
+    "analytics": "Reportes",
+    "farm": "Fincas",
+    "parcel": "Parcelas",
+    "crop": "Cultivos",
+    "fumigationArea": "Zonas de fumigación",
+    "analytics": "Reportes",
+    "drone": "Drones"
   },
   "farm": {
     "title": "Fincas",
@@ -220,5 +226,28 @@
     },
     "empty": "No se encontraron registros.",
     "loading": "Cargando..."
+  },
+  "drone": {
+    "title": "Gestión de flota de drones",
+    "status": {
+      "AVAILABLE": "Disponible",
+      "IN_FLIGHT": "En vuelo",
+      "MAINTENANCE": "Mantenimiento",
+      "MAINTENANCE_SOON": "Mantenimiento próx."
+    },
+    "serial": "SN",
+    "battery": "Batería",
+    "nozzle": "Boquilla",
+    "noNozzle": "Sin boquilla",
+    "compatible": "Compatible",
+    "nextService": "Próximo service",
+    "noPhoto": "Sin foto",
+    "loading": "Cargando drones...",
+    "empty": "No hay drones para mostrar",
+    "actions": {
+      "details": "Ver detalles",
+      "maintenance": "Ver mantenimientos"
+    }
   }
 }
+

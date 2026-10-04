@@ -14,4 +14,10 @@ AgriDronProviderMissionReportsEndpointPath: '/mission-reports',
   AgriDronProviderPerformanceIndicatorsEndpointPath: '/performance-indicators',
   weatherApiBaseUrl: 'http://localhost:3000/api/v1',
   weatherEndpointPath: '/weather',
+
+  ////De Edwin
+  AgriDronProviderDronesMetricsEndpointPath: '/drones',
+  AgriDronProvideChemicalsEndpointPath: '/chemicals',
+  AgriDronProvideNozzlesEndpointPath: '/nozzles',
+  AgriDronProvideMaintenanceRecordEndpointPath: '/maintenance',
 };
