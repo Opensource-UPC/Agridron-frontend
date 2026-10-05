@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AuthenticationService } from '../../../application/authentication.service';
 import { SignInCommand } from '../../../domain/model/sign-in.command';
 
@@ -21,6 +22,8 @@ import { SignInCommand } from '../../../domain/model/sign-in.command';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule
+  ,
+    TranslatePipe
   ],
   templateUrl: './sign-in.html',
   styleUrl: './sign-in.css',

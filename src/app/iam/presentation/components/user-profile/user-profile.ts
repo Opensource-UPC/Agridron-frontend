@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AuthenticationService } from '../../../application/authentication.service';
 
 @Component({
@@ -16,6 +17,8 @@ import { AuthenticationService } from '../../../application/authentication.servi
     MatIconModule,
     MatChipsModule,
     MatDividerModule
+  ,
+    TranslatePipe
   ],
   templateUrl: './user-profile.html',
   styleUrl: './user-profile.css',

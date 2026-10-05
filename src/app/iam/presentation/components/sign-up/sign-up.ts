@@ -9,6 +9,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AuthenticationService } from '../../../application/authentication.service';
 import { SignUpCommand } from '../../../domain/model/sign-up.command';
 import { UserRole } from '../../../domain/model/user-role.enum';
@@ -26,6 +27,8 @@ import { UserRole } from '../../../domain/model/user-role.enum';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule
+  ,
+    TranslatePipe
   ],
   templateUrl: './sign-up.html',
   styleUrl: './sign-up.css',

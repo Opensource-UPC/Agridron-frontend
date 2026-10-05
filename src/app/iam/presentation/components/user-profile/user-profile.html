@@ -4,35 +4,35 @@
       <div class="profile-avatar">
         <mat-icon>account_circle</mat-icon>
       </div>
-      <mat-card-title>Perfil de Usuario</mat-card-title>
-      <mat-card-subtitle>Información de la cuenta activa</mat-card-subtitle>
+      <mat-card-title>{{ 'iam.profile.title' | translate }}</mat-card-title>
+      <mat-card-subtitle>{{ 'iam.profile.subtitle' | translate }}</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content class="profile-content">
       @if (user(); as currentUser) {
         <div class="info-group">
           <div class="info-item">
-            <span class="info-label">Usuario</span>
+            <span class="info-label">{{ 'iam.profile.username' | translate }}</span>
             <span class="info-value">{{ currentUser.username }}</span>
           </div>
           <mat-divider></mat-divider>
 
           <div class="info-item">
-            <span class="info-label">Correo electrónico</span>
+            <span class="info-label">{{ 'iam.profile.email' | translate }}</span>
             <span class="info-value">{{ currentUser.email }}</span>
           </div>
           <mat-divider></mat-divider>
 
           <div class="info-item">
-            <span class="info-label">Rol asignado</span>
+            <span class="info-label">{{ 'iam.profile.role' | translate }}</span>
             <mat-chip highlighted color="accent" class="role-chip">{{ currentUser.role }}</mat-chip>
           </div>
         </div>
       } @else {
         <div class="empty-state">
           <mat-icon class="empty-icon">person_off</mat-icon>
-          <p>No hay una sesión iniciada actualmente.</p>
-          <a mat-raised-button color="primary" routerLink="/auth/sign-in">Iniciar Sesión</a>
+          <p>{{ 'iam.profile.noSession' | translate }}</p>
+          <a mat-raised-button color="primary" routerLink="/auth/sign-in">{{ 'iam.profile.signIn' | translate }}</a>
         </div>
       }
     </mat-card-content>
@@ -41,11 +41,11 @@
       <mat-card-actions class="profile-actions">
         <a mat-stroked-button color="primary" routerLink="/farms">
           <mat-icon>grass</mat-icon>
-          <span>Ir a Fincas</span>
+          <span>{{ 'iam.profile.goToFarms' | translate }}</span>
         </a>
         <button mat-raised-button color="warn" (click)="onSignOut()">
           <mat-icon>logout</mat-icon>
-          <span>Cerrar Sesión</span>
+          <span>{{ 'iam.profile.signOut' | translate }}</span>
         </button>
       </mat-card-actions>
     }

@@ -1,0 +1,43 @@
+<section class="home">
+  <mat-card class="home__hero" appearance="outlined">
+    <mat-card-content>
+      <h1 class="home__greeting">{{ 'home.greeting' | translate:{ username: username() } }}</h1>
+      <p class="home__subtitle">{{ 'home.subtitle' | translate }}</p>
+
+      @if (currentUser(); as user) {
+        <div class="home__user">
+          <mat-icon>account_circle</mat-icon>
+          <span>{{ user.email }}</span>
+          <span class="home__role">{{ user.role }}</span>
+        </div>
+      }
+    </mat-card-content>
+    <mat-card-actions>
+      <a matButton="filled" routerLink="/farms">{{ 'home.actions.farms' | translate }}</a>
+      <a matButton routerLink="/analytics">{{ 'home.actions.analytics' | translate }}</a>
+    </mat-card-actions>
+  </mat-card>
+
+  <h2 class="home__section-title">{{ 'home.metricsTitle' | translate }}</h2>
+  <div class="home__metrics">
+    @for (metric of metrics(); track metric.label) {
+      <mat-card class="home__metric" appearance="outlined">
+        <mat-card-content>
+          <mat-icon class="home__metric-icon">{{ metric.icon }}</mat-icon>
+          <p class="home__metric-value">{{ metric.value }}</p>
+          <p class="home__metric-label">{{ metric.label | translate }}</p>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+
+  <h2 class="home__section-title">{{ 'home.shortcutsTitle' | translate }}</h2>
+  <div class="home__shortcuts">
+    @for (shortcut of shortcuts; track shortcut.link) {
+      <a class="home__shortcut" [routerLink]="shortcut.link">
+        <mat-icon>{{ shortcut.icon }}</mat-icon>
+        <span>{{ shortcut.label | translate }}</span>
+      </a>
+    }
+  </div>
+</section>

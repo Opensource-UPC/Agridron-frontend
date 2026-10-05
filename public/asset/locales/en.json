@@ -15,7 +15,9 @@
     "crop": "Crops",
     "fumigationArea": "Fumigation areas",
     "analytics": "Reports",
-    "drone": "Drones"
+    "drone": "Drones",
+    "profile": "Profile",
+    "home": "Inicio"
   },
   "farm": {
     "title": "Farms",
@@ -242,6 +244,76 @@
     "actions": {
       "details": "View details",
       "maintenance": "View maintenance"
+    }
+  },
+  "iam": {
+    "signIn": {
+      "title": "Iniciar Sesión",
+      "subtitle": "Ingresa tus credenciales para acceder a AgriDron",
+      "username": "Nombre de usuario",
+      "usernamePlaceholder": "ej. jdoe",
+      "usernameRequired": "El nombre de usuario es obligatorio",
+      "password": "Contraseña",
+      "passwordRequired": "La contraseña es obligatoria",
+      "passwordMinLength": "Mínimo 4 caracteres",
+      "showPassword": "Mostrar contraseña",
+      "hidePassword": "Ocultar contraseña",
+      "signingIn": "Iniciando sesión...",
+      "submit": "Ingresar",
+      "noAccount": "¿No tienes una cuenta?",
+      "signUpLink": "Regístrate aquí",
+      "invalidCredentials": "Credenciales inválidas"
+    },
+    "signUp": {
+      "title": "Crear Cuenta",
+      "subtitle": "Regístrate en la plataforma AgriDron",
+      "username": "Nombre de usuario",
+      "usernamePlaceholder": "ej. jdoe",
+      "usernameRequired": "El nombre de usuario es obligatorio",
+      "usernameMinLength": "Mínimo 3 caracteres",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "ej. usuario@ejemplo.com",
+      "emailRequired": "El correo electrónico es obligatorio",
+      "emailInvalid": "Formato de correo no válido",
+      "password": "Contraseña",
+      "passwordRequired": "La contraseña es obligatoria",
+      "passwordMinLength": "Mínimo 6 caracteres",
+      "showPassword": "Mostrar contraseña",
+      "hidePassword": "Ocultar contraseña",
+      "role": "Rol en el sistema",
+      "roleRequired": "Debes seleccionar un rol",
+      "signingUp": "Registrando cuenta...",
+      "submit": "Registrarse",
+      "hasAccount": "¿Ya tienes una cuenta?",
+      "signInLink": "Inicia sesión",
+      "signUpError": "Error al registrar usuario"
+    },
+    "profile": {
+      "title": "Perfil de Usuario",
+      "subtitle": "Información de la cuenta activa",
+      "username": "Usuario",
+      "email": "Correo electrónico",
+      "role": "Rol asignado",
+      "noSession": "No hay una sesión iniciada actualmente.",
+      "signIn": "Iniciar Sesión",
+      "goToFarms": "Ir a Fincas",
+      "signOut": "Cerrar Sesión"
+    }
+  },
+  "home": {
+    "greeting": "Hello {username}, welcome",
+    "subtitle": "Overview of your agricultural operation",
+    "metricsTitle": "Metrics",
+    "shortcutsTitle": "Quick access",
+    "metrics": {
+      "farms": "Farms",
+      "parcels": "Parcels",
+      "crops": "Crops",
+      "fumigationAreas": "Fumigation areas"
+    },
+    "actions": {
+      "farms": "View farms",
+      "analytics": "View reports"
     }
   }
 }

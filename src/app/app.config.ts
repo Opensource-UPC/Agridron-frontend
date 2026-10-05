@@ -1,6 +1,6 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { routes } from './iam/presentation/app.routes';
+import { routes } from './app.routes';
 import { provideAppInitializer, inject } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';

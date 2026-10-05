@@ -1,11 +1,41 @@
-import { Injectable, inject, signal, computed } from '@angular/core';
-import { Router } from '@angular/router';
-import { User } from '../domain/model/user.entity';
-import { UserRole } from '../domain/model/user-role.enum';
-import { SignInCommand } from '../domain/model/sign-in.command';
-import { SignUpCommand } from '../domain/model/sign-up.command';
-import { AuthApi } from '../infrastructure/auth-api';
-import { AuthAssembler } from '../infrastructure/auth-assembler';
+import {Injectable, inject, signal, computed} from '@angular/core';
+import {Router} from '@angular/router';
+import {switchMap} from 'rxjs/operators';
+import {User} from '../domain/model/user.entity';
+import {UserRole} from '../domain/model/user-role.enum';
+import {SignInCommand} from '../domain/model/sign-in.command';
+import {SignUpCommand} from '../domain/model/sign-up.command';
+import {AuthApi} from '../infrastructure/auth-api';
+import {AuthAssembler} from '../infrastructure/auth-assembler';
+
+/**
+ * Shape persisted in localStorage to survive page reloads.
+ * The password is never stored.
+ */
+interface StoredUser {
+    id: number | null;
+    username: string;
+    email: string;
+    role: UserRole;
+}
+
+/**
+ * Restores the current user from localStorage, ignoring malformed entries.
+ * @returns The stored user or null when there is no valid session.
+ */
+function readStoredUser(): User | null {
+    const raw = localStorage.getItem('user');
+    if (!raw) return null;
+
+    try {
+        const stored = JSON.parse(raw) as StoredUser;
+        if (!stored.username) return null;
+        return new User(stored.id, stored.username, stored.email, '', stored.role);
+    } catch {
+        localStorage.removeItem('user');
+        return null;
+    }
+}
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +45,7 @@ export class AuthenticationService {
     private readonly router = inject(Router);
 
     // Private reactive signals
-    #currentUser = signal<User | null>(null);
+    #currentUser = signal<User | null>(readStoredUser());
     #token = signal<string | null>(localStorage.getItem('token'));
     #loading = signal<boolean>(false);
     #error = signal<string | null>(null);
@@ -29,6 +59,33 @@ export class AuthenticationService {
     readonly error = this.#error.asReadonly();
 
     /**
+     * Persists the active session so it survives a page reload.
+     * @param user - The authenticated user.
+     * @param token - The session token.
+     */
+    private storeSession(user: User, token: string): void {
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify({
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            role: user.role
+        } satisfies StoredUser));
+        this.#token.set(token);
+        this.#currentUser.set(user);
+    }
+
+    /**
+     * Removes the persisted session.
+     */
+    private clearSession(): void {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        this.#token.set(null);
+        this.#currentUser.set(null);
+    }
+
+    /**
      * Handles signing in a user.
      */
     signIn(command: SignInCommand): void {
@@ -37,19 +94,19 @@ export class AuthenticationService {
 
         const request = AuthAssembler.toSignInRequestFromCommand(command);
 
-        this.authApi.signIn(request).subscribe({
+        this.authApi.getUsers().pipe(
+            switchMap(users => AuthAssembler.toSessionFromCredentials(users, request))
+        ).subscribe({
             next: (response) => {
                 const user = AuthAssembler.toEntityFromResponse(response);
                 if (response.token) {
-                    localStorage.setItem('token', response.token);
-                    this.#token.set(response.token);
+                    this.storeSession(user, response.token);
                 }
-                this.#currentUser.set(user);
                 this.#loading.set(false);
-                this.router.navigate(['/farms']);
+                this.router.navigate(['/home']);
             },
             error: (err) => {
-                this.#error.set(err?.error?.message ?? 'Credenciales inválidas');
+                this.#error.set(err?.message ?? 'Credenciales inválidas');
                 this.#loading.set(false);
             }
         });
@@ -64,20 +121,20 @@ export class AuthenticationService {
 
         const request = AuthAssembler.toSignUpRequestFromCommand(command);
 
-        this.authApi.signUp(request).subscribe({
+        this.authApi.signUp(request).pipe(
+            switchMap(created => AuthAssembler.toSessionFromResource(created))
+        ).subscribe({
             next: (response) => {
                 const user = AuthAssembler.toEntityFromResponse(response);
                 user.signUp();
                 if (response.token) {
-                    localStorage.setItem('token', response.token);
-                    this.#token.set(response.token);
+                    this.storeSession(user, response.token);
                 }
-                this.#currentUser.set(user);
                 this.#loading.set(false);
-                this.router.navigate(['/farms']);
+                this.router.navigate(['/home']);
             },
             error: (err) => {
-                this.#error.set(err?.error?.message ?? 'Error al registrar usuario');
+                this.#error.set(err?.message ?? 'Error al registrar usuario');
                 this.#loading.set(false);
             }
         });
@@ -87,9 +144,7 @@ export class AuthenticationService {
      * Clears session and logs out user.
      */
     signOut(): void {
-        localStorage.removeItem('token');
-        this.#currentUser.set(null);
-        this.#token.set(null);
+        this.clearSession();
         this.router.navigate(['/auth/sign-in']);
     }
 
