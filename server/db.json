@@ -211,24 +211,336 @@
     }
   ],
   "mission-reports": [
-    {"id": 1, "missionId": 1, "type": "MISSION_SUMMARY", "treatedArea": 12.5, "appliedVolume": 38.0, "observations": "Mission completed without incidents.", "generatedAt": "2026-09-20T15:30:00"},
-    {"id": 2, "missionId": 1, "type": "PHYTOSANITARY", "treatedArea": 12.5, "appliedVolume": 38.0, "observations": "Fungicide applied at the recommended dose.", "generatedAt": "2026-09-20T16:10:00"},
-    {"id": 3, "missionId": 2, "type": "MISSION_SUMMARY", "treatedArea": 8.2, "appliedVolume": 24.6, "observations": "Mission paused once due to wind.", "generatedAt": "2026-09-25T11:05:00"}
+    {
+      "id": 1,
+      "missionId": 1,
+      "type": "MISSION_SUMMARY",
+      "treatedArea": 12.5,
+      "appliedVolume": 38,
+      "observations": "Mission completed without incidents.",
+      "generatedAt": "2026-09-20T15:30:00"
+    },
+    {
+      "id": 2,
+      "missionId": 1,
+      "type": "PHYTOSANITARY",
+      "treatedArea": 12.5,
+      "appliedVolume": 38,
+      "observations": "Fungicide applied at the recommended dose.",
+      "generatedAt": "2026-09-20T16:10:00"
+    },
+    {
+      "id": 3,
+      "missionId": 2,
+      "type": "MISSION_SUMMARY",
+      "treatedArea": 8.2,
+      "appliedVolume": 24.6,
+      "observations": "Mission paused once due to wind.",
+      "generatedAt": "2026-09-25T11:05:00"
+    }
   ],
   "mission-histories": [
-    {"id": 1, "missionId": 1, "finalStatus": "COMPLETED", "completedAt": "2026-09-20T15:20:00"},
-    {"id": 2, "missionId": 2, "finalStatus": "COMPLETED", "completedAt": "2026-09-25T11:00:00"},
-    {"id": 3, "missionId": 3, "finalStatus": "CANCELLED", "completedAt": "2026-09-28T09:15:00"}
+    {
+      "id": 1,
+      "missionId": 1,
+      "finalStatus": "COMPLETED",
+      "completedAt": "2026-09-20T15:20:00"
+    },
+    {
+      "id": 2,
+      "missionId": 2,
+      "finalStatus": "COMPLETED",
+      "completedAt": "2026-09-25T11:00:00"
+    },
+    {
+      "id": 3,
+      "missionId": 3,
+      "finalStatus": "CANCELLED",
+      "completedAt": "2026-09-28T09:15:00"
+    }
   ],
   "operational-metrics": [
-    {"id": 1, "reportId": 1, "name": "Flight time", "value": 42, "unit": "min"},
-    {"id": 2, "reportId": 1, "name": "Battery used", "value": 68, "unit": "%"},
-    {"id": 3, "reportId": 2, "name": "Product concentration", "value": 2.5, "unit": "L/ha"},
-    {"id": 4, "reportId": 3, "name": "Flight time", "value": 31, "unit": "min"}
+    {
+      "id": 1,
+      "reportId": 1,
+      "name": "Flight time",
+      "value": 42,
+      "unit": "min"
+    },
+    {
+      "id": 2,
+      "reportId": 1,
+      "name": "Battery used",
+      "value": 68,
+      "unit": "%"
+    },
+    {
+      "id": 3,
+      "reportId": 2,
+      "name": "Product concentration",
+      "value": 2.5,
+      "unit": "L/ha"
+    },
+    {
+      "id": 4,
+      "reportId": 3,
+      "name": "Flight time",
+      "value": 31,
+      "unit": "min"
+    }
   ],
   "performance-indicators": [
-    {"id": 1, "name": "Hectares treated", "value": 20.7, "unit": "ha", "period": "2026-09", "calculatedAt": "2026-09-30T23:00:00"},
-    {"id": 2, "name": "Completion rate", "value": 66.7, "unit": "%", "period": "2026-09", "calculatedAt": "2026-09-30T23:00:00"},
-    {"id": 3, "name": "Average flight time", "value": 36.5, "unit": "min", "period": "2026-09", "calculatedAt": "2026-09-30T23:00:00"}
+    {
+      "id": 1,
+      "name": "Hectares treated",
+      "value": 20.7,
+      "unit": "ha",
+      "period": "2026-09",
+      "calculatedAt": "2026-09-30T23:00:00"
+    },
+    {
+      "id": 2,
+      "name": "Completion rate",
+      "value": 66.7,
+      "unit": "%",
+      "period": "2026-09",
+      "calculatedAt": "2026-09-30T23:00:00"
+    },
+    {
+      "id": 3,
+      "name": "Average flight time",
+      "value": 36.5,
+      "unit": "min",
+      "period": "2026-09",
+      "calculatedAt": "2026-09-30T23:00:00"
+    }
+  ],
+  "drones": [
+    {
+      "id": 1,
+      "serialNumber": "DRN-2026-0101",
+      "model": "RTX-6030",
+      "batteryLevel": 80,
+      "status": "available",
+      "nozzleId": 1,
+      "lastMaintenanceDate": "2026-08-10",
+      "nextMaintenanceDate": "2026-11-10",
+      "urlimg": "https://images.unsplash.com/photo-1521405924368-64c5b84bec60?w=600"
+    },
+    {
+      "id": 2,
+      "serialNumber": "DRN-2026-0102",
+      "model": "RTX-6030",
+      "batteryLevel": 35,
+      "status": "in-flight",
+      "nozzleId": 2,
+      "lastMaintenanceDate": "2026-07-22",
+      "nextMaintenanceDate": "2026-10-22",
+      "urlimg": "https://images.unsplash.com/photo-1713952160141-8364b2fca485?w=600"
+    },
+    {
+      "id": 3,
+      "serialNumber": "DRN-2026-0103",
+      "model": "AGX-8000",
+      "batteryLevel": 10,
+      "status": "maintenance",
+      "nozzleId": 3,
+      "lastMaintenanceDate": "2026-06-15",
+      "nextMaintenanceDate": "2026-09-15",
+      "urlimg": "https://images.unsplash.com/photo-1713952160141-8364b2fca485?w=600"
+    },
+    {
+      "id": 4,
+      "serialNumber": "DRN-2026-0104",
+      "model": "AGX-8000",
+      "batteryLevel": 95,
+      "status": "available",
+      "nozzleId": 4,
+      "lastMaintenanceDate": "2026-09-01",
+      "nextMaintenanceDate": "2026-12-01",
+      "urlimg": "https://images.unsplash.com/photo-1713952160156-bb59cac789a9?w=600"
+    },
+    {
+      "id": 5,
+      "serialNumber": "DRN-2026-0105",
+      "model": "TRX-4500",
+      "batteryLevel": 55,
+      "status": "available",
+      "nozzleId": 5,
+      "lastMaintenanceDate": "2026-08-25",
+      "nextMaintenanceDate": "2026-11-25",
+      "urlimg": "https://images.unsplash.com/photo-1713952160156-bb59cac789a9?w=600"
+    },
+    {
+      "id": 6,
+      "serialNumber": "DRN-2026-0106",
+      "model": "TRX-4500",
+      "batteryLevel": 0,
+      "status": "out-of-service",
+      "nozzleId": 6,
+      "lastMaintenanceDate": "2026-03-10",
+      "nextMaintenanceDate": "2026-06-10",
+      "urlimg": "https://images.unsplash.com/photo-1521405924368-64c5b84bec60?w=600"
+    }
+  ],
+  "agrochemicals": [
+    {
+      "id": 1,
+      "name": "Glifosato 48%",
+      "type": "herbicide",
+      "stockLiters": 120,
+      "minimumStockLiters": 40,
+      "expirationDate": "2027-08-30"
+    },
+    {
+      "id": 2,
+      "name": "Cipermetrina 25%",
+      "type": "insecticide",
+      "stockLiters": 25,
+      "minimumStockLiters": 30,
+      "expirationDate": "2026-12-10"
+    },
+    {
+      "id": 3,
+      "name": "Mancozeb 80%",
+      "type": "fungicide",
+      "stockLiters": 60,
+      "minimumStockLiters": 20,
+      "expirationDate": "2027-01-15"
+    },
+    {
+      "id": 4,
+      "name": "Imidacloprid 35%",
+      "type": "insecticide",
+      "stockLiters": 80,
+      "minimumStockLiters": 25,
+      "expirationDate": "2027-03-20"
+    },
+    {
+      "id": 5,
+      "name": "2,4-D Amina 72%",
+      "type": "herbicide",
+      "stockLiters": 15,
+      "minimumStockLiters": 20,
+      "expirationDate": "2026-09-30"
+    },
+    {
+      "id": 6,
+      "name": "Azoxistrobina 25%",
+      "type": "fungicide",
+      "stockLiters": 45,
+      "minimumStockLiters": 15,
+      "expirationDate": "2027-06-05"
+    }
+  ],
+  "nozzles": [
+    {
+      "id": 1,
+      "type": "flat-fan",
+      "diameterMm": 5,
+      "stockUnits": 12,
+      "status": "good"
+    },
+    {
+      "id": 2,
+      "type": "hollow-cone",
+      "diameterMm": 3,
+      "stockUnits": 4,
+      "status": "worn"
+    },
+    {
+      "id": 3,
+      "type": "flat-fan",
+      "diameterMm": 7,
+      "stockUnits": 8,
+      "status": "good"
+    },
+    {
+      "id": 4,
+      "type": "full-cone",
+      "diameterMm": 4,
+      "stockUnits": 10,
+      "status": "good"
+    },
+    {
+      "id": 5,
+      "type": "air-induction",
+      "diameterMm": 6,
+      "stockUnits": 2,
+      "status": "worn"
+    },
+    {
+      "id": 6,
+      "type": "hollow-cone",
+      "diameterMm": 3,
+      "stockUnits": 0,
+      "status": "damaged"
+    }
+  ],
+  "maintenanceRecords": [
+    {
+      "id": 1,
+      "droneId": 1,
+      "date": "2026-08-10",
+      "type": "preventive",
+      "description": "Revisión de motores y limpieza de boquilla",
+      "technician": "Carlos Ramírez"
+    },
+    {
+      "id": 2,
+      "droneId": 2,
+      "date": "2026-07-22",
+      "type": "preventive",
+      "description": "Cambio de hélices y calibración de sensores",
+      "technician": "Lucía Torres"
+    },
+    {
+      "id": 3,
+      "droneId": 3,
+      "date": "2026-06-15",
+      "type": "corrective",
+      "description": "Reemplazo de batería dañada",
+      "technician": "Carlos Ramírez"
+    },
+    {
+      "id": 4,
+      "droneId": 4,
+      "date": "2026-09-01",
+      "type": "preventive",
+      "description": "Inspección general y actualización de firmware",
+      "technician": "Mario Vega"
+    },
+    {
+      "id": 5,
+      "droneId": 5,
+      "date": "2026-08-25",
+      "type": "preventive",
+      "description": "Lubricación de ejes y revisión del sistema de rociado",
+      "technician": "Lucía Torres"
+    },
+    {
+      "id": 6,
+      "droneId": 6,
+      "date": "2026-03-10",
+      "type": "corrective",
+      "description": "Falla en motor trasero izquierdo, pendiente de repuesto",
+      "technician": "Mario Vega"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "email": "admin@agridron.com",
+      "password": "admin123",
+      "role": "FARMER"
+    },
+    {
+      "id": 2,
+      "username": "pedro",
+      "email": "user@agridron.com",
+      "password": "pedro123",
+      "role": "FARMER"
+    }
   ]
 }

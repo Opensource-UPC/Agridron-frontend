@@ -35,11 +35,14 @@ export class SideNav {
   readonly opened = computed(() => (this.isMobile() ? this.open() : true));
 
   readonly options = [
+    {link: '/home', label: 'option.home', icon: 'home'},
     {link: '/farms', label: 'option.farm', icon: 'agriculture'},
     {link: '/parcels', label: 'option.parcel', icon: 'grid_view'},
     {link: '/crops', label: 'option.crop', icon: 'grass'},
     {link: '/fumigation-areas', label: 'option.fumigationArea', icon: 'science'},
-    {link: '/analytics', label: 'option.analytics', icon: 'insights'}
+    {link: '/analytics', label: 'option.analytics', icon: 'insights'},
+    {link: '/drones', label: 'option.drone', icon: 'Drone'},
+    {link: '/auth/profile', label: 'option.profile', icon: 'person'}
   ];
 
   onNavigate = (): void => {

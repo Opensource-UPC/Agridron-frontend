@@ -1,0 +1,15 @@
+
+<section class="drone-page">
+    <h2>{{ 'drone.title' | translate }}</h2>
+
+    @if (error()) {
+        <p class="drone-page__error">{{ error() }}</p>
+    }
+
+    <app-drone-list
+            [drones]="drones()"
+            [nozzles]="nozzles()"
+            [loading]="loading()"
+            (viewDetails)="onViewDetails($event)"
+            (viewMaintenance)="onViewMaintenance($event)"/>
+</section>
