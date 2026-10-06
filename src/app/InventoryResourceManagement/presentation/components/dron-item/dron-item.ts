@@ -3,7 +3,7 @@ import {ChangeDetectionStrategy, Component, computed, input, output} from '@angu
 import {DatePipe} from '@angular/common';
 import {Drone} from '../../../domain/model/drone.entity';
 import {Nozzle} from '../../../domain/model/nozzle.entity';
-import {TranslatePipe} from '@ngx-translate/core';
+import {translate, TranslatePipe} from '@ngx-translate/core';
 
 /**
  * Tarjeta que muestra UN dron. Es un componente "tonto": no conoce el store
@@ -69,8 +69,11 @@ export class DroneItem {
    */
   protected nozzleLabel = computed(() => {
     const nozzle = this.nozzle();
-    return nozzle ? nozzle.type : 'Sin boquilla';
+    return nozzle ? nozzle.diameterMm : 'Sin boquilla';
   });
+
+  //OJITO
+  //nozzleLabel() ?? ('drone.noNozzle' | translate)
 
   /** Une la lista con comas y "y" antes del último: "A, B y C". */
   protected chemicalsText = computed(() => {
@@ -78,4 +81,5 @@ export class DroneItem {
     if (list.length <= 1) return list.join('');
     return list.slice(0, -1).join(', ') + ' y ' + list[list.length - 1];
   });
+  protected readonly translate = translate;
 }

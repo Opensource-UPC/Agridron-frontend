@@ -231,16 +231,16 @@
     "title": "Gestión de flota de drones",
     "status": {
       "AVAILABLE": "Disponible",
-      "IN_FLIGHT": "En vuelo",
+      "IN-FLIGHT": "En vuelo",
       "MAINTENANCE": "Mantenimiento",
-      "MAINTENANCE_SOON": "Mantenimiento próx."
+      "OUT-OF-SERVICE": "fuera de servicio"
     },
     "serial": "SN",
     "battery": "Batería",
     "nozzle": "Boquilla",
     "noNozzle": "Sin boquilla",
     "compatible": "Compatible",
-    "nextService": "Próximo service",
+    "nextService": "Próximo servicio",
     "noPhoto": "Sin foto",
     "loading": "Cargando drones...",
     "empty": "No hay drones para mostrar",

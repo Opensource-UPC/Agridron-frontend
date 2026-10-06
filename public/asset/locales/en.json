@@ -226,9 +226,9 @@
     "title": "Drone fleet management",
     "status": {
       "AVAILABLE": "Available",
-      "IN_FLIGHT": "In flight",
+      "IN-FLIGHT": "In flight",
       "MAINTENANCE": "Maintenance",
-      "MAINTENANCE_SOON": "Maintenance due"
+      "OUT-OF-SERVICE": "out of service"
     },
     "serial": "SN",
     "battery": "Battery",

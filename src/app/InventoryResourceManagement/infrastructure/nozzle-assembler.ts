@@ -10,11 +10,11 @@ export class NozzleAssembler implements BaseAssembler<Nozzle,NozzleResource,Nozz
      */
     toResourceFromEntity(entity: Nozzle): NozzleResource {
         return {
-            id: entity.getId(),
-            type: entity.getType(),
+            id: entity.id,
+            type: entity.type,
             diameterMm: entity.getDiameterMm(),
             stockUnits: entity.getStockUnits(),
-            status: entity.getStatus()
+            status: entity.status,
         };
     }
 

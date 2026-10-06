@@ -12,9 +12,10 @@
             <!-- Mismo patrón que mission-history-table:
                  la clase sale del status en minúsculas (AVAILABLE -> badge--available)
                  y el texto de la traducción 'drone.status.<STATUS>'. -->
-            <span [class]="'drone-card__badge badge badge--' + drone().status.toLowerCase()">
-        {{ 'drone.status.' + drone().status | translate }}
+            <span [class]="'drone-card__badge badge badge--' + drone().status.toUpperCase()">
+        {{ 'drone.status.' + drone().status.toUpperCase() | translate }}
       </span>
+
         </div>
 
         <div class="drone-card__summary">
@@ -27,15 +28,18 @@
                     <div class="battery__fill"
                          [class.battery__fill--low]="isLowBattery()"
                          [style.width.%]="battery()"></div>
+                    <!-- When the battery is under to 20%,
+                    the class battery__fill--low is added-->
+
                 </div>
                 <span>{{ battery() }}%</span>
             </div>
 
-            <p>
+            <p class="nozzle">
                 <strong>{{ 'drone.nozzle' | translate }}:</strong>
-                <!-- AJUSTA `name` al campo real de tu Nozzle -->
-                <small>{{ nozzle() ? nozzle()!.type : ('drone.noNozzle' | translate) }}</small>
+                <small>{{ nozzle() ? nozzle()!.diameterMm + ' mm' : ('drone.noNozzle' | translate) }}</small>
             </p>
+
         </div>
     </div>
 

@@ -13,6 +13,7 @@ export class DronApiEndpoint extends BaseApiEndpoint<Drone, DroneResource, Drone
     /**
      * Creates an instance of DroneApiEndpoint.
      * @param http - The HttpClient to be used for making API requests.
+     * BASICAMENTE LO QUE HACE ES ARMAR SU PROPIA URL Y COMO HEREDA DE BASEAPIENDPOINT PUES...YA TIENE LAS OPERACIONES CRUD.
      */
     constructor(http: HttpClient) {
         super(http, `${environment.AgriDronProviderApiBaseUrl}${environment.AgriDronProviderDronesMetricsEndpointPath}`, new DronAssembler());
