@@ -17,7 +17,7 @@ export class NozzleApiEndpoint extends BaseApiEndpoint<Nozzle,NozzleResource,Noz
      * @param http - The HttpClient to be used for making API requests.
      */
     constructor(http: HttpClient) {
-        super(http, `${environment.AgriDronProviderApiBaseUrl}${environment.AgriDronProviderDronesMetricsEndpointPath}`, new NozzleAssembler());
+        super(http, `${environment.AgriDronProviderApiBaseUrl}${environment.AgriDronProvideNozzlesEndpointPath}`, new NozzleAssembler());
     }
 }
 

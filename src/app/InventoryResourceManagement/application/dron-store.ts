@@ -90,10 +90,14 @@ export class DroneStore {
         this.loadDrones();
     };
 
+    /**
+     *
+     */
     private loadDrones = (): void => {
         this.loadingSignal.set(true);
         this.errorSignal.set(null);
-        forkJoin({
+        forkJoin({ //Pide que se carguen los drones y las
+            // boquillas
             drones: this.droneEndpoint.getAll().pipe(retry(2)),
             nozzles: this.nozzleEndpoint.getAll().pipe(retry(2))
         }).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({

@@ -10,6 +10,10 @@ import {DroneList} from "../dron-list/dron-list"
   styleUrl: './drone-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
+/**
+ *
+ */
 export class DronePage {
 
   private readonly store = inject(DroneStore);

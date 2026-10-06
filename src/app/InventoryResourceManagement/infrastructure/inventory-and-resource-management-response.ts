@@ -4,6 +4,9 @@ import{BaseResource, BaseResponse} from "../../shared/infrastructure/base-respon
 /**
  * describe a dron from endpoint
  */
+
+//La forma de JSON tal y como de la API
+
 export interface DroneResource extends BaseResource {
     id: number;
     serialNumber: string;
