@@ -325,7 +325,7 @@
       "nozzleId": 1,
       "lastMaintenanceDate": "2026-08-10",
       "nextMaintenanceDate": "2026-11-10",
-      "urlimg":"https://images.unsplash.com/photo-1521405924368-64c5b84bec60?w=600"
+      "urlimg": "https://images.unsplash.com/photo-1521405924368-64c5b84bec60?w=600"
     },
     {
       "id": 2,
@@ -525,6 +525,22 @@
       "type": "corrective",
       "description": "Falla en motor trasero izquierdo, pendiente de repuesto",
       "technician": "Mario Vega"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "email": "admin@agridron.com",
+      "password": "admin123",
+      "role": "FARMER"
+    },
+    {
+      "id": 2,
+      "username": "pedro",
+      "email": "user@agridron.com",
+      "password": "pedro123",
+      "role": "FARMER"
     }
   ]
 }

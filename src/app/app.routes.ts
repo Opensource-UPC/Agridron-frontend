@@ -2,6 +2,21 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'auth/sign-in'
+  },
+  {
+    path: 'home',
+    loadComponent: () =>
+      import('./shared/presentation/views/home/home').then(m => m.Home)
+  },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./iam/presentation/iam.routes').then(m => m.iamRoutes)
+  },
+  {
     path: 'farms',
     loadChildren: () =>
       import('./fieldManagement/presentation/fieldManagement.routes').then(m => m.fieldManagementRoutes)

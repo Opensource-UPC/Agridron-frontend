@@ -1,8 +1,8 @@
 :host {
   display: block;
-  max-width: 360px;
-  margin: 24px auto;
-  padding: 0 16px;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 article {
