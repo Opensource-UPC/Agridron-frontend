@@ -5,6 +5,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIcon} from '@angular/material/icon';
 import {TranslatePipe} from '@ngx-translate/core';
 import {AuthenticationService} from '../../../../iam/application/authentication.service';
+import {WeatherWidget} from '../../components/weather-widget/weather-widget';
+import {WeatherService} from '../../../../weather-integration/application/weather-service';
 import {FarmStore} from '../../../../fieldManagement/application/farm.store';
 import {ParcelStore} from '../../../../fieldManagement/application/parcel.store';
 import {CropStore} from '../../../../fieldManagement/application/crop.store';
@@ -12,7 +14,7 @@ import {FumigationAreaStore} from '../../../../fieldManagement/application/fumig
 
 @Component({
   selector: 'app-home',
-  imports: [MatCardModule, MatButtonModule, MatIcon, RouterLink, TranslatePipe],
+  imports: [MatCardModule, MatButtonModule, MatIcon, RouterLink, TranslatePipe, WeatherWidget],
   templateUrl: './home.html',
   styleUrl: './home.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -23,6 +25,14 @@ export class Home {
   private readonly parcelStore = inject(ParcelStore);
   private readonly cropStore = inject(CropStore);
   private readonly fumigationAreaStore = inject(FumigationAreaStore);
+  private readonly weatherService = inject(WeatherService);
+
+  /**
+   * Creates an instance of Home and loads the initial weather data.
+   */
+  constructor() {
+    this.weatherService.loadWeatherConditions();
+  }
 
   readonly currentUser = this.authService.currentUser;
 

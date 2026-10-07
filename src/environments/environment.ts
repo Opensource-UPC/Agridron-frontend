@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
-  AgriDronProviderApiBaseUrl: 'http://localhost:3000/api/v1',
+  AgriDronProviderApiBaseUrl: 'https://6ac44bc6ae53bf25b80f549f.mockapi.io',
+  ///AgriDronProviderApiBaseUrl: 'http://localhost:3000/api/v1',
   AgriDronProviderProductsEndpointPath: '/products',
   AgriDronProviderCartsEndpointPath: '/carts',
   AgriDronProviderUsersEndpointPath: '/users',
