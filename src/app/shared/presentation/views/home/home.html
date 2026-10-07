@@ -19,6 +19,10 @@
   </mat-card>
 
   <h2 class="home__section-title">{{ 'home.metricsTitle' | translate }}</h2>
+  <div class="home__weather">
+    <app-weather-widget/>
+  </div>
+
   <div class="home__metrics">
     @for (metric of metrics(); track metric.label) {
       <mat-card class="home__metric" appearance="outlined">
