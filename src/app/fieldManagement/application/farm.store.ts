@@ -137,17 +137,24 @@ export class FarmStore {
     private loadFarms = (): void => {
         this.loadingSignal.set(true);
         this.errorSignal.set(null);
-        forkJoin({
-            farms: this.fieldManagementApi.getAllFarms().pipe(retry(2)),
-            parcels: this.fieldManagementApi.getAllParcels().pipe(retry(2))
-        }).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-            next: ({farms, parcels}) => {
-                farms.forEach(farm => {
-                    farm.parcel = parcels.filter(p => p.farmId === farm.id);
-                });
+        this.fieldManagementApi.getAllFarms().pipe(retry(2), takeUntilDestroyed(this.destroyRef)).subscribe({
+            next: farms => {
                 this.farmsSignal.set(farms);
                 this.loadingSignal.set(false);
                 this.errorSignal.set(null);
+                // Load parcels separately, don't block farms if parcels fails
+                this.fieldManagementApi.getAllParcels().pipe(retry(2), takeUntilDestroyed(this.destroyRef)).subscribe({
+                    next: parcels => {
+                        farms.forEach(farm => {
+                            farm.parcel = parcels.filter(p => p.farmId === farm.id);
+                        });
+                        this.farmsSignal.set([...farms]);
+                    },
+                    error: () => {
+                        // Silently ignore parcels load error in production (mockapi limitation)
+                        console.warn('Parcels not available in current environment');
+                    }
+                });
             },
             error: err => {
                 this.errorSignal.set(this.formatError(err, 'Failed to load farms'));

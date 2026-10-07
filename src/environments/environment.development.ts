@@ -15,7 +15,7 @@ export const environment = {
   weatherApiBaseUrl: 'http://localhost:3000/api/v1',
   weatherEndpointPath: '/weather',
 
-////De Edwin
+  ////De Edwin
   AgriDronProviderDronesMetricsEndpointPath: '/drones',
   AgriDronProvideChemicalsEndpointPath: '/chemicals',
   AgriDronProvideNozzlesEndpointPath: '/nozzles',
