@@ -315,5 +315,12 @@
       "farms": "Ver fincas",
       "analytics": "Ver reportes"
     }
+  },
+  "detail": {
+    "title": "Detalles del dron",
+    "back": "Volver a drones",
+    "status": "Estado operativo",
+    "lastService": "Último mantenimiento",
+    "notFound": "No se encontró el dron"
   }
 }

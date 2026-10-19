@@ -1,0 +1,70 @@
+
+.drone-detail {
+    padding: 16px;
+    color: #1B463C;
+    font-family: Montserrat, Arial, sans-serif;
+}
+
+.drone-detail h2,
+.drone-detail h3 {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.drone-detail h2 {
+    margin: 16px 0 24px;
+}
+
+.detail-card {
+    max-width: 900px;
+    border-radius: 12px;
+    background: #FFFFFF;
+}
+
+.detail-content {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 24px;
+    padding: 24px;
+}
+
+.detail-image img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.detail-info h3 {
+    font-size: 24px;
+    margin: 0 0 24px;
+}
+
+.detail-info dl {
+    display: grid;
+    grid-template-columns: 160px minmax(0, 1fr);
+    gap: 16px;
+    margin: 0;
+}
+
+.detail-info dt {
+    font-weight: 600;
+    color: #1B463C;
+}
+
+.detail-info dd {
+    margin: 0;
+    color: #334155;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 700px) {
+    .detail-content {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
+
+    .detail-info dl {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+}

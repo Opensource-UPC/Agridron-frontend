@@ -315,5 +315,12 @@
       "farms": "View farms",
       "analytics": "View reports"
     }
+  },
+  "detail": {
+    "title": "Drone details",
+    "back": "Back to drones",
+    "status": "Operational status",
+    "lastService": "Last maintenance",
+    "notFound": "Drone not found"
   }
 }

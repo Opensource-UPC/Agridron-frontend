@@ -1,0 +1,77 @@
+
+
+<section class="drone-detail">
+
+    <button matButton type="button" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        {{ 'detail.back' | translate }}
+    </button>
+
+    <h2>{{ 'detail.title' | translate }}</h2>
+
+    @if (loading()) {
+        <p>{{ 'drone.loading' | translate }}</p>
+
+    } @else if (drone(); as selectedDrone) {
+
+        <mat-card appearance="outlined" class="detail-card">
+            <mat-card-content class="detail-content">
+
+                <div class="detail-image">
+                    @if (selectedDrone.urlimg) {
+                        <img
+                                [src]="selectedDrone.urlimg"
+                                [alt]="selectedDrone.model">
+                    } @else {
+                        <p>{{ 'drone.noPhoto' | translate }}</p>
+                    }
+                </div>
+
+                <div class="detail-info">
+
+                    <h3>{{ selectedDrone.model }}</h3>
+
+                    <dl>
+                        <dt>{{ 'drone.serial' | translate }}</dt>
+                        <dd>{{ selectedDrone.serialNumber }}</dd>
+
+                        <dt>{{ 'detail.status' | translate }}</dt>
+                        <dd>
+                            {{ 'drone.status.' + selectedDrone.status.toUpperCase() | translate }}
+                        </dd>
+
+                        <dt>{{ 'drone.battery' | translate }}</dt>
+                        <dd>{{ selectedDrone.batteryLevel }}%</dd>
+
+                        <dt>{{ 'drone.nozzle' | translate }}</dt>
+                        <dd>
+                            @if (nozzle(); as selectedNozzle) {
+                                {{ selectedNozzle.type }} -
+                                {{ selectedNozzle.diameterMm }} mm
+                            } @else {
+                                {{ 'drone.noNozzle' | translate }}
+                            }
+                        </dd>
+
+                        <dt>{{ 'detail.lastService' | translate }}</dt>
+                        <dd>
+                            {{ selectedDrone.lastMaintenanceDate | date:'dd/MM/yyyy' }}
+                        </dd>
+
+                        <dt>{{ 'drone.nextService' | translate }}</dt>
+                        <dd>
+                            {{ selectedDrone.nextMaintenanceDate | date:'dd/MM/yyyy' }}
+                        </dd>
+                    </dl>
+
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+    } @else {
+        <p role="alert">
+            {{ error() || ('drone.detail.notFound' | translate) }}
+        </p>
+    }
+
+</section>

@@ -5,7 +5,9 @@ import {Drone} from '../../../domain/model/drone.entity';
 import {Nozzle} from '../../../domain/model/nozzle.entity';
 import {translate, TranslatePipe} from '@ngx-translate/core';
 
-/**
+/********************************
+ * DroneItem representa cada tarjeta.
+ * *******************************
  * Tarjeta que muestra UN dron. Es un componente "tonto": no conoce el store
  * ni la API, solo recibe datos por `input` y avisa por `output` cuando
  * se pulsa un botón.

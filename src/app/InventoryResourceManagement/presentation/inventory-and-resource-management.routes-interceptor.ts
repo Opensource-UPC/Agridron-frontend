@@ -5,4 +5,11 @@ import {Routes} from '@angular/router';
  */
 export const inventoryAndResourceManagementRoutes: Routes = [
     {path: '', loadComponent: () => import('./components/drone-page/drone-page').then(m => m.DronePage)},
+    {
+        path: ':id', loadComponent: () =>
+            import('./components/drone-detail/drone-detail')
+                .then(m => m.DroneDetail)
+    }
+
+
 ];
