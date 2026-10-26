@@ -48,4 +48,9 @@ export class DroneDetail {
   goBack(): void {
     this.router.navigate(['/drones']);
   }
+
+  editDrone() :void{
+    this.router.navigate(['/drones', this.droneId , 'edit']);
+  }
+
 }

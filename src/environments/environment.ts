@@ -18,7 +18,7 @@ AgriDronProviderMissionReportsEndpointPath: '/mission-reports',
 
   ////De Edwin
   AgriDronProviderDronesMetricsEndpointPath: '/drones',
-  AgriDronProvideChemicalsEndpointPath: '/chemicals',
+  AgriDronProvideChemicalsEndpointPath: '/agrochemicals',
   AgriDronProvideNozzlesEndpointPath: '/nozzles',
-  AgriDronProvideMaintenanceRecordEndpointPath: '/maintenance',
+  AgriDronProvideMaintenanceRecordEndpointPath: '/maintenanceRecords',
 };

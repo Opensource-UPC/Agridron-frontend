@@ -11,6 +11,8 @@ export class Drone {
    nextMaintenanceDate : string;
    urlimg: string;
 
+
+
    constructor(id: number, serialNumber: string,
                model: string, batteryLevel: number, status: string,
                nozzleId: number, lastMaintenanceDate: string,
@@ -24,6 +26,7 @@ export class Drone {
        this.lastMaintenanceDate = lastMaintenanceDate;
        this.nextMaintenanceDate = nextMaintenanceDate;
        this.urlimg = urlimg;
+
    }
 
    getId():number {

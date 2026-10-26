@@ -18,4 +18,5 @@ export class DronApiEndpoint extends BaseApiEndpoint<Drone, DroneResource, Drone
     constructor(http: HttpClient) {
         super(http, `${environment.AgriDronProviderApiBaseUrl}${environment.AgriDronProviderDronesMetricsEndpointPath}`, new DronAssembler());
     }
+
 }

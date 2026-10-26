@@ -321,17 +321,17 @@
       "serialNumber": "DRN-2026-0101",
       "model": "RTX-6030",
       "batteryLevel": 80,
-      "status": "available",
-      "nozzleId": 1,
+      "status": "maintenance",
+      "nozzleId": 6,
       "lastMaintenanceDate": "2026-08-10",
-      "nextMaintenanceDate": "2026-11-10",
+      "nextMaintenanceDate": "2026-12-06",
       "urlimg": "https://images.unsplash.com/photo-1521405924368-64c5b84bec60?w=600"
     },
     {
       "id": 2,
       "serialNumber": "DRN-2026-0102",
       "model": "RTX-6030",
-      "batteryLevel": 35,
+      "batteryLevel": 10,
       "status": "in-flight",
       "nozzleId": 2,
       "lastMaintenanceDate": "2026-07-22",
@@ -342,7 +342,7 @@
       "id": 3,
       "serialNumber": "DRN-2026-0103",
       "model": "AGX-8000",
-      "batteryLevel": 10,
+      "batteryLevel": 80,
       "status": "maintenance",
       "nozzleId": 3,
       "lastMaintenanceDate": "2026-06-15",
@@ -544,5 +544,3 @@
     }
   ]
 }
-
-

@@ -6,6 +6,13 @@ import {Drone} from '../domain/model/drone.entity';
 import {Nozzle} from '../domain/model/nozzle.entity';
 import {DronApiEndpoint} from '../infrastructure/dron-api-endpoint';
 import {NozzleApiEndpoint} from '../infrastructure/nozzle-api-endpoint';
+import {
+    Observable,
+    catchError,
+    finalize,
+    tap,
+    throwError
+} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class DroneStore {
@@ -56,20 +63,34 @@ export class DroneStore {
         });
     };
 
-    updateDrone = (updated: Drone): void => {
+
+
+    updateDrone = (updated: Drone): Observable<Drone> => {
         this.loadingSignal.set(true);
         this.errorSignal.set(null);
-        this.droneEndpoint.update(updated, updated.id).pipe(retry(2)).subscribe({
-            next: drone => {
-                this.dronesSignal.update(drones => drones.map(d => d.id === drone.id ? drone : d));
+
+        return this.droneEndpoint.update(updated, updated.id).pipe(
+            tap(drone => {
+                this.dronesSignal.update(drones =>
+                    drones.map(d =>
+                        d.id === drone.id ? drone : d
+                    )
+                );
+            }),
+
+            catchError(err => {
+                this.errorSignal.set(
+                    this.formatError(err, 'Failed to update drone')
+                );
+                return throwError(() => err);
+            }),
+
+            finalize(() => {
                 this.loadingSignal.set(false);
-            },
-            error: err => {
-                this.errorSignal.set(this.formatError(err, 'Failed to update drone'));
-                this.loadingSignal.set(false);
-            }
-        });
+            })
+        );
     };
+
 
     deleteDrone = (id: number): void => {
         this.loadingSignal.set(true);

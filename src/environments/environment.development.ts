@@ -1,3 +1,6 @@
+import {HttpClient} from "@angular/common/http";
+import {DronAssembler} from "../app/InventoryResourceManagement/infrastructure/dron-assembler";
+
 export const environment = {
   production: false,
   AgriDronProviderApiBaseUrl: 'http://localhost:3000/api/v1',
@@ -17,7 +20,10 @@ export const environment = {
 
 ////De Edwin
   AgriDronProviderDronesMetricsEndpointPath: '/drones',
-  AgriDronProvideChemicalsEndpointPath: '/chemicals',
+  AgriDronProvideChemicalsEndpointPath: '/agrochemicals',
   AgriDronProvideNozzlesEndpointPath: '/nozzles',
-  AgriDronProvideMaintenanceRecordEndpointPath: '/maintenance',
+  AgriDronProvideMaintenanceRecordEndpointPath: '/maintenanceRecords',
 };
+
+
+

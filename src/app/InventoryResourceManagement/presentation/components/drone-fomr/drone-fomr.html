@@ -1,0 +1,119 @@
+
+<section class="drone-form">
+
+    <h2>Edit drone</h2>
+
+    @if (loading() && !drone()) {
+        <p>Loading drone...</p>
+
+    } @else if (drone()) {
+
+        <form [formGroup]="form" (ngSubmit)="submit()">
+
+            <div class="form-grid">
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Serial number</mat-label>
+                    <input matInput formControlName="serialNumber">
+
+                    @if (form.controls.serialNumber.hasError('required')) {
+                        <mat-error>Serial number is required</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Model</mat-label>
+                    <input matInput formControlName="model">
+
+                    @if (form.controls.model.hasError('required')) {
+                        <mat-error>Model is required</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Battery level (%)</mat-label>
+                    <input matInput type="number"
+                           formControlName="batteryLevel">
+
+                    @if (form.controls.batteryLevel.invalid) {
+                        <mat-error>Enter a value from 0 to 100</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Status</mat-label>
+
+                    <mat-select formControlName="status">
+                        @for (status of statuses; track status.value) {
+                            <mat-option [value]="status.value">
+                                {{ status.label }}
+                            </mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Nozzle</mat-label>
+
+                    <mat-select formControlName="nozzleId">
+                        @for (nozzle of nozzles(); track nozzle.id) {
+                            <mat-option [value]="nozzle.id">
+                                {{ nozzle.type }} - {{ nozzle.diameterMm }} mm
+                            </mat-option>
+                        }
+                    </mat-select>
+
+                    @if (form.controls.nozzleId.invalid) {
+                        <mat-error>Select a nozzle</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Last maintenance</mat-label>
+                    <input matInput type="date"
+                           formControlName="lastMaintenanceDate">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Next maintenance</mat-label>
+                    <input matInput type="date"
+                           formControlName="nextMaintenanceDate">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Image URL</mat-label>
+                    <input matInput type="url"
+                           formControlName="urlimg">
+                </mat-form-field>
+
+            </div>
+
+            @if (form.hasError('invalidMaintenanceDates')) {
+                <p class="form-error" role="alert">
+                    Next maintenance cannot be before last maintenance.
+                </p>
+            }
+
+            @if (error()) {
+                <p class="form-error" role="alert">{{ error() }}</p>
+            }
+
+            <div class="form-actions">
+                <button mat-button type="button"
+                        (click)="cancel()">
+                    Cancel
+                </button>
+
+                <button mat-flat-button type="submit"
+                        [disabled]="form.invalid || loading()">
+                    Save changes
+                </button>
+            </div>
+
+        </form>
+
+    } @else {
+        <p role="alert">Drone not found.</p>
+    }
+
+</section>

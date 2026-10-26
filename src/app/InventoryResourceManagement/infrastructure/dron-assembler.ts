@@ -20,7 +20,8 @@ export class DronAssembler implements BaseAssembler<Drone, DroneResource, DroneR
             resource.nozzleId,
             resource.lastMaintenanceDate,
             resource.nextMaintenanceDate,
-            resource.urlimg)
+            resource.urlimg,
+           )
     }
 
 

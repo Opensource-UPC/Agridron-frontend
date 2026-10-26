@@ -9,7 +9,12 @@ export const inventoryAndResourceManagementRoutes: Routes = [
         path: ':id', loadComponent: () =>
             import('./components/drone-detail/drone-detail')
                 .then(m => m.DroneDetail)
-    }
+    },
 
+    {
+        path: ':id/edit', loadComponent: () =>
+            import('./components/drone-fomr/drone-fomr')
+                .then(m=> m.DroneForm)
+    }
 
 ];

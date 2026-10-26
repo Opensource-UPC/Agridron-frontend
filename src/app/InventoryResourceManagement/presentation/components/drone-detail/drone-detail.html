@@ -7,6 +7,12 @@
         {{ 'detail.back' | translate }}
     </button>
 
+    <!-- Button edit-->
+    <button mat-flat-button type="button" (click)="editDrone()">
+        <mat-icon>edit</mat-icon>
+        Edit drone
+    </button>
+
     <h2>{{ 'detail.title' | translate }}</h2>
 
     @if (loading()) {
