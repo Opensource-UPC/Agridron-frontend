@@ -4,12 +4,14 @@
 export class MissionHistory {
     #id!: number;
     #missionId!: number;
+    #parcelId!: number;
     #finalStatus!: string;
     #completedAt!: string;
 
-    constructor(id: number, missionId: number, finalStatus: string, completedAt: string) {
+    constructor(id: number, missionId: number, parcelId: number, finalStatus: string, completedAt: string) {
         this.#id = id;
         this.#missionId = missionId;
+        this.#parcelId = parcelId;
         this.#finalStatus = finalStatus;
         this.#completedAt = completedAt;
     }
@@ -28,6 +30,14 @@ export class MissionHistory {
 
     set missionId(value: number) {
         this.#missionId = value;
+    }
+
+    get parcelId(): number {
+        return this.#parcelId;
+    }
+
+    set parcelId(value: number) {
+        this.#parcelId = value;
     }
 
     get finalStatus(): string {

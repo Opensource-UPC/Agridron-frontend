@@ -6,6 +6,7 @@ import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-respo
 export interface MissionReportResource extends BaseResource {
     id: number;
     missionId: number;
+    parcelId: number;
     type: string;
     treatedArea: number;
     appliedVolume: number;
@@ -26,6 +27,7 @@ export interface MissionReportResponse extends BaseResponse {
 export interface MissionHistoryResource extends BaseResource {
     id: number;
     missionId: number;
+    parcelId: number;
     finalStatus: string;
     completedAt: string;
 }

@@ -7,6 +7,7 @@ import {ReportType} from './report-type.enum';
 export class MissionReport {
     #id!: number;
     #missionId!: number;
+    #parcelId!: number;
     #type!: ReportType;
     #treatedArea!: number;
     #appliedVolume!: number;
@@ -17,6 +18,7 @@ export class MissionReport {
     constructor(
         id: number,
         missionId: number,
+        parcelId: number,
         type: ReportType,
         treatedArea: number,
         appliedVolume: number,
@@ -26,6 +28,7 @@ export class MissionReport {
     ) {
         this.#id = id;
         this.#missionId = missionId;
+        this.#parcelId = parcelId;
         this.#type = type;
         this.#treatedArea = treatedArea;
         this.#appliedVolume = appliedVolume;
@@ -48,6 +51,14 @@ export class MissionReport {
 
     set missionId(value: number) {
         this.#missionId = value;
+    }
+
+    get parcelId(): number {
+        return this.#parcelId;
+    }
+
+    set parcelId(value: number) {
+        this.#parcelId = value;
     }
 
     get type(): ReportType {
@@ -107,6 +118,7 @@ export class MissionReport {
         const base = {
             id: this.#id,
             missionId: this.#missionId,
+            parcelId: this.#parcelId,
             type: this.#type,
             treatedArea: this.#treatedArea,
             appliedVolume: this.#appliedVolume,
