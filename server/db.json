@@ -214,6 +214,7 @@
     {
       "id": 1,
       "missionId": 1,
+      "parcelId": 1,
       "type": "MISSION_SUMMARY",
       "treatedArea": 12.5,
       "appliedVolume": 38,
@@ -223,6 +224,7 @@
     {
       "id": 2,
       "missionId": 1,
+      "parcelId": 1,
       "type": "PHYTOSANITARY",
       "treatedArea": 12.5,
       "appliedVolume": 38,
@@ -232,31 +234,69 @@
     {
       "id": 3,
       "missionId": 2,
+      "parcelId": 3,
       "type": "MISSION_SUMMARY",
       "treatedArea": 8.2,
       "appliedVolume": 24.6,
       "observations": "Mission paused once due to wind.",
       "generatedAt": "2026-09-25T11:05:00"
+    },
+    {
+      "id": 4,
+      "missionId": 4,
+      "parcelId": 2,
+      "type": "MISSION_SUMMARY",
+      "treatedArea": 8.3,
+      "appliedVolume": 29.9,
+      "observations": "Full coverage, light wind at the end.",
+      "generatedAt": "2026-09-29T10:20:00"
+    },
+    {
+      "id": 5,
+      "missionId": 5,
+      "parcelId": 5,
+      "type": "MISSION_SUMMARY",
+      "treatedArea": 6.0,
+      "appliedVolume": 21,
+      "observations": "Completed on schedule.",
+      "generatedAt": "2026-10-01T09:40:00"
     }
   ],
   "mission-histories": [
     {
       "id": 1,
       "missionId": 1,
+      "parcelId": 1,
       "finalStatus": "COMPLETED",
       "completedAt": "2026-09-20T15:20:00"
     },
     {
       "id": 2,
       "missionId": 2,
+      "parcelId": 3,
       "finalStatus": "COMPLETED",
       "completedAt": "2026-09-25T11:00:00"
     },
     {
       "id": 3,
       "missionId": 3,
+      "parcelId": 2,
       "finalStatus": "CANCELLED",
       "completedAt": "2026-09-28T09:15:00"
+    },
+    {
+      "id": 4,
+      "missionId": 4,
+      "parcelId": 2,
+      "finalStatus": "COMPLETED",
+      "completedAt": "2026-09-29T10:10:00"
+    },
+    {
+      "id": 5,
+      "missionId": 5,
+      "parcelId": 5,
+      "finalStatus": "COMPLETED",
+      "completedAt": "2026-10-01T09:30:00"
     }
   ],
   "operational-metrics": [
@@ -286,6 +326,20 @@
       "reportId": 3,
       "name": "Flight time",
       "value": 31,
+      "unit": "min"
+    },
+    {
+      "id": 5,
+      "reportId": 4,
+      "name": "Flight time",
+      "value": 35,
+      "unit": "min"
+    },
+    {
+      "id": 6,
+      "reportId": 5,
+      "name": "Flight time",
+      "value": 28,
       "unit": "min"
     }
   ],

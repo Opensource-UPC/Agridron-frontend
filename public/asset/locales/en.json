@@ -171,13 +171,16 @@
     "tabs": {
       "missions": "Missions",
       "supplyUsage": "Supply usage",
-      "indicators": "Indicators"
+      "indicators": "Indicators",
+      "compare": "Compare parcels"
     },
     "filter": {
       "from": "From",
       "to": "To",
       "apply": "Filter",
-      "clear": "Clear"
+      "clear": "Clear",
+      "farm": "Farm",
+      "allFarms": "All farms"
     },
     "columns": {
       "id": "ID",
@@ -189,7 +192,11 @@
       "type": "Type",
       "volume": "Volume (L)",
       "density": "L/ha",
-      "generatedAt": "Generated"
+      "generatedAt": "Generated",
+      "parcel": "Parcel",
+      "farm": "Farm",
+      "missions": "Missions",
+      "total": "Total"
     },
     "status": {
       "PLANNED": "Planned",
@@ -208,7 +215,8 @@
       "detail": "View detail",
       "back": "Back to reports",
       "exportJson": "Export JSON",
-      "exportCsv": "Export CSV"
+      "exportCsv": "Export CSV",
+      "exportPdf": "Export PDF"
     },
     "indicators": {
       "period": "Period",
@@ -222,7 +230,19 @@
       "notFound": "Report not found."
     },
     "empty": "No records found.",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "consumption": {
+      "byFarm": "Consumption by farm",
+      "details": "Report details"
+    },
+    "compare": {
+      "select": "Parcels to compare",
+      "hint": "Select at least two parcels to compare them.",
+      "intensity": "L/ha (relative)"
+    },
+    "pdf": {
+      "title": "AgriDron - Mission report"
+    }
   },
   "drone": {
     "title": "Drone fleet management",

@@ -171,13 +171,16 @@
     "tabs": {
       "missions": "Misiones",
       "supplyUsage": "Uso de insumos",
-      "indicators": "Indicadores"
+      "indicators": "Indicadores",
+      "compare": "Comparar parcelas"
     },
     "filter": {
       "from": "Desde",
       "to": "Hasta",
       "apply": "Filtrar",
-      "clear": "Limpiar"
+      "clear": "Limpiar",
+      "farm": "Finca",
+      "allFarms": "Todas las fincas"
     },
     "columns": {
       "id": "ID",
@@ -189,7 +192,11 @@
       "type": "Tipo",
       "volume": "Volumen (L)",
       "density": "L/ha",
-      "generatedAt": "Generado"
+      "generatedAt": "Generado",
+      "parcel": "Parcela",
+      "farm": "Finca",
+      "missions": "Misiones",
+      "total": "Total"
     },
     "status": {
       "PLANNED": "Programada",
@@ -208,7 +215,8 @@
       "detail": "Ver detalle",
       "back": "Volver a reportes",
       "exportJson": "Exportar JSON",
-      "exportCsv": "Exportar CSV"
+      "exportCsv": "Exportar CSV",
+      "exportPdf": "Exportar PDF"
     },
     "indicators": {
       "period": "Periodo",
@@ -222,7 +230,19 @@
       "notFound": "Reporte no encontrado."
     },
     "empty": "No se encontraron registros.",
-    "loading": "Cargando..."
+    "loading": "Cargando...",
+    "consumption": {
+      "byFarm": "Consumo por finca",
+      "details": "Detalle de reportes"
+    },
+    "compare": {
+      "select": "Parcelas a comparar",
+      "hint": "Selecciona al menos dos parcelas para compararlas.",
+      "intensity": "L/ha (relativo)"
+    },
+    "pdf": {
+      "title": "AgriDron - Reporte de misión"
+    }
   },
   "drone": {
     "title": "Gestión de flota de drones",
