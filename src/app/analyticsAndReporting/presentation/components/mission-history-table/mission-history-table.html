@@ -8,6 +8,14 @@
     <td mat-cell *matCellDef="let row">MS-{{ row.missionId | number: '3.0-0' }}</td>
   </ng-container>
 
+  <ng-container matColumnDef="parcel">
+    <th mat-header-cell *matHeaderCellDef>{{ 'analytics.columns.parcel' | translate }}</th>
+    <td mat-cell *matCellDef="let row">
+      {{ row.parcelName }}
+      <small class="history-table__farm">{{ row.farmName }}</small>
+    </td>
+  </ng-container>
+
   <ng-container matColumnDef="date">
     <th mat-header-cell *matHeaderCellDef>{{ 'analytics.columns.date' | translate }}</th>
     <td mat-cell *matCellDef="let row">{{ row.completedAt | date: 'dd/MM/yyyy' }}</td>

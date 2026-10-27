@@ -14,6 +14,10 @@
         <dl class="report-detail__fields">
           <dt>{{ 'analytics.columns.mission' | translate }}</dt>
           <dd>MS-{{ report.missionId | number: '3.0-0' }}</dd>
+          <dt>{{ 'analytics.columns.farm' | translate }}</dt>
+          <dd>{{ farmName() }}</dd>
+          <dt>{{ 'analytics.columns.parcel' | translate }}</dt>
+          <dd>{{ parcelName() }}</dd>
           <dt>{{ 'analytics.columns.generatedAt' | translate }}</dt>
           <dd>{{ report.generatedAt | date: 'dd/MM/yyyy HH:mm' }}</dd>
           <dt>{{ 'analytics.columns.area' | translate }}</dt>
@@ -36,6 +40,9 @@
         }
       </mat-card-content>
       <mat-card-actions>
+        <button matButton (click)="downloadPdf()">
+          <mat-icon>picture_as_pdf</mat-icon>{{ 'analytics.actions.exportPdf' | translate }}
+        </button>
         <button matButton (click)="download('json')">
           <mat-icon>download</mat-icon>{{ 'analytics.actions.exportJson' | translate }}
         </button>

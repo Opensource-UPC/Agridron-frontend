@@ -12,7 +12,17 @@
     <mat-tab [label]="'analytics.tabs.supplyUsage' | translate">
       <ng-template matTabContent>
         <ng-container [ngTemplateOutlet]="filterBar"/>
-        <app-supply-usage-table [reports]="filteredReports()" [loading]="loading()"/>
+        <h3>{{ 'analytics.consumption.byFarm' | translate }}</h3>
+        <app-farm-consumption-summary [rows]="reportRows()"/>
+        <h3>{{ 'analytics.consumption.details' | translate }}</h3>
+        <app-supply-usage-table [rows]="reportRows()" [loading]="loading()"/>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab [label]="'analytics.tabs.compare' | translate">
+      <ng-template matTabContent>
+        <ng-container [ngTemplateOutlet]="filterBar"/>
+        <app-parcel-comparison [rows]="reportRows()" [parcels]="parcelOptions()"/>
       </ng-template>
     </mat-tab>
 
@@ -26,6 +36,15 @@
 
 <ng-template #filterBar>
   <div class="reports__filter">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'analytics.filter.farm' | translate }}</mat-label>
+      <mat-select [value]="draftFarmId()" (selectionChange)="draftFarmId.set($event.value)">
+        <mat-option [value]="null">{{ 'analytics.filter.allFarms' | translate }}</mat-option>
+        @for (farm of farms(); track farm.id) {
+          <mat-option [value]="farm.id">{{ farm.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>{{ 'analytics.filter.from' | translate }}</mat-label>
       <input matInput type="date" [value]="draftFrom()" (change)="onFromChange($event)"/>

@@ -27,3 +27,8 @@
 .badge--authorized { --badge: #ffa726; }
 .badge--paused,
 .badge--cancelled { --badge: #ef5350; }
+
+.history-table__farm {
+  display: block;
+  opacity: 0.7;
+}

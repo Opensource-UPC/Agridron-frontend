@@ -1,0 +1,7 @@
+.consumption-table {
+  width: 100%;
+}
+
+.consumption-table__total td {
+  font-weight: 600;
+}

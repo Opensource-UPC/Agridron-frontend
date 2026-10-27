@@ -1,0 +1,52 @@
+<mat-form-field appearance="outline" class="comparison__select">
+  <mat-label>{{ 'analytics.compare.select' | translate }}</mat-label>
+  <mat-select multiple [value]="selectedIds()" (selectionChange)="onSelectionChange($event.value)">
+    @for (parcel of parcels(); track parcel.id) {
+      <mat-option [value]="parcel.id">{{ parcel.name }} · {{ parcel.farmName }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
+@if (selectedIds().length < 2) {
+  <p class="comparison__hint">{{ 'analytics.compare.hint' | translate }}</p>
+} @else {
+  <table mat-table [dataSource]="comparison()" class="comparison__table">
+    <ng-container matColumnDef="parcel">
+      <th mat-header-cell *matHeaderCellDef>{{ 'analytics.columns.parcel' | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.name }}
+        <small class="comparison__farm">{{ row.farmName }}</small>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="missions">
+      <th mat-header-cell *matHeaderCellDef>{{ 'analytics.columns.missions' | translate }}</th>
+      <td mat-cell *matCellDef="let row">{{ row.missions }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="area">
+      <th mat-header-cell *matHeaderCellDef>{{ 'analytics.columns.area' | translate }}</th>
+      <td mat-cell *matCellDef="let row">{{ row.treatedArea | number: '1.1-1' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="volume">
+      <th mat-header-cell *matHeaderCellDef>{{ 'analytics.columns.volume' | translate }}</th>
+      <td mat-cell *matCellDef="let row">{{ row.appliedVolume | number: '1.1-1' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="density">
+      <th mat-header-cell *matHeaderCellDef>{{ 'analytics.columns.density' | translate }}</th>
+      <td mat-cell *matCellDef="let row">{{ row.density !== null ? (row.density | number: '1.1-1') : '—' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="bar">
+      <th mat-header-cell *matHeaderCellDef>{{ 'analytics.compare.intensity' | translate }}</th>
+      <td mat-cell *matCellDef="let row" class="comparison__bar-cell">
+        <div class="comparison__bar" [style.width.%]="barWidth(row)"></div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+}
