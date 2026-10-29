@@ -1,3 +1,4 @@
+import {MissionStatus} from "./mission-status.enum";
 
 export class Mission {
     #id!: number;
@@ -10,9 +11,9 @@ export class Mission {
     #flightSpeed!: number | null;
     #sprayRate!: number | null;
     #overlap!: number | null;
-    #status!: string | null;
+    #status!: MissionStatus | null;
 
-    constructor(id: number, requestedDate: Date | null, parcelId: number, agrochemicalId: number, droneId: number, operatorId: number, flightHeight: number | null, flightSpeed: number | null, sprayRate: number | null, overlap: number | null, status: string | null) {
+    constructor(id: number, requestedDate: Date | null, parcelId: number, agrochemicalId: number, droneId: number, operatorId: number, flightHeight: number | null, flightSpeed: number | null, sprayRate: number | null, overlap: number | null, status: MissionStatus) {
         this.#id = id;
         this.#requestedDate = requestedDate;
         this.#parcelId = parcelId;
@@ -106,11 +107,11 @@ export class Mission {
         this.#overlap = value;
     }
 
-    get status(): string | null {
+    get status(): MissionStatus | null {
         return this.#status;
     }
 
-    set status(value: string | null) {
+    set status(value: MissionStatus | null) {
         this.#status = value;
     }
 }
