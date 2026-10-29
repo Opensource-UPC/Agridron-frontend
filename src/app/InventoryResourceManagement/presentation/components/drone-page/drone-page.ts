@@ -31,6 +31,10 @@ export class DronePage {
   {
       this.router.navigateByUrl(`/drones/${id}`);
   };
-  protected readonly onViewMaintenance = (id: number): void => {};
+  protected readonly onViewMaintenance = (id: number): void =>
+  {
+   this.router.navigateByUrl(`/drones/${id}/maintenance`);
+
+  };
 
 }

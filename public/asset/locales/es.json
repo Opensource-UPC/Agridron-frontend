@@ -345,5 +345,19 @@
       "nozzleRequired": "Selecciona una boquilla",
       "invalidDates": "El próximo mantenimiento no puede ser anterior al último."
     }
+  },
+  "maintenance": {
+    "title": "Historial de mantenimiento",
+    "loading": "Cargando mantenimientos...",
+    "empty": "Este dron aún no tiene mantenimientos registrados.",
+    "date": "Fecha",
+    "description": "Descripción",
+    "technician": "Técnico",
+    "viewDrone": "Ver detalles del dron",
+    "type": {
+      "label": "Tipo",
+      "PREVENTIVE": "Preventivo",
+      "CORRECTIVE": "Correctivo"
+    }
   }
 }

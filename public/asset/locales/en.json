@@ -345,5 +345,19 @@
       "nozzleRequired": "Select a nozzle",
       "invalidDates": "Next maintenance cannot be before last maintenance."
     }
+  },
+  "maintenance": {
+    "title": "Maintenance history",
+    "loading": "Loading maintenance records...",
+    "empty": "This drone has no maintenance records yet.",
+    "date": "Date",
+    "description": "Description",
+    "technician": "Technician",
+    "viewDrone": "View drone details",
+    "type": {
+      "label": "Type",
+      "PREVENTIVE": "Preventive",
+      "CORRECTIVE": "Corrective"
+    }
   }
 }

@@ -1,0 +1,70 @@
+<section class="maintenance-page">
+
+    <button mat-button type="button" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        {{ 'detail.back' | translate }}
+    </button>
+
+    <h2>{{ 'maintenance.title' | translate }}</h2>
+
+    @if (drone(); as selectedDrone) {
+        <p class="maintenance-page__drone">
+            <strong>{{ selectedDrone.model }}</strong>
+            · {{ 'drone.serial' | translate }}: {{ selectedDrone.serialNumber }}
+        </p>
+
+        <p class="maintenance-page__dates">
+            {{ 'detail.lastService' | translate }}:
+            {{ selectedDrone.lastMaintenanceDate | date:'dd/MM/yyyy' }}
+            · {{ 'drone.nextService' | translate }}:
+            {{ selectedDrone.nextMaintenanceDate | date:'dd/MM/yyyy' }}
+        </p>
+    }
+
+    @if (error()) {
+        <p class="maintenance-page__error" role="alert">{{ error() }}</p>
+    }
+
+    @if (loading()) {
+        <p>{{ 'maintenance.loading' | translate }}</p>
+
+    } @else if (records().length > 0) {
+
+        <mat-card appearance="outlined" class="maintenance-card">
+            <table class="maintenance-table">
+                <thead>
+                <tr>
+                    <th>{{ 'maintenance.date' | translate }}</th>
+                    <th>{{ 'maintenance.type.label' | translate }}</th>
+                    <th>{{ 'maintenance.description' | translate }}</th>
+                    <th>{{ 'maintenance.technician' | translate }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @for (record of records(); track record.id) {
+                        <tr>
+                            <td>{{ record.date | date:'dd/MM/yyyy' }}</td>
+                            <td>
+                                <span [class]="'type-badge type-badge--' + record.type.toLowerCase()">
+                                    {{ 'maintenance.type.' + record.type.toUpperCase() | translate }}
+                                </span>
+                            </td>
+                            <td>{{ record.description }}</td>
+                            <td>{{ record.technician }}</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </mat-card>
+
+    } @else {
+        <p class="maintenance-page__empty">{{ 'maintenance.empty' | translate }}</p>
+    }
+
+    <div class="maintenance-page__actions">
+        <button mat-flat-button type="button" (click)="viewDrone()">
+            {{ 'maintenance.viewDrone' | translate }}
+        </button>
+    </div>
+
+</section>
