@@ -14,6 +14,7 @@ export interface DroneResource extends BaseResource {
     batteryLevel: number;
     status: string;
     nozzleId: number;
+    tankCapacityLiters: number;
     lastMaintenanceDate: string;
     nextMaintenanceDate: string;
     urlimg: string;

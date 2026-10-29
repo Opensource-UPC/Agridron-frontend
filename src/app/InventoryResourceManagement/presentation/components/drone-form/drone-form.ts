@@ -1,4 +1,3 @@
-
 import {
   ChangeDetectionStrategy,
   Component,
@@ -20,10 +19,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import {TranslatePipe} from '@ngx-translate/core';
 
 import {DroneStore} from '../../../application/dron-store';
 import {Drone} from '../../../domain/model/drone.entity';
-import {TranslatePipe} from "@ngx-translate/core";
 
 // La fecha del siguiente mantenimiento no puede ser anterior
 // a la fecha del último mantenimiento.
@@ -42,11 +41,11 @@ function validateMaintenanceDates(
   selector: 'app-drone-form',
   imports: [
     ReactiveFormsModule,
+    TranslatePipe,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule,
-    TranslatePipe
+    MatSelectModule
   ],
   templateUrl: './drone-form.html',
   styleUrl: './drone-form.css',
@@ -76,7 +75,6 @@ export class DroneForm {
     {value: 'out-of-service'}
   ];
 
-
   readonly form = this.fb.nonNullable.group({
     serialNumber: ['', Validators.required],
     model: ['', Validators.required],
@@ -92,7 +90,12 @@ export class DroneForm {
     ]],
     lastMaintenanceDate: ['', Validators.required],
     nextMaintenanceDate: ['', Validators.required],
-    urlimg: ['']
+    urlimg: [''],
+    tankCapacityLiters: [0, [
+      Validators.required,
+      Validators.min(1),
+      Validators.max(100)
+    ]]
   }, {
     validators: validateMaintenanceDates
   });
@@ -110,9 +113,10 @@ export class DroneForm {
           batteryLevel: selectedDrone.batteryLevel,
           status: selectedDrone.status,
           nozzleId: selectedDrone.nozzleId,
+          tankCapacityLiters: selectedDrone.tankCapacityLiters ?? 0,
           lastMaintenanceDate: selectedDrone.lastMaintenanceDate,
           nextMaintenanceDate: selectedDrone.nextMaintenanceDate,
-          urlimg: selectedDrone.urlimg
+          urlimg: selectedDrone.urlimg,
         });
 
         this.initialized = true;
@@ -138,9 +142,10 @@ export class DroneForm {
         value.batteryLevel,
         value.status,
         value.nozzleId,
+        value.tankCapacityLiters,
         value.lastMaintenanceDate,
         value.nextMaintenanceDate,
-        value.urlimg.trim()
+        value.urlimg.trim(),
     );
 
     this.store.updateDrone(updatedDrone)

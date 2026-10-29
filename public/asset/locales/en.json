@@ -235,6 +235,7 @@
     "serial": "SN",
     "battery": "Battery",
     "nozzle": "Nozzle",
+    "tankCapacity": "Tank capacity",
     "noNozzle": "No nozzle",
     "compatible": "Compatible",
     "nextService": "Next service",
@@ -333,6 +334,7 @@
     "batteryLevel": "Battery level (%)",
     "status": "Status",
     "nozzle": "Nozzle",
+    "tankCapacity": "Tank capacity (L)",
     "lastMaintenance": "Last maintenance",
     "nextMaintenance": "Next maintenance",
     "imageUrl": "Image URL",
@@ -343,7 +345,8 @@
       "modelRequired": "Model is required",
       "batteryRange": "Enter a value from 0 to 100",
       "nozzleRequired": "Select a nozzle",
-      "invalidDates": "Next maintenance cannot be before last maintenance."
+      "invalidDates": "Next maintenance cannot be before last maintenance.",
+      "tankRange": "Enter a value between 1 and 100 liters"
     }
   },
   "maintenance": {

@@ -7,6 +7,7 @@ export class Drone {
    batteryLevel: number;
    status: string;
    nozzleId: number;
+   tankCapacityLiters: number;
    lastMaintenanceDate : string;
    nextMaintenanceDate : string;
    urlimg: string;
@@ -15,7 +16,7 @@ export class Drone {
 
    constructor(id: number, serialNumber: string,
                model: string, batteryLevel: number, status: string,
-               nozzleId: number, lastMaintenanceDate: string,
+               nozzleId: number, tankCapacityLiters: number ,lastMaintenanceDate: string,
                nextMaintenanceDate: string, urlimg: string) {
        this.id = id;
        this.serialNumber = serialNumber;
@@ -23,6 +24,7 @@ export class Drone {
        this.batteryLevel = batteryLevel;
        this.status = status;
        this.nozzleId = nozzleId;
+       this.tankCapacityLiters = tankCapacityLiters;
        this.lastMaintenanceDate = lastMaintenanceDate;
        this.nextMaintenanceDate = nextMaintenanceDate;
        this.urlimg = urlimg;

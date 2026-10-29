@@ -18,6 +18,7 @@ export class DronAssembler implements BaseAssembler<Drone, DroneResource, DroneR
             resource.batteryLevel
             , resource.status,
             resource.nozzleId,
+            resource.tankCapacityLiters,
             resource.lastMaintenanceDate,
             resource.nextMaintenanceDate,
             resource.urlimg,
@@ -33,6 +34,7 @@ export class DronAssembler implements BaseAssembler<Drone, DroneResource, DroneR
        batteryLevel:entity.batteryLevel,
        status:entity.status,
        nozzleId:entity.nozzleId,
+           tankCapacityLiters:entity.tankCapacityLiters,
        lastMaintenanceDate:entity.lastMaintenanceDate,
        nextMaintenanceDate:entity.nextMaintenanceDate,
            urlimg:entity.urlimg};

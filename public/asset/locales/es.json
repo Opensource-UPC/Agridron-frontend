@@ -235,6 +235,7 @@
     "serial": "SN",
     "battery": "Batería",
     "nozzle": "Boquilla",
+    "tankCapacity": "Capacidad del tanque",
     "noNozzle": "Sin boquilla",
     "compatible": "Compatible",
     "nextService": "Próximo servicio",
@@ -343,7 +344,8 @@
       "modelRequired": "El modelo es obligatorio",
       "batteryRange": "Ingresa un valor entre 0 y 100",
       "nozzleRequired": "Selecciona una boquilla",
-      "invalidDates": "El próximo mantenimiento no puede ser anterior al último."
+      "invalidDates": "El próximo mantenimiento no puede ser anterior al último.",
+      "tankRange": "Ingresa un valor entre 1 y 100 litros"
     }
   },
   "maintenance": {

@@ -320,9 +320,10 @@
       "id": 1,
       "serialNumber": "DRN-2026-0101",
       "model": "RTX-6030",
-      "batteryLevel": 100,
-      "status": "in-flight",
+      "batteryLevel": 50,
+      "status": "maintenance",
       "nozzleId": 6,
+      "tankCapacityLiters": 35,
       "lastMaintenanceDate": "2026-08-10",
       "nextMaintenanceDate": "2026-12-06",
       "urlimg": "https://images.unsplash.com/photo-1521405924368-64c5b84bec60?w=600"
@@ -334,6 +335,7 @@
       "batteryLevel": 10,
       "status": "in-flight",
       "nozzleId": 2,
+      "tankCapacityLiters": 10,
       "lastMaintenanceDate": "2026-07-22",
       "nextMaintenanceDate": "2026-10-22",
       "urlimg": "https://images.unsplash.com/photo-1713952160141-8364b2fca485?w=600"
@@ -345,6 +347,7 @@
       "batteryLevel": 80,
       "status": "maintenance",
       "nozzleId": 3,
+      "tankCapacityLiters": 20,
       "lastMaintenanceDate": "2026-06-15",
       "nextMaintenanceDate": "2026-09-15",
       "urlimg": "https://images.unsplash.com/photo-1713952160141-8364b2fca485?w=600"
@@ -356,6 +359,7 @@
       "batteryLevel": 95,
       "status": "available",
       "nozzleId": 4,
+      "tankCapacityLiters": 20,
       "lastMaintenanceDate": "2026-09-01",
       "nextMaintenanceDate": "2026-12-01",
       "urlimg": "https://images.unsplash.com/photo-1713952160156-bb59cac789a9?w=600"
@@ -367,6 +371,7 @@
       "batteryLevel": 55,
       "status": "available",
       "nozzleId": 5,
+      "tankCapacityLiters": 16,
       "lastMaintenanceDate": "2026-08-25",
       "nextMaintenanceDate": "2026-11-25",
       "urlimg": "https://images.unsplash.com/photo-1713952160156-bb59cac789a9?w=600"
@@ -378,6 +383,7 @@
       "batteryLevel": 0,
       "status": "out-of-service",
       "nozzleId": 6,
+      "tankCapacityLiters": 16,
       "lastMaintenanceDate": "2026-03-10",
       "nextMaintenanceDate": "2026-06-10",
       "urlimg": "https://images.unsplash.com/photo-1521405924368-64c5b84bec60?w=600"

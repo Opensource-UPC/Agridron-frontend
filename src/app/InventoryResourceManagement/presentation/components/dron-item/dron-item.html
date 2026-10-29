@@ -1,4 +1,3 @@
-
 <article class="drone-card">
 
     <div class="drone-card__top">
@@ -38,6 +37,11 @@
             <p class="nozzle">
                 <strong>{{ 'drone.nozzle' | translate }}:</strong>
                 <small>{{ nozzle() ? nozzle()!.diameterMm + ' mm' : ('drone.noNozzle' | translate) }}</small>
+            </p>
+
+            <p class="nozzle">
+                <strong>{{ 'drone.tankCapacity' | translate }}:</strong>
+                <small>{{ drone().tankCapacityLiters != null ? drone().tankCapacityLiters + ' L' : '—' }}</small>
             </p>
 
         </div>

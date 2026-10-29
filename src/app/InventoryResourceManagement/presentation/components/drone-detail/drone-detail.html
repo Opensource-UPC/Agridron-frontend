@@ -47,6 +47,11 @@
                         <dt>{{ 'drone.battery' | translate }}</dt>
                         <dd>{{ selectedDrone.batteryLevel }}%</dd>
 
+                        <dt>{{ 'drone.tankCapacity' | translate }}</dt>
+                        <dd>
+                            {{ selectedDrone.tankCapacityLiters != null ? selectedDrone.tankCapacityLiters + ' L' : '—' }}
+                        </dd>
+
                         <dt>{{ 'drone.nozzle' | translate }}</dt>
                         <dd>
                             @if (nozzle(); as selectedNozzle) {
