@@ -1,10 +1,9 @@
-
 <section class="drone-form">
 
-    <h2>Edit drone</h2>
+    <h2>{{ 'droneForm.title' | translate }}</h2>
 
     @if (loading() && !drone()) {
-        <p>Loading drone...</p>
+        <p>{{ 'droneForm.loading' | translate }}</p>
 
     } @else if (drone()) {
 
@@ -13,47 +12,47 @@
             <div class="form-grid">
 
                 <mat-form-field appearance="outline">
-                    <mat-label>Serial number</mat-label>
+                    <mat-label>{{ 'droneForm.serialNumber' | translate }}</mat-label>
                     <input matInput formControlName="serialNumber">
 
                     @if (form.controls.serialNumber.hasError('required')) {
-                        <mat-error>Serial number is required</mat-error>
+                        <mat-error>{{ 'droneForm.errors.serialRequired' | translate }}</mat-error>
                     }
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
-                    <mat-label>Model</mat-label>
+                    <mat-label>{{ 'droneForm.model' | translate }}</mat-label>
                     <input matInput formControlName="model">
 
                     @if (form.controls.model.hasError('required')) {
-                        <mat-error>Model is required</mat-error>
+                        <mat-error>{{ 'droneForm.errors.modelRequired' | translate }}</mat-error>
                     }
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
-                    <mat-label>Battery level (%)</mat-label>
+                    <mat-label>{{ 'droneForm.batteryLevel' | translate }}</mat-label>
                     <input matInput type="number"
                            formControlName="batteryLevel">
 
                     @if (form.controls.batteryLevel.invalid) {
-                        <mat-error>Enter a value from 0 to 100</mat-error>
+                        <mat-error>{{ 'droneForm.errors.batteryRange' | translate }}</mat-error>
                     }
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
-                    <mat-label>Status</mat-label>
+                    <mat-label>{{ 'droneForm.status' | translate }}</mat-label>
 
                     <mat-select formControlName="status">
                         @for (status of statuses; track status.value) {
                             <mat-option [value]="status.value">
-                                {{ status.label }}
+                                {{ 'drone.status.' + status.value.toUpperCase() | translate }}
                             </mat-option>
                         }
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
-                    <mat-label>Nozzle</mat-label>
+                    <mat-label>{{ 'droneForm.nozzle' | translate }}</mat-label>
 
                     <mat-select formControlName="nozzleId">
                         @for (nozzle of nozzles(); track nozzle.id) {
@@ -64,24 +63,24 @@
                     </mat-select>
 
                     @if (form.controls.nozzleId.invalid) {
-                        <mat-error>Select a nozzle</mat-error>
+                        <mat-error>{{ 'droneForm.errors.nozzleRequired' | translate }}</mat-error>
                     }
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
-                    <mat-label>Last maintenance</mat-label>
+                    <mat-label>{{ 'droneForm.lastMaintenance' | translate }}</mat-label>
                     <input matInput type="date"
                            formControlName="lastMaintenanceDate">
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
-                    <mat-label>Next maintenance</mat-label>
+                    <mat-label>{{ 'droneForm.nextMaintenance' | translate }}</mat-label>
                     <input matInput type="date"
                            formControlName="nextMaintenanceDate">
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
-                    <mat-label>Image URL</mat-label>
+                    <mat-label>{{ 'droneForm.imageUrl' | translate }}</mat-label>
                     <input matInput type="url"
                            formControlName="urlimg">
                 </mat-form-field>
@@ -90,7 +89,7 @@
 
             @if (form.hasError('invalidMaintenanceDates')) {
                 <p class="form-error" role="alert">
-                    Next maintenance cannot be before last maintenance.
+                    {{ 'droneForm.errors.invalidDates' | translate }}
                 </p>
             }
 
@@ -101,19 +100,19 @@
             <div class="form-actions">
                 <button mat-button type="button"
                         (click)="cancel()">
-                    Cancel
+                    {{ 'droneForm.cancel' | translate }}
                 </button>
 
                 <button mat-flat-button type="submit"
                         [disabled]="form.invalid || loading()">
-                    Save changes
+                    {{ 'droneForm.save' | translate }}
                 </button>
             </div>
 
         </form>
 
     } @else {
-        <p role="alert">Drone not found.</p>
+        <p role="alert">{{ 'droneForm.notFound' | translate }}</p>
     }
 
 </section>

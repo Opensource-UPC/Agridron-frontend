@@ -13,7 +13,7 @@ export const inventoryAndResourceManagementRoutes: Routes = [
 
     {
         path: ':id/edit', loadComponent: () =>
-            import('./components/drone-fomr/drone-fomr')
+            import('./components/drone-form/drone-form')
                 .then(m=> m.DroneForm)
     }
 

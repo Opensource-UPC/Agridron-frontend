@@ -1,5 +1,3 @@
-
-
 <section class="drone-detail">
 
     <button matButton type="button" (click)="goBack()">
@@ -10,7 +8,7 @@
     <!-- Button edit-->
     <button mat-flat-button type="button" (click)="editDrone()">
         <mat-icon>edit</mat-icon>
-        Edit drone
+        {{ 'detail.edit' | translate }}
     </button>
 
     <h2>{{ 'detail.title' | translate }}</h2>
@@ -76,7 +74,7 @@
 
     } @else {
         <p role="alert">
-            {{ error() || ('drone.detail.notFound' | translate) }}
+            {{ error() || ('detail.notFound' | translate) }}
         </p>
     }
 

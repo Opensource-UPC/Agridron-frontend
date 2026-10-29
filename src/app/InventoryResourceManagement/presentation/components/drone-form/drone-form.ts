@@ -23,6 +23,7 @@ import {MatSelectModule} from '@angular/material/select';
 
 import {DroneStore} from '../../../application/dron-store';
 import {Drone} from '../../../domain/model/drone.entity';
+import {TranslatePipe} from "@ngx-translate/core";
 
 // La fecha del siguiente mantenimiento no puede ser anterior
 // a la fecha del último mantenimiento.
@@ -44,10 +45,11 @@ function validateMaintenanceDates(
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    TranslatePipe
   ],
-  templateUrl: './drone-fomr.html',
-  styleUrl: './drone-fomr.css',
+  templateUrl: './drone-form.html',
+  styleUrl: './drone-form.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DroneForm {
@@ -68,11 +70,12 @@ export class DroneForm {
   readonly error = this.store.error;
 
   readonly statuses = [
-    {value: 'available', label: 'Available'},
-    {value: 'in-flight', label: 'In flight'},
-    {value: 'maintenance', label: 'Maintenance'},
-    {value: 'out-of-service', label: 'Out of service'}
+    {value: 'available'},
+    {value: 'in-flight'},
+    {value: 'maintenance'},
+    {value: 'out-of-service'}
   ];
+
 
   readonly form = this.fb.nonNullable.group({
     serialNumber: ['', Validators.required],

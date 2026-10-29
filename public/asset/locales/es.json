@@ -321,6 +321,29 @@
     "back": "Volver a drones",
     "status": "Estado operativo",
     "lastService": "Último mantenimiento",
-    "notFound": "No se encontró el dron"
+    "notFound": "No se encontró el dron",
+    "edit" : "Editar drone"
+  },
+  "droneForm": {
+    "title": "Editar dron",
+    "loading": "Cargando dron...",
+    "notFound": "No se encontró el dron.",
+    "serialNumber": "Número de serie",
+    "model": "Modelo",
+    "batteryLevel": "Nivel de batería (%)",
+    "status": "Estado",
+    "nozzle": "Boquilla",
+    "lastMaintenance": "Último mantenimiento",
+    "nextMaintenance": "Próximo mantenimiento",
+    "imageUrl": "URL de la imagen",
+    "cancel": "Cancelar",
+    "save": "Guardar cambios",
+    "errors": {
+      "serialRequired": "El número de serie es obligatorio",
+      "modelRequired": "El modelo es obligatorio",
+      "batteryRange": "Ingresa un valor entre 0 y 100",
+      "nozzleRequired": "Selecciona una boquilla",
+      "invalidDates": "El próximo mantenimiento no puede ser anterior al último."
+    }
   }
 }
