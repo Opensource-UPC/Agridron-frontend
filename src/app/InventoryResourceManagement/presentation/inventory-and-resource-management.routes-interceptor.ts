@@ -21,5 +21,10 @@ export const inventoryAndResourceManagementRoutes: Routes = [
             import('./components/drone-maintenance-page/drone-maintenance-page')
                 .then(m => m.MaintenancePage)
     },
+    {
+        path: 'new', loadComponent: () =>
+            import('./components/drone-form/drone-form')
+                .then(m => m.DroneForm)
+    }
 
 ];

@@ -1,6 +1,8 @@
 import {computed, DestroyRef, inject, Injectable, Signal, signal} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {HttpClient} from '@angular/common/http';
+import {TranslateService} from '@ngx-translate/core';
+import {translatedError} from './Translate-error';
 import {forkJoin, retry} from 'rxjs';
 import {Drone} from '../domain/model/drone.entity';
 import {Nozzle} from '../domain/model/nozzle.entity';
@@ -20,6 +22,7 @@ export class DroneStore {
     private readonly droneEndpoint = new DronApiEndpoint(this.http);
     private readonly nozzleEndpoint = new NozzleApiEndpoint(this.http);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly translate = inject(TranslateService);
 
     private readonly dronesSignal = signal<Drone[]>([]);
     readonly drones = this.dronesSignal.asReadonly();
@@ -48,19 +51,24 @@ export class DroneStore {
     getNozzleById = (id: number): Signal<Nozzle | undefined> =>
         computed(() => this.nozzles().find(n => n.id === id));
 
-    addDrone = (drone: Drone): void => {
+    addDrone = (drone: Drone): Observable<Drone> => {
         this.loadingSignal.set(true);
         this.errorSignal.set(null);
-        this.droneEndpoint.create(drone).pipe(retry(2)).subscribe({
-            next: created => {
+
+        return this.droneEndpoint.create(drone).pipe(
+            tap(created => {
                 this.dronesSignal.update(drones => [...drones, created]);
+            }),
+
+            catchError(err => {
+                this.setError(err, 'errors.drone.create');
+                return throwError(() => err);
+            }),
+
+            finalize(() => {
                 this.loadingSignal.set(false);
-            },
-            error: err => {
-                this.errorSignal.set(this.formatError(err, 'Failed to create drone'));
-                this.loadingSignal.set(false);
-            }
-        });
+            })
+        );
     };
 
 
@@ -79,9 +87,7 @@ export class DroneStore {
             }),
 
             catchError(err => {
-                this.errorSignal.set(
-                    this.formatError(err, 'Failed to update drone')
-                );
+                this.setError(err, 'errors.drone.update');
                 return throwError(() => err);
             }),
 
@@ -101,7 +107,7 @@ export class DroneStore {
                 this.loadingSignal.set(false);
             },
             error: err => {
-                this.errorSignal.set(this.formatError(err, 'Failed to delete drone'));
+                this.setError(err, 'errors.drone.delete');
                 this.loadingSignal.set(false);
             }
         });
@@ -128,16 +134,14 @@ export class DroneStore {
                 this.loadingSignal.set(false);
             },
             error: err => {
-                this.errorSignal.set(this.formatError(err, 'Failed to load drones'));
+                this.setError(err, 'errors.drone.load');
                 this.loadingSignal.set(false);
             }
         });
     };
 
-    private formatError = (error: unknown, fallback: string): string => {
-        if (error instanceof Error) {
-            return error.message.includes('Resource not found') ? `${fallback}: Not found` : error.message;
-        }
-        return fallback;
+    private setError = (error: unknown, operationKey: string): void => {
+        translatedError(this.translate, error, operationKey)
+            .subscribe(message => this.errorSignal.set(message));
     };
 }

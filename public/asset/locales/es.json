@@ -244,7 +244,8 @@
     "empty": "No hay drones para mostrar",
     "actions": {
       "details": "Ver detalles",
-      "maintenance": "Ver mantenimientos"
+      "maintenance": "Ver mantenimientos",
+      "new": "Añadir Dron"
     }
   },
   "iam": {
@@ -327,11 +328,13 @@
   },
   "droneForm": {
     "title": "Editar dron",
+    "createTitle": "Nuevo dron",
     "loading": "Cargando dron...",
     "notFound": "No se encontró el dron.",
     "serialNumber": "Número de serie",
     "model": "Modelo",
     "batteryLevel": "Nivel de batería (%)",
+    "tankCapacity": "Capacidad del tanque (L)",
     "status": "Estado",
     "nozzle": "Boquilla",
     "lastMaintenance": "Último mantenimiento",
@@ -339,13 +342,15 @@
     "imageUrl": "URL de la imagen",
     "cancel": "Cancelar",
     "save": "Guardar cambios",
+    "create": "Registrar dron",
     "errors": {
       "serialRequired": "El número de serie es obligatorio",
+      "serialDuplicate": "Ya existe un dron con este número de serie",
       "modelRequired": "El modelo es obligatorio",
       "batteryRange": "Ingresa un valor entre 0 y 100",
+      "tankRange": "Ingresa un valor entre 1 y 100 litros",
       "nozzleRequired": "Selecciona una boquilla",
-      "invalidDates": "El próximo mantenimiento no puede ser anterior al último.",
-      "tankRange": "Ingresa un valor entre 1 y 100 litros"
+      "invalidDates": "El próximo mantenimiento no puede ser anterior al último."
     }
   },
   "maintenance": {
@@ -360,6 +365,22 @@
       "label": "Tipo",
       "PREVENTIVE": "Preventivo",
       "CORRECTIVE": "Correctivo"
+    }
+  },
+  "errors": {
+    "notFound": "No encontrado",
+    "network": "No se pudo conectar con el servidor",
+    "drone": {
+      "load": "No se pudieron cargar los drones",
+      "create": "No se pudo registrar el dron",
+      "update": "No se pudo actualizar el dron",
+      "delete": "No se pudo eliminar el dron"
+    },
+    "maintenance": {
+      "load": "No se pudieron cargar los mantenimientos",
+      "create": "No se pudo registrar el mantenimiento",
+      "update": "No se pudo actualizar el mantenimiento",
+      "delete": "No se pudo eliminar el mantenimiento"
     }
   }
 }

@@ -1,6 +1,12 @@
-
 <section class="drone-page">
-    <h2>{{ 'drone.title' | translate }}</h2>
+    <div class="drone-page__header">
+        <h2>{{ 'drone.title' | translate }}</h2>
+
+        <button mat-flat-button type="button" (click)="onNewDrone()">
+            <mat-icon>add</mat-icon>
+            {{ 'drone.actions.new' | translate }}
+        </button>
+    </div>
 
     @if (error()) {
         <p class="drone-page__error">{{ error() }}</p>

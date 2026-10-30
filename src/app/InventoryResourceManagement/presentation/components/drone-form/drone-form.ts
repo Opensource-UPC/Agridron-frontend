@@ -47,7 +47,7 @@ function validateMaintenanceDates(
     MatInputModule,
     MatSelectModule
   ],
-  templateUrl: './drone-form.html',
+  templateUrl: '/drone-form.html',
   styleUrl: './drone-form.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -58,6 +58,9 @@ export class DroneForm {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
+
+  // Modo alta: la ruta /drones/new no trae :id
+  readonly isNew = !this.route.snapshot.paramMap.has('id');
 
   readonly droneId = Number(
       this.route.snapshot.paramMap.get('id')
@@ -103,6 +106,17 @@ export class DroneForm {
   private initialized = false;
 
   constructor() {
+    if (this.isNew) {
+      // DR-001: el dron nuevo nace "disponible"; el estado no se elige.
+      this.form.controls.status.disable();
+      this.form.controls.batteryLevel.setValue(100);
+      // Las fechas de mantenimiento son opcionales al registrar.
+      this.form.controls.lastMaintenanceDate.clearValidators();
+      this.form.controls.nextMaintenanceDate.clearValidators();
+      this.form.controls.lastMaintenanceDate.updateValueAndValidity();
+      this.form.controls.nextMaintenanceDate.updateValueAndValidity();
+    }
+
     effect(() => {
       const selectedDrone = this.drone();
 
@@ -113,10 +127,10 @@ export class DroneForm {
           batteryLevel: selectedDrone.batteryLevel,
           status: selectedDrone.status,
           nozzleId: selectedDrone.nozzleId,
-          tankCapacityLiters: selectedDrone.tankCapacityLiters ?? 0,
           lastMaintenanceDate: selectedDrone.lastMaintenanceDate,
           nextMaintenanceDate: selectedDrone.nextMaintenanceDate,
           urlimg: selectedDrone.urlimg,
+          tankCapacityLiters: selectedDrone.tankCapacityLiters ?? 0
         });
 
         this.initialized = true;
@@ -130,14 +144,56 @@ export class DroneForm {
       return;
     }
 
+    if (this.loading()) return;
+
     const original = this.drone();
-    if (!original || this.loading()) return;
+    if (!this.isNew && !original) return;
 
     const value = this.form.getRawValue();
+    const serial = value.serialNumber.trim();
+
+    // El número de serie es único en la flota.
+    const ignoreId = this.isNew ? -1 : this.droneId;
+    const serialTaken = this.store.drones().some(d =>
+        d.id !== ignoreId &&
+        d.serialNumber.trim().toLowerCase() === serial.toLowerCase());
+
+    if (serialTaken) {
+      this.form.controls.serialNumber.setErrors({duplicate: true});
+      this.form.controls.serialNumber.markAsTouched();
+      return;
+    }
+
+    if (this.isNew) {
+      const newDrone = new Drone(
+          0, // el servidor asigna el id real
+          serial,
+          value.model.trim(),
+          value.batteryLevel,
+          'available',
+          value.nozzleId,
+          value.tankCapacityLiters,
+          value.lastMaintenanceDate,
+          value.nextMaintenanceDate,
+          value.urlimg.trim(),
+      );
+
+      this.store.addDrone(newDrone)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe({
+            next: created => {
+              void this.router.navigate(['/drones', created.id]);
+            },
+            error: () => {
+              // El store guarda el error y lo muestra la plantilla.
+            }
+          });
+      return;
+    }
 
     const updatedDrone = new Drone(
-        original.id,
-        value.serialNumber.trim(),
+        original!.id,
+        serial,
         value.model.trim(),
         value.batteryLevel,
         value.status,
@@ -152,7 +208,7 @@ export class DroneForm {
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
           next: () => {
-            void this.router.navigate(['/drones', original.id]);
+            void this.router.navigate(['/drones', original!.id]);
           },
           error: () => {
             // El store guarda el error y lo muestra la plantilla.
@@ -161,6 +217,6 @@ export class DroneForm {
   }
 
   cancel(): void {
-    void this.router.navigate(['/drones', this.droneId]);
+    void this.router.navigate(this.isNew ? ['/drones'] : ['/drones', this.droneId]);
   }
 }

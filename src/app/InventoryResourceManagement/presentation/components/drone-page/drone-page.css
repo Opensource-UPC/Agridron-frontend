@@ -1,4 +1,9 @@
-
-
 .drone-page { padding: 16px; }
 .drone-page__error { color: #b00020; }
+
+.drone-page__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}

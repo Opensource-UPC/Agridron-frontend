@@ -1,11 +1,11 @@
 <section class="drone-form">
 
-    <h2>{{ 'droneForm.title' | translate }}</h2>
+    <h2>{{ (isNew ? 'droneForm.createTitle' : 'droneForm.title') | translate }}</h2>
 
-    @if (loading() && !drone()) {
+    @if (loading() && !drone() && !isNew) {
         <p>{{ 'droneForm.loading' | translate }}</p>
 
-    } @else if (drone()) {
+    } @else if (isNew || drone()) {
 
         <form [formGroup]="form" (ngSubmit)="submit()">
 
@@ -17,6 +17,9 @@
 
                     @if (form.controls.serialNumber.hasError('required')) {
                         <mat-error>{{ 'droneForm.errors.serialRequired' | translate }}</mat-error>
+                    }
+                    @if (form.controls.serialNumber.hasError('duplicate')) {
+                        <mat-error>{{ 'droneForm.errors.serialDuplicate' | translate }}</mat-error>
                     }
                 </mat-form-field>
 
@@ -115,7 +118,7 @@
 
                 <button mat-flat-button type="submit"
                         [disabled]="form.invalid || loading()">
-                    {{ 'droneForm.save' | translate }}
+                    {{ (isNew ? 'droneForm.create' : 'droneForm.save') | translate }}
                 </button>
             </div>
 

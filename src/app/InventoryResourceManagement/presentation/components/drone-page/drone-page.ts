@@ -3,12 +3,19 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {DroneStore} from "../../../application/dron-store";
 import {DroneList} from "../dron-list/dron-list"
 import {Router} from "@angular/router";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
 
 @Component({
   selector: 'app-drone-page',
-  imports: [DroneList, TranslatePipe],
+  imports: [
+      DroneList,
+    TranslatePipe,
+      MatButtonModule,
+      MatIconModule,
+  ],
   templateUrl: './drone-page.html',
-  styleUrl: './drone-page.css',
+  styleUrl: 'drone-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
@@ -36,5 +43,9 @@ export class DronePage {
    this.router.navigateByUrl(`/drones/${id}/maintenance`);
 
   };
+
+  protected readonly onNewDrone = (): void =>{
+    this.router.navigateByUrl(`/drones/new`);
+  }
 
 }

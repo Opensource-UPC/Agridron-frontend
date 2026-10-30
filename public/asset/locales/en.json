@@ -244,7 +244,8 @@
     "empty": "No drones to show",
     "actions": {
       "details": "View details",
-      "maintenance": "View maintenance"
+      "maintenance": "View maintenance",
+      "new": " Add New drone"
     }
   },
   "iam": {
@@ -325,28 +326,39 @@
     "notFound": "Drone not found",
     "edit" : "Edit drone"
   },
+  "detail": {
+    "title": "Drone details",
+    "back": "Back to drones",
+    "status": "Operational status",
+    "lastService": "Last maintenance",
+    "notFound": "Drone not found",
+    "edit": "Edit drone"
+  },
   "droneForm": {
     "title": "Edit drone",
+    "createTitle": "New drone",
     "loading": "Loading drone...",
     "notFound": "Drone not found.",
     "serialNumber": "Serial number",
     "model": "Model",
     "batteryLevel": "Battery level (%)",
+    "tankCapacity": "Tank capacity (L)",
     "status": "Status",
     "nozzle": "Nozzle",
-    "tankCapacity": "Tank capacity (L)",
     "lastMaintenance": "Last maintenance",
     "nextMaintenance": "Next maintenance",
     "imageUrl": "Image URL",
     "cancel": "Cancel",
     "save": "Save changes",
+    "create": "Register drone",
     "errors": {
       "serialRequired": "Serial number is required",
+      "serialDuplicate": "A drone with this serial number already exists",
       "modelRequired": "Model is required",
       "batteryRange": "Enter a value from 0 to 100",
+      "tankRange": "Enter a value from 1 to 100 liters",
       "nozzleRequired": "Select a nozzle",
-      "invalidDates": "Next maintenance cannot be before last maintenance.",
-      "tankRange": "Enter a value between 1 and 100 liters"
+      "invalidDates": "Next maintenance cannot be before last maintenance."
     }
   },
   "maintenance": {
@@ -361,6 +373,22 @@
       "label": "Type",
       "PREVENTIVE": "Preventive",
       "CORRECTIVE": "Corrective"
+    }
+  },
+  "errors": {
+    "notFound": "Not found",
+    "network": "Cannot reach the server",
+    "drone": {
+      "load": "Could not load drones",
+      "create": "Could not register the drone",
+      "update": "Could not update the drone",
+      "delete": "Could not delete the drone"
+    },
+    "maintenance": {
+      "load": "Could not load maintenance records",
+      "create": "Could not register the maintenance record",
+      "update": "Could not update the maintenance record",
+      "delete": "Could not delete the maintenance record"
     }
   }
 }
