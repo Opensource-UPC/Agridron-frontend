@@ -105,7 +105,16 @@ export class OperationStatusStore {
     private loadOperationStatuses = (): void => {
         this.loadingSignal.set(true);
         this.errorSignal.set(null);
-        this.flightOperationsApi.getAllOperationStatuses().subscribe({})
+        this.flightOperationsApi.getAllOperationStatuses().subscribe({
+            next: (operationStatuses) => {
+                this.missionResultsSignal.set(operationStatuses);
+                this.loadingSignal.set(false);
+            },
+            error: (error) => {
+                this.errorSignal.set(this.formatError(error, 'Error loading operation statuses'));
+                this.loadingSignal.set(false);
+            }
+        });
     };
 
     /**
