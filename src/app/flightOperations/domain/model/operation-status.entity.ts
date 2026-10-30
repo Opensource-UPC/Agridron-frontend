@@ -1,12 +1,12 @@
-export class OperationStatusEntity {
+export class OperationStatus {
     #id!: number;
     #missionId!: number;
     #latitude!: number;
     #longitude!: number;
     #status!: string;
-    #timestamp!: Date;
+    #timestamp!: Date | null;
 
-    constructor(id: number, missionId: number, latitude: number, longitude: number, status: string, timestamp: Date) {
+    constructor(id: number, missionId: number, latitude: number, longitude: number, status: string, timestamp: Date | null) {
         this.#id = id;
         this.#missionId = missionId;
         this.#latitude = latitude;
@@ -55,11 +55,11 @@ export class OperationStatusEntity {
         this.#status = value;
     }
 
-    get timestamp(): Date {
+    get timestamp(): Date | null {
         return this.#timestamp;
     }
 
-    set timestamp(value: Date) {
+    set timestamp(value: Date | null) {
         this.#timestamp = value;
     }
 

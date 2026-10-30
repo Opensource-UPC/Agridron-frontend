@@ -1,5 +1,5 @@
 
-export class MissionResultEntity {
+export class MissionResult {
     #id!: number;
     #missionId!: number;
     #treatedArea!: number | null;

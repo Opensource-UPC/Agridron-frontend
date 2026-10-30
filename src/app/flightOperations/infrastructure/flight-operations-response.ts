@@ -19,11 +19,11 @@ export interface MissionResource extends BaseResource {
     status: MissionStatus;
 }
 
-export interface MissionResponse extends BaseResponse {
+export interface FlightOperationsResponse extends BaseResponse {
     missions: MissionResource[];
 }
 
-export interface MissionResultResource extends MissionResource {
+export interface MissionResultResource extends BaseResource {
     id: number;
     missionId: number;
     treatedArea: number | null;
@@ -40,7 +40,7 @@ export interface IncidentResource extends BaseResource {
     missionId: number;
     type: string | null;
     description: string | null;
-    reportedAt: string;
+    occurredAt: string;
 }
 
 export interface IncidentResponse extends BaseResponse {
@@ -51,7 +51,9 @@ export interface OperationStatusResource extends BaseResource {
     id: number;
     missionId: number;
     status: string;
-    reportedAt: string;
+    latitude: number;
+    longitude: number;
+    timestamp: string;
 }
 
 export interface OperationStatusResponse extends BaseResponse {
