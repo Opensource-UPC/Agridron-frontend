@@ -1,9 +1,9 @@
 import {BaseAssembler} from "../../shared/infrastructure/base-assembler";
 import {Mission} from "../domain/model/mission.entity";
-import {MissionResource, FlightOperationsResponse} from "./flight-operations-response";
+import {MissionResource, MissionResponse} from "./flight-operations-response";
 
-export class MissionAssembler implements BaseAssembler<Mission, MissionResource, FlightOperationsResponse> {
-    toEntitiesFromResponse = (response: FlightOperationsResponse): Mission[] =>
+export class MissionAssembler implements BaseAssembler<Mission, MissionResource, MissionResponse> {
+    toEntitiesFromResponse = (response: MissionResponse): Mission[] =>
         response.missions.map(resource => this.toEntityFromResource(resource));
 
     toEntityFromResource = (resource: MissionResource): Mission =>

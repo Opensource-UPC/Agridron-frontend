@@ -19,7 +19,7 @@ export interface MissionResource extends BaseResource {
     status: MissionStatus;
 }
 
-export interface FlightOperationsResponse extends BaseResponse {
+export interface MissionResponse extends BaseResponse {
     missions: MissionResource[];
 }
 
