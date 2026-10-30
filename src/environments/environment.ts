@@ -9,7 +9,7 @@ export const environment = {
   AgriDronProviderParcelsEndpointPath: '/parcels',
   AgriDronProviderFumigationAreasEndpointPath: '/fumigation-areas',
   AgriDronProviderCropsEndpointPath: '/crops',
-AgriDronProviderMissionReportsEndpointPath: '/mission-reports',
+  AgriDronProviderMissionReportsEndpointPath: '/mission-reports',
   AgriDronProviderMissionHistoriesEndpointPath: '/mission-histories',
   AgriDronProviderOperationalMetricsEndpointPath: '/operational-metrics',
   AgriDronProviderPerformanceIndicatorsEndpointPath: '/performance-indicators',
@@ -21,4 +21,9 @@ AgriDronProviderMissionReportsEndpointPath: '/mission-reports',
   AgriDronProvideChemicalsEndpointPath: '/chemicals',
   AgriDronProvideNozzlesEndpointPath: '/nozzles',
   AgriDronProvideMaintenanceRecordEndpointPath: '/maintenance',
+
+  AgriDronProviderMissionsEndpointPath: '/missions',
+  AgriDronProviderMissionResultsEndpointPath: '/mission-results',
+  AgriDronProviderIncidentsEndpointPath: '/incidents',
+  AgriDronProviderOperationStatusesEndpointPath: '/operation-status',
 };
