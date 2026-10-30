@@ -322,7 +322,7 @@
       "model": "RTX-6030",
       "batteryLevel": 36,
       "status": "available",
-      "nozzleId": 3,
+      "nozzleId": 4,
       "tankCapacityLiters": 35,
       "lastMaintenanceDate": "2026-08-10",
       "nextMaintenanceDate": "2026-12-06",
@@ -333,8 +333,8 @@
       "serialNumber": "DRN-2026-0102",
       "model": "RTX-6030",
       "batteryLevel": 10,
-      "status": "in-flight",
-      "nozzleId": 2,
+      "status": "available",
+      "nozzleId": 1,
       "tankCapacityLiters": 10,
       "lastMaintenanceDate": "2026-07-22",
       "nextMaintenanceDate": "2026-10-22",
@@ -346,7 +346,7 @@
       "model": "AGX-8000",
       "batteryLevel": 80,
       "status": "maintenance",
-      "nozzleId": 3,
+      "nozzleId": 1,
       "tankCapacityLiters": 20,
       "lastMaintenanceDate": "2026-06-15",
       "nextMaintenanceDate": "2026-09-15",
@@ -370,7 +370,7 @@
       "model": "TRX-4500",
       "batteryLevel": 55,
       "status": "available",
-      "nozzleId": 5,
+      "nozzleId": 8,
       "tankCapacityLiters": 16,
       "lastMaintenanceDate": "2026-08-25",
       "nextMaintenanceDate": "2026-11-25",
@@ -382,23 +382,23 @@
       "model": "TRX-4500",
       "batteryLevel": 0,
       "status": "out-of-service",
-      "nozzleId": 6,
+      "nozzleId": 4,
       "tankCapacityLiters": 16,
       "lastMaintenanceDate": "2026-03-10",
       "nextMaintenanceDate": "2026-06-10",
       "urlimg": "https://images.unsplash.com/photo-1521405924368-64c5b84bec60?w=600"
     },
     {
+      "id": 7,
       "serialNumber": "ASI0005",
       "model": "GTR-NISSAN-EXPLORER-300",
       "batteryLevel": 50,
       "status": "available",
-      "nozzleId": 6,
+      "nozzleId": 4,
       "tankCapacityLiters": 60,
       "lastMaintenanceDate": "",
       "nextMaintenanceDate": "",
-      "urlimg": "https://images.unsplash.com/photo-1720071702672-d18c69cb475c?w=800",
-      "id": 7
+      "urlimg": "https://images.unsplash.com/photo-1720071702672-d18c69cb475c?w=800"
     }
   ],
   "agrochemicals": [
@@ -456,32 +456,32 @@
       "id": 1,
       "type": "flat-fan",
       "diameterMm": 5,
-      "goodUnits": 12,
-      "wornUnits": 5,
-      "damagedUnits": 0
+      "goodUnits": 6,
+      "wornUnits": 6,
+      "damagedUnits": 3
     },
     {
       "id": 2,
       "type": "hollow-cone",
       "diameterMm": 3,
       "goodUnits": 10,
-      "wornUnits": 2,
+      "wornUnits": 3,
       "damagedUnits": 2
     },
     {
       "id": 3,
       "type": "flat-fan",
       "diameterMm": 7,
-      "goodUnits": 8,
-      "wornUnits": 0,
+      "goodUnits": 6,
+      "wornUnits": 3,
       "damagedUnits": 0
     },
     {
       "id": 4,
       "type": "full-cone",
       "diameterMm": 4,
-      "goodUnits": 10,
-      "wornUnits": 0,
+      "goodUnits": 6,
+      "wornUnits": 1,
       "damagedUnits": 0
     },
     {
@@ -490,23 +490,31 @@
       "diameterMm": 6,
       "goodUnits": 0,
       "wornUnits": 2,
-      "damagedUnits": 0
+      "damagedUnits": 1
     },
     {
       "id": 6,
       "type": "hollow-cone",
       "diameterMm": 3,
-      "goodUnits": 0,
-      "wornUnits": 0,
+      "goodUnits": 2,
+      "wornUnits": 1,
+      "damagedUnits": 2
+    },
+    {
+      "id": 7,
+      "type": "flat-fan",
+      "diameterMm": 8,
+      "goodUnits": 1,
+      "wornUnits": 2,
       "damagedUnits": 0
     },
     {
-      "type": "flat-fan",
-      "diameterMm": 8,
-      "goodUnits": 3,
-      "wornUnits": 0,
-      "damagedUnits": 0,
-      "id": 7
+      "id": 8,
+      "type": "cone line",
+      "diameterMm": 2,
+      "goodUnits": 1,
+      "wornUnits": 3,
+      "damagedUnits": 1
     }
   ],
   "maintenance-records": [
