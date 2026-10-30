@@ -322,7 +322,7 @@
       "model": "RTX-6030",
       "batteryLevel": 36,
       "status": "available",
-      "nozzleId": 6,
+      "nozzleId": 3,
       "tankCapacityLiters": 35,
       "lastMaintenanceDate": "2026-08-10",
       "nextMaintenanceDate": "2026-12-06",
@@ -387,6 +387,18 @@
       "lastMaintenanceDate": "2026-03-10",
       "nextMaintenanceDate": "2026-06-10",
       "urlimg": "https://images.unsplash.com/photo-1521405924368-64c5b84bec60?w=600"
+    },
+    {
+      "serialNumber": "ASI0005",
+      "model": "GTR-NISSAN-EXPLORER-300",
+      "batteryLevel": 50,
+      "status": "available",
+      "nozzleId": 6,
+      "tankCapacityLiters": 60,
+      "lastMaintenanceDate": "",
+      "nextMaintenanceDate": "",
+      "urlimg": "https://images.unsplash.com/photo-1720071702672-d18c69cb475c?w=800",
+      "id": 7
     }
   ],
   "agrochemicals": [
@@ -444,46 +456,60 @@
       "id": 1,
       "type": "flat-fan",
       "diameterMm": 5,
-      "stockUnits": 12,
-      "status": "good"
+      "goodUnits": 12,
+      "wornUnits": 5,
+      "damagedUnits": 0
     },
     {
       "id": 2,
       "type": "hollow-cone",
       "diameterMm": 3,
-      "stockUnits": 4,
-      "status": "worn"
+      "goodUnits": 10,
+      "wornUnits": 2,
+      "damagedUnits": 2
     },
     {
       "id": 3,
       "type": "flat-fan",
       "diameterMm": 7,
-      "stockUnits": 8,
-      "status": "good"
+      "goodUnits": 8,
+      "wornUnits": 0,
+      "damagedUnits": 0
     },
     {
       "id": 4,
       "type": "full-cone",
       "diameterMm": 4,
-      "stockUnits": 10,
-      "status": "good"
+      "goodUnits": 10,
+      "wornUnits": 0,
+      "damagedUnits": 0
     },
     {
       "id": 5,
       "type": "air-induction",
       "diameterMm": 6,
-      "stockUnits": 2,
-      "status": "worn"
+      "goodUnits": 0,
+      "wornUnits": 2,
+      "damagedUnits": 0
     },
     {
       "id": 6,
       "type": "hollow-cone",
       "diameterMm": 3,
-      "stockUnits": 0,
-      "status": "damaged"
+      "goodUnits": 0,
+      "wornUnits": 0,
+      "damagedUnits": 0
+    },
+    {
+      "type": "flat-fan",
+      "diameterMm": 8,
+      "goodUnits": 3,
+      "wornUnits": 0,
+      "damagedUnits": 0,
+      "id": 7
     }
   ],
-  "maintenanceRecords": [
+  "maintenance-records": [
     {
       "id": 1,
       "droneId": 1,
