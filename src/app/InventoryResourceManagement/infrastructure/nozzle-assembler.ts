@@ -1,20 +1,20 @@
-
-
 import { Nozzle } from '../domain/model/nozzle.entity';
 import { NozzleResource, NozzlesResponse} from "./inventory-and-resource-management-response";
 import {BaseAssembler} from "../../shared/infrastructure/base-assembler";
 
 export class NozzleAssembler implements BaseAssembler<Nozzle,NozzleResource,NozzlesResponse> {
     /**
-     * Transforma una Entidad de dominio a un Resource (DTO)
+     * Transforma una Entidad de dominio a un Resource (DTO).
+     * El total (stockUnits) no se guarda: se calcula sumando los tres contadores.
      */
     toResourceFromEntity(entity: Nozzle): NozzleResource {
         return {
             id: entity.id,
             type: entity.type,
             diameterMm: entity.getDiameterMm(),
-            stockUnits: entity.getStockUnits(),
-            status: entity.status,
+            goodUnits: entity.goodUnits,
+            wornUnits: entity.wornUnits,
+            damagedUnits: entity.damagedUnits,
         };
     }
 
@@ -24,8 +24,9 @@ export class NozzleAssembler implements BaseAssembler<Nozzle,NozzleResource,Nozz
             resource.id,
             resource.type,
             resource.diameterMm,
-            resource.stockUnits,
-            resource.status
+            resource.goodUnits,
+            resource.wornUnits,
+            resource.damagedUnits
         );
     }
 
@@ -36,5 +37,3 @@ export class NozzleAssembler implements BaseAssembler<Nozzle,NozzleResource,Nozz
         return response.nozzles.map(resource => this.toEntityFromResource(resource));
     }
 }
-
-

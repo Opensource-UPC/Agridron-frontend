@@ -1,0 +1,73 @@
+<section class="nozzle-page">
+
+    <button mat-button type="button" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        {{ 'detail.back' | translate }}
+    </button>
+
+    <div class="nozzle-page__header">
+        <h2>{{ 'nozzle.title' | translate }}</h2>
+
+        <button mat-flat-button type="button" (click)="openCreate()">
+            <mat-icon>add</mat-icon>
+            {{ 'nozzle.actions.new' | translate }}
+        </button>
+    </div>
+
+    @if (error()) {
+        <p class="nozzle-page__error" role="alert">{{ error() }}</p>
+    }
+
+    @if (nozzles().length > 0) {
+
+        <mat-card appearance="outlined" class="nozzle-card">
+            <table class="nozzle-table">
+                <thead>
+                <tr>
+                    <th>{{ 'nozzle.type' | translate }}</th>
+                    <th>{{ 'nozzle.diameter' | translate }}</th>
+                    <th class="num">{{ 'nozzle.good' | translate }}</th>
+                    <th class="num">{{ 'nozzle.worn' | translate }}</th>
+                    <th class="num">{{ 'nozzle.damaged' | translate }}</th>
+                    <th class="num">{{ 'nozzle.total' | translate }}</th>
+                    <th>{{ 'nozzle.actionsColumn' | translate }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @for (nozzle of nozzles(); track nozzle.id) {
+                        <tr>
+                            <td><app-nozzle-type-label [type]="nozzle.type"/></td>
+                            <td>{{ nozzle.diameterMm }} mm</td>
+                            <td class="num">
+                                <span class="count count--good" [class.count--zero]="nozzle.goodUnits === 0">{{ nozzle.goodUnits }}</span>
+                            </td>
+                            <td class="num">
+                                <span class="count count--worn" [class.count--zero]="nozzle.wornUnits === 0">{{ nozzle.wornUnits }}</span>
+                            </td>
+                            <td class="num">
+                                <span class="count count--damaged" [class.count--zero]="nozzle.damagedUnits === 0">{{ nozzle.damagedUnits }}</span>
+                            </td>
+                            <td class="num"><strong>{{ nozzle.stockUnits }}</strong></td>
+                            <td class="actions">
+                                <button mat-stroked-button type="button" (click)="openRestock(nozzle)">
+                                    <mat-icon>add_box</mat-icon>
+                                    {{ 'nozzle.actions.restock' | translate }}
+                                </button>
+                                <button mat-stroked-button type="button" (click)="openStatusUpdate(nozzle)">
+                                    <mat-icon>swap_horiz</mat-icon>
+                                    {{ 'nozzle.actions.updateStatus' | translate }}
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </mat-card>
+
+    } @else {
+        <p class="nozzle-page__empty">
+            {{ loading() ? ('nozzle.loading' | translate) : ('nozzle.empty' | translate) }}
+        </p>
+    }
+
+</section>

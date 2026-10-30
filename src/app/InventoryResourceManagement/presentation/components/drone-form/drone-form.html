@@ -64,21 +64,27 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field appearance="outline">
-                    <mat-label>{{ 'droneForm.nozzle' | translate }}</mat-label>
+                @if (isNew) {
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{ 'droneForm.nozzle' | translate }}</mat-label>
 
-                    <mat-select formControlName="nozzleId">
-                        @for (nozzle of nozzles(); track nozzle.id) {
-                            <mat-option [value]="nozzle.id">
-                                {{ nozzle.type }} - {{ nozzle.diameterMm }} mm
-                            </mat-option>
+                        <mat-select formControlName="nozzleId">
+                            @for (nozzle of nozzles(); track nozzle.id) {
+                                <mat-option [value]="nozzle.id"
+                                            [disabled]="nozzle.installableUnits === 0">
+                                    <app-nozzle-type-label [type]="nozzle.type"/> - {{ nozzle.diameterMm }} mm
+                                    @if (nozzle.installableUnits === 0) {
+                                        ({{ 'nozzle.change.noStock' | translate }})
+                                    }
+                                </mat-option>
+                            }
+                        </mat-select>
+
+                        @if (form.controls.nozzleId.invalid) {
+                            <mat-error>{{ 'droneForm.errors.nozzleRequired' | translate }}</mat-error>
                         }
-                    </mat-select>
-
-                    @if (form.controls.nozzleId.invalid) {
-                        <mat-error>{{ 'droneForm.errors.nozzleRequired' | translate }}</mat-error>
-                    }
-                </mat-form-field>
+                    </mat-form-field>
+                }
 
                 <mat-form-field appearance="outline">
                     <mat-label>{{ 'droneForm.lastMaintenance' | translate }}</mat-label>

@@ -1,0 +1,70 @@
+
+
+<h2 mat-dialog-title>{{ 'agrochemical.create.title' | translate }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-dialog-content class="dialog-body">
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'agrochemical.name' | translate }}</mat-label>
+            <input matInput type="text" maxlength="60" formControlName="name">
+            <mat-error>{{ 'agrochemical.errors.nameRequired' | translate }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'agrochemical.type' | translate }}</mat-label>
+            <mat-select formControlName="type">
+                @for (type of types; track type) {
+                    <mat-option [value]="type">{{ 'agrochemical.types.' + type | translate }}</mat-option>
+                }
+            </mat-select>
+            <mat-error>{{ 'agrochemical.errors.typeRequired' | translate }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'agrochemical.activeIngredient' | translate }}</mat-label>
+            <input matInput type="text" maxlength="60" formControlName="activeIngredient">
+            <mat-error>{{ 'agrochemical.errors.activeIngredientRequired' | translate }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'agrochemical.recommendedDose' | translate }}</mat-label>
+            <input matInput type="number" step="0.01" formControlName="recommendedDoseLitersPerHa">
+            <mat-error>{{ 'agrochemical.errors.doseRequired' | translate }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'agrochemical.stock' | translate }}</mat-label>
+            <input matInput type="number" step="0.1" formControlName="stockLiters">
+            <mat-error>{{ 'agrochemical.errors.stockInvalid' | translate }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'agrochemical.minimumStock' | translate }}</mat-label>
+            <input matInput type="number" step="0.1" formControlName="minimumStockLiters">
+            <mat-error>{{ 'agrochemical.errors.stockInvalid' | translate }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'agrochemical.expiration' | translate }}</mat-label>
+            <input matInput type="date" [min]="today" formControlName="expirationDate">
+            @if (form.controls.expirationDate.hasError('expired')) {
+                <mat-error>{{ 'agrochemical.errors.expired' | translate }}</mat-error>
+            } @else {
+                <mat-error>{{ 'agrochemical.errors.expirationRequired' | translate }}</mat-error>
+            }
+        </mat-form-field>
+
+        @if (form.hasError('duplicate')) {
+            <p class="dialog-error" role="alert">{{ 'agrochemical.errors.duplicate' | translate }}</p>
+        }
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button mat-button type="button" mat-dialog-close>{{ 'droneForm.cancel' | translate }}</button>
+        <button mat-flat-button type="submit" [disabled]="form.invalid">
+            {{ 'agrochemical.create.confirm' | translate }}
+        </button>
+    </mat-dialog-actions>
+</form>

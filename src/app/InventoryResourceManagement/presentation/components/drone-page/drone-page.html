@@ -1,11 +1,22 @@
+
+
+
+
 <section class="drone-page">
     <div class="drone-page__header">
         <h2>{{ 'drone.title' | translate }}</h2>
 
-        <button mat-flat-button type="button" (click)="onNewDrone()">
-            <mat-icon>add</mat-icon>
-            {{ 'drone.actions.new' | translate }}
-        </button>
+        <div class="drone-page__actions">
+            <button mat-stroked-button type="button" (click)="onViewNozzles()">
+                <mat-icon>tune</mat-icon>
+                {{ 'drone.actions.nozzles' | translate }}
+            </button>
+
+            <button mat-flat-button type="button" (click)="onNewDrone()">
+                <mat-icon>add</mat-icon>
+                {{ 'drone.actions.new' | translate }}
+            </button>
+        </div>
     </div>
 
     @if (error()) {

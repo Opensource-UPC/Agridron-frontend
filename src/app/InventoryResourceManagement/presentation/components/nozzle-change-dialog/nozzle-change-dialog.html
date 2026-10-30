@@ -1,0 +1,70 @@
+
+
+<h2 mat-dialog-title>{{ 'nozzle.change.title' | translate }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-dialog-content class="dialog-body">
+
+        <p class="dialog-info">
+            <strong>{{ data.drone.model }}</strong> · {{ data.drone.serialNumber }}<br>
+            {{ 'nozzle.change.current' | translate }}:
+            @if (data.current; as current) {
+                <app-nozzle-type-label [type]="current.type"/> · {{ current.diameterMm }} mm
+            } @else {
+                {{ 'drone.noNozzle' | translate }}
+            }
+        </p>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'nozzle.change.newNozzle' | translate }}</mat-label>
+
+            <mat-select formControlName="nozzleId">
+                <mat-select-trigger>
+                    @if (selected(); as chosen) {
+                        <app-nozzle-type-label [type]="chosen.type"/> · {{ chosen.diameterMm }} mm
+                    }
+                </mat-select-trigger>
+
+                @for (nozzle of data.nozzles; track nozzle.id) {
+                    <mat-option [value]="nozzle.id" [disabled]="nozzle.installableUnits === 0">
+                        <app-nozzle-type-label [type]="nozzle.type"/> · {{ nozzle.diameterMm }} mm ·
+                        {{ 'nozzle.good' | translate }} {{ nozzle.goodUnits }} ·
+                        {{ 'nozzle.worn' | translate }} {{ nozzle.wornUnits }}
+                        @if (nozzle.installableUnits === 0) {
+                            · {{ 'nozzle.change.noStock' | translate }}
+                        }
+                    </mat-option>
+                }
+            </mat-select>
+
+            <mat-error>{{ 'droneForm.errors.nozzleRequired' | translate }}</mat-error>
+        </mat-form-field>
+
+        @if (wornWarning()) {
+            <p class="dialog-warning" role="alert">{{ 'nozzle.change.wornWarning' | translate }}</p>
+        }
+
+        @if (data.current) {
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'nozzle.change.retiredState' | translate }}</mat-label>
+
+                <mat-select formControlName="retiredState">
+                    @for (state of states; track state) {
+                        <mat-option [value]="state">{{ 'nozzle.' + state | translate }}</mat-option>
+                    }
+                </mat-select>
+
+                <mat-hint>{{ 'nozzle.change.retiredHint' | translate }}</mat-hint>
+                <mat-error>{{ 'nozzle.errors.retiredRequired' | translate }}</mat-error>
+            </mat-form-field>
+        }
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button mat-button type="button" mat-dialog-close>{{ 'droneForm.cancel' | translate }}</button>
+        <button mat-flat-button type="submit" [disabled]="form.invalid">
+            {{ 'nozzle.change.confirm' | translate }}
+        </button>
+    </mat-dialog-actions>
+</form>

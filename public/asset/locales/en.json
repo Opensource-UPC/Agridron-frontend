@@ -16,6 +16,7 @@
     "fumigationArea": "Fumigation areas",
     "analytics": "Reports",
     "drone": "Drones",
+    "agrochemical": "Agrochemicals",
     "profile": "Profile",
     "home": "Inicio"
   },
@@ -245,7 +246,116 @@
     "actions": {
       "details": "View details",
       "maintenance": "View maintenance",
-      "new": " Add New drone"
+      "new": " Add New drone",
+      "nozzles" : "Spray nozzles"
+    }
+  },
+  "agrochemical": {
+    "title": "Agrochemicals",
+    "loading": "Loading agrochemicals...",
+    "empty": "There are no agrochemicals registered yet.",
+    "name": "Commercial name",
+    "type": "Type",
+    "activeIngredient": "Active ingredient",
+    "recommendedDose": "Recommended dose (L/ha)",
+    "recommendedDoseShort": "Dose (L/ha)",
+    "stock": "Stock (L)",
+    "stockShort": "Stock (L)",
+    "minimumStock": "Minimum stock (L)",
+    "minimumStockShort": "Minimum (L)",
+    "expiration": "Expiration date",
+    "lowStock": "Low stock",
+    "expired": "Expired",
+    "types": {
+      "herbicide": "Herbicide",
+      "insecticide": "Insecticide",
+      "fungicide": "Fungicide",
+      "fertilizer": "Fertilizer",
+      "other": "Other"
+    },
+    "actions": {
+      "new": "New agrochemical"
+    },
+    "create": {
+      "title": "New agrochemical",
+      "confirm": "Register agrochemical"
+    },
+    "errors": {
+      "nameRequired": "Enter the commercial name (up to 60 characters)",
+      "typeRequired": "Select a type",
+      "activeIngredientRequired": "The active ingredient is required",
+      "doseRequired": "The recommended dose is required (0.01 to 100 L/ha)",
+      "stockInvalid": "Enter a quantity of 0 liters or more",
+      "expirationRequired": "Enter the expiration date",
+      "expired": "The expiration date cannot be in the past",
+      "duplicate": "A product with this commercial name already exists"
+    }
+  },
+  "nozzle": {
+    "title": "Nozzles",
+    "loading": "Loading nozzles...",
+    "empty": "There are no nozzles registered yet.",
+    "type": "Type",
+    "diameter": "Diameter",
+    "good": "Good",
+    "worn": "Worn",
+    "damaged": "Damaged",
+    "total": "Total",
+    "types": {
+      "flat-fan": "Flat fan",
+      "hollow-cone": "Hollow cone",
+      "full-cone": "Full cone",
+      "air-induction": "Air induction"
+    },
+    "actionsColumn": "Actions",
+    "actions": {
+      "new": "New nozzle",
+      "restock": "Restock",
+      "updateStatus": "Update status",
+      "change": "Change nozzle"
+    },
+    "create": {
+      "title": "New nozzle",
+      "diameter": "Diameter (mm)",
+      "units": "Initial good units",
+      "other": "Other...",
+      "customType": "Type name",
+      "confirm": "Register nozzle"
+    },
+    "restock": {
+      "title": "Restock",
+      "current": "Good units now",
+      "units": "Units to add",
+      "confirm": "Add stock"
+    },
+    "statusUpdate": {
+      "title": "Update status",
+      "from": "From state",
+      "to": "To state",
+      "quantity": "Units to move",
+      "confirm": "Update"
+    },
+    "change": {
+      "title": "Change nozzle",
+      "current": "Current nozzle",
+      "newNozzle": "New nozzle",
+      "noStock": "No stock",
+      "wornWarning": "No good units are left: a worn one will be installed.",
+      "retiredState": "State of the removed nozzle",
+      "retiredHint": "It goes back to the warehouse in this state.",
+      "inFlight": "A drone in flight cannot change its nozzle.",
+      "confirm": "Change nozzle"
+    },
+    "errors": {
+      "typeRequired": "Select a type",
+      "customInvalid": "Enter a name of up to 40 characters",
+      "diameterRange": "Enter a diameter from 0.1 to 50 mm",
+      "unitsInvalid": "Enter a whole number, 0 or more",
+      "restockRange": "Enter a whole number from 1 to 1000",
+      "duplicate": "This type and diameter already exist. Use Restock instead.",
+      "sameState": "Choose two different states",
+      "exceeds": "There are only {{max}} units in that state",
+      "retiredRequired": "Select the state of the removed nozzle"
     }
   },
   "iam": {
@@ -324,14 +434,6 @@
     "status": "Operational status",
     "lastService": "Last maintenance",
     "notFound": "Drone not found",
-    "edit" : "Edit drone"
-  },
-  "detail": {
-    "title": "Drone details",
-    "back": "Back to drones",
-    "status": "Operational status",
-    "lastService": "Last maintenance",
-    "notFound": "Drone not found",
     "edit": "Edit drone"
   },
   "droneForm": {
@@ -345,6 +447,7 @@
     "tankCapacity": "Tank capacity (L)",
     "status": "Status",
     "nozzle": "Nozzle",
+    "nozzleHint": "To change a registered drone's nozzle, use Change nozzle in its details.",
     "lastMaintenance": "Last maintenance",
     "nextMaintenance": "Next maintenance",
     "imageUrl": "Image URL",
@@ -382,7 +485,16 @@
       "load": "Could not load drones",
       "create": "Could not register the drone",
       "update": "Could not update the drone",
-      "delete": "Could not delete the drone"
+      "delete": "Could not delete the drone",
+      "changeNozzle": "Could not change the nozzle"
+    },
+    "nozzle": {
+      "create": "Could not register the nozzle",
+      "update": "Could not update the nozzle"
+    },
+    "agrochemical": {
+      "load": "Could not load agrochemicals",
+      "create": "Could not register the agrochemical"
     },
     "maintenance": {
       "load": "Could not load maintenance records",

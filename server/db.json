@@ -404,51 +404,33 @@
   "agrochemicals": [
     {
       "id": 1,
-      "name": "Glifosato 48%",
+      "name": "Roundup Max",
       "type": "herbicide",
+      "activeIngredient": "Glifosato",
+      "recommendedDoseLitersPerHa": 2.5,
       "stockLiters": 120,
-      "minimumStockLiters": 40,
-      "expirationDate": "2027-08-30"
+      "minimumStockLiters": 30,
+      "expirationDate": "2027-08-15"
     },
     {
       "id": 2,
-      "name": "Cipermetrina 25%",
+      "name": "Karate Zeon",
       "type": "insecticide",
-      "stockLiters": 25,
-      "minimumStockLiters": 30,
-      "expirationDate": "2026-12-10"
-    },
-    {
-      "id": 3,
-      "name": "Mancozeb 80%",
-      "type": "fungicide",
-      "stockLiters": 60,
-      "minimumStockLiters": 20,
-      "expirationDate": "2027-01-15"
-    },
-    {
-      "id": 4,
-      "name": "Imidacloprid 35%",
-      "type": "insecticide",
-      "stockLiters": 80,
+      "activeIngredient": "Lambda-cihalotrina",
+      "recommendedDoseLitersPerHa": 0.15,
+      "stockLiters": 20,
       "minimumStockLiters": 25,
-      "expirationDate": "2027-03-20"
+      "expirationDate": "2027-03-10"
     },
     {
-      "id": 5,
-      "name": "2,4-D Amina 72%",
-      "type": "herbicide",
-      "stockLiters": 15,
-      "minimumStockLiters": 20,
-      "expirationDate": "2026-09-30"
-    },
-    {
-      "id": 6,
-      "name": "Azoxistrobina 25%",
+      "name": "FungiMax",
       "type": "fungicide",
-      "stockLiters": 45,
-      "minimumStockLiters": 15,
-      "expirationDate": "2027-06-05"
+      "activeIngredient": "Sulfato de Cobre",
+      "recommendedDoseLitersPerHa": 20,
+      "stockLiters": 60,
+      "minimumStockLiters": 10,
+      "expirationDate": "2027-12-05",
+      "id": 3
     }
   ],
   "nozzles": [

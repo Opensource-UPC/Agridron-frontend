@@ -1,4 +1,3 @@
-
 .drone-detail {
     padding: 16px;
     color: #1B463C;
@@ -67,4 +66,18 @@
         grid-template-columns: 1fr;
         gap: 8px;
     }
+}
+
+.change-nozzle {
+    margin-left: 12px;
+}
+
+.change-nozzle__hint {
+    display: block;
+    margin-top: 4px;
+    color: #92400E;
+}
+
+.detail-error {
+    color: #B42318;
 }

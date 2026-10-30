@@ -6,6 +6,16 @@ import {Routes} from '@angular/router';
 export const inventoryAndResourceManagementRoutes: Routes = [
     {path: '', loadComponent: () => import('./components/drone-page/drone-page').then(m => m.DronePage)},
     {
+        path: 'new', loadComponent: () =>
+            import('./components/drone-form/drone-form')
+                .then(m => m.DroneForm)
+    },
+    {
+        path: 'nozzles', loadComponent: () =>
+            import('./components/nozzle-page/nozzle-page')
+                .then(m => m.NozzlePage)
+    },
+    {
         path: ':id', loadComponent: () =>
             import('./components/drone-detail/drone-detail')
                 .then(m => m.DroneDetail)
@@ -21,10 +31,5 @@ export const inventoryAndResourceManagementRoutes: Routes = [
             import('./components/drone-maintenance-page/drone-maintenance-page')
                 .then(m => m.MaintenancePage)
     },
-    {
-        path: 'new', loadComponent: () =>
-            import('./components/drone-form/drone-form')
-                .then(m => m.DroneForm)
-    }
 
 ];

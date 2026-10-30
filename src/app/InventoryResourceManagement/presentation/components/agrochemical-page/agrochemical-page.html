@@ -1,0 +1,73 @@
+
+
+<section class="agrochemical-page">
+
+    <div class="agrochemical-page__header">
+        <h2>{{ 'agrochemical.title' | translate }}</h2>
+
+        <button mat-flat-button type="button" (click)="openCreate()">
+            <mat-icon>add</mat-icon>
+            {{ 'agrochemical.actions.new' | translate }}
+        </button>
+    </div>
+
+    @if (error()) {
+        <p class="agrochemical-page__error" role="alert">{{ error() }}</p>
+    }
+
+    @if (agrochemicals().length > 0) {
+
+        <mat-card appearance="outlined" class="agrochemical-card">
+            <table class="agrochemical-table">
+                <thead>
+                <tr>
+                    <th>{{ 'agrochemical.name' | translate }}</th>
+                    <th>{{ 'agrochemical.type' | translate }}</th>
+                    <th>{{ 'agrochemical.activeIngredient' | translate }}</th>
+                    <th class="num">{{ 'agrochemical.recommendedDoseShort' | translate }}</th>
+                    <th class="num">{{ 'agrochemical.stockShort' | translate }}</th>
+                    <th class="num">{{ 'agrochemical.minimumStockShort' | translate }}</th>
+                    <th>{{ 'agrochemical.expiration' | translate }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @for (item of agrochemicals(); track item.id) {
+                        <tr>
+                            <td><strong>{{ item.name }}</strong></td>
+                            <td>
+                                @if (isKnownType(item.type)) {
+                                    {{ 'agrochemical.types.' + item.type | translate }}
+                                } @else {
+                                    {{ item.type }}
+                                }
+                            </td>
+                            <td>{{ item.activeIngredient || '—' }}</td>
+                            <td class="num">
+                                {{ item.recommendedDoseLitersPerHa > 0 ? item.recommendedDoseLitersPerHa : '—' }}
+                            </td>
+                            <td class="num">
+                                <span class="badge" [class.badge--low]="item.lowStock">{{ item.stockLiters }}</span>
+                                @if (item.lowStock) {
+                                    <span class="note">{{ 'agrochemical.lowStock' | translate }}</span>
+                                }
+                            </td>
+                            <td class="num">{{ item.minimumStockLiters }}</td>
+                            <td>
+                                {{ item.expirationDate }}
+                                @if (item.isExpired(today)) {
+                                    <span class="badge badge--low">{{ 'agrochemical.expired' | translate }}</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </mat-card>
+
+    } @else {
+        <p class="agrochemical-page__empty">
+            {{ loading() ? ('agrochemical.loading' | translate) : ('agrochemical.empty' | translate) }}
+        </p>
+    }
+
+</section>

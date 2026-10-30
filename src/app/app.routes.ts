@@ -47,17 +47,14 @@ export const routes: Routes = [
         import('./InventoryResourceManagement/presentation/inventory-and-resource-management.routes-interceptor').then(m => m.inventoryAndResourceManagementRoutes)
   },
   {
+    path: 'agrochemicals',
+    loadChildren: () =>
+        import('./InventoryResourceManagement/presentation/agrochemical-routes').then(m => m.agrochemicalRoutes)
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./shared/presentation/views/page-not-found/page-not-found').then(m => m.PageNotFound)
   },
-
-    ////Esto fue lo que modifique
-  {
-    path: 'drones',
-    loadChildren: () =>
-        import('./InventoryResourceManagement/presentation/inventory-and-resource-management.routes-interceptor')
-            .then(m=> m.inventoryAndResourceManagementRoutes)
-  }
 
 ];

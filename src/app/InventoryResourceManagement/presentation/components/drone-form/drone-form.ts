@@ -23,6 +23,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 
 import {DroneStore} from '../../../application/dron-store';
 import {Drone} from '../../../domain/model/drone.entity';
+import {NozzleTypeLabel} from '../nozzle-type-label/nozzle-type-label';
 
 // La fecha del siguiente mantenimiento no puede ser anterior
 // a la fecha del último mantenimiento.
@@ -42,12 +43,13 @@ function validateMaintenanceDates(
   imports: [
     ReactiveFormsModule,
     TranslatePipe,
+    NozzleTypeLabel,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule
   ],
-  templateUrl: '/drone-form.html',
+  templateUrl: './drone-form.html',
   styleUrl: './drone-form.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -115,6 +117,11 @@ export class DroneForm {
       this.form.controls.nextMaintenanceDate.clearValidators();
       this.form.controls.lastMaintenanceDate.updateValueAndValidity();
       this.form.controls.nextMaintenanceDate.updateValueAndValidity();
+    } else {
+      // La boquilla de un dron ya registrado no se muestra aquí: se cambia desde su
+      // detalle ("Cambiar boquilla") para que el stock quede al día. El control se
+      // deshabilita para que no afecte la validación; su valor se conserva al guardar.
+      this.form.controls.nozzleId.disable();
     }
 
     effect(() => {
@@ -176,6 +183,7 @@ export class DroneForm {
           value.lastMaintenanceDate,
           value.nextMaintenanceDate,
           value.urlimg.trim(),
+
       );
 
       this.store.addDrone(newDrone)
@@ -202,6 +210,7 @@ export class DroneForm {
         value.lastMaintenanceDate,
         value.nextMaintenanceDate,
         value.urlimg.trim(),
+
     );
 
     this.store.updateDrone(updatedDrone)

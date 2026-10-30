@@ -16,6 +16,7 @@
     "fumigationArea": "Zonas de fumigación",
     "analytics": "Reportes",
     "drone": "Drones",
+    "agrochemical": "Agroquímicos",
     "profile": "Perfil",
     "home": "Inicio"
   },
@@ -245,7 +246,116 @@
     "actions": {
       "details": "Ver detalles",
       "maintenance": "Ver mantenimientos",
-      "new": "Añadir Dron"
+      "new": "Añadir Dron",
+      "nozzles": "Boquillas de de pulverización "
+    }
+  },
+  "agrochemical": {
+    "title": "Agroquímicos",
+    "loading": "Cargando agroquímicos...",
+    "empty": "Aún no hay agroquímicos registrados.",
+    "name": "Denominación comercial",
+    "type": "Tipo",
+    "activeIngredient": "Ingrediente activo",
+    "recommendedDose": "Dosis recomendada (L/ha)",
+    "recommendedDoseShort": "Dosis (L/ha)",
+    "stock": "Stock (L)",
+    "stockShort": "Stock (L)",
+    "minimumStock": "Stock mínimo (L)",
+    "minimumStockShort": "Mínimo (L)",
+    "expiration": "Fecha de vencimiento",
+    "lowStock": "Stock bajo",
+    "expired": "Vencido",
+    "types": {
+      "herbicide": "Herbicida",
+      "insecticide": "Insecticida",
+      "fungicide": "Fungicida",
+      "fertilizer": "Fertilizante",
+      "other": "Otro"
+    },
+    "actions": {
+      "new": "Nuevo agroquímico"
+    },
+    "create": {
+      "title": "Nuevo agroquímico",
+      "confirm": "Registrar agroquímico"
+    },
+    "errors": {
+      "nameRequired": "Ingresa la denominación comercial (hasta 60 caracteres)",
+      "typeRequired": "Selecciona un tipo",
+      "activeIngredientRequired": "Falta el ingrediente activo",
+      "doseRequired": "Falta la dosis recomendada (entre 0.01 y 100 L/ha)",
+      "stockInvalid": "Ingresa una cantidad de 0 litros o más",
+      "expirationRequired": "Ingresa la fecha de vencimiento",
+      "expired": "La fecha de vencimiento no puede ser anterior a hoy",
+      "duplicate": "Ya existe un producto con esta denominación comercial"
+    }
+  },
+  "nozzle": {
+    "title": "Boquillas",
+    "loading": "Cargando boquillas...",
+    "empty": "Aún no hay boquillas registradas.",
+    "type": "Tipo",
+    "diameter": "Diámetro",
+    "good": "Buenas",
+    "worn": "Desgastadas",
+    "damaged": "Dañadas",
+    "total": "Total",
+    "types": {
+      "flat-fan": "Flat fan",
+      "hollow-cone": "Hollow cone",
+      "full-cone": "Full cone",
+      "air-induction": "Air induction"
+    },
+    "actionsColumn": "Acciones",
+    "actions": {
+      "new": "Nueva boquilla",
+      "restock": "Reponer stock",
+      "updateStatus": "Actualizar estado",
+      "change": "Cambiar boquilla"
+    },
+    "create": {
+      "title": "Nueva boquilla",
+      "diameter": "Diámetro (mm)",
+      "units": "Unidades buenas iniciales",
+      "other": "Otro...",
+      "customType": "Nombre del tipo",
+      "confirm": "Registrar boquilla"
+    },
+    "restock": {
+      "title": "Reponer stock",
+      "current": "Unidades buenas actuales",
+      "units": "Unidades a agregar",
+      "confirm": "Agregar stock"
+    },
+    "statusUpdate": {
+      "title": "Actualizar estado",
+      "from": "Estado de origen",
+      "to": "Estado de destino",
+      "quantity": "Unidades a mover",
+      "confirm": "Actualizar"
+    },
+    "change": {
+      "title": "Cambiar boquilla",
+      "current": "Boquilla actual",
+      "newNozzle": "Boquilla nueva",
+      "noStock": "Sin stock",
+      "wornWarning": "No quedan unidades buenas: se instalará una desgastada.",
+      "retiredState": "Estado de la boquilla retirada",
+      "retiredHint": "Vuelve a bodega en este estado.",
+      "inFlight": "Un dron en vuelo no puede cambiar de boquilla.",
+      "confirm": "Cambiar boquilla"
+    },
+    "errors": {
+      "typeRequired": "Selecciona un tipo",
+      "customInvalid": "Escribe un nombre de hasta 40 caracteres",
+      "diameterRange": "Ingresa un diámetro entre 0.1 y 50 mm",
+      "unitsInvalid": "Ingresa un número entero, 0 o más",
+      "restockRange": "Ingresa un número entero entre 1 y 1000",
+      "duplicate": "Ya existe este tipo con este diámetro. Usa Reponer stock.",
+      "sameState": "Elige dos estados distintos",
+      "exceeds": "Solo hay {{max}} unidades en ese estado",
+      "retiredRequired": "Selecciona el estado de la boquilla retirada"
     }
   },
   "iam": {
@@ -324,7 +434,7 @@
     "status": "Estado operativo",
     "lastService": "Último mantenimiento",
     "notFound": "No se encontró el dron",
-    "edit" : "Editar drone"
+    "edit": "Editar dron"
   },
   "droneForm": {
     "title": "Editar dron",
@@ -337,6 +447,7 @@
     "tankCapacity": "Capacidad del tanque (L)",
     "status": "Estado",
     "nozzle": "Boquilla",
+    "nozzleHint": "Para cambiar la boquilla de un dron registrado, usa «Cambiar boquilla» en su detalle.",
     "lastMaintenance": "Último mantenimiento",
     "nextMaintenance": "Próximo mantenimiento",
     "imageUrl": "URL de la imagen",
@@ -374,7 +485,16 @@
       "load": "No se pudieron cargar los drones",
       "create": "No se pudo registrar el dron",
       "update": "No se pudo actualizar el dron",
-      "delete": "No se pudo eliminar el dron"
+      "delete": "No se pudo eliminar el dron",
+      "changeNozzle": "No se pudo cambiar la boquilla"
+    },
+    "nozzle": {
+      "create": "No se pudo registrar la boquilla",
+      "update": "No se pudo actualizar la boquilla"
+    },
+    "agrochemical": {
+      "load": "No se pudieron cargar los agroquímicos",
+      "create": "No se pudo registrar el agroquímico"
     },
     "maintenance": {
       "load": "No se pudieron cargar los mantenimientos",

@@ -1,0 +1,7 @@
+
+
+@if (known()) {
+    {{ 'nozzle.types.' + type() | translate }}
+} @else {
+    {{ type() }}
+}

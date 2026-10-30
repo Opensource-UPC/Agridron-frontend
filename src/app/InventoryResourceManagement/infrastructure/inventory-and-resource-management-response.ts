@@ -36,6 +36,8 @@ export interface AgrochemicalResource extends BaseResource {
     id:number;
     name: string;
     type: string;
+    activeIngredient: string;
+    recommendedDoseLitersPerHa: number;
     stockLiters: number;
     minimumStockLiters: number;
     expirationDate: string;
@@ -51,10 +53,11 @@ export interface AgrochemicalsResponse extends BaseResponse {
 
 export interface NozzleResource extends BaseResource {
     id: number;
-    type: string;
+    type: string ;
     diameterMm: number;
-    stockUnits: number;
-    status: string;
+    goodUnits: number;
+    wornUnits: number;
+    damagedUnits: number;
 }
 
 /**

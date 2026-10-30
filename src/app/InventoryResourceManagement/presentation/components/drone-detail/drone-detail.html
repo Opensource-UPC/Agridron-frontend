@@ -13,6 +13,10 @@
 
     <h2>{{ 'detail.title' | translate }}</h2>
 
+    @if (error() && drone()) {
+        <p class="detail-error" role="alert">{{ error() }}</p>
+    }
+
     @if (loading()) {
         <p>{{ 'drone.loading' | translate }}</p>
 
@@ -55,10 +59,20 @@
                         <dt>{{ 'drone.nozzle' | translate }}</dt>
                         <dd>
                             @if (nozzle(); as selectedNozzle) {
-                                {{ selectedNozzle.type }} -
+                                <app-nozzle-type-label [type]="selectedNozzle.type"/> -
                                 {{ selectedNozzle.diameterMm }} mm
                             } @else {
                                 {{ 'drone.noNozzle' | translate }}
+                            }
+
+                            <button mat-stroked-button type="button" class="change-nozzle"
+                                    [disabled]="!canChangeNozzle()" (click)="changeNozzle()">
+                                <mat-icon>swap_horiz</mat-icon>
+                                {{ 'nozzle.actions.change' | translate }}
+                            </button>
+
+                            @if (!canChangeNozzle()) {
+                                <small class="change-nozzle__hint">{{ 'nozzle.change.inFlight' | translate }}</small>
                             }
                         </dd>
 

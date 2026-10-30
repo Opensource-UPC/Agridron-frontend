@@ -47,5 +47,7 @@ export class DronePage {
   protected readonly onNewDrone = (): void =>{
     this.router.navigateByUrl(`/drones/new`);
   }
-
+  protected readonly onViewNozzles = (): void => {
+    this.router.navigateByUrl('/drones/nozzles');
+  };
 }

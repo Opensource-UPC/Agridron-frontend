@@ -22,7 +22,7 @@ export const environment = {
   AgriDronProviderDronesMetricsEndpointPath: '/drones',
   AgriDronProvideChemicalsEndpointPath: '/agrochemicals',
   AgriDronProvideNozzlesEndpointPath: '/nozzles',
-  AgriDronProvideMaintenanceRecordEndpointPath: '/maintenanceRecords',
+  AgriDronProvideMaintenanceRecordEndpointPath: '/maintenance-records',
 };
 
 
