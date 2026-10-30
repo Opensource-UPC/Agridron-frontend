@@ -39,6 +39,7 @@ export class SideNav {
     {link: '/farms', label: 'option.farm', icon: 'agriculture'},
     {link: '/parcels', label: 'option.parcel', icon: 'grid_view'},
     {link: '/crops', label: 'option.crop', icon: 'grass'},
+    {link: '/missions', label: 'option.mission', icon: 'grass'},
     {link: '/fumigation-areas', label: 'option.fumigationArea', icon: 'science'},
     {link: '/analytics', label: 'option.analytics', icon: 'insights'},
     {link: '/drones', label: 'option.drone', icon: 'Drone'},
