@@ -1,0 +1,30 @@
+.paused {
+    max-width: 720px;
+    margin: 16px;
+}
+
+.paused mat-card-content {
+    text-align: center;
+}
+
+.paused__icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: #64748B;
+}
+
+.paused__details {
+    margin-top: 24px;
+    text-align: left;
+}
+
+.paused__fields {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 8px 24px;
+    margin: 0;
+}
+
+.paused__fields dt { font-weight: 500; }
+.paused__fields dd { margin: 0; }

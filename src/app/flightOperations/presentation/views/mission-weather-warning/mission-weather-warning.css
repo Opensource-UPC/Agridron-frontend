@@ -1,0 +1,30 @@
+.title {
+    margin: 16px;
+}
+
+.warning {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 720px;
+    margin: 16px;
+}
+
+.warning__banner {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    background: #fff3e0;
+    color: #b45309;
+}
+
+.warning__banner p {
+    margin: 4px 0 0;
+}
+
+.warning__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
