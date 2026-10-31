@@ -33,8 +33,19 @@ export class MissionComplete {
     readonly mission = inject(MissionStore).getMissionById(this.missionId);
     readonly result = inject(MissionResultStore).getByMissionId(this.missionId);
     readonly timeline = inject(OperationStatusStore).getByMissionId(this.missionId);
+    readonly reports = this.reportStore.getReportsByMissionId(this.missionId);
 
     protected readonly format = formatDuration;
+
+    /**
+     * Summary report generated when the mission was completed.
+     */
+    readonly summaryReport = computed(() => this.reports().find(r => r.type === ReportType.MISSION_SUMMARY));
+
+    /**
+     * Phytosanitary report of the mission, if it was already generated.
+     */
+    readonly phytosanitaryReport = computed(() => this.reports().find(r => r.type === ReportType.PHYTOSANITARY));
 
     /**
      * Total duration between the first and the last operation status.
@@ -51,28 +62,31 @@ export class MissionComplete {
     readonly finishedAt = computed(() => this.timeline().at(-1)?.timestamp ?? null);
 
     /**
-     * Generates the phytosanitary report and opens the reports view.
+     * Generates the phytosanitary report once and opens the reports view.
      */
     generateReport() {
-        const result = this.result();
-        this.reportStore.addReport(new MissionReport(
-            0,
-            this.missionId,
-            ReportType.PHYTOSANITARY,
-            result?.treatedArea ?? 0,
-            result?.appliedVolume ?? 0,
-            result?.observations ?? '',
-            new Date().toISOString(),
-            []
-        ));
+        if (!this.phytosanitaryReport()) {
+            const result = this.result();
+            this.reportStore.addReport(new MissionReport(
+                0,
+                this.missionId,
+                ReportType.PHYTOSANITARY,
+                result?.treatedArea ?? 0,
+                result?.appliedVolume ?? 0,
+                result?.observations ?? '',
+                new Date().toISOString(),
+                []
+            ));
+        }
         this.router.navigate(['analytics']).then();
     }
 
     /**
-     * Opens the reports view.
+     * Opens the detail of the mission summary report.
      */
     serviceReport() {
-        this.router.navigate(['analytics']).then();
+        const report = this.summaryReport();
+        this.router.navigate(report ? ['analytics/reports', report.id] : ['analytics']).then();
     }
 
     /**

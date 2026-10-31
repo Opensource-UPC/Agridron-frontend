@@ -12,6 +12,13 @@ import {OperationStatus} from '../domain/model/operation-status.entity';
 import {MissionResultStore} from './mission-result.store';
 import {OperationStatusStore} from './operation-status.store';
 import {ParcelStore} from '../../fieldManagement/application/parcel.store';
+import {MissionStatus} from '../domain/model/mission-status.enum';
+import {IncidentStore} from './incident.store';
+import {MissionHistory} from '../../analyticsAndReporting/domain/model/mission-history.entity';
+import {MissionReport} from '../../analyticsAndReporting/domain/model/mission-report.entity';
+import {ReportType} from '../../analyticsAndReporting/domain/model/report-type.enum';
+import {MissionHistoryStore} from '../../analyticsAndReporting/application/mission-history.store';
+import {MissionReportStore} from '../../analyticsAndReporting/application/mission-report.store';
 
 @Injectable({
     providedIn: 'root'
@@ -22,6 +29,9 @@ export class MissionStore {
     private readonly operationStatusStore = inject(OperationStatusStore);
     private readonly missionResultStore = inject(MissionResultStore);
     private readonly parcelStore = inject(ParcelStore);
+    private readonly incidentStore = inject(IncidentStore);
+    private readonly missionHistoryStore = inject(MissionHistoryStore);
+    private readonly missionReportStore = inject(MissionReportStore);
 
     /**
      - Computed signal for the count of missions
@@ -154,16 +164,24 @@ export class MissionStore {
     };
 
     /**
-     * Completes a mission in progress and registers its result.
+     * Completes a mission in progress and registers its result, history and summary report.
      * @param mission - The mission to complete.
      */
     completeMission = (mission: Mission): void => {
         mission.complete();
         this.updateMission(mission);
         this.recordOperationStatus(mission, 'COMPLETED');
+
         const area = this.parcelStore.parcels().find(p => p.id === mission.parcelId)?.area ?? null;
         const volume = area !== null && mission.sprayRate !== null ? area * mission.sprayRate : null;
-        this.missionResultStore.addMissionResult(new MissionResult(0, mission.id, area, volume, null));
+        const observations = this.summarizeIncidents(mission.id);
+        const completedAt = new Date().toISOString();
+
+        this.missionResultStore.addMissionResult(new MissionResult(0, mission.id, area, volume, observations));
+        this.missionHistoryStore.addHistory(
+            new MissionHistory(0, mission.id, MissionStatus.COMPLETED, completedAt));
+        this.missionReportStore.addReport(
+            new MissionReport(0, mission.id, ReportType.MISSION_SUMMARY, area ?? 0, volume ?? 0, observations, completedAt, []));
     };
 
     /**
@@ -237,5 +255,17 @@ export class MissionStore {
         const {latitude, longitude} = parcel?.centroid() ?? {latitude: 0, longitude: 0};
         this.operationStatusStore.addOperationStatus(
             new OperationStatus(0, mission.id, latitude, longitude, status, new Date()));
+    };
+
+    /**
+     * Builds the observations of a mission from its registered incidents.
+     * @param missionId - The ID of the mission.
+     * @returns The incident descriptions, or a default text when there are none.
+     */
+    private summarizeIncidents = (missionId: number): string => {
+        const descriptions = this.incidentStore.incidents()
+            .filter(i => i.missionId === missionId && i.description)
+            .map(i => i.description);
+        return descriptions.length ? descriptions.join('; ') : 'Mission completed without incidents.';
     };
 }

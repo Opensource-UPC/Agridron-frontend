@@ -18,7 +18,9 @@
         <h3>{{ 'mission.complete.whatNext' | translate }}</h3>
     </mat-card-content>
     <mat-card-actions class="complete__actions">
-        <button mat-raised-button color="primary" (click)="generateReport()">{{ 'mission.complete.generateReport' | translate }}</button>
+        <button mat-raised-button color="primary" (click)="generateReport()">
+            {{ (phytosanitaryReport() ? 'mission.complete.viewReport' : 'mission.complete.generateReport') | translate }}
+        </button>
         <button mat-stroked-button (click)="serviceReport()">{{ 'mission.complete.serviceReport' | translate }}</button>
         <button mat-stroked-button (click)="dashboard()">{{ 'mission.complete.dashboard' | translate }}</button>
     </mat-card-actions>
