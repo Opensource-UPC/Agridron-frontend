@@ -1,10 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<h1 class="title">{{ 'mission.monitor.title' | translate }}</h1>
+@if (mission(); as m) {
+    <mat-card appearance="outlined" class="monitor">
+        <mat-card-header>
+            <mat-card-title>{{ farm()?.name }}</mat-card-title>
+            <mat-card-subtitle>{{ parcel()?.name }} · MS-{{ m.id }}</mat-card-subtitle>
+            <app-mission-status-badge class="monitor__badge" [status]="m.status"/>
+        </mat-card-header>
 
-</body>
-</html>
+        <mat-card-content>
+            <app-mission-stepper [currentStep]="stepIndex()"/>
+            <app-mission-telemetry [mission]="m" [drone]="drone()" [parcelArea]="parcel()?.area"
+                                   [elapsedMs]="elapsedMs()" [position]="lastPosition()"/>
+        </mat-card-content>
+
+        <mat-card-actions>
+            @switch (m.status) {
+                @case (MissionStatus.PLANNED) {
+                    <button mat-raised-button color="primary" (click)="authorize()">{{ 'mission.actions.authorize' | translate }}</button>
+                }
+                @case (MissionStatus.AUTHORIZED) {
+                    <button mat-raised-button color="primary" (click)="start()">{{ 'mission.actions.start' | translate }}</button>
+                }
+                @case (MissionStatus.IN_PROGRESS) {
+                    <button mat-button (click)="incident()">{{ 'mission.actions.incident' | translate }}</button>
+                    <button mat-button (click)="pause()">{{ 'mission.actions.pause' | translate }}</button>
+                    <button mat-raised-button color="primary" (click)="finish()">{{ 'mission.actions.finish' | translate }}</button>
+                }
+                @case (MissionStatus.PAUSED) {
+                    <button mat-button (click)="viewPaused()">{{ 'mission.actions.details' | translate }}</button>
+                    <button mat-raised-button color="primary" (click)="resume()">{{ 'mission.actions.resume' | translate }}</button>
+                }
+                @case (MissionStatus.COMPLETED) {
+                    <button mat-raised-button color="primary" (click)="viewSummary()">{{ 'mission.actions.summary' | translate }}</button>
+                }
+            }
+            <button mat-button (click)="back()">{{ 'mission.actions.back' | translate }}</button>
+        </mat-card-actions>
+    </mat-card>
+} @else {
+    <p>{{ store.loading() ? ('mission.loading' | translate) : ('mission.notFound' | translate) }}</p>
+}
