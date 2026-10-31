@@ -114,4 +114,11 @@ export class Mission {
     set status(value: MissionStatus | null) {
         this.#status = value;
     }
+
+    authorize(): void { if (this.#status === MissionStatus.PLANNED) this.#status = MissionStatus.AUTHORIZED; }
+    start(): void     { if (this.#status === MissionStatus.AUTHORIZED) this.#status = MissionStatus.IN_PROGRESS; }
+    pause(): void     { if (this.#status === MissionStatus.IN_PROGRESS) this.#status = MissionStatus.PAUSED; }
+    resume(): void    { if (this.#status === MissionStatus.PAUSED) this.#status = MissionStatus.IN_PROGRESS; }
+    complete(): void  { if (this.#status === MissionStatus.IN_PROGRESS) this.#status = MissionStatus.COMPLETED; }
+    cancel(): void    { if (this.#status !== MissionStatus.COMPLETED) this.#status = MissionStatus.CANCELLED; }
 }
