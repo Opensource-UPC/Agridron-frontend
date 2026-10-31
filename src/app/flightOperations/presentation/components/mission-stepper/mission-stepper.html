@@ -1,0 +1,5 @@
+<ol class="stepper">
+    @for (step of steps; track step; let i = $index) {
+        <li [class.done]="i <= currentStep()">{{ 'mission.monitor.steps.' + step | translate }}</li>
+    }
+</ol>

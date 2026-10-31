@@ -1,0 +1,21 @@
+@if (condition(); as c) {
+    <div class="metrics">
+        <div>
+            <mat-icon>rainy</mat-icon>
+            <span>{{ 'mission.weatherWarning.rain' | translate }}</span>
+            <b>{{ c.precipitation }} mm</b>
+        </div>
+        <div>
+            <mat-icon>air</mat-icon>
+            <span>{{ 'mission.weatherWarning.wind' | translate }}</span>
+            <b>{{ c.windSpeed }} km/h</b>
+        </div>
+        <div>
+            <mat-icon>thermostat</mat-icon>
+            <span>{{ 'mission.weatherWarning.temperature' | translate }}</span>
+            <b>{{ c.temperature }}°C</b>
+        </div>
+    </div>
+} @else {
+    <p>{{ 'weather.empty' | translate }}</p>
+}

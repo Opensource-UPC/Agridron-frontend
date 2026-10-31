@@ -1,0 +1,9 @@
+.place {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 8px 24px;
+    margin: 0 0 8px;
+}
+
+.place dt { font-weight: 500; }
+.place dd { margin: 0; }
