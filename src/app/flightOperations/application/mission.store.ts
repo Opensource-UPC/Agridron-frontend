@@ -7,6 +7,11 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {retry} from 'rxjs';
 import {FlightOperationsApi} from '../infrastructure/flight-operations-api';
 import {Mission} from '../domain/model/mission.entity';
+import {MissionResult} from '../domain/model/mission-result.entity';
+import {OperationStatus} from '../domain/model/operation-status.entity';
+import {MissionResultStore} from './mission-result.store';
+import {OperationStatusStore} from './operation-status.store';
+import {ParcelStore} from '../../fieldManagement/application/parcel.store';
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +19,9 @@ import {Mission} from '../domain/model/mission.entity';
 export class MissionStore {
     private readonly flightOperationsApi = inject(FlightOperationsApi);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly operationStatusStore = inject(OperationStatusStore);
+    private readonly missionResultStore = inject(MissionResultStore);
+    private readonly parcelStore = inject(ParcelStore);
 
     /**
      - Computed signal for the count of missions
@@ -107,6 +115,58 @@ export class MissionStore {
     };
 
     /**
+     * Authorizes a planned mission.
+     * @param mission - The mission to authorize.
+     */
+    authorizeMission = (mission: Mission): void => {
+        mission.authorize();
+        this.updateMission(mission);
+    };
+
+    /**
+     * Starts an authorized mission.
+     * @param mission - The mission to start.
+     */
+    startMission = (mission: Mission): void => {
+        mission.start();
+        this.updateMission(mission);
+        this.recordOperationStatus(mission, 'IN_PROGRESS');
+    };
+
+    /**
+     * Pauses a mission in progress.
+     * @param mission - The mission to pause.
+     */
+    pauseMission = (mission: Mission): void => {
+        mission.pause();
+        this.updateMission(mission);
+        this.recordOperationStatus(mission, 'PAUSED');
+    };
+
+    /**
+     * Resumes a paused mission.
+     * @param mission - The mission to resume.
+     */
+    resumeMission = (mission: Mission): void => {
+        mission.resume();
+        this.updateMission(mission);
+        this.recordOperationStatus(mission, 'IN_PROGRESS');
+    };
+
+    /**
+     * Completes a mission in progress and registers its result.
+     * @param mission - The mission to complete.
+     */
+    completeMission = (mission: Mission): void => {
+        mission.complete();
+        this.updateMission(mission);
+        this.recordOperationStatus(mission, 'COMPLETED');
+        const area = this.parcelStore.parcels().find(p => p.id === mission.parcelId)?.area ?? null;
+        const volume = area !== null && mission.sprayRate !== null ? area * mission.sprayRate : null;
+        this.missionResultStore.addMissionResult(new MissionResult(0, mission.id, area, volume, null));
+    };
+
+    /**
      - Reloads all missions from the API
      */
     reloadMissions = (): void => {
@@ -166,4 +226,16 @@ export class MissionStore {
         }
         return fallback;
     }
+
+    /**
+     * Registers the operation status of a mission at the center of its parcel.
+     * @param mission - The mission being tracked.
+     * @param status - The status label to record.
+     */
+    private recordOperationStatus = (mission: Mission, status: string): void => {
+        const parcel = this.parcelStore.parcels().find(p => p.id === mission.parcelId);
+        const {latitude, longitude} = parcel?.centroid() ?? {latitude: 0, longitude: 0};
+        this.operationStatusStore.addOperationStatus(
+            new OperationStatus(0, mission.id, latitude, longitude, status, new Date()));
+    };
 }
