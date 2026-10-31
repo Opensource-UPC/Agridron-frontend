@@ -1,9 +1,9 @@
-<app-header-content [menuToggle]="toggleSidebar"/>
+<app-header-content (menuToggle)="toggleSidebar()"/>
 
-<app-side-nav [open]="sidebarOpen()" [close]="closeSidebar">
-  <main class="layout__content">
-    <router-outlet/>
-  </main>
+<app-side-nav [open]="sidebarOpen()" (close)="closeSidebar()">
+    <main class="layout__content">
+        <router-outlet/>
+    </main>
 </app-side-nav>
 
 <app-footer-content/>

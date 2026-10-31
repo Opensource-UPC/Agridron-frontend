@@ -1,0 +1,82 @@
+<h1 class="title">{{ (isEdit ? 'mission.form.edit-title' : 'mission.form.new-title') | translate }}</h1>
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field>
+        <mat-label>{{ 'mission.form.requestedDate' | translate }}</mat-label>
+        <input matInput type="datetime-local" formControlName="requestedDate" required>
+        @if (form.get('requestedDate')?.touched && form.get('requestedDate')!.hasError('required')) {
+            <mat-error>{{ 'mission.form.error.date-required' | translate }}</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>{{ 'mission.form.parcel' | translate }}</mat-label>
+        <mat-select formControlName="parcelId" required>
+            @for (parcel of parcels(); track parcel.id) {
+                <mat-option [value]="parcel.id">{{ parcel.name }}</mat-option>
+            }
+        </mat-select>
+        @if (form.get('parcelId')?.touched && form.get('parcelId')!.hasError('required')) {
+            <mat-error>{{ 'mission.form.error.parcel-required' | translate }}</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>{{ 'mission.form.agrochemical' | translate }}</mat-label>
+        <mat-select formControlName="agrochemicalId" required>
+            @for (agrochemical of agrochemicals(); track agrochemical.id) {
+                <mat-option [value]="agrochemical.id">{{ agrochemical.name }}</mat-option>
+            }
+        </mat-select>
+        @if (form.get('agrochemicalId')?.touched && form.get('agrochemicalId')!.hasError('required')) {
+            <mat-error>{{ 'mission.form.error.agrochemical-required' | translate }}</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>{{ 'mission.form.drone' | translate }}</mat-label>
+        <mat-select formControlName="droneId" required>
+            @for (drone of drones(); track drone.id) {
+                <mat-option [value]="drone.id">{{ drone.model }} · {{ drone.serialNumber }}</mat-option>
+            }
+        </mat-select>
+        @if (form.get('droneId')?.touched && form.get('droneId')!.hasError('required')) {
+            <mat-error>{{ 'mission.form.error.drone-required' | translate }}</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>{{ 'mission.form.flightHeight' | translate }}</mat-label>
+        <input matInput type="number" formControlName="flightHeight">
+        @if (form.get('flightHeight')?.hasError('min')) {
+            <mat-error>{{ 'mission.form.error.min' | translate }}</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>{{ 'mission.form.flightSpeed' | translate }}</mat-label>
+        <input matInput type="number" formControlName="flightSpeed">
+        @if (form.get('flightSpeed')?.hasError('min')) {
+            <mat-error>{{ 'mission.form.error.min' | translate }}</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>{{ 'mission.form.sprayRate' | translate }}</mat-label>
+        <input matInput type="number" step="0.1" formControlName="sprayRate">
+        @if (form.get('sprayRate')?.hasError('min')) {
+            <mat-error>{{ 'mission.form.error.min' | translate }}</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>{{ 'mission.form.overlap' | translate }}</mat-label>
+        <input matInput type="number" formControlName="overlap">
+        @if (form.get('overlap')?.hasError('min') || form.get('overlap')?.hasError('max')) {
+            <mat-error>{{ 'mission.form.error.overlap' | translate }}</mat-error>
+        }
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+        {{ (isEdit ? 'mission.form.update' : 'mission.form.create') | translate }}
+    </button>
+</form>

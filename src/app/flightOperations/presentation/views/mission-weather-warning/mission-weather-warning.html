@@ -1,0 +1,18 @@
+<h1 class="title">{{ 'mission.weatherWarning.title' | translate }}</h1>
+<section class="warning">
+    <div class="warning__banner">
+        <mat-icon>warning</mat-icon>
+        <div>
+            <strong>{{ 'mission.weatherWarning.heading' | translate }}</strong>
+            <p>{{ 'mission.weatherWarning.message' | translate }}</p>
+        </div>
+    </div>
+
+    <app-mission-weather-metrics [condition]="condition()"/>
+
+    <div class="warning__actions">
+        <button mat-raised-button color="primary" (click)="reschedule()">{{ 'mission.actions.reschedule' | translate }}</button>
+        <button mat-stroked-button (click)="forecast()">{{ 'mission.actions.forecast' | translate }}</button>
+        <button mat-button (click)="continueAnyway()">{{ 'mission.actions.continueAnyway' | translate }}</button>
+    </div>
+</section>

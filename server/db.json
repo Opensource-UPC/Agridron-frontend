@@ -237,6 +237,24 @@
       "appliedVolume": 24.6,
       "observations": "Mission paused once due to wind.",
       "generatedAt": "2026-09-25T11:05:00"
+    },
+    {
+      "id": 4,
+      "missionId": 1,
+      "type": "PHYTOSANITARY",
+      "treatedArea": 12.5,
+      "appliedVolume": 38,
+      "observations": "Sin incidentes",
+      "generatedAt": "2026-10-31T12:53:05.415Z"
+    },
+    {
+      "id": 5,
+      "missionId": 2,
+      "type": "PHYTOSANITARY",
+      "treatedArea": 8.2,
+      "appliedVolume": 24.6,
+      "observations": "Pausada una vez por viento",
+      "generatedAt": "2026-10-31T13:43:10.321Z"
     }
   ],
   "mission-histories": [
@@ -257,6 +275,167 @@
       "missionId": 3,
       "finalStatus": "CANCELLED",
       "completedAt": "2026-09-28T09:15:00"
+    }
+  ],
+  "missions": [
+    {
+      "id": 1,
+      "requestedDate": "2026-09-20T13:00:00.000Z",
+      "parcelId": 1,
+      "agrochemicalId": 3,
+      "droneId": 1,
+      "operatorId": 1,
+      "flightHeight": 3,
+      "flightSpeed": 5,
+      "sprayRate": 3,
+      "overlap": 20,
+      "status": "COMPLETED"
+    },
+    {
+      "id": 2,
+      "requestedDate": "2026-09-25T10:00:00",
+      "parcelId": 2,
+      "agrochemicalId": 3,
+      "droneId": 4,
+      "operatorId": 2,
+      "flightHeight": 3,
+      "flightSpeed": 5,
+      "sprayRate": 3,
+      "overlap": 20,
+      "status": "COMPLETED"
+    },
+    {
+      "id": 3,
+      "requestedDate": "2026-09-28T09:00:00",
+      "parcelId": 3,
+      "agrochemicalId": 1,
+      "droneId": 5,
+      "operatorId": 1,
+      "flightHeight": 4,
+      "flightSpeed": 6,
+      "sprayRate": 2.5,
+      "overlap": 15,
+      "status": "CANCELLED"
+    },
+    {
+      "id": 4,
+      "requestedDate": "2026-11-05T12:00:00.000Z",
+      "parcelId": 1,
+      "agrochemicalId": 6,
+      "droneId": 1,
+      "operatorId": 1,
+      "flightHeight": 3,
+      "flightSpeed": 5,
+      "sprayRate": 2,
+      "overlap": 20,
+      "status": "COMPLETED"
+    },
+    {
+      "id": 5,
+      "requestedDate": "2026-11-06T07:30:00",
+      "parcelId": 2,
+      "agrochemicalId": 4,
+      "droneId": 4,
+      "operatorId": 2,
+      "flightHeight": 3,
+      "flightSpeed": 5,
+      "sprayRate": 2,
+      "overlap": 20,
+      "status": "AUTHORIZED"
+    },
+    {
+      "id": 6,
+      "requestedDate": "2026-10-30T09:00:00",
+      "parcelId": 4,
+      "agrochemicalId": 3,
+      "droneId": 2,
+      "operatorId": 1,
+      "flightHeight": 4,
+      "flightSpeed": 6,
+      "sprayRate": 3,
+      "overlap": 20,
+      "status": "IN_PROGRESS"
+    }
+  ],
+  "mission-results": [
+    {
+      "id": 1,
+      "missionId": 1,
+      "treatedArea": 12.5,
+      "appliedVolume": 38,
+      "observations": "Sin incidentes"
+    },
+    {
+      "id": 2,
+      "missionId": 2,
+      "treatedArea": 8.2,
+      "appliedVolume": 24.6,
+      "observations": "Pausada una vez por viento"
+    },
+    {
+      "id": 3,
+      "missionId": 4,
+      "treatedArea": 12.5,
+      "appliedVolume": 25,
+      "observations": null
+    }
+  ],
+  "incidents": [
+    {
+      "id": 1,
+      "missionId": 2,
+      "type": "WEATHER",
+      "description": "Viento superior a 25 km/h",
+      "occurredAt": "2026-09-25T10:15:00"
+    },
+    {
+      "id": 2,
+      "missionId": 4,
+      "type": "SAFETY",
+      "description": "incident test ",
+      "occurredAt": "2026-10-31T12:53:38.901Z"
+    }
+  ],
+  "operation-status": [
+    {
+      "id": 1,
+      "missionId": 1,
+      "status": "IN_PROGRESS",
+      "latitude": -14.065,
+      "longitude": -76.135,
+      "timestamp": "2026-09-20T08:05:00"
+    },
+    {
+      "id": 2,
+      "missionId": 1,
+      "status": "COMPLETED",
+      "latitude": -14.065,
+      "longitude": -76.135,
+      "timestamp": "2026-09-20T08:47:00"
+    },
+    {
+      "id": 3,
+      "missionId": 6,
+      "status": "IN_PROGRESS",
+      "latitude": -14.075,
+      "longitude": -76.135,
+      "timestamp": "2026-10-30T09:00:00"
+    },
+    {
+      "id": 4,
+      "missionId": 4,
+      "status": "IN_PROGRESS",
+      "latitude": -14.065000000000001,
+      "longitude": -76.13499999999999,
+      "timestamp": "2026-10-31T12:53:26.932Z"
+    },
+    {
+      "id": 5,
+      "missionId": 4,
+      "status": "COMPLETED",
+      "latitude": -14.065000000000001,
+      "longitude": -76.13499999999999,
+      "timestamp": "2026-10-31T12:53:41.904Z"
     }
   ],
   "operational-metrics": [
@@ -383,7 +562,7 @@
       "urlimg": "https://images.unsplash.com/photo-1521405924368-64c5b84bec60?w=600"
     }
   ],
-  "agrochemicals": [
+  "chemicals": [
     {
       "id": 1,
       "name": "Glifosato 48%",

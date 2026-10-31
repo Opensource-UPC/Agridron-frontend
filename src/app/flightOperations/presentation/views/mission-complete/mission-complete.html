@@ -1,0 +1,27 @@
+<h1 class="title">{{ 'mission.complete.title' | translate }}</h1>
+<mat-card appearance="outlined" class="complete">
+    <mat-card-content>
+        <p class="complete__success"><mat-icon>check_circle</mat-icon> {{ 'mission.complete.success' | translate }}</p>
+
+        @if (mission(); as m) {
+            <app-mission-place [parcelId]="m.parcelId"/>
+        }
+        <dl class="complete__fields">
+            <dt>{{ 'mission.complete.treatedArea' | translate }}</dt>
+            <dd>{{ result()?.treatedArea | number: '1.1-1' }} ha</dd>
+            <dt>{{ 'mission.complete.totalTime' | translate }}</dt>
+            <dd>{{ format(totalMs()) }}</dd>
+            <dt>{{ 'mission.complete.date' | translate }}</dt>
+            <dd>{{ finishedAt() | date: 'dd/MM/yyyy HH:mm' }}</dd>
+        </dl>
+
+        <h3>{{ 'mission.complete.whatNext' | translate }}</h3>
+    </mat-card-content>
+    <mat-card-actions class="complete__actions">
+        <button mat-raised-button color="primary" (click)="generateReport()">
+            {{ (phytosanitaryReport() ? 'mission.complete.viewReport' : 'mission.complete.generateReport') | translate }}
+        </button>
+        <button mat-stroked-button (click)="serviceReport()">{{ 'mission.complete.serviceReport' | translate }}</button>
+        <button mat-stroked-button (click)="dashboard()">{{ 'mission.complete.dashboard' | translate }}</button>
+    </mat-card-actions>
+</mat-card>

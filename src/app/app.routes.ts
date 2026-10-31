@@ -37,6 +37,11 @@ export const routes: Routes = [
       import('./fieldManagement/presentation/fumigation-area.routes').then(m => m.fumigationAreaRoutes)
   },
   {
+    path: 'flight-operations',
+    loadChildren: () =>
+        import('./flightOperations/presentation/flight-operations.routes').then(m => m.flightOperationsRoutes)
+  },
+  {
     path: 'analytics',
     loadChildren: () =>
       import('./analyticsAndReporting/presentation/analyticsAndReporting.routes').then(m => m.analyticsAndReportingRoutes)

@@ -1,5 +1,4 @@
 
-
 export class Drone {
     id: number;
    serialNumber: string;
