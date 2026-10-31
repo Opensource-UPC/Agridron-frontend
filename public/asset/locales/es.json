@@ -275,7 +275,8 @@
       "whatNext": "What would you like to do next?",
       "generateReport": "Generate phytosanitary report",
       "serviceReport": "View service record",
-      "dashboard": "Back to dashboard"
+      "dashboard": "Back to dashboard",
+      "viewReport": "Ver reporte fitosanitario"
     }
   },
   "weather": {

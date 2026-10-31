@@ -246,6 +246,15 @@
       "appliedVolume": 38,
       "observations": "Sin incidentes",
       "generatedAt": "2026-10-31T12:53:05.415Z"
+    },
+    {
+      "id": 5,
+      "missionId": 2,
+      "type": "PHYTOSANITARY",
+      "treatedArea": 8.2,
+      "appliedVolume": 24.6,
+      "observations": "Pausada una vez por viento",
+      "generatedAt": "2026-10-31T13:43:10.321Z"
     }
   ],
   "mission-histories": [
