@@ -1,0 +1,18 @@
+<dl class="telemetry">
+    <dt>{{ 'mission.monitor.drone' | translate }}</dt>
+    <dd>{{ drone()?.serialNumber ?? '—' }}</dd>
+    <dt>{{ 'mission.monitor.altitude' | translate }}</dt>
+    <dd>{{ mission().flightHeight ?? '—' }} m</dd>
+    <dt>{{ 'mission.monitor.speed' | translate }}</dt>
+    <dd>{{ mission().flightSpeed ?? '—' }} km/h</dd>
+    <dt>{{ 'mission.monitor.battery' | translate }}</dt>
+    <dd>{{ drone()?.batteryLevel ?? '—' }}%</dd>
+    <dt>{{ 'mission.monitor.area' | translate }}</dt>
+    <dd>{{ parcelArea() ?? '—' }} ha</dd>
+    <dt>{{ 'mission.monitor.elapsed' | translate }}</dt>
+    <dd>{{ format(elapsedMs()) }}</dd>
+    @if (position(); as p) {
+        <dt>{{ 'mission.monitor.position' | translate }}</dt>
+        <dd>{{ p.latitude | number: '1.4-4' }}, {{ p.longitude | number: '1.4-4' }}</dd>
+    }
+</dl>

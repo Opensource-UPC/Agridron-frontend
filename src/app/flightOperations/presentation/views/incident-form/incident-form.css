@@ -1,0 +1,20 @@
+.title {
+    margin: 16px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 600px;
+    margin: 16px;
+}
+
+.location h3 {
+    margin: 0 0 8px;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+}

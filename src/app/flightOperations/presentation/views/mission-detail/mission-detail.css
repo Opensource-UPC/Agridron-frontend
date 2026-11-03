@@ -1,0 +1,13 @@
+.title {
+    margin: 16px;
+}
+
+.monitor {
+    max-width: 800px;
+    margin: 16px;
+}
+
+.monitor__badge {
+    margin-left: auto;
+    align-self: flex-start;
+}
