@@ -20,7 +20,11 @@
 
   <h2 class="home__section-title">{{ 'home.metricsTitle' | translate }}</h2>
   <div class="home__weather">
-    <app-weather-widget/>
+    @if (debugMode) {
+      <app-weather-simulator/>
+    } @else {
+      <app-weather-widget/>
+    }
   </div>
 
   <div class="home__metrics">

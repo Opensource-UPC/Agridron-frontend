@@ -1,6 +1,8 @@
 import {computed, DestroyRef, inject, Injectable, Signal, signal} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {HttpClient} from '@angular/common/http';
+import {TranslateService} from '@ngx-translate/core';
+import {translatedError} from './Translate-error';
 import {retry} from 'rxjs';
 import {MaintenanceRecord} from "../domain/model/maintance-records.entity";
 import {MaintenanceRecordsApiEndpoint} from "../infrastructure/maintenance-records-api-endpoint";
@@ -10,6 +12,7 @@ export class MaintenanceRecordStore {
     private readonly http = inject(HttpClient);
     private readonly recordEndpoint = new MaintenanceRecordsApiEndpoint(this.http);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly translate = inject(TranslateService);
 
     private readonly recordsSignal = signal<MaintenanceRecord[]>([]);
     readonly records = this.recordsSignal.asReadonly();
@@ -38,7 +41,7 @@ export class MaintenanceRecordStore {
                 this.loadingSignal.set(false);
             },
             error: err => {
-                this.errorSignal.set(this.formatError(err, 'Failed to create maintenance record'));
+                this.setError(err, 'errors.maintenance.create');
                 this.loadingSignal.set(false);
             }
         });
@@ -53,7 +56,7 @@ export class MaintenanceRecordStore {
                 this.loadingSignal.set(false);
             },
             error: err => {
-                this.errorSignal.set(this.formatError(err, 'Failed to update maintenance record'));
+                this.setError(err, 'errors.maintenance.update');
                 this.loadingSignal.set(false);
             }
         });
@@ -68,7 +71,7 @@ export class MaintenanceRecordStore {
                 this.loadingSignal.set(false);
             },
             error: err => {
-                this.errorSignal.set(this.formatError(err, 'Failed to delete maintenance record'));
+                this.setError(err, 'errors.maintenance.delete');
                 this.loadingSignal.set(false);
             }
         });
@@ -87,16 +90,14 @@ export class MaintenanceRecordStore {
                 this.loadingSignal.set(false);
             },
             error: err => {
-                this.errorSignal.set(this.formatError(err, 'Failed to load maintenance records'));
+                this.setError(err, 'errors.maintenance.load');
                 this.loadingSignal.set(false);
             }
         });
     };
 
-    private formatError = (error: unknown, fallback: string): string => {
-        if (error instanceof Error) {
-            return error.message.includes('Resource not found') ? `${fallback}: Not found` : error.message;
-        }
-        return fallback;
+    private setError = (error: unknown, operationKey: string): void => {
+        translatedError(this.translate, error, operationKey)
+            .subscribe(message => this.errorSignal.set(message));
     };
 }

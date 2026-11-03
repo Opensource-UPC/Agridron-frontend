@@ -4,6 +4,9 @@ import{BaseResource, BaseResponse} from "../../shared/infrastructure/base-respon
 /**
  * describe a dron from endpoint
  */
+
+//La forma de JSON tal y como de la API
+
 export interface DroneResource extends BaseResource {
     id: number;
     serialNumber: string;
@@ -11,6 +14,7 @@ export interface DroneResource extends BaseResource {
     batteryLevel: number;
     status: string;
     nozzleId: number;
+    tankCapacityLiters: number;
     lastMaintenanceDate: string;
     nextMaintenanceDate: string;
     urlimg: string;
@@ -32,6 +36,8 @@ export interface AgrochemicalResource extends BaseResource {
     id:number;
     name: string;
     type: string;
+    activeIngredient: string;
+    recommendedDoseLitersPerHa: number;
     stockLiters: number;
     minimumStockLiters: number;
     expirationDate: string;
@@ -47,10 +53,11 @@ export interface AgrochemicalsResponse extends BaseResponse {
 
 export interface NozzleResource extends BaseResource {
     id: number;
-    type: string;
+    type: string ;
     diameterMm: number;
-    stockUnits: number;
-    status: string;
+    goodUnits: number;
+    wornUnits: number;
+    damagedUnits: number;
 }
 
 /**

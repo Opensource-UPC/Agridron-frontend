@@ -16,6 +16,7 @@
     "fumigationArea": "Zonas de fumigación",
     "analytics": "Reportes",
     "drone": "Drones",
+    "agrochemical": "Agroquímicos",
     "profile": "Perfil",
     "home": "Inicio"
   },
@@ -160,6 +161,25 @@
     "observed": "Observado",
     "alerts": "Alertas",
     "empty": "Sin datos meteorológicos disponibles.",
+    "referenceLocation": "ubicación de referencia",
+    "precipitationProbability": "Probabilidad de lluvia",
+    "source": "Datos",
+    "favorable": "Condiciones favorables para fumigar: viento de 15 km/h o menos, temperatura menor a 28 °C y sin lluvia.",
+    "alert": {
+      "wind": "Viento superior a 15 km/h: riesgo alto de deriva, no se recomienda fumigar.",
+      "rain": "Lluvia detectada: riesgo alto de deriva, posponer la misión.",
+      "moderateWind": "Viento entre 10 y 15 km/h: fumigar con precaución y boquillas antideriva.",
+      "calmWind": "Viento menor a 3 km/h: posible inversión térmica, el producto puede quedar suspendido y desplazarse.",
+      "rainLikely": "Probabilidad de lluvia de 70 % o más: el producto podría lavarse, considera reprogramar.",
+      "rainPossible": "Probabilidad de lluvia entre 40 % y 69 %: revisa el cielo antes de despegar.",
+      "heat": "Temperatura superior a 30 °C: el producto se evapora más rápido, prefiere horas más frescas.",
+      "lowHumidity": "Humedad menor a 50 %: las gotas se evaporan más rápido."
+    },
+    "simulator": {
+      "title": "Debug: simulador del clima",
+      "hint": "Se activa y desactiva con debugMode en src/environments/environment.development.ts. No modifica los datos reales.",
+      "reset": "Volver a los datos reales"
+    },
     "severity": {
       "HIGH": "Alto",
       "MEDIUM": "Medio",
@@ -228,22 +248,133 @@
     "title": "Gestión de flota de drones",
     "status": {
       "AVAILABLE": "Disponible",
-      "IN_FLIGHT": "En vuelo",
+      "IN-FLIGHT": "En vuelo",
       "MAINTENANCE": "Mantenimiento",
-      "MAINTENANCE_SOON": "Mantenimiento próx."
+      "OUT-OF-SERVICE": "fuera de servicio"
     },
     "serial": "SN",
     "battery": "Batería",
     "nozzle": "Boquilla",
+    "tankCapacity": "Capacidad del tanque",
     "noNozzle": "Sin boquilla",
     "compatible": "Compatible",
-    "nextService": "Próximo service",
+    "nextService": "Próximo servicio",
     "noPhoto": "Sin foto",
     "loading": "Cargando drones...",
     "empty": "No hay drones para mostrar",
     "actions": {
       "details": "Ver detalles",
-      "maintenance": "Ver mantenimientos"
+      "maintenance": "Ver mantenimientos",
+      "new": "Añadir Dron",
+      "nozzles": "Boquillas de de pulverización "
+    }
+  },
+  "agrochemical": {
+    "title": "Agroquímicos",
+    "loading": "Cargando agroquímicos...",
+    "empty": "Aún no hay agroquímicos registrados.",
+    "name": "Denominación comercial",
+    "type": "Tipo",
+    "activeIngredient": "Ingrediente activo",
+    "recommendedDose": "Dosis recomendada (L/ha)",
+    "recommendedDoseShort": "Dosis (L/ha)",
+    "stock": "Stock (L)",
+    "stockShort": "Stock (L)",
+    "minimumStock": "Stock mínimo (L)",
+    "minimumStockShort": "Mínimo (L)",
+    "expiration": "Fecha de vencimiento",
+    "lowStock": "Stock bajo",
+    "expired": "Vencido",
+    "types": {
+      "herbicide": "Herbicida",
+      "insecticide": "Insecticida",
+      "fungicide": "Fungicida",
+      "fertilizer": "Fertilizante",
+      "other": "Otro"
+    },
+    "actions": {
+      "new": "Nuevo agroquímico"
+    },
+    "create": {
+      "title": "Nuevo agroquímico",
+      "confirm": "Registrar agroquímico"
+    },
+    "errors": {
+      "nameRequired": "Ingresa la denominación comercial (hasta 60 caracteres)",
+      "typeRequired": "Selecciona un tipo",
+      "activeIngredientRequired": "Falta el ingrediente activo",
+      "doseRequired": "Falta la dosis recomendada (entre 0.01 y 100 L/ha)",
+      "stockInvalid": "Ingresa una cantidad de 0 litros o más",
+      "expirationRequired": "Ingresa la fecha de vencimiento",
+      "expired": "La fecha de vencimiento no puede ser anterior a hoy",
+      "duplicate": "Ya existe un producto con esta denominación comercial"
+    }
+  },
+  "nozzle": {
+    "title": "Boquillas",
+    "loading": "Cargando boquillas...",
+    "empty": "Aún no hay boquillas registradas.",
+    "type": "Tipo",
+    "diameter": "Diámetro",
+    "good": "Buenas",
+    "worn": "Desgastadas",
+    "damaged": "Dañadas",
+    "total": "Total",
+    "types": {
+      "flat-fan": "Flat fan",
+      "hollow-cone": "Hollow cone",
+      "full-cone": "Full cone",
+      "air-induction": "Air induction"
+    },
+    "actionsColumn": "Acciones",
+    "actions": {
+      "new": "Nueva boquilla",
+      "restock": "Reponer stock",
+      "updateStatus": "Actualizar estado",
+      "change": "Cambiar boquilla"
+    },
+    "create": {
+      "title": "Nueva boquilla",
+      "diameter": "Diámetro (mm)",
+      "units": "Unidades buenas iniciales",
+      "other": "Otro...",
+      "customType": "Nombre del tipo",
+      "confirm": "Registrar boquilla"
+    },
+    "restock": {
+      "title": "Reponer stock",
+      "current": "Unidades buenas actuales",
+      "units": "Unidades a agregar",
+      "confirm": "Agregar stock"
+    },
+    "statusUpdate": {
+      "title": "Actualizar estado",
+      "from": "Estado de origen",
+      "to": "Estado de destino",
+      "quantity": "Unidades a mover",
+      "confirm": "Actualizar"
+    },
+    "change": {
+      "title": "Cambiar boquilla",
+      "current": "Boquilla actual",
+      "newNozzle": "Boquilla nueva",
+      "noStock": "Sin stock",
+      "wornWarning": "No quedan unidades buenas: se instalará una desgastada.",
+      "retiredState": "Estado de la boquilla retirada",
+      "retiredHint": "Vuelve a bodega en este estado.",
+      "inFlight": "Un dron en vuelo no puede cambiar de boquilla.",
+      "confirm": "Cambiar boquilla"
+    },
+    "errors": {
+      "typeRequired": "Selecciona un tipo",
+      "customInvalid": "Escribe un nombre de hasta 40 caracteres",
+      "diameterRange": "Ingresa un diámetro entre 0.1 y 50 mm",
+      "unitsInvalid": "Ingresa un número entero, 0 o más",
+      "restockRange": "Ingresa un número entero entre 1 y 1000",
+      "duplicate": "Ya existe este tipo con este diámetro. Usa Reponer stock.",
+      "sameState": "Elige dos estados distintos",
+      "exceeds": "Solo hay {{max}} unidades en ese estado",
+      "retiredRequired": "Selecciona el estado de la boquilla retirada"
     }
   },
   "iam": {
@@ -314,6 +445,81 @@
     "actions": {
       "farms": "Ver fincas",
       "analytics": "Ver reportes"
+    }
+  },
+  "detail": {
+    "title": "Detalles del dron",
+    "back": "Volver a drones",
+    "status": "Estado operativo",
+    "lastService": "Último mantenimiento",
+    "notFound": "No se encontró el dron",
+    "edit": "Editar dron"
+  },
+  "droneForm": {
+    "title": "Editar dron",
+    "createTitle": "Nuevo dron",
+    "loading": "Cargando dron...",
+    "notFound": "No se encontró el dron.",
+    "serialNumber": "Número de serie",
+    "model": "Modelo",
+    "batteryLevel": "Nivel de batería (%)",
+    "tankCapacity": "Capacidad del tanque (L)",
+    "status": "Estado",
+    "nozzle": "Boquilla",
+    "nozzleHint": "Para cambiar la boquilla de un dron registrado, usa «Cambiar boquilla» en su detalle.",
+    "lastMaintenance": "Último mantenimiento",
+    "nextMaintenance": "Próximo mantenimiento",
+    "imageUrl": "URL de la imagen",
+    "cancel": "Cancelar",
+    "save": "Guardar cambios",
+    "create": "Registrar dron",
+    "errors": {
+      "serialRequired": "El número de serie es obligatorio",
+      "serialDuplicate": "Ya existe un dron con este número de serie",
+      "modelRequired": "El modelo es obligatorio",
+      "batteryRange": "Ingresa un valor entre 0 y 100",
+      "tankRange": "Ingresa un valor entre 1 y 100 litros",
+      "nozzleRequired": "Selecciona una boquilla",
+      "invalidDates": "El próximo mantenimiento no puede ser anterior al último."
+    }
+  },
+  "maintenance": {
+    "title": "Historial de mantenimiento",
+    "loading": "Cargando mantenimientos...",
+    "empty": "Este dron aún no tiene mantenimientos registrados.",
+    "date": "Fecha",
+    "description": "Descripción",
+    "technician": "Técnico",
+    "viewDrone": "Ver detalles del dron",
+    "type": {
+      "label": "Tipo",
+      "PREVENTIVE": "Preventivo",
+      "CORRECTIVE": "Correctivo"
+    }
+  },
+  "errors": {
+    "notFound": "No encontrado",
+    "network": "No se pudo conectar con el servidor",
+    "drone": {
+      "load": "No se pudieron cargar los drones",
+      "create": "No se pudo registrar el dron",
+      "update": "No se pudo actualizar el dron",
+      "delete": "No se pudo eliminar el dron",
+      "changeNozzle": "No se pudo cambiar la boquilla"
+    },
+    "nozzle": {
+      "create": "No se pudo registrar la boquilla",
+      "update": "No se pudo actualizar la boquilla"
+    },
+    "agrochemical": {
+      "load": "No se pudieron cargar los agroquímicos",
+      "create": "No se pudo registrar el agroquímico"
+    },
+    "maintenance": {
+      "load": "No se pudieron cargar los mantenimientos",
+      "create": "No se pudo registrar el mantenimiento",
+      "update": "No se pudo actualizar el mantenimiento",
+      "delete": "No se pudo eliminar el mantenimiento"
     }
   }
 }

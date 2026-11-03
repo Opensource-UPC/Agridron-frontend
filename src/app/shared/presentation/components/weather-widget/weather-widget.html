@@ -1,7 +1,12 @@
-@if (weatherConditions()[0]; as condition) {
+@if (shownCondition(); as condition) {
   <article>
     <h2>{{ 'weather.title' | translate }}</h2>
-    <h3>{{ condition.location }}</h3>
+    <h3>
+      {{ condition.location }}
+      @if (weatherService.usingDefaultLocation()) {
+        <small>({{ 'weather.referenceLocation' | translate }})</small>
+      }
+    </h3>
     <small>{{ 'weather.observed' | translate }}: {{ condition.observedAt | date: 'dd/MM/yyyy · HH:mm' }}</small>
 
     <p [attr.aria-label]="'weather.temperature' | translate">{{ condition.temperature }}°C</p>
@@ -10,13 +15,20 @@
       <li>{{ 'weather.humidity' | translate }}: <b>{{ condition.humidity }}%</b></li>
       <li>{{ 'weather.wind' | translate }}: <b>{{ condition.windSpeed }} km/h</b></li>
       <li>{{ 'weather.precipitation' | translate }}: <b>{{ condition.precipitation }} mm</b></li>
+      <li>{{ 'weather.precipitationProbability' | translate }}: <b>{{ condition.precipitationProbability }}%</b></li>
     </ul>
+
+    @if (weatherService.isSuitable(condition)) {
+      <div class="favorable">{{ 'weather.favorable' | translate }}</div>
+    }
 
     @for (alert of condition.alerts; track alert.id) {
       <div class="alert {{ alert.severity.toLowerCase() }}">
-        <b>{{ 'weather.severity.' + alert.severity | translate }}</b>: {{ alert.message }}
+        <b>{{ 'weather.severity.' + alert.severity | translate }}</b>: {{ alert.message | translate }}
       </div>
     }
+
+    <small>{{ 'weather.source' | translate }}: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a></small>
   </article>
 } @else {
   <p>{{ 'weather.empty' | translate }}</p>

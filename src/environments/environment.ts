@@ -5,6 +5,9 @@ export const environment = {
   AgriDronProviderProductsEndpointPath: '/products',
   AgriDronProviderCartsEndpointPath: '/carts',
   AgriDronProviderUsersEndpointPath: '/users',
+  reverseGeocodingUrl: 'https://api.bigdatacloud.net/data/reverse-geocode-client',
+  /** Weather simulator (debug panel) on Home. Keep false in production. */
+  debugMode: false,
   AgriDronProviderFarmsEndpointPath: '/farms',
   AgriDronProviderParcelsEndpointPath: '/parcels',
   AgriDronProviderFumigationAreasEndpointPath: '/fumigation-areas',
@@ -13,12 +16,13 @@ AgriDronProviderMissionReportsEndpointPath: '/mission-reports',
   AgriDronProviderMissionHistoriesEndpointPath: '/mission-histories',
   AgriDronProviderOperationalMetricsEndpointPath: '/operational-metrics',
   AgriDronProviderPerformanceIndicatorsEndpointPath: '/performance-indicators',
-  weatherApiBaseUrl: 'http://localhost:3000/api/v1',
-  weatherEndpointPath: '/weather',
+  // TODO: Replace with real weather API (cannot use localhost in production)
+  weatherApiBaseUrl: 'https://api.open-meteo.com',
+  weatherEndpointPath: '/v1/forecast',
 
   ////De Edwin
   AgriDronProviderDronesMetricsEndpointPath: '/drones',
-  AgriDronProvideChemicalsEndpointPath: '/chemicals',
+  AgriDronProvideChemicalsEndpointPath: '/agrochemicals',
   AgriDronProvideNozzlesEndpointPath: '/nozzles',
-  AgriDronProvideMaintenanceRecordEndpointPath: '/maintenance',
+  AgriDronProvideMaintenanceRecordEndpointPath: '/maintenanceRecords',
 };
