@@ -1,0 +1,16 @@
+<app-weather-widget [condition]="condition()"/>
+
+<details>
+  <summary>{{ 'weather.simulator.title' | translate }}</summary>
+  <small>{{ 'weather.simulator.hint' | translate }}</small>
+
+  @for (slider of sliders; track slider.key) {
+    <label>
+      {{ slider.label | translate }}: <b>{{ simulated()[slider.key] }} {{ slider.unit }}</b>
+      <input type="range" min="0" [max]="slider.max" [step]="slider.step" [value]="simulated()[slider.key]"
+             (input)="update(slider.key, $any($event.target).valueAsNumber)">
+    </label>
+  }
+
+  <button type="button" (click)="reset()">{{ 'weather.simulator.reset' | translate }}</button>
+</details>

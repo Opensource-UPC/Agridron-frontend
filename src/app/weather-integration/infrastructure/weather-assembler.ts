@@ -1,32 +1,18 @@
-import { WeatherAlertResource } from './weather-alert-resource';
 import { WeatherConditionResponse } from './weather-condition-response';
-import { WeatherAlert } from '../domain/model/weather-alert.entity';
 import { WeatherCondition } from '../domain/model/weather-condition.entity';
 
 export class WeatherAssembler {
-  static toEntityFromResource(resource: WeatherAlertResource): WeatherAlert {
+  static toEntityFromResponse(response: WeatherConditionResponse, location: string): WeatherCondition {
     return {
-      id: resource.id,
-      severity: resource.severity,
-      message: resource.message,
-      createdAt: resource.createdAt,
+      id: 1,
+      location,
+      temperature: response.current.temperature_2m,
+      humidity: response.current.relative_humidity_2m,
+      windSpeed: response.current.wind_speed_10m,
+      precipitation: response.current.precipitation,
+      precipitationProbability: response.hourly.precipitation_probability[0] ?? 0,
+      observedAt: response.current.time,
+      alerts: [],
     };
-  }
-
-  static toEntityFromResponse(response: WeatherConditionResponse): WeatherCondition {
-    return {
-      id: response.id,
-      location: response.location,
-      temperature: response.temperature,
-      humidity: response.humidity,
-      windSpeed: response.windSpeed,
-      precipitation: response.precipitation,
-      observedAt: response.observedAt,
-      alerts: response.alerts.map(alert => this.toEntityFromResource(alert)),
-    };
-  }
-
-  static toEntityFromResponseArray(responseArray: WeatherConditionResponse[]): WeatherCondition[] {
-    return responseArray.map(response => this.toEntityFromResponse(response));
   }
 }
