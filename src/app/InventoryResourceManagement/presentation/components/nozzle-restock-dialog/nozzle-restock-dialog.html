@@ -1,0 +1,27 @@
+
+
+<h2 mat-dialog-title>{{ 'nozzle.restock.title' | translate }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-dialog-content class="dialog-body">
+
+        <p class="dialog-info">
+            <strong><app-nozzle-type-label [type]="nozzle.type"/> · {{ nozzle.diameterMm }} mm</strong><br>
+            {{ 'nozzle.restock.current' | translate }}: {{ nozzle.goodUnits }}
+        </p>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'nozzle.restock.units' | translate }}</mat-label>
+            <input matInput type="number" step="1" formControlName="units">
+            <mat-error>{{ 'nozzle.errors.restockRange' | translate }}</mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button mat-button type="button" mat-dialog-close>{{ 'droneForm.cancel' | translate }}</button>
+        <button mat-flat-button type="submit" [disabled]="form.invalid">
+            {{ 'nozzle.restock.confirm' | translate }}
+        </button>
+    </mat-dialog-actions>
+</form>

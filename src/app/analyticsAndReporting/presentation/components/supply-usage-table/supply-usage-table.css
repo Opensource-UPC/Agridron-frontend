@@ -6,3 +6,8 @@
   text-align: center;
   padding: 16px;
 }
+
+.supply-table__farm {
+  display: block;
+  opacity: 0.7;
+}

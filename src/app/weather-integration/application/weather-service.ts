@@ -1,7 +1,13 @@
 import { inject, Injectable, signal } from '@angular/core';
+import { catchError, forkJoin, map, Observable, of } from 'rxjs';
 import { WeatherApi } from '../infrastructure/weather-api';
 import { WeatherAssembler } from '../infrastructure/weather-assembler';
 import { WeatherCondition } from '../domain/model/weather-condition.entity';
+import { WeatherAlert } from '../domain/model/weather-alert.entity';
+import { ALERT_RULES, isSuitable as isSuitableForSpraying } from '../domain/model/weather-rules';
+
+/** Reference location used when the user does not share their position. */
+const DEFAULT_LOCATION = { name: 'Cañete', latitude: -13.08, longitude: -76.39 };
 
 @Injectable({ providedIn: 'root' })
 export class WeatherService {
@@ -9,8 +15,53 @@ export class WeatherService {
 
   weatherConditions = signal<WeatherCondition[]>([]);
 
+  /** True when the weather shown belongs to the reference location. */
+  usingDefaultLocation = signal(false);
+
+  /**
+   * Loads the weather of the user's location, or of the reference location if it is not shared.
+   */
   loadWeatherConditions() {
-    this.weatherApi.getWeather().subscribe(responseArray =>
-      this.weatherConditions.set(WeatherAssembler.toEntityFromResponseArray(responseArray)));
+    const useDefault = () => this.loadWeather(DEFAULT_LOCATION.latitude, DEFAULT_LOCATION.longitude, of(DEFAULT_LOCATION.name), true);
+    if (!navigator.geolocation) return useDefault();
+    navigator.geolocation.getCurrentPosition(({ coords }) => {
+      const coordinates = `${coords.latitude.toFixed(2)}, ${coords.longitude.toFixed(2)}`;
+      const placeName = this.weatherApi.getLocationName(coords.latitude, coords.longitude).pipe(
+        map(name => name || coordinates),
+        catchError(() => of(coordinates)),
+      );
+      this.loadWeather(coords.latitude, coords.longitude, placeName, false);
+    }, useDefault);
+  }
+
+  /**
+   * Generates the alerts of a weather condition from the alert rules.
+   */
+  evaluateConditions(weather: WeatherCondition): WeatherAlert[] {
+    return ALERT_RULES.filter(rule => rule.applies(weather)).map((rule, index) => ({
+      id: index + 1,
+      severity: rule.severity,
+      message: rule.message,
+      createdAt: weather.observedAt,
+    }));
+  }
+
+  /**
+   * Tells whether the conditions are favorable for spraying. It is information, not an alert.
+   */
+  isSuitable(weather: WeatherCondition) {
+    return isSuitableForSpraying(weather);
+  }
+
+  private loadWeather(latitude: number, longitude: number, location: Observable<string>, isDefault: boolean) {
+    forkJoin([this.weatherApi.getWeather(latitude, longitude), location]).subscribe({
+      next: ([response, name]) => {
+        const condition = WeatherAssembler.toEntityFromResponse(response, name);
+        condition.alerts = this.evaluateConditions(condition);
+        this.usingDefaultLocation.set(isDefault);
+        this.weatherConditions.set([condition]);
+      },
+      error: () => this.weatherConditions.set([]),
+    });
   }
 }

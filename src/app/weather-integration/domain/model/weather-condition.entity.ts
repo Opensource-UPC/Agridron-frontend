@@ -7,6 +7,7 @@ export interface WeatherCondition {
   humidity: number;
   windSpeed: number;
   precipitation: number;
+  precipitationProbability: number;
   observedAt: string;
   alerts: WeatherAlert[];
 }

@@ -1,0 +1,19 @@
+:host {
+  display: grid;
+  gap: 8px;
+}
+
+details {
+  display: grid;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #64748B;
+}
+
+summary {
+  cursor: pointer;
+}
+
+label {
+  display: grid;
+}

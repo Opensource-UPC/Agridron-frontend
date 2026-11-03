@@ -6,6 +6,9 @@ import {Nozzle} from '../../../domain/model/nozzle.entity';
 import {DroneItem} from '../dron-item/dron-item';
 
 /**
+ * ****************************************
+ *     DroneList construye la cuadrícula. *
+ * ****************************************
  * Muestra una cuadrícula de tarjetas de drones.
  * Igual que la tarjeta, es un componente "tonto": recibe datos por `input`
  * y avisa por `output`. No conoce el store.
