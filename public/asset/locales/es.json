@@ -1,378 +1,378 @@
 {
   "page-not-found": {
-    "title": "Page not found",
-    "content": "The path <strong>{{ invalid_path }}</strong> is not valid.",
-    "go-home": "Go Home"
+    "title": "Página no encontrada",
+    "content": "La ruta <strong>{{ invalid_path }}</strong> no es válida.",
+    "go-home": "Ir al inicio"
   },
   "footer": {
-    "rights": "Copyright © 2026 AgriDron, All rights reserved",
-    "intro": "Developed ",
-    "author": "by AgriDron Solutions Team"
+    "rights": "Copyright © 2026 AgriDron, Todos los derechos reservados",
+    "intro": "Desarrollado ",
+    "author": "por el equipo de AgriDron Solutions"
   },
   "option": {
-    "farm": "Farms",
-    "parcel": "Parcels",
-    "crop": "Crops",
-    "mission": "Missions",
-    "fumigationArea": "Fumigation areas",
-    "analytics": "Reports",
+    "farm": "Fincas",
+    "parcel": "Parcelas",
+    "crop": "Cultivos",
+    "mission": "Misiones",
+    "fumigationArea": "Áreas de fumigación",
+    "analytics": "Reportes",
     "drone": "Drones",
-    "profile": "Profile",
+    "profile": "Perfil",
     "home": "Inicio"
   },
   "farm": {
-    "title": "Farms",
-    "newFarm": "New farm",
-    "delete-confirm": "Are you sure you want to delete this farm?",
-    "empty": "No farms registered",
-    "parcelCount": "{{ count }} parcels",
+    "title": "Fincas",
+    "newFarm": "Nueva finca",
+    "delete-confirm": "¿Estás seguro de que deseas eliminar esta finca?",
+    "empty": "No hay fincas registradas",
+    "parcelCount": "{{ count }} parcelas",
     "imagePlaceholder": "https://material.angular.dev/assets/img/examples/shiba2.jpg",
-    "loading": "Loading farms...",
+    "loading": "Cargando fincas...",
     "button": {
-      "seeMore": "See more",
-      "edit": "Edit",
-      "delete": "Delete"
+      "seeMore": "Ver más",
+      "edit": "Editar",
+      "delete": "Eliminar"
     },
     "form": {
-      "new-title": "New farm",
-      "edit-title": "Edit farm",
-      "name": "Name",
-      "location": "Location",
-      "ownerId": "Owner ID",
-      "image": "Image URL",
-      "imageHint": "Optional",
-      "create": "Create",
-      "update": "Update",
+      "new-title": "Nueva finca",
+      "edit-title": "Editar finca",
+      "name": "Nombre",
+      "location": "Ubicación",
+      "ownerId": "ID del propietario",
+      "image": "URL de la imagen",
+      "imageHint": "Opcional",
+      "create": "Crear",
+      "update": "Actualizar",
       "error": {
-        "name-required": "Name is required",
-        "location-required": "Location is required",
-        "ownerId-required": "Owner ID is required",
-        "ownerId-min": "ID must be greater than 0"
+        "name-required": "El nombre es obligatorio",
+        "location-required": "La ubicación es obligatoria",
+        "ownerId-required": "El ID del propietario es obligatorio",
+        "ownerId-min": "El ID debe ser mayor a 0"
       }
     }
   },
   "parcel": {
-    "title": "Parcels",
-    "area": "Area",
-    "farm": "Farm",
-    "noCrop": "No crop",
+    "title": "Parcelas",
+    "area": "Área",
+    "farm": "Finca",
+    "noCrop": "Sin cultivo",
     "imagePlaceholder": "https://material.angular.dev/assets/img/examples/shiba2.jpg",
-    "newParcel": "New parcel",
-    "selectFarm": "Select farm",
-    "selectFarmPrompt": "Select a farm to see its parcels",
-    "delete-confirm": "Are you sure you want to delete this parcel?",
+    "newParcel": "Nueva parcela",
+    "selectFarm": "Seleccionar finca",
+    "selectFarmPrompt": "Selecciona una finca para ver sus parcelas",
+    "delete-confirm": "¿Estás seguro de que deseas eliminar esta parcela?",
     "form": {
-      "new-title": "New parcel",
-      "edit-title": "Edit parcel",
-      "name": "Name",
-      "area": "Area (ha)",
-      "geometry": "Geometry (GeoJSON)",
-      "farm": "Farm",
-      "crop": "Crop",
-      "image": "Image URL",
-      "imageHint": "Optional",
-      "create": "Create",
-      "update": "Update",
+      "new-title": "Nueva parcela",
+      "edit-title": "Editar parcela",
+      "name": "Nombre",
+      "area": "Área (ha)",
+      "geometry": "Geometría (GeoJSON)",
+      "farm": "Finca",
+      "crop": "Cultivo",
+      "image": "URL de la imagen",
+      "imageHint": "Opcional",
+      "create": "Crear",
+      "update": "Actualizar",
       "error": {
-        "name-required": "Name is required",
-        "area-required": "Area is required",
-        "area-min": "Area must be greater than 0",
-        "geometry-required": "Geometry is required",
-        "farm-required": "You must select a farm",
-        "crop-required": "You must select a crop"
+        "name-required": "El nombre es obligatorio",
+        "area-required": "El área es obligatoria",
+        "area-min": "El área debe ser mayor a 0",
+        "geometry-required": "La geometría es obligatoria",
+        "farm-required": "Debes seleccionar una finca",
+        "crop-required": "Debes seleccionar un cultivo"
       }
     },
-    "empty": "No parcels registered",
-    "loading": "Loading parcels...",
+    "empty": "No hay parcelas registradas",
+    "loading": "Cargando parcelas...",
     "detail": {
-      "title": "Parcel detail",
-      "name": "Name",
-      "geometry": "Geometry",
-      "notFound": "Parcel not found",
-      "back": "Back"
+      "title": "Detalle de parcela",
+      "name": "Nombre",
+      "geometry": "Geometría",
+      "notFound": "Parcela no encontrada",
+      "back": "Volver"
     },
     "button": {
-      "seeMore": "See more",
-      "edit": "Edit",
-      "delete": "Delete"
+      "seeMore": "Ver más",
+      "edit": "Editar",
+      "delete": "Eliminar"
     }
   },
   "crop": {
-    "title": "Crops",
-    "newCrop": "New crop",
-    "variety": "Variety",
-    "noVariety": "No variety",
-    "information": "Crop information",
-    "delete-confirm": "Are you sure you want to delete this crop?",
-    "empty": "No crops registered",
-    "loading": "Loading crops...",
+    "title": "Cultivos",
+    "newCrop": "Nuevo cultivo",
+    "variety": "Variedad",
+    "noVariety": "Sin variedad",
+    "information": "Información del cultivo",
+    "delete-confirm": "¿Estás seguro de que deseas eliminar este cultivo?",
+    "empty": "No hay cultivos registrados",
+    "loading": "Cargando cultivos...",
     "button": {
-      "edit": "Edit",
-      "delete": "Delete"
+      "edit": "Editar",
+      "delete": "Eliminar"
     },
     "form": {
-      "new-title": "New crop",
-      "edit-title": "Edit crop",
-      "name": "Name",
-      "variety": "Variety",
-      "create": "Create",
-      "update": "Update",
+      "new-title": "Nuevo cultivo",
+      "edit-title": "Editar cultivo",
+      "name": "Nombre",
+      "variety": "Variedad",
+      "create": "Crear",
+      "update": "Actualizar",
       "error": {
-        "name-required": "Name is required"
+        "name-required": "El nombre es obligatorio"
       }
     }
   },
   "fumigationArea": {
-    "title": "Fumigation areas",
-    "parcel": "Parcel",
-    "selectParcel": "Select parcel",
-    "newFumigationArea": "New fumigation area",
-    "selectParcelPrompt": "Select a parcel to see its fumigation areas",
-    "delete-confirm": "Are you sure you want to delete this fumigation area?",
-    "empty": "No fumigation areas registered",
-    "loading": "Loading fumigation areas...",
+    "title": "Áreas de fumigación",
+    "parcel": "Parcela",
+    "selectParcel": "Seleccionar parcela",
+    "newFumigationArea": "Nueva área de fumigación",
+    "selectParcelPrompt": "Selecciona una parcela para ver sus áreas de fumigación",
+    "delete-confirm": "¿Estás seguro de que deseas eliminar esta área de fumigación?",
+    "empty": "No hay áreas de fumigación registradas",
+    "loading": "Cargando áreas de fumigación...",
     "button": {
-      "edit": "Edit",
-      "delete": "Delete"
+      "edit": "Editar",
+      "delete": "Eliminar"
     },
     "form": {
-      "new-title": "New fumigation area",
-      "edit-title": "Edit fumigation area",
-      "parcel": "Parcel",
-      "geometry": "Geometry (GeoJSON)",
-      "area": "Area (m²)",
-      "create": "Create",
-      "update": "Update",
+      "new-title": "Nueva área de fumigación",
+      "edit-title": "Editar área de fumigación",
+      "parcel": "Parcela",
+      "geometry": "Geometría (GeoJSON)",
+      "area": "Área (m²)",
+      "create": "Crear",
+      "update": "Actualizar",
       "error": {
-        "parcel-required": "You must select a parcel",
-        "geometry-required": "Geometry is required",
-        "area-required": "Area is required",
-        "area-min": "Area must be greater than 0"
+        "parcel-required": "Debes seleccionar una parcela",
+        "geometry-required": "La geometría es obligatoria",
+        "area-required": "El área es obligatoria",
+        "area-min": "El área debe ser mayor a 0"
       }
     }
   },
   "mission": {
-    "title": "Missions",
-    "newMission": "New mission",
-    "loading": "Loading missions...",
-    "notFound": "Mission not found",
+    "title": "Misiones",
+    "newMission": "Nueva misión",
+    "loading": "Cargando misiones...",
+    "notFound": "Misión no encontrada",
     "columns": {
       "id": "ID",
-      "parcel": "Parcel",
-      "requestedDate": "Requested date",
-      "status": "Status",
-      "actions": "Actions"
+      "parcel": "Parcela",
+      "requestedDate": "Fecha solicitada",
+      "status": "Estado",
+      "actions": "Acciones"
     },
     "status": {
-      "PLANNED": "Planned",
-      "AUTHORIZED": "Authorized",
-      "IN_PROGRESS": "In progress",
-      "PAUSED": "Paused",
-      "COMPLETED": "Completed",
-      "CANCELLED": "Cancelled"
+      "PLANNED": "Planificada",
+      "AUTHORIZED": "Autorizada",
+      "IN_PROGRESS": "En progreso",
+      "PAUSED": "Pausada",
+      "COMPLETED": "Completada",
+      "CANCELLED": "Cancelada"
     },
     "button": {
-      "seeMore": "View detail",
-      "edit": "Edit",
-      "delete": "Delete"
+      "seeMore": "Ver detalle",
+      "edit": "Editar",
+      "delete": "Eliminar"
     },
     "actions": {
-      "authorize": "Authorize mission",
-      "start": "Start mission",
-      "pause": "Pause mission",
-      "resume": "Resume mission",
-      "incident": "Report incident",
-      "finish": "Finish mission",
-      "summary": "View summary",
-      "back": "Back",
-      "reschedule": "Reschedule mission",
-      "forecast": "View detailed forecast",
-      "continueAnyway": "Continue anyway",
-      "details": "View details",
-      "home": "Back to home"
+      "authorize": "Autorizar misión",
+      "start": "Iniciar misión",
+      "pause": "Pausar misión",
+      "resume": "Reanudar misión",
+      "incident": "Reportar incidente",
+      "finish": "Finalizar misión",
+      "summary": "Ver resumen",
+      "back": "Volver",
+      "reschedule": "Reprogramar misión",
+      "forecast": "Ver pronóstico detallado",
+      "continueAnyway": "Continuar de todos modos",
+      "details": "Ver detalles",
+      "home": "Volver al inicio"
     },
     "place": {
-      "farm": "Farm",
-      "parcel": "Parcel",
-      "coordinates": "Coordinates"
+      "farm": "Finca",
+      "parcel": "Parcela",
+      "coordinates": "Coordenadas"
     },
     "form": {
-      "new-title": "New mission",
-      "edit-title": "Edit mission",
-      "requestedDate": "Date and time",
-      "parcel": "Parcel",
-      "agrochemical": "Agrochemical",
-      "drone": "Drone",
-      "flightHeight": "Flight height (m)",
-      "flightSpeed": "Flight speed (km/h)",
-      "sprayRate": "Spray rate (L/ha)",
-      "overlap": "Overlap (%)",
-      "create": "Create",
-      "update": "Update",
+      "new-title": "Nueva misión",
+      "edit-title": "Editar misión",
+      "requestedDate": "Fecha y hora",
+      "parcel": "Parcela",
+      "agrochemical": "Agroquímico",
+      "drone": "Dron",
+      "flightHeight": "Altura de vuelo (m)",
+      "flightSpeed": "Velocidad de vuelo (km/h)",
+      "sprayRate": "Tasa de pulverización (L/ha)",
+      "overlap": "Solapamiento (%)",
+      "create": "Crear",
+      "update": "Actualizar",
       "error": {
-        "date-required": "Date is required",
-        "parcel-required": "You must select a parcel",
-        "agrochemical-required": "You must select an agrochemical",
-        "drone-required": "You must select a drone",
-        "min": "Value must be greater than 0",
-        "overlap": "Overlap must be between 0 and 100"
+        "date-required": "La fecha es obligatoria",
+        "parcel-required": "Debes seleccionar una parcela",
+        "agrochemical-required": "Debes seleccionar un agroquímico",
+        "drone-required": "Debes seleccionar un dron",
+        "min": "El valor debe ser mayor a 0",
+        "overlap": "El solapamiento debe estar entre 0 y 100"
       }
     },
     "monitor": {
-      "title": "Mission monitoring",
+      "title": "Monitoreo de misión",
       "steps": {
-        "preparation": "Preparation",
-        "takeoff": "Take-off",
-        "flying": "In flight",
-        "finish": "Finish"
+        "preparation": "Preparación",
+        "takeoff": "Despegue",
+        "flying": "En vuelo",
+        "finish": "Finalizar"
       },
-      "drone": "Drone",
-      "altitude": "Altitude",
-      "speed": "Speed",
-      "battery": "Battery",
-      "area": "Parcel area",
-      "elapsed": "Elapsed time",
-      "position": "Last position"
+      "drone": "Dron",
+      "altitude": "Altitud",
+      "speed": "Velocidad",
+      "battery": "Batería",
+      "area": "Área de la parcela",
+      "elapsed": "Tiempo transcurrido",
+      "position": "Última posición"
     },
     "weatherWarning": {
-      "title": "Weather warning",
-      "heading": "Weather conditions not recommended",
-      "message": "Check the current conditions around the parcel. Rescheduling the mission or adjusting the flight window is recommended.",
-      "rain": "Rain",
-      "wind": "Wind",
-      "temperature": "Temperature"
+      "title": "Advertencia meteorológica",
+      "heading": "Condiciones meteorológicas no recomendadas",
+      "message": "Consulta las condiciones actuales en la parcela. Se recomienda reprogramar la misión o ajustar la ventana de vuelo.",
+      "rain": "Lluvia",
+      "wind": "Viento",
+      "temperature": "Temperatura"
     },
     "paused": {
-      "message": "The mission has been paused",
-      "description": "You can resume it when conditions are safe.",
-      "start": "Start",
-      "pausedFor": "Paused for"
+      "message": "La misión ha sido pausada",
+      "description": "Puedes reanudarla cuando las condiciones sean seguras.",
+      "start": "Iniciar",
+      "pausedFor": "Pausada durante"
     },
     "incident": {
-      "title": "Report incident",
-      "type": "Incident type",
-      "description": "Description",
-      "location": "Location",
-      "save": "Save incident",
-      "cancel": "Cancel",
+      "title": "Reportar incidente",
+      "type": "Tipo de incidente",
+      "description": "Descripción",
+      "location": "Ubicación",
+      "save": "Guardar incidente",
+      "cancel": "Cancelar",
       "types": {
-        "TECHNICAL": "Technical",
-        "WEATHER": "Weather",
-        "SAFETY": "Safety",
-        "OTHER": "Other"
+        "TECHNICAL": "Técnico",
+        "WEATHER": "Clima",
+        "SAFETY": "Seguridad",
+        "OTHER": "Otro"
       },
       "error": {
-        "type-required": "Type is required",
-        "description-required": "Description is required"
+        "type-required": "El tipo es obligatorio",
+        "description-required": "La descripción es obligatoria"
       }
     },
     "complete": {
-      "title": "Finish mission",
-      "success": "The mission was completed successfully",
-      "treatedArea": "Treated area",
-      "totalTime": "Total time",
-      "date": "Date",
-      "whatNext": "What would you like to do next?",
-      "generateReport": "Generate phytosanitary report",
-      "serviceReport": "View service record",
-      "dashboard": "Back to dashboard",
+      "title": "Finalizar misión",
+      "success": "La misión se completó con éxito",
+      "treatedArea": "Área tratada",
+      "totalTime": "Tiempo total",
+      "date": "Fecha",
+      "whatNext": "¿Qué te gustaría hacer a continuación?",
+      "generateReport": "Generar reporte fitosanitario",
+      "serviceReport": "Ver registro de servicio",
+      "dashboard": "Volver al panel",
       "viewReport": "Ver reporte fitosanitario"
     }
   },
   "weather": {
-    "title": "Weather status",
-    "subtitle": "Current conditions by location",
-    "temperature": "Temperature",
-    "humidity": "Humidity",
-    "wind": "Wind",
-    "precipitation": "Precipitation",
-    "observed": "Observed",
-    "alerts": "Alerts",
-    "empty": "No weather data available.",
+    "title": "Estado del clima",
+    "subtitle": "Condiciones actuales por ubicación",
+    "temperature": "Temperatura",
+    "humidity": "Humedad",
+    "wind": "Viento",
+    "precipitation": "Precipitación",
+    "observed": "Observado",
+    "alerts": "Alertas",
+    "empty": "No hay datos meteorológicos disponibles.",
     "severity": {
-      "HIGH": "High",
-      "MEDIUM": "Medium",
-      "LOW": "Low"
+      "HIGH": "Alta",
+      "MEDIUM": "Media",
+      "LOW": "Baja"
     }
   },
   "analytics": {
-    "title": "Reports and history",
+    "title": "Reportes e historial",
     "tabs": {
-      "missions": "Missions",
-      "supplyUsage": "Supply usage",
-      "indicators": "Indicators"
+      "missions": "Misiones",
+      "supplyUsage": "Uso de insumos",
+      "indicators": "Indicadores"
     },
     "filter": {
-      "from": "From",
-      "to": "To",
-      "apply": "Filter",
-      "clear": "Clear"
+      "from": "Desde",
+      "to": "Hasta",
+      "apply": "Filtrar",
+      "clear": "Limpiar"
     },
     "columns": {
       "id": "ID",
-      "mission": "Mission",
-      "date": "Date",
-      "status": "Status",
-      "area": "Area (ha)",
-      "actions": "Actions",
-      "type": "Type",
-      "volume": "Volume (L)",
+      "mission": "Misión",
+      "date": "Fecha",
+      "status": "Estado",
+      "area": "Área (ha)",
+      "actions": "Acciones",
+      "type": "Tipo",
+      "volume": "Volumen (L)",
       "density": "L/ha",
-      "generatedAt": "Generated"
+      "generatedAt": "Generado"
     },
     "status": {
-      "PLANNED": "Planned",
-      "AUTHORIZED": "Authorized",
-      "IN_PROGRESS": "In progress",
-      "PAUSED": "Paused",
-      "COMPLETED": "Completed",
-      "CANCELLED": "Cancelled"
+      "PLANNED": "Planificada",
+      "AUTHORIZED": "Autorizada",
+      "IN_PROGRESS": "En progreso",
+      "PAUSED": "Pausada",
+      "COMPLETED": "Completada",
+      "CANCELLED": "Cancelada"
     },
     "reportType": {
-      "MISSION_SUMMARY": "Mission summary",
-      "PHYTOSANITARY": "Phytosanitary"
+      "MISSION_SUMMARY": "Resumen de misión",
+      "PHYTOSANITARY": "Fitosanitario"
     },
     "actions": {
-      "download": "Download report",
-      "detail": "View detail",
-      "back": "Back to reports",
-      "exportJson": "Export JSON",
-      "exportCsv": "Export CSV"
+      "download": "Descargar reporte",
+      "detail": "Ver detalle",
+      "back": "Volver a reportes",
+      "exportJson": "Exportar JSON",
+      "exportCsv": "Exportar CSV"
     },
     "indicators": {
-      "period": "Period",
-      "empty": "No indicators available."
+      "period": "Período",
+      "empty": "No hay indicadores disponibles."
     },
     "detail": {
-      "title": "Report",
-      "observations": "Observations",
-      "metrics": "Operational metrics",
-      "noMetrics": "No metrics recorded.",
-      "notFound": "Report not found."
+      "title": "Reporte",
+      "observations": "Observaciones",
+      "metrics": "Métricas operativas",
+      "noMetrics": "No hay métricas registradas.",
+      "notFound": "Reporte no encontrado."
     },
-    "empty": "No records found.",
-    "loading": "Loading..."
+    "empty": "No se encontraron registros.",
+    "loading": "Cargando..."
   },
   "drone": {
-    "title": "Drone fleet management",
+    "title": "Gestión de flota de drones",
     "status": {
-      "AVAILABLE": "Available",
-      "IN_FLIGHT": "In flight",
-      "MAINTENANCE": "Maintenance",
-      "MAINTENANCE_SOON": "Maintenance due"
+      "AVAILABLE": "Disponible",
+      "IN_FLIGHT": "En vuelo",
+      "MAINTENANCE": "Mantenimiento",
+      "MAINTENANCE_SOON": "Mantenimiento próximo"
     },
-    "serial": "SN",
-    "battery": "Battery",
-    "nozzle": "Nozzle",
-    "noNozzle": "No nozzle",
+    "serial": "NS",
+    "battery": "Batería",
+    "nozzle": "Boquilla",
+    "noNozzle": "Sin boquilla",
     "compatible": "Compatible",
-    "nextService": "Next service",
-    "noPhoto": "No photo",
-    "loading": "Loading drones...",
-    "empty": "No drones to show",
+    "nextService": "Próximo servicio",
+    "noPhoto": "Sin foto",
+    "loading": "Cargando drones...",
+    "empty": "No hay drones para mostrar",
     "actions": {
-      "details": "View details",
-      "maintenance": "View maintenance"
+      "details": "Ver detalles",
+      "maintenance": "Ver mantenimiento"
     }
   },
   "iam": {
@@ -430,19 +430,19 @@
     }
   },
   "home": {
-    "greeting": "Hello {username}, welcome",
-    "subtitle": "Overview of your agricultural operation",
-    "metricsTitle": "Metrics",
-    "shortcutsTitle": "Quick access",
+    "greeting": "Hola {username}, bienvenido",
+    "subtitle": "Resumen de tu operación agrícola",
+    "metricsTitle": "Métricas",
+    "shortcutsTitle": "Acceso rápido",
     "metrics": {
-      "farms": "Farms",
-      "parcels": "Parcels",
-      "crops": "Crops",
-      "fumigationAreas": "Fumigation areas"
+      "farms": "Fincas",
+      "parcels": "Parcelas",
+      "crops": "Cultivos",
+      "fumigationAreas": "Áreas de fumigación"
     },
     "actions": {
-      "farms": "View farms",
-      "analytics": "View reports"
+      "farms": "Ver fincas",
+      "analytics": "Ver reportes"
     }
   }
 }
