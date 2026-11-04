@@ -243,6 +243,7 @@
     "noPhoto": "No photo",
     "loading": "Loading drones...",
     "empty": "No drones to show",
+    "flightHours": "Flight hours since last service",
     "actions": {
       "details": "View details",
       "maintenance": "View maintenance",
@@ -501,6 +502,38 @@
       "create": "Could not register the maintenance record",
       "update": "Could not update the maintenance record",
       "delete": "Could not delete the maintenance record"
+    }
+  },
+  "maintenance": {
+    "title": "Maintenance history",
+    "loading": "Loading maintenance records...",
+    "empty": "This drone has no maintenance records yet.",
+    "date": "Date",
+    "description": "Description",
+    "technician": "Technician",
+    "viewDrone": "View drone details",
+    "type": {
+      "label": "Type",
+      "PREVENTIVE": "Preventive",
+      "CORRECTIVE": "Corrective"
+    },
+    "actions": {
+      "register": "Register maintenance"
+    },
+    "register": {
+      "title": "Register maintenance",
+      "nextMaintenance": "Next maintenance date",
+      "preventiveHint": "A preventive maintenance updates the drone's last and next service dates and resets its flight hours.",
+      "confirm": "Register"
+    },
+    "errors": {
+      "dateRequired": "Select the maintenance date",
+      "dateFuture": "The date cannot be in the future",
+      "beforeLast": "A preventive maintenance cannot be dated before the last one ({{date}})",
+      "descriptionRequired": "Enter a description (up to 200 characters)",
+      "technicianRequired": "Enter the technician's name (up to 60 characters)",
+      "nextRequired": "Enter the date of the next maintenance",
+      "nextBeforeDate": "The next maintenance must be after this one"
     }
   }
 }

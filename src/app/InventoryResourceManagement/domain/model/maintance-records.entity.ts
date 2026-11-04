@@ -1,4 +1,5 @@
-
+/** Tipos de mantenimiento (los mismos textos que guarda la API). */
+export const MAINTENANCE_TYPES = ['preventive', 'corrective'] as const;
 
 export class MaintenanceRecord {
     id: number;

@@ -1,0 +1,63 @@
+
+
+<h2 mat-dialog-title>{{ 'maintenance.register.title' | translate }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-dialog-content class="dialog-body">
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'maintenance.date' | translate }}</mat-label>
+            <input matInput type="date" [max]="today" formControlName="date">
+            @if (form.controls.date.hasError('future')) {
+                <mat-error>{{ 'maintenance.errors.dateFuture' | translate }}</mat-error>
+            } @else if (form.controls.date.hasError('beforeLast')) {
+                <mat-error>{{ 'maintenance.errors.beforeLast' | translate:{date: lastServiceText} }}</mat-error>
+            } @else {
+                <mat-error>{{ 'maintenance.errors.dateRequired' | translate }}</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'maintenance.type.label' | translate }}</mat-label>
+            <mat-select formControlName="type">
+                @for (type of types; track type) {
+                    <mat-option [value]="type">{{ 'maintenance.type.' + type.toUpperCase() | translate }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'maintenance.description' | translate }}</mat-label>
+            <textarea matInput rows="3" maxlength="200" formControlName="description"></textarea>
+            <mat-error>{{ 'maintenance.errors.descriptionRequired' | translate }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'maintenance.technician' | translate }}</mat-label>
+            <input matInput type="text" maxlength="60" formControlName="technician">
+            <mat-error>{{ 'maintenance.errors.technicianRequired' | translate }}</mat-error>
+        </mat-form-field>
+
+        @if (preventive) {
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'maintenance.register.nextMaintenance' | translate }}</mat-label>
+                <input matInput type="date" formControlName="nextMaintenanceDate">
+                @if (form.controls.nextMaintenanceDate.hasError('beforeDate')) {
+                    <mat-error>{{ 'maintenance.errors.nextBeforeDate' | translate }}</mat-error>
+                } @else {
+                    <mat-error>{{ 'maintenance.errors.nextRequired' | translate }}</mat-error>
+                }
+            </mat-form-field>
+
+            <p class="dialog-hint">{{ 'maintenance.register.preventiveHint' | translate }}</p>
+        }
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button mat-button type="button" mat-dialog-close>{{ 'droneForm.cancel' | translate }}</button>
+        <button mat-flat-button type="submit" [disabled]="form.invalid">
+            {{ 'maintenance.register.confirm' | translate }}
+        </button>
+    </mat-dialog-actions>
+</form>

@@ -85,6 +85,9 @@
                         <dd>
                             {{ selectedDrone.nextMaintenanceDate | date:'dd/MM/yyyy' }}
                         </dd>
+
+                        <dt>{{ 'drone.flightHours' | translate }}</dt>
+                        <dd>{{ selectedDrone.flightHours }} h</dd>
                     </dl>
 
                 </div>

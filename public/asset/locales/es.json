@@ -243,6 +243,7 @@
     "noPhoto": "Sin foto",
     "loading": "Cargando drones...",
     "empty": "No hay drones para mostrar",
+    "flightHours": "Horas de vuelo desde el último servicio",
     "actions": {
       "details": "Ver detalles",
       "maintenance": "Ver mantenimientos",
@@ -501,6 +502,38 @@
       "create": "No se pudo registrar el mantenimiento",
       "update": "No se pudo actualizar el mantenimiento",
       "delete": "No se pudo eliminar el mantenimiento"
+    }
+  },
+  "maintenance": {
+    "title": "Historial de mantenimiento",
+    "loading": "Cargando mantenimientos...",
+    "empty": "Este dron aún no tiene mantenimientos registrados.",
+    "date": "Fecha",
+    "description": "Descripción",
+    "technician": "Técnico",
+    "viewDrone": "Ver detalles del dron",
+    "type": {
+      "label": "Tipo",
+      "PREVENTIVE": "Preventivo",
+      "CORRECTIVE": "Correctivo"
+    },
+    "actions": {
+      "register": "Registrar mantenimiento"
+    },
+    "register": {
+      "title": "Registrar mantenimiento",
+      "nextMaintenance": "Fecha del próximo mantenimiento",
+      "preventiveHint": "Un mantenimiento preventivo actualiza las fechas del último y del próximo servicio del dron y reinicia sus horas de vuelo.",
+      "confirm": "Registrar"
+    },
+    "errors": {
+      "dateRequired": "Selecciona la fecha del mantenimiento",
+      "dateFuture": "La fecha no puede ser futura",
+      "beforeLast": "Un preventivo no puede ser anterior al último mantenimiento ({{date}})",
+      "descriptionRequired": "Ingresa una descripción (hasta 200 caracteres)",
+      "technicianRequired": "Ingresa el nombre del técnico (hasta 60 caracteres)",
+      "nextRequired": "Ingresa la fecha del próximo mantenimiento",
+      "nextBeforeDate": "El próximo mantenimiento debe ser posterior a este"
     }
   }
 }

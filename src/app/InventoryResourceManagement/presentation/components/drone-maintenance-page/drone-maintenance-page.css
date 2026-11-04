@@ -5,8 +5,16 @@
 }
 
 .maintenance-page h2 {
-    margin: 16px 0 8px;
+    margin: 0;
     font-family: 'Segoe UI', sans-serif;
+}
+
+.maintenance-page__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 16px 0 8px;
 }
 
 .maintenance-page__drone,

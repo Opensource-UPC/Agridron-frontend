@@ -133,7 +133,7 @@ export class DroneStore {
             const updatedDrone = new Drone(
                 drone.id, drone.serialNumber, drone.model, drone.batteryLevel,
                 drone.status, newNozzleId, drone.tankCapacityLiters,drone.lastMaintenanceDate,
-                drone.nextMaintenanceDate, drone.urlimg);
+                drone.nextMaintenanceDate, drone.urlimg, drone.flightHours);
 
             return from(toSave).pipe(
                 concatMap(n => this.nozzleEndpoint.update(n, n.id).pipe(

@@ -18,6 +18,7 @@ export interface DroneResource extends BaseResource {
     lastMaintenanceDate: string;
     nextMaintenanceDate: string;
     urlimg: string;
+    flightHours: number;
 }
 
 /**

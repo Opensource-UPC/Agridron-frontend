@@ -37,6 +37,7 @@ export class DronAssembler implements BaseAssembler<Drone, DroneResource, DroneR
             resource.lastMaintenanceDate,
             resource.nextMaintenanceDate,
             resource.urlimg,
+            resource.flightHours ?? 0,
            )
     }
 
@@ -52,7 +53,8 @@ export class DronAssembler implements BaseAssembler<Drone, DroneResource, DroneR
            tankCapacityLiters:entity.tankCapacityLiters,
        lastMaintenanceDate:entity.lastMaintenanceDate,
        nextMaintenanceDate:entity.nextMaintenanceDate,
-           urlimg:entity.urlimg};
+           urlimg:entity.urlimg,
+           flightHours:entity.flightHours};
     }
 
 }

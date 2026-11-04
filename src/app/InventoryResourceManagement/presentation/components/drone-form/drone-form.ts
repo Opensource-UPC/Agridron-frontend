@@ -179,7 +179,7 @@ export class DroneForm {
           value.lastMaintenanceDate,
           value.nextMaintenanceDate,
           value.urlimg.trim(),
-
+          0 // un dron nuevo aún no acumula horas de vuelo
       );
 
       this.store.addDrone(newDrone)
@@ -206,7 +206,7 @@ export class DroneForm {
         value.lastMaintenanceDate,
         value.nextMaintenanceDate,
         value.urlimg.trim(),
-
+        original!.flightHours // las horas no se editan aquí: se reinician al registrar un mantenimiento preventivo
     );
 
     this.store.updateDrone(updatedDrone)
