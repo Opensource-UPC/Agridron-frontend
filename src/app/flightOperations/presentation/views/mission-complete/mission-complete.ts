@@ -65,11 +65,13 @@ export class MissionComplete {
      * Generates the phytosanitary report once and opens the reports view.
      */
     generateReport() {
-        if (!this.phytosanitaryReport()) {
+        const mission = this.mission();
+        if (mission && !this.phytosanitaryReport()) {
             const result = this.result();
             this.reportStore.addReport(new MissionReport(
                 0,
                 this.missionId,
+                mission.parcelId,
                 ReportType.PHYTOSANITARY,
                 result?.treatedArea ?? 0,
                 result?.appliedVolume ?? 0,
