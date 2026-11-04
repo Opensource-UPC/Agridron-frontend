@@ -1,11 +1,12 @@
 
+import {DroneStatus} from "./drone-status";
 
 export class Drone {
     id: number;
    serialNumber: string;
    model: string;
    batteryLevel: number;
-   status: string;
+    status: DroneStatus;
    nozzleId: number;
    tankCapacityLiters: number;
    lastMaintenanceDate : string;
@@ -15,7 +16,7 @@ export class Drone {
 
 
    constructor(id: number, serialNumber: string,
-               model: string, batteryLevel: number, status: string,
+               model: string, batteryLevel: number, status: DroneStatus,
                nozzleId: number, tankCapacityLiters: number ,lastMaintenanceDate: string,
                nextMaintenanceDate: string, urlimg: string) {
        this.id = id;

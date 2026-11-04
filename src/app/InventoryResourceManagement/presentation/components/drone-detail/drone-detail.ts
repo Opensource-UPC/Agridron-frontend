@@ -8,6 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import {TranslatePipe} from '@ngx-translate/core';
 import {DroneStore} from '../../../application/dron-store';
+import {DroneStatus} from '../../../domain/model/drone-status';
 import {NozzleTypeLabel} from '../nozzle-type-label/nozzle-type-label';
 import {
   NozzleChangeData,
@@ -53,7 +54,7 @@ export class DroneDetail {
   });
 
   /** Un dron en vuelo no puede cambiar de boquilla. */
-  readonly canChangeNozzle = computed(() => this.drone()?.status !== 'in-flight');
+  readonly canChangeNozzle = computed(() => this.drone()?.status !== DroneStatus.IN_FLIGHT);
 
   readonly loading = this.store.loading;
   readonly error = this.store.error;

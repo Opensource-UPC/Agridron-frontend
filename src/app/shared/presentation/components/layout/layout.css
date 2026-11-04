@@ -8,3 +8,9 @@
   flex: 1;
   padding: 32px;
 }
+
+app-side-nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}

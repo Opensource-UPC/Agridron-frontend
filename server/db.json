@@ -321,8 +321,8 @@
       "serialNumber": "DRN-2026-0101",
       "model": "RTX-6030",
       "batteryLevel": 36,
-      "status": "available",
-      "nozzleId": 4,
+      "status": "in-flight",
+      "nozzleId": 3,
       "tankCapacityLiters": 35,
       "lastMaintenanceDate": "2026-08-10",
       "nextMaintenanceDate": "2026-12-06",
@@ -333,7 +333,7 @@
       "serialNumber": "DRN-2026-0102",
       "model": "RTX-6030",
       "batteryLevel": 10,
-      "status": "available",
+      "status": "maintenance",
       "nozzleId": 1,
       "tankCapacityLiters": 10,
       "lastMaintenanceDate": "2026-07-22",
@@ -345,7 +345,7 @@
       "serialNumber": "DRN-2026-0103",
       "model": "AGX-8000",
       "batteryLevel": 80,
-      "status": "maintenance",
+      "status": "available",
       "nozzleId": 1,
       "tankCapacityLiters": 20,
       "lastMaintenanceDate": "2026-06-15",
@@ -454,7 +454,7 @@
       "id": 3,
       "type": "flat-fan",
       "diameterMm": 7,
-      "goodUnits": 6,
+      "goodUnits": 5,
       "wornUnits": 3,
       "damagedUnits": 0
     },
@@ -464,7 +464,7 @@
       "diameterMm": 4,
       "goodUnits": 6,
       "wornUnits": 1,
-      "damagedUnits": 0
+      "damagedUnits": 1
     },
     {
       "id": 5,
