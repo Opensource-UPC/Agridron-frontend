@@ -21,4 +21,5 @@ AgriDronProviderMissionReportsEndpointPath: '/mission-reports',
   AgriDronProvideChemicalsEndpointPath: '/agrochemicals',
   AgriDronProvideNozzlesEndpointPath: '/nozzles',
   AgriDronProvideMaintenanceRecordEndpointPath: '//maintenance-records',
+  AgriDronProvideIncidentsEndpointPath: '/drone-incidents'
 };

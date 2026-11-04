@@ -49,6 +49,13 @@ export class Drone {
    getStatus():string {
        return this.status;
    }
+    /** Copia del dron con otro estado operativo (el resto de los datos no cambia). */
+    withStatus(status: DroneStatus): Drone {
+        return new Drone(this.id, this.serialNumber, this.model, this.batteryLevel, status,
+            this.nozzleId, this.tankCapacityLiters, this.lastMaintenanceDate,
+            this.nextMaintenanceDate, this.urlimg, this.flightHours);
+    }
+
    getNozzleId():number {
        return this.nozzleId;
    }

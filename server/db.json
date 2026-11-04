@@ -321,7 +321,7 @@
       "serialNumber": "DRN-2026-0101",
       "model": "RTX-6030",
       "batteryLevel": 36,
-      "status": "in-flight",
+      "status": "available",
       "nozzleId": 3,
       "tankCapacityLiters": 35,
       "lastMaintenanceDate": "2026-11-04",
@@ -337,10 +337,10 @@
       "status": "maintenance",
       "nozzleId": 1,
       "tankCapacityLiters": 10,
-      "lastMaintenanceDate": "2026-07-22",
-      "nextMaintenanceDate": "2026-10-22",
+      "lastMaintenanceDate": "2026-11-04",
+      "nextMaintenanceDate": "2026-12-05",
       "urlimg": "https://images.unsplash.com/photo-1713952160141-8364b2fca485?w=600",
-      "flightHours": 6
+      "flightHours": 0
     },
     {
       "id": 3,
@@ -562,6 +562,33 @@
       "description": "Mantenimiento preventivo general (Cambio de rotor, aceite y boquilla)",
       "technician": "Juan Fran Romario",
       "id": 7
+    },
+    {
+      "droneId": 2,
+      "date": "2026-11-04",
+      "type": "preventive",
+      "description": "Lubricación de engranajes y cambio de faja",
+      "technician": "Federico Valverde",
+      "id": 8
+    },
+    {
+      "droneId": 1,
+      "date": "2026-11-04",
+      "type": "corrective",
+      "description": "Lubricación de rotor. Solución de momento hasta encontrar repuesto.",
+      "technician": "Federico Valverde",
+      "id": 9
+    }
+  ],
+  "drone-incidents": [
+    {
+      "id": 1,
+      "droneId": 1,
+      "description": "Sonido extraño al encender el dron. Sonido proveniente de la parte inferior del dron, cerca a la bateria.",
+      "reportedAt": "2026-11-04",
+      "resolvedAt": "2026-11-04",
+      "status": "resolved",
+      "repairRecordId": 9
     }
   ],
   "users": [

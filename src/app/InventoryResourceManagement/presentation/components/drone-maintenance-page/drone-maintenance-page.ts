@@ -15,6 +15,7 @@ import {
   MaintenanceRegisterDialog,
   MaintenanceRegisterResult
 } from '../maintenance-register-dialog/maintenance-register-dialog';
+import {DroneIncidentStore} from '../../../application/drone-incident.store';
 
 /**
  * Pantalla "Ver mantenimientos": historial de mantenimiento de un dron (DR-005).
@@ -30,6 +31,7 @@ import {
 export class MaintenancePage {
   private readonly droneStore = inject(DroneStore);
   private readonly recordStore = inject(MaintenanceRecordStore);
+  private readonly incidentStore = inject(DroneIncidentStore);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly dialog = inject(MatDialog);
@@ -43,6 +45,13 @@ export class MaintenancePage {
   /** Registros del dron, del más reciente al más antiguo. */
   readonly records = computed(() =>
       [...this.droneRecords()].sort((a, b) => b.date.localeCompare(a.date)));
+
+  /** Ids de los mantenimientos que repararon una falla (DR-006): llevan la etiqueta "Reparación". */
+  readonly repairRecordIds = computed(() => new Set(
+      this.incidentStore.incidents()
+          .map(i => i.repairRecordId)
+          .filter((id): id is number => id !== null)));
+
 
   readonly loading = this.recordStore.loading;
   readonly error = this.recordStore.error;

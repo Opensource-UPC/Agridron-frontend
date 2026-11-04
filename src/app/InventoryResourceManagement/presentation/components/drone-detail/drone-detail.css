@@ -81,3 +81,70 @@
 .detail-error {
     color: #B42318;
 }
+
+/* Incidentes y fallas (DR-006) */
+.incidents {
+    max-width: 900px;
+    margin-top: 24px;
+}
+
+.incidents__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.incidents__header h3 {
+    margin: 0;
+}
+
+.incidents__empty {
+    color: #334155;
+}
+
+.incidents__hint {
+    display: block;
+    color: #92400E;
+}
+
+.incident--pending {
+    margin: 12px 0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: #FEF3C7;
+    color: #92400E;
+}
+
+.incident--pending strong {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.incident--pending p {
+    margin: 8px 0 0;
+    color: #1B463C;
+}
+
+.incidents h4 {
+    margin: 20px 0 8px;
+}
+
+.incidents__history {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.incidents__history li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 0;
+    border-bottom: 1px solid #E2E8F0;
+}
+
+.incidents__history small {
+    color: #64748B;
+}
