@@ -547,7 +547,7 @@
       "serialNumber": "DRN-2026-0102",
       "model": "RTX-6030",
       "batteryLevel": 50,
-      "status": "maintenance",
+      "status": "available",
       "nozzleId": 1,
       "tankCapacityLiters": 10,
       "lastMaintenanceDate": "2026-11-04",
@@ -574,7 +574,7 @@
       "model": "AGX-8000",
       "batteryLevel": 95,
       "status": "available",
-      "nozzleId": 4,
+      "nozzleId": 2,
       "tankCapacityLiters": 20,
       "lastMaintenanceDate": "2026-09-01",
       "nextMaintenanceDate": "2026-12-01",
@@ -666,7 +666,7 @@
       "id": 2,
       "type": "hollow-cone",
       "diameterMm": 3,
-      "goodUnits": 10,
+      "goodUnits": 9,
       "wornUnits": 3,
       "damagedUnits": 2
     },
@@ -683,7 +683,7 @@
       "type": "full-cone",
       "diameterMm": 4,
       "goodUnits": 6,
-      "wornUnits": 1,
+      "wornUnits": 2,
       "damagedUnits": 1
     },
     {
@@ -791,6 +791,22 @@
       "description": "Lubricación de rotor. Solución de momento hasta encontrar repuesto.",
       "technician": "Federico Valverde",
       "id": 9
+    },
+    {
+      "droneId": 5,
+      "date": "2026-11-05",
+      "type": "corrective",
+      "description": "Cambio de bateria y mantenimiento de motor",
+      "technician": "Federico Valverde",
+      "id": 10
+    },
+    {
+      "droneId": 2,
+      "date": "2026-11-05",
+      "type": "corrective",
+      "description": "Se cambio el modulo del Bluetooth",
+      "technician": "Federico Valverde",
+      "id": 11
     }
   ],
   "drone-incidents": [
@@ -802,6 +818,24 @@
       "resolvedAt": "2026-11-04",
       "status": "resolved",
       "repairRecordId": 9
+    },
+    {
+      "id": 2,
+      "droneId": 5,
+      "description": "Bateria en mal estado. Dura poco.",
+      "reportedAt": "2026-11-05",
+      "resolvedAt": "2026-11-05",
+      "status": "resolved",
+      "repairRecordId": 10
+    },
+    {
+      "id": 3,
+      "droneId": 2,
+      "description": "Falla al conectar el control el control mediante el Bluetooth",
+      "reportedAt": "2026-11-05",
+      "resolvedAt": "2026-11-05",
+      "status": "resolved",
+      "repairRecordId": 11
     }
   ],
   "users": [
