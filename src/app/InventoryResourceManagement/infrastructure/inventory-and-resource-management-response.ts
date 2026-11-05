@@ -18,6 +18,7 @@ export interface DroneResource extends BaseResource {
     lastMaintenanceDate: string;
     nextMaintenanceDate: string;
     urlimg: string;
+    flightHours: number;
 }
 
 /**
@@ -27,6 +28,22 @@ export interface DroneResponse extends BaseResponse {
     drones: DroneResource[];
 }
 
+/**
+ * describe  DroneIncident from endpoint
+ */
+export interface DroneIncidentResource extends BaseResource {
+    id: number;
+    droneId: number;
+    description: string;
+    reportedAt: string;
+    resolvedAt: string | null;
+    status: string;
+    repairRecordId: number | null;
+}
+
+export interface DroneIncidentsResponse extends BaseResponse {
+    droneIncidents: DroneIncidentResource[];
+}
 
 /**
  * describe  Agrochemical from endpoint

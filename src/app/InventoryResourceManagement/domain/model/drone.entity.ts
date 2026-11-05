@@ -4,19 +4,20 @@ export class Drone {
    serialNumber: string;
    model: string;
    batteryLevel: number;
-   status: string;
+   status: DroneStatus;
    nozzleId: number;
    tankCapacityLiters: number;
    lastMaintenanceDate : string;
    nextMaintenanceDate : string;
    urlimg: string;
+   flightHours: number;
 
 
 
    constructor(id: number, serialNumber: string,
-               model: string, batteryLevel: number, status: string,
+               model: string, batteryLevel: number, status: DroneStatus,
                nozzleId: number, tankCapacityLiters: number ,lastMaintenanceDate: string,
-               nextMaintenanceDate: string, urlimg: string) {
+               nextMaintenanceDate: string, urlimg: string, flightHours: number) {
        this.id = id;
        this.serialNumber = serialNumber;
        this.model = model;
@@ -27,6 +28,7 @@ export class Drone {
        this.lastMaintenanceDate = lastMaintenanceDate;
        this.nextMaintenanceDate = nextMaintenanceDate;
        this.urlimg = urlimg;
+       this.flightHours = flightHours;
 
    }
 
@@ -45,6 +47,13 @@ export class Drone {
    getStatus():string {
        return this.status;
    }
+    /** Copia del dron con otro estado operativo (el resto de los datos no cambia). */
+    withStatus(status: DroneStatus): Drone {
+        return new Drone(this.id, this.serialNumber, this.model, this.batteryLevel, status,
+            this.nozzleId, this.tankCapacityLiters, this.lastMaintenanceDate,
+            this.nextMaintenanceDate, this.urlimg, this.flightHours);
+    }
+
    getNozzleId():number {
        return this.nozzleId;
    }
@@ -55,4 +64,7 @@ export class Drone {
        return this.nextMaintenanceDate;
    }
 
+    getFlightHours():number {
+        return this.flightHours;
+    }
 }

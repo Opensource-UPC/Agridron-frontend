@@ -5,6 +5,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {translatedError} from './Translate-error';
 import {concatMap, defer, forkJoin, from, of, retry, switchMap, toArray} from 'rxjs';
 import {Drone} from '../domain/model/drone.entity';
+import {DroneStatus} from '../domain/model/drone-status';
 import {Nozzle, NozzleState} from '../domain/model/nozzle.entity';
 import {DronApiEndpoint} from '../infrastructure/dron-api-endpoint';
 import {NozzleApiEndpoint} from '../infrastructure/nozzle-api-endpoint';
@@ -45,7 +46,7 @@ export class DroneStore {
     getDroneById = (id: number): Signal<Drone | undefined> =>
         computed(() => id ? this.drones().find(d => d.id === id) : undefined);
 
-    getDronesByStatus = (status: string): Signal<Drone[]> =>
+    getDronesByStatus = (status: DroneStatus): Signal<Drone[]> =>
         computed(() => this.drones().filter(d => d.status === status));
 
     getNozzleById = (id: number): Signal<Nozzle | undefined> =>
@@ -107,7 +108,7 @@ export class DroneStore {
             this.loadingSignal.set(true);
             this.errorSignal.set(null);
 
-            if (drone.status === 'in-flight') throw new Error('Drone is in flight');
+            if (drone.status === DroneStatus.IN_FLIGHT) throw new Error('Drone is in flight');
 
             const target = this.nozzles().find(n => n.id === newNozzleId);
             if (!target) throw new Error('Nozzle not found');
@@ -132,7 +133,7 @@ export class DroneStore {
             const updatedDrone = new Drone(
                 drone.id, drone.serialNumber, drone.model, drone.batteryLevel,
                 drone.status, newNozzleId, drone.tankCapacityLiters,drone.lastMaintenanceDate,
-                drone.nextMaintenanceDate, drone.urlimg);
+                drone.nextMaintenanceDate, drone.urlimg, drone.flightHours);
 
             return from(toSave).pipe(
                 concatMap(n => this.nozzleEndpoint.update(n, n.id).pipe(

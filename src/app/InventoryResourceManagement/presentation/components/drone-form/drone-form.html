@@ -56,9 +56,9 @@
                     <mat-label>{{ 'droneForm.status' | translate }}</mat-label>
 
                     <mat-select formControlName="status">
-                        @for (status of statuses; track status.value) {
-                            <mat-option [value]="status.value">
-                                {{ 'drone.status.' + status.value.toUpperCase() | translate }}
+                        @for (status of statuses; track status) {
+                            <mat-option [value]="status">
+                                {{ 'drone.status.' + status.toUpperCase() | translate }}
                             </mat-option>
                         }
                     </mat-select>

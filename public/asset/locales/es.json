@@ -412,6 +412,7 @@
     "noPhoto": "Sin foto",
     "loading": "Cargando drones...",
     "empty": "No hay drones para mostrar",
+    "flightHours": "Horas de vuelo desde el último servicio",
     "actions": {
       "details": "Ver detalles",
       "maintenance": "Ver mantenimiento"
@@ -670,6 +671,82 @@
       "create": "No se pudo registrar el mantenimiento",
       "update": "No se pudo actualizar el mantenimiento",
       "delete": "No se pudo eliminar el mantenimiento"
+    },
+    "incident": {
+      "load": "No se pudieron cargar los incidentes",
+      "report": "No se pudo reportar la falla",
+      "repair": "No se pudo registrar la reparación"
+    }
+  },
+  "maintenance": {
+    "title": "Historial de mantenimiento",
+    "loading": "Cargando mantenimientos...",
+    "empty": "Este dron aún no tiene mantenimientos registrados.",
+    "date": "Fecha",
+    "description": "Descripción",
+    "technician": "Técnico",
+    "viewDrone": "Ver detalles del dron",
+    "repairTag": "Reparación",
+    "type": {
+      "label": "Tipo",
+      "PREVENTIVE": "Preventivo",
+      "CORRECTIVE": "Correctivo"
+    },
+    "actions": {
+      "register": "Registrar mantenimiento"
+    },
+    "register": {
+      "title": "Registrar mantenimiento",
+      "nextMaintenance": "Fecha del próximo mantenimiento",
+      "preventiveHint": "Un mantenimiento preventivo actualiza las fechas del último y del próximo servicio del dron y reinicia sus horas de vuelo.",
+      "confirm": "Registrar"
+    },
+    "errors": {
+      "dateRequired": "Selecciona la fecha del mantenimiento",
+      "dateFuture": "La fecha no puede ser futura",
+      "beforeLast": "Un preventivo no puede ser anterior al último mantenimiento ({{date}})",
+      "descriptionRequired": "Ingresa una descripción (hasta 200 caracteres)",
+      "technicianRequired": "Ingresa el nombre del técnico (hasta 60 caracteres)",
+      "nextRequired": "Ingresa la fecha del próximo mantenimiento",
+      "nextBeforeDate": "El próximo mantenimiento debe ser posterior a este"
+    }
+  },
+  "incident": {
+    "title": "Incidentes",
+    "none": "No hay fallas pendientes de reparación.",
+    "history": "Fallas reparadas",
+    "since": "desde",
+    "reported": "Reportada",
+    "outOfServiceHint": "El dron ya está fuera de servicio, por lo que no se puede reportar otra falla.",
+    "status": {
+      "reported": "Pendiente de reparación",
+      "resolved": "Reparada"
+    },
+    "actions": {
+      "report": "Reportar falla",
+      "repair": "Registrar reparación"
+    },
+    "report": {
+      "title": "Reportar falla",
+      "description": "Descripción de la falla",
+      "hint": "Al reportar la falla, el dron queda fuera de servicio hasta que se registre su reparación.",
+      "confirm": "Reportar falla"
+    },
+    "repair": {
+      "title": "Registrar reparación",
+      "date": "Fecha de reparación",
+      "description": "Qué se reparó",
+      "technician": "Técnico",
+      "hint": "Se creará un mantenimiento correctivo y el dron volverá a estar disponible.",
+      "confirm": "Registrar reparación"
+    },
+    "errors": {
+      "descriptionRequired": "Describe la falla (máximo 200 caracteres)",
+      "dateRequired": "La fecha de reparación es obligatoria",
+      "dateFuture": "La fecha no puede ser futura",
+      "dateBeforeReport": "La reparación no puede ser anterior al reporte ({{date}})",
+      "technicianRequired": "El técnico es obligatorio",
+      "repairDescriptionRequired": "Describe qué se reparó (máximo 200 caracteres)"
     }
   }
 }

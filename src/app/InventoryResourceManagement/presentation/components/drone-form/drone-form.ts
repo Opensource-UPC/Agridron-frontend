@@ -23,6 +23,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 
 import {DroneStore} from '../../../application/dron-store';
 import {Drone} from '../../../domain/model/drone.entity';
+import {DRONE_STATUSES, DroneStatus} from '../../../domain/model/drone-status';
 import {NozzleTypeLabel} from '../nozzle-type-label/nozzle-type-label';
 
 // La fecha del siguiente mantenimiento no puede ser anterior
@@ -73,12 +74,7 @@ export class DroneForm {
   readonly loading = this.store.loading;
   readonly error = this.store.error;
 
-  readonly statuses = [
-    {value: 'available'},
-    {value: 'in-flight'},
-    {value: 'maintenance'},
-    {value: 'out-of-service'}
-  ];
+  readonly statuses = DRONE_STATUSES;
 
   readonly form = this.fb.nonNullable.group({
     serialNumber: ['', Validators.required],
@@ -88,7 +84,7 @@ export class DroneForm {
       Validators.min(0),
       Validators.max(100)
     ]],
-    status: ['available', Validators.required],
+    status: [DroneStatus.AVAILABLE as DroneStatus, Validators.required],
     nozzleId: [0, [
       Validators.required,
       Validators.min(1)
@@ -177,13 +173,13 @@ export class DroneForm {
           serial,
           value.model.trim(),
           value.batteryLevel,
-          'available',
+          DroneStatus.AVAILABLE,
           value.nozzleId,
           value.tankCapacityLiters,
           value.lastMaintenanceDate,
           value.nextMaintenanceDate,
           value.urlimg.trim(),
-
+          0 // un dron nuevo aún no acumula horas de vuelo
       );
 
       this.store.addDrone(newDrone)
@@ -210,7 +206,7 @@ export class DroneForm {
         value.lastMaintenanceDate,
         value.nextMaintenanceDate,
         value.urlimg.trim(),
-
+        original!.flightHours // las horas no se editan aquí: se reinician al registrar un mantenimiento preventivo
     );
 
     this.store.updateDrone(updatedDrone)
