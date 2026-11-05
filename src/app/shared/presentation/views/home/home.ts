@@ -6,6 +6,8 @@ import {MatIcon} from '@angular/material/icon';
 import {TranslatePipe} from '@ngx-translate/core';
 import {AuthenticationService} from '../../../../iam/application/authentication.service';
 import {WeatherWidget} from '../../components/weather-widget/weather-widget';
+import {WeatherSimulator} from '../../components/weather-simulator/weather-simulator';
+import {environment} from '../../../../../environments/environment';
 import {WeatherService} from '../../../../weather-integration/application/weather-service';
 import {FarmStore} from '../../../../fieldManagement/application/farm.store';
 import {ParcelStore} from '../../../../fieldManagement/application/parcel.store';
@@ -14,7 +16,7 @@ import {FumigationAreaStore} from '../../../../fieldManagement/application/fumig
 
 @Component({
   selector: 'app-home',
-  imports: [MatCardModule, MatButtonModule, MatIcon, RouterLink, TranslatePipe, WeatherWidget],
+  imports: [MatCardModule, MatButtonModule, MatIcon, RouterLink, TranslatePipe, WeatherWidget, WeatherSimulator],
   templateUrl: './home.html',
   styleUrl: './home.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -26,6 +28,9 @@ export class Home {
   private readonly cropStore = inject(CropStore);
   private readonly fumigationAreaStore = inject(FumigationAreaStore);
   private readonly weatherService = inject(WeatherService);
+
+  /** Shows the weather simulator instead of the widget (local tests only). */
+  readonly debugMode = environment.debugMode;
 
   /**
    * Creates an instance of Home and loads the initial weather data.

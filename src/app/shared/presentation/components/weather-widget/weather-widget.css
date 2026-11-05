@@ -53,6 +53,15 @@ ul {
   font-size: 0.875rem;
 }
 
+.favorable {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 6px;
+  background: #E8F6F1;
+  color: #1B463C;
+  font-size: 0.875rem;
+}
+
 .low { background: #EFF4FF; color: #1E3A8A; }
 .medium { background: #FFF7E6; color: #B45309; }
 .high { background: #FEECEC; color: #B91C1C; }

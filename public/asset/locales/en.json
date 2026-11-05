@@ -13,12 +13,13 @@
     "farm": "Farms",
     "parcel": "Parcels",
     "crop": "Crops",
+    "mission": "Missions",
     "fumigationArea": "Fumigation areas",
     "analytics": "Reports",
     "drone": "Drones",
     "agrochemical": "Agrochemicals",
     "profile": "Profile",
-    "home": "Inicio"
+    "home": "Home"
   },
   "farm": {
     "title": "Farms",
@@ -151,6 +152,134 @@
       }
     }
   },
+  "mission": {
+    "title": "Missions",
+    "newMission": "New mission",
+    "loading": "Loading missions...",
+    "notFound": "Mission not found",
+    "columns": {
+      "id": "ID",
+      "parcel": "Parcel",
+      "requestedDate": "Requested date",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "status": {
+      "PLANNED": "Planned",
+      "AUTHORIZED": "Authorized",
+      "IN_PROGRESS": "In progress",
+      "PAUSED": "Paused",
+      "COMPLETED": "Completed",
+      "CANCELLED": "Cancelled"
+    },
+    "button": {
+      "seeMore": "View detail",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "actions": {
+      "authorize": "Authorize mission",
+      "start": "Start mission",
+      "pause": "Pause mission",
+      "resume": "Resume mission",
+      "incident": "Report incident",
+      "finish": "Finish mission",
+      "summary": "View summary",
+      "back": "Back",
+      "reschedule": "Reschedule mission",
+      "forecast": "View detailed forecast",
+      "continueAnyway": "Continue anyway",
+      "details": "View details",
+      "home": "Back to home"
+    },
+    "place": {
+      "farm": "Farm",
+      "parcel": "Parcel",
+      "coordinates": "Coordinates"
+    },
+    "form": {
+      "new-title": "New mission",
+      "edit-title": "Edit mission",
+      "requestedDate": "Date and time",
+      "parcel": "Parcel",
+      "agrochemical": "Agrochemical",
+      "drone": "Drone",
+      "flightHeight": "Flight height (m)",
+      "flightSpeed": "Flight speed (km/h)",
+      "sprayRate": "Spray rate (L/ha)",
+      "overlap": "Overlap (%)",
+      "create": "Create",
+      "update": "Update",
+      "error": {
+        "date-required": "Date is required",
+        "parcel-required": "You must select a parcel",
+        "agrochemical-required": "You must select an agrochemical",
+        "drone-required": "You must select a drone",
+        "min": "Value must be greater than 0",
+        "overlap": "Overlap must be between 0 and 100"
+      }
+    },
+    "monitor": {
+      "title": "Mission monitoring",
+      "steps": {
+        "preparation": "Preparation",
+        "takeoff": "Take-off",
+        "flying": "In flight",
+        "finish": "Finish"
+      },
+      "drone": "Drone",
+      "altitude": "Altitude",
+      "speed": "Speed",
+      "battery": "Battery",
+      "area": "Parcel area",
+      "elapsed": "Elapsed time",
+      "position": "Last position"
+    },
+    "weatherWarning": {
+      "title": "Weather warning",
+      "heading": "Weather conditions not recommended",
+      "message": "Check the current conditions around the parcel. Rescheduling the mission or adjusting the flight window is recommended.",
+      "rain": "Rain",
+      "wind": "Wind",
+      "temperature": "Temperature"
+    },
+    "paused": {
+      "message": "The mission has been paused",
+      "description": "You can resume it when conditions are safe.",
+      "start": "Start",
+      "pausedFor": "Paused for"
+    },
+    "incident": {
+      "title": "Report incident",
+      "type": "Incident type",
+      "description": "Description",
+      "location": "Location",
+      "save": "Save incident",
+      "cancel": "Cancel",
+      "types": {
+        "TECHNICAL": "Technical",
+        "WEATHER": "Weather",
+        "SAFETY": "Safety",
+        "OTHER": "Other"
+      },
+      "error": {
+        "type-required": "Type is required",
+        "description-required": "Description is required"
+      }
+    },
+    "complete": {
+      "title": "Finish mission",
+      "success": "The mission was completed successfully",
+      "treatedArea": "Treated area",
+      "totalTime": "Total time",
+      "date": "Date",
+      "whatNext": "What would you like to do next?",
+      "generateReport": "Generate phytosanitary report",
+      "viewReport": "View phytosanitary report",
+      "serviceReport": "View service record",
+      "dashboard": "Back to dashboard"
+    }
+  },
   "weather": {
     "title": "Weather status",
     "subtitle": "Current conditions by location",
@@ -161,6 +290,25 @@
     "observed": "Observed",
     "alerts": "Alerts",
     "empty": "No weather data available.",
+    "referenceLocation": "reference location",
+    "precipitationProbability": "Rain probability",
+    "source": "Data",
+    "favorable": "Favorable conditions for spraying: wind of 15 km/h or less, temperature below 28 °C and no rain.",
+    "alert": {
+      "wind": "Wind above 15 km/h: high drift risk, spraying is not recommended.",
+      "rain": "Rain detected: high drift risk, postpone the mission.",
+      "moderateWind": "Wind between 10 and 15 km/h: spray with caution and anti-drift nozzles.",
+      "calmWind": "Wind below 3 km/h: possible temperature inversion, the product can stay suspended and move away.",
+      "rainLikely": "Rain probability of 70 % or more: the product could be washed off, consider rescheduling.",
+      "rainPossible": "Rain probability between 40 % and 69 %: check the sky before take-off.",
+      "heat": "Temperature above 30 °C: the product evaporates faster, prefer cooler hours.",
+      "lowHumidity": "Humidity below 50 %: droplets evaporate faster."
+    },
+    "simulator": {
+      "title": "Debug: weather simulator",
+      "hint": "Turn it on or off with debugMode in src/environments/environment.development.ts. The real data is not modified.",
+      "reset": "Back to real data"
+    },
     "severity": {
       "HIGH": "High",
       "MEDIUM": "Medium",
@@ -172,13 +320,16 @@
     "tabs": {
       "missions": "Missions",
       "supplyUsage": "Supply usage",
-      "indicators": "Indicators"
+      "indicators": "Indicators",
+      "compare": "Compare parcels"
     },
     "filter": {
       "from": "From",
       "to": "To",
       "apply": "Filter",
-      "clear": "Clear"
+      "clear": "Clear",
+      "farm": "Farm",
+      "allFarms": "All farms"
     },
     "columns": {
       "id": "ID",
@@ -190,7 +341,11 @@
       "type": "Type",
       "volume": "Volume (L)",
       "density": "L/ha",
-      "generatedAt": "Generated"
+      "generatedAt": "Generated",
+      "parcel": "Parcel",
+      "farm": "Farm",
+      "missions": "Missions",
+      "total": "Total"
     },
     "status": {
       "PLANNED": "Planned",
@@ -209,7 +364,8 @@
       "detail": "View detail",
       "back": "Back to reports",
       "exportJson": "Export JSON",
-      "exportCsv": "Export CSV"
+      "exportCsv": "Export CSV",
+      "exportPdf": "Export PDF"
     },
     "indicators": {
       "period": "Period",
@@ -223,7 +379,19 @@
       "notFound": "Report not found."
     },
     "empty": "No records found.",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "consumption": {
+      "byFarm": "Consumption by farm",
+      "details": "Report details"
+    },
+    "compare": {
+      "select": "Parcels to compare",
+      "hint": "Select at least two parcels to compare them.",
+      "intensity": "L/ha (relative)"
+    },
+    "pdf": {
+      "title": "AgriDron - Mission report"
+    }
   },
   "drone": {
     "title": "Drone fleet management",

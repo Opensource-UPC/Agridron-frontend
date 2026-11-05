@@ -1,10 +1,10 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button aria-label="Menu" (click)="menuToggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>AgriDron</span>
-  <span class="header-content__spacer"></span>
-  <span>
+    <button mat-icon-button aria-label="Menu" (click)="menuToggle.emit()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>AgriDron</span>
+    <span class="header-content__spacer"></span>
+    <span>
     <app-language-switcher/>
   </span>
 </mat-toolbar>

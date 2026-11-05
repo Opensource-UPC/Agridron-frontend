@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, computed, input, InputSignal, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, inject, input, InputSignal, signal} from '@angular/core';
 import {DatePipe, DecimalPipe} from '@angular/common';
 import {RouterLink} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
@@ -7,7 +7,7 @@ import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import {TranslatePipe} from '@ngx-translate/core';
 import {MissionReport} from '../../../domain/model/mission-report.entity';
-import {downloadTextFile} from '../../download-text-file';
+import {ReportPdfService} from '../../report-pdf.service';
 
 /**
  * Row shown in the mission history table (history record joined with its report).
@@ -15,6 +15,8 @@ import {downloadTextFile} from '../../download-text-file';
 export interface MissionHistoryRow {
   id: number;
   missionId: number;
+  parcelName: string;
+  farmName: string;
   finalStatus: string;
   completedAt: string;
   treatedArea: number | null;
@@ -29,13 +31,15 @@ export interface MissionHistoryRow {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MissionHistoryTable {
+  private readonly pdfService = inject(ReportPdfService);
+
   rows: InputSignal<MissionHistoryRow[]> = input.required<MissionHistoryRow[]>();
 
   loading: InputSignal<boolean> = input(false);
 
   error: InputSignal<string | null> = input<string | null>(null);
 
-  protected readonly displayedColumns = ['id', 'date', 'status', 'area', 'actions'];
+  protected readonly displayedColumns = ['id', 'parcel', 'date', 'status', 'area', 'actions'];
 
   protected readonly pageSize = signal(5);
 
@@ -57,6 +61,6 @@ export class MissionHistoryTable {
     if (!row.report) {
       return;
     }
-    downloadTextFile(`mission-report-${row.report.id}.csv`, row.report.export('csv'), 'text/csv');
+    void this.pdfService.download(row.report, row.parcelName, row.farmName);
   }
 }

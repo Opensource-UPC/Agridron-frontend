@@ -1,5 +1,12 @@
+:host {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+}
+
 .side-nav {
-  flex: 1 1 auto;
+  flex: 1;
   height: 100%;
 }
 .side-nav__panel {
@@ -52,5 +59,9 @@
 }
 
 .side-nav__content {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  min-width: 0;
+  overflow-x: hidden;
 }

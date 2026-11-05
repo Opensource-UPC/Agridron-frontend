@@ -1,13 +1,15 @@
-import { WeatherAlertResource } from './weather-alert-resource';
-
+/**
+ * Current conditions and next-hour rain probability returned by the Open-Meteo forecast endpoint.
+ */
 export interface WeatherConditionResponse {
-  id: number;
-  location: string;
-  temperature: number;
-  humidity: number;
-  windSpeed: number;
-  precipitation: number;
-  observedAt: string;
-  alerts: WeatherAlertResource[];
+  current: {
+    time: string;
+    temperature_2m: number;
+    relative_humidity_2m: number;
+    wind_speed_10m: number;
+    precipitation: number;
+  };
+  hourly: {
+    precipitation_probability: number[];
+  };
 }
-

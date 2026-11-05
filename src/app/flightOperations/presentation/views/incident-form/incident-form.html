@@ -1,0 +1,34 @@
+<h1 class="title">{{ 'mission.incident.title' | translate }}</h1>
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field>
+        <mat-label>{{ 'mission.incident.type' | translate }}</mat-label>
+        <mat-select formControlName="type" required>
+            @for (type of types; track type) {
+                <mat-option [value]="type">{{ 'mission.incident.types.' + type | translate }}</mat-option>
+            }
+        </mat-select>
+        @if (form.get('type')?.touched && form.get('type')!.hasError('required')) {
+            <mat-error>{{ 'mission.incident.error.type-required' | translate }}</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>{{ 'mission.incident.description' | translate }}</mat-label>
+        <textarea matInput rows="4" formControlName="description" required></textarea>
+        @if (form.get('description')?.touched && form.get('description')!.hasError('required')) {
+            <mat-error>{{ 'mission.incident.error.description-required' | translate }}</mat-error>
+        }
+    </mat-form-field>
+
+    <section class="location">
+        <h3>{{ 'mission.incident.location' | translate }}</h3>
+        @if (mission(); as m) {
+            <app-mission-place [parcelId]="m.parcelId" [showCoordinates]="true"/>
+        }
+    </section>
+
+    <div class="actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ 'mission.incident.save' | translate }}</button>
+        <button mat-stroked-button type="button" (click)="cancel()">{{ 'mission.incident.cancel' | translate }}</button>
+    </div>
+</form>

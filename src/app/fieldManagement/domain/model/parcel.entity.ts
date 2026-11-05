@@ -87,4 +87,21 @@ export class Parcel {
     set image(value: string | null) {
         this.#image = value;
     }
+
+    /**
+     * Calculates the center point of the parcel from its GeoJSON polygon.
+     * @returns Latitude and longitude of the center, or zeros when the geometry is invalid.
+     */
+    centroid(): { latitude: number; longitude: number } {
+        try {
+            const ring: number[][] = JSON.parse(this.#geometry).coordinates[0];
+            const points = ring.length > 1 ? ring.slice(0, -1) : ring;
+            return {
+                longitude: points.reduce((sum, p) => sum + p[0], 0) / points.length || 0,
+                latitude: points.reduce((sum, p) => sum + p[1], 0) / points.length || 0
+            };
+        } catch {
+            return {latitude: 0, longitude: 0};
+        }
+    }
 }
