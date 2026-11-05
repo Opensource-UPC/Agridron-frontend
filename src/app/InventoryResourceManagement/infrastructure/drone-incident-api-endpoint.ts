@@ -14,7 +14,7 @@ export class DroneIncidentApiEndpoint extends BaseApiEndpoint<
     DroneIncident, DroneIncidentResource, DroneIncidentsResponse, DroneIncidentAssembler> {
 
     constructor(http: HttpClient) {
-        super(http, `${environment.AgriDronProviderApiBaseUrl}${environment.AgriDronProvideIncidentsEndpointPath}`, new DroneIncidentAssembler());
+        super(http, `${environment.AgriDronProviderApiBaseUrl}${environment.AgriDronProviderIncidentsEndpointPath}`, new DroneIncidentAssembler());
     }
 
     /**

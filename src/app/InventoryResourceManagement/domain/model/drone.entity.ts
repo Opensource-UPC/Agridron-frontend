@@ -1,3 +1,4 @@
+import {DroneStatus} from "./drone-status";
 
 export class Drone {
     id: number;
