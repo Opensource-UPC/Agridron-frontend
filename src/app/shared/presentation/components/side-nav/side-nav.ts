@@ -38,6 +38,7 @@ export class SideNav {
     { link: '/fumigation-areas', label: 'option.fumigationArea', icon: 'science' },
     { link: '/analytics', label: 'option.analytics', icon: 'insights' },
     { link: '/drones', label: 'option.drone', icon: 'Drone' },
+    { link: '/agrochemicals', label: 'option.agrochemical', icon: 'science' },
     { link: '/auth/profile', label: 'option.profile', icon: 'person' }
   ];
 

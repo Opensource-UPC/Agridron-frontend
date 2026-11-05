@@ -399,7 +399,7 @@
       "AVAILABLE": "Disponible",
       "IN-FLIGHT": "En vuelo",
       "MAINTENANCE": "Mantenimiento",
-      "MAINTENANCE_SOON": "Mantenimiento próximo"
+      "MAINTENANCE_SOON": "Mantenimiento próximo",
       "OUT-OF-SERVICE": "fuera de servicio"
     },
     "serial": "NS",
@@ -415,7 +415,7 @@
     "flightHours": "Horas de vuelo desde el último servicio",
     "actions": {
       "details": "Ver detalles",
-      "maintenance": "Ver mantenimiento"
+      "maintenance": "Ver mantenimiento",
       "new": "Añadir Dron",
       "nozzles": "Boquillas de de pulverización "
     }
