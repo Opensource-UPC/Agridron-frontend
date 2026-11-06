@@ -339,32 +339,6 @@
     },
     {
       "id": 4,
-      "requestedDate": "2026-11-05T12:00:00.000Z",
-      "parcelId": 1,
-      "agrochemicalId": 6,
-      "droneId": 1,
-      "operatorId": 1,
-      "flightHeight": 3,
-      "flightSpeed": 5,
-      "sprayRate": 2,
-      "overlap": 20,
-      "status": "COMPLETED"
-    },
-    {
-      "id": 5,
-      "requestedDate": "2026-11-06T07:30:00",
-      "parcelId": 2,
-      "agrochemicalId": 4,
-      "droneId": 4,
-      "operatorId": 2,
-      "flightHeight": 3,
-      "flightSpeed": 5,
-      "sprayRate": 2,
-      "overlap": 20,
-      "status": "AUTHORIZED"
-    },
-    {
-      "id": 6,
       "requestedDate": "2026-10-30T09:00:00",
       "parcelId": 4,
       "agrochemicalId": 3,

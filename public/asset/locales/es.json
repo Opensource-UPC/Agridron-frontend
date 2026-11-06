@@ -157,6 +157,8 @@
     "newMission": "Nueva misión",
     "loading": "Cargando misiones...",
     "notFound": "Misión no encontrada",
+    "cancel-confirm": "¿Estás seguro de que deseas cancelar esta misión?",
+    "delete-confirm": "¿Estás seguro de que deseas eliminar esta misión?",
     "columns": {
       "id": "ID",
       "parcel": "Parcela",
@@ -183,6 +185,7 @@
       "startNow": "Iniciar misión",
       "pause": "Pausar misión",
       "resume": "Reanudar misión",
+      "cancel": "Cancelar misión",
       "incident": "Reportar incidente",
       "finish": "Finalizar misión",
       "summary": "Ver resumen",
@@ -211,13 +214,17 @@
       "overlap": "Solapamiento (%)",
       "create": "Crear",
       "update": "Actualizar",
+      "noDrones": "No hay drones disponibles en este momento",
+      "noAgrochemicals": "No hay agroquímicos vigentes con stock",
       "error": {
         "date-required": "La fecha es obligatoria",
+        "date-past": "La fecha no puede ser anterior a hoy",
         "parcel-required": "Debes seleccionar una parcela",
         "agrochemical-required": "Debes seleccionar un agroquímico",
         "drone-required": "Debes seleccionar un dron",
         "min": "El valor debe ser mayor a 0",
-        "overlap": "El solapamiento debe estar entre 0 y 100"
+        "overlap": "El solapamiento debe estar entre 0 y 100",
+        "insufficient-stock": "Stock insuficiente: el área de la parcela × la tasa de pulverización supera los litros disponibles"
       }
     },
     "monitor": {

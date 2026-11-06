@@ -157,6 +157,8 @@
     "newMission": "New mission",
     "loading": "Loading missions...",
     "notFound": "Mission not found",
+    "cancel-confirm": "Are you sure you want to cancel this mission?",
+    "delete-confirm": "Are you sure you want to delete this mission?",
     "columns": {
       "id": "ID",
       "parcel": "Parcel",
@@ -183,6 +185,7 @@
       "startNow": "Start mission",
       "pause": "Pause mission",
       "resume": "Resume mission",
+      "cancel": "Cancel mission",
       "incident": "Report incident",
       "finish": "Finish mission",
       "summary": "View summary",
@@ -211,467 +214,471 @@
       "overlap": "Overlap (%)",
       "create": "Create",
       "update": "Update",
+      "noDrones": "No drones are available right now",
+      "noAgrochemicals": "No agrochemicals with valid stock",
       "error": {
         "date-required": "Date is required",
+        "date-past": "The date cannot be in the past",
         "parcel-required": "You must select a parcel",
         "agrochemical-required": "You must select an agrochemical",
         "drone-required": "You must select a drone",
         "min": "Value must be greater than 0",
-        "overlap": "Overlap must be between 0 and 100"
+        "overlap": "Overlap must be between 0 and 100",
+        "insufficient-stock": "Not enough stock: parcel area × spray rate exceeds the available liters"
+      },
+      "monitor": {
+        "title": "Mission monitoring",
+        "steps": {
+          "preparation": "Preparation",
+          "takeoff": "Take-off",
+          "flying": "In flight",
+          "finish": "Finish"
+        },
+        "drone": "Drone",
+        "altitude": "Altitude",
+        "speed": "Speed",
+        "battery": "Battery",
+        "area": "Parcel area",
+        "elapsed": "Elapsed time",
+        "position": "Last position"
+      },
+      "weatherWarning": {
+        "title": "Weather warning",
+        "heading": "Weather conditions not recommended",
+        "message": "Check the current conditions around the parcel. Rescheduling the mission or adjusting the flight window is recommended.",
+        "okHeading": "Favorable conditions",
+        "okMessage": "Wind, temperature and rain are within the recommended limits for spraying.",
+        "rain": "Rain",
+        "wind": "Wind",
+        "temperature": "Temperature"
+      },
+      "paused": {
+        "message": "The mission has been paused",
+        "description": "You can resume it when conditions are safe.",
+        "start": "Start",
+        "pausedFor": "Paused for"
+      },
+      "incident": {
+        "title": "Report incident",
+        "type": "Incident type",
+        "description": "Description",
+        "location": "Location",
+        "save": "Save incident",
+        "cancel": "Cancel",
+        "types": {
+          "TECHNICAL": "Technical",
+          "WEATHER": "Weather",
+          "SAFETY": "Safety",
+          "OTHER": "Other"
+        },
+        "error": {
+          "type-required": "Type is required",
+          "description-required": "Description is required"
+        }
+      },
+      "complete": {
+        "title": "Finish mission",
+        "success": "The mission was completed successfully",
+        "treatedArea": "Treated area",
+        "totalTime": "Total time",
+        "date": "Date",
+        "whatNext": "What would you like to do next?",
+        "generateReport": "Generate phytosanitary report",
+        "viewReport": "View phytosanitary report",
+        "serviceReport": "View service record",
+        "dashboard": "Back to dashboard"
       }
     },
-    "monitor": {
-      "title": "Mission monitoring",
-      "steps": {
-        "preparation": "Preparation",
-        "takeoff": "Take-off",
-        "flying": "In flight",
-        "finish": "Finish"
-      },
-      "drone": "Drone",
-      "altitude": "Altitude",
-      "speed": "Speed",
-      "battery": "Battery",
-      "area": "Parcel area",
-      "elapsed": "Elapsed time",
-      "position": "Last position"
-    },
-    "weatherWarning": {
-      "title": "Weather warning",
-      "heading": "Weather conditions not recommended",
-      "message": "Check the current conditions around the parcel. Rescheduling the mission or adjusting the flight window is recommended.",
-      "okHeading": "Favorable conditions",
-      "okMessage": "Wind, temperature and rain are within the recommended limits for spraying.",
-      "rain": "Rain",
+    "weather": {
+      "title": "Weather status",
+      "subtitle": "Current conditions by location",
+      "temperature": "Temperature",
+      "humidity": "Humidity",
       "wind": "Wind",
-      "temperature": "Temperature"
-    },
-    "paused": {
-      "message": "The mission has been paused",
-      "description": "You can resume it when conditions are safe.",
-      "start": "Start",
-      "pausedFor": "Paused for"
-    },
-    "incident": {
-      "title": "Report incident",
-      "type": "Incident type",
-      "description": "Description",
-      "location": "Location",
-      "save": "Save incident",
-      "cancel": "Cancel",
-      "types": {
-        "TECHNICAL": "Technical",
-        "WEATHER": "Weather",
-        "SAFETY": "Safety",
-        "OTHER": "Other"
+      "precipitation": "Precipitation",
+      "observed": "Observed",
+      "alerts": "Alerts",
+      "empty": "No weather data available.",
+      "referenceLocation": "reference location",
+      "precipitationProbability": "Rain probability",
+      "source": "Data",
+      "favorable": "Favorable conditions for spraying: wind of 15 km/h or less, temperature below 28 °C and no rain.",
+      "alert": {
+        "wind": "Wind above 15 km/h: high drift risk, spraying is not recommended.",
+        "rain": "Rain detected: high drift risk, postpone the mission.",
+        "moderateWind": "Wind between 10 and 15 km/h: spray with caution and anti-drift nozzles.",
+        "calmWind": "Wind below 3 km/h: possible temperature inversion, the product can stay suspended and move away.",
+        "rainLikely": "Rain probability of 70 % or more: the product could be washed off, consider rescheduling.",
+        "rainPossible": "Rain probability between 40 % and 69 %: check the sky before take-off.",
+        "heat": "Temperature above 30 °C: the product evaporates faster, prefer cooler hours.",
+        "lowHumidity": "Humidity below 50 %: droplets evaporate faster."
       },
-      "error": {
-        "type-required": "Type is required",
-        "description-required": "Description is required"
+      "simulator": {
+        "title": "Debug: weather simulator",
+        "hint": "Turn it on or off with debugMode in src/environments/environment.development.ts. The real data is not modified.",
+        "reset": "Back to real data"
+      },
+      "severity": {
+        "HIGH": "High",
+        "MEDIUM": "Medium",
+        "LOW": "Low"
       }
     },
-    "complete": {
-      "title": "Finish mission",
-      "success": "The mission was completed successfully",
-      "treatedArea": "Treated area",
-      "totalTime": "Total time",
-      "date": "Date",
-      "whatNext": "What would you like to do next?",
-      "generateReport": "Generate phytosanitary report",
-      "viewReport": "View phytosanitary report",
-      "serviceReport": "View service record",
-      "dashboard": "Back to dashboard"
-    }
-  },
-  "weather": {
-    "title": "Weather status",
-    "subtitle": "Current conditions by location",
-    "temperature": "Temperature",
-    "humidity": "Humidity",
-    "wind": "Wind",
-    "precipitation": "Precipitation",
-    "observed": "Observed",
-    "alerts": "Alerts",
-    "empty": "No weather data available.",
-    "referenceLocation": "reference location",
-    "precipitationProbability": "Rain probability",
-    "source": "Data",
-    "favorable": "Favorable conditions for spraying: wind of 15 km/h or less, temperature below 28 °C and no rain.",
-    "alert": {
-      "wind": "Wind above 15 km/h: high drift risk, spraying is not recommended.",
-      "rain": "Rain detected: high drift risk, postpone the mission.",
-      "moderateWind": "Wind between 10 and 15 km/h: spray with caution and anti-drift nozzles.",
-      "calmWind": "Wind below 3 km/h: possible temperature inversion, the product can stay suspended and move away.",
-      "rainLikely": "Rain probability of 70 % or more: the product could be washed off, consider rescheduling.",
-      "rainPossible": "Rain probability between 40 % and 69 %: check the sky before take-off.",
-      "heat": "Temperature above 30 °C: the product evaporates faster, prefer cooler hours.",
-      "lowHumidity": "Humidity below 50 %: droplets evaporate faster."
+    "analytics": {
+      "title": "Reports and history",
+      "tabs": {
+        "missions": "Missions",
+        "supplyUsage": "Supply usage",
+        "indicators": "Indicators",
+        "compare": "Compare parcels"
+      },
+      "filter": {
+        "from": "From",
+        "to": "To",
+        "apply": "Filter",
+        "clear": "Clear",
+        "farm": "Farm",
+        "allFarms": "All farms"
+      },
+      "columns": {
+        "id": "ID",
+        "mission": "Mission",
+        "date": "Date",
+        "status": "Status",
+        "area": "Area (ha)",
+        "actions": "Actions",
+        "type": "Type",
+        "volume": "Volume (L)",
+        "density": "L/ha",
+        "generatedAt": "Generated",
+        "parcel": "Parcel",
+        "farm": "Farm",
+        "missions": "Missions",
+        "total": "Total"
+      },
+      "status": {
+        "PLANNED": "Planned",
+        "AUTHORIZED": "Authorized",
+        "IN_PROGRESS": "In progress",
+        "PAUSED": "Paused",
+        "COMPLETED": "Completed",
+        "CANCELLED": "Cancelled"
+      },
+      "reportType": {
+        "MISSION_SUMMARY": "Mission summary",
+        "PHYTOSANITARY": "Phytosanitary"
+      },
+      "actions": {
+        "download": "Download report",
+        "detail": "View detail",
+        "back": "Back to reports",
+        "exportJson": "Export JSON",
+        "exportCsv": "Export CSV",
+        "exportPdf": "Export PDF"
+      },
+      "indicators": {
+        "period": "Period",
+        "empty": "No indicators available."
+      },
+      "detail": {
+        "title": "Report",
+        "observations": "Observations",
+        "metrics": "Operational metrics",
+        "noMetrics": "No metrics recorded.",
+        "notFound": "Report not found."
+      },
+      "empty": "No records found.",
+      "loading": "Loading...",
+      "consumption": {
+        "byFarm": "Consumption by farm",
+        "details": "Report details"
+      },
+      "compare": {
+        "select": "Parcels to compare",
+        "hint": "Select at least two parcels to compare them.",
+        "intensity": "L/ha (relative)"
+      },
+      "pdf": {
+        "title": "AgriDron - Mission report"
+      }
     },
-    "simulator": {
-      "title": "Debug: weather simulator",
-      "hint": "Turn it on or off with debugMode in src/environments/environment.development.ts. The real data is not modified.",
-      "reset": "Back to real data"
-    },
-    "severity": {
-      "HIGH": "High",
-      "MEDIUM": "Medium",
-      "LOW": "Low"
-    }
-  },
-  "analytics": {
-    "title": "Reports and history",
-    "tabs": {
-      "missions": "Missions",
-      "supplyUsage": "Supply usage",
-      "indicators": "Indicators",
-      "compare": "Compare parcels"
-    },
-    "filter": {
-      "from": "From",
-      "to": "To",
-      "apply": "Filter",
-      "clear": "Clear",
-      "farm": "Farm",
-      "allFarms": "All farms"
-    },
-    "columns": {
-      "id": "ID",
-      "mission": "Mission",
-      "date": "Date",
-      "status": "Status",
-      "area": "Area (ha)",
-      "actions": "Actions",
-      "type": "Type",
-      "volume": "Volume (L)",
-      "density": "L/ha",
-      "generatedAt": "Generated",
-      "parcel": "Parcel",
-      "farm": "Farm",
-      "missions": "Missions",
-      "total": "Total"
-    },
-    "status": {
-      "PLANNED": "Planned",
-      "AUTHORIZED": "Authorized",
-      "IN_PROGRESS": "In progress",
-      "PAUSED": "Paused",
-      "COMPLETED": "Completed",
-      "CANCELLED": "Cancelled"
-    },
-    "reportType": {
-      "MISSION_SUMMARY": "Mission summary",
-      "PHYTOSANITARY": "Phytosanitary"
-    },
-    "actions": {
-      "download": "Download report",
-      "detail": "View detail",
-      "back": "Back to reports",
-      "exportJson": "Export JSON",
-      "exportCsv": "Export CSV",
-      "exportPdf": "Export PDF"
-    },
-    "indicators": {
-      "period": "Period",
-      "empty": "No indicators available."
-    },
-    "detail": {
-      "title": "Report",
-      "observations": "Observations",
-      "metrics": "Operational metrics",
-      "noMetrics": "No metrics recorded.",
-      "notFound": "Report not found."
-    },
-    "empty": "No records found.",
-    "loading": "Loading...",
-    "consumption": {
-      "byFarm": "Consumption by farm",
-      "details": "Report details"
-    },
-    "compare": {
-      "select": "Parcels to compare",
-      "hint": "Select at least two parcels to compare them.",
-      "intensity": "L/ha (relative)"
-    },
-    "pdf": {
-      "title": "AgriDron - Mission report"
-    }
-  },
-  "drone": {
-    "title": "Drone fleet management",
-    "status": {
-      "AVAILABLE": "Available",
-      "IN-FLIGHT": "In flight",
-      "MAINTENANCE": "Maintenance",
-      "OUT-OF-SERVICE": "out of service"
-    },
-    "serial": "SN",
-    "battery": "Battery",
-    "nozzle": "Nozzle",
-    "tankCapacity": "Tank capacity",
-    "noNozzle": "No nozzle",
-    "compatible": "Compatible",
-    "nextService": "Next service",
-    "noPhoto": "No photo",
-    "loading": "Loading drones...",
-    "empty": "No drones to show",
-    "actions": {
-      "details": "View details",
-      "maintenance": "View maintenance",
-      "new": " Add New drone",
-      "nozzles" : "Spray nozzles"
-    }
-  },
-  "agrochemical": {
-    "title": "Agrochemicals",
-    "loading": "Loading agrochemicals...",
-    "empty": "There are no agrochemicals registered yet.",
-    "name": "Commercial name",
-    "type": "Type",
-    "activeIngredient": "Active ingredient",
-    "recommendedDose": "Recommended dose (L/ha)",
-    "recommendedDoseShort": "Dose (L/ha)",
-    "stock": "Stock (L)",
-    "stockShort": "Stock (L)",
-    "minimumStock": "Minimum stock (L)",
-    "minimumStockShort": "Minimum (L)",
-    "expiration": "Expiration date",
-    "lowStock": "Low stock",
-    "expired": "Expired",
-    "types": {
-      "herbicide": "Herbicide",
-      "insecticide": "Insecticide",
-      "fungicide": "Fungicide",
-      "fertilizer": "Fertilizer",
-      "other": "Other"
-    },
-    "actions": {
-      "new": "New agrochemical"
-    },
-    "create": {
-      "title": "New agrochemical",
-      "confirm": "Register agrochemical"
-    },
-    "errors": {
-      "nameRequired": "Enter the commercial name (up to 60 characters)",
-      "typeRequired": "Select a type",
-      "activeIngredientRequired": "The active ingredient is required",
-      "doseRequired": "The recommended dose is required (0.01 to 100 L/ha)",
-      "stockInvalid": "Enter a quantity of 0 liters or more",
-      "expirationRequired": "Enter the expiration date",
-      "expired": "The expiration date cannot be in the past",
-      "duplicate": "A product with this commercial name already exists"
-    }
-  },
-  "nozzle": {
-    "title": "Nozzles",
-    "loading": "Loading nozzles...",
-    "empty": "There are no nozzles registered yet.",
-    "type": "Type",
-    "diameter": "Diameter",
-    "good": "Good",
-    "worn": "Worn",
-    "damaged": "Damaged",
-    "total": "Total",
-    "types": {
-      "flat-fan": "Flat fan",
-      "hollow-cone": "Hollow cone",
-      "full-cone": "Full cone",
-      "air-induction": "Air induction"
-    },
-    "actionsColumn": "Actions",
-    "actions": {
-      "new": "New nozzle",
-      "restock": "Restock",
-      "updateStatus": "Update status",
-      "change": "Change nozzle"
-    },
-    "create": {
-      "title": "New nozzle",
-      "diameter": "Diameter (mm)",
-      "units": "Initial good units",
-      "other": "Other...",
-      "customType": "Type name",
-      "confirm": "Register nozzle"
-    },
-    "restock": {
-      "title": "Restock",
-      "current": "Good units now",
-      "units": "Units to add",
-      "confirm": "Add stock"
-    },
-    "statusUpdate": {
-      "title": "Update status",
-      "from": "From state",
-      "to": "To state",
-      "quantity": "Units to move",
-      "confirm": "Update"
-    },
-    "change": {
-      "title": "Change nozzle",
-      "current": "Current nozzle",
-      "newNozzle": "New nozzle",
-      "noStock": "No stock",
-      "wornWarning": "No good units are left: a worn one will be installed.",
-      "retiredState": "State of the removed nozzle",
-      "retiredHint": "It goes back to the warehouse in this state.",
-      "inFlight": "A drone in flight cannot change its nozzle.",
-      "confirm": "Change nozzle"
-    },
-    "errors": {
-      "typeRequired": "Select a type",
-      "customInvalid": "Enter a name of up to 40 characters",
-      "diameterRange": "Enter a diameter from 0.1 to 50 mm",
-      "unitsInvalid": "Enter a whole number, 0 or more",
-      "restockRange": "Enter a whole number from 1 to 1000",
-      "duplicate": "This type and diameter already exist. Use Restock instead.",
-      "sameState": "Choose two different states",
-      "exceeds": "There are only {{max}} units in that state",
-      "retiredRequired": "Select the state of the removed nozzle"
-    }
-  },
-  "iam": {
-    "signIn": {
-      "title": "Iniciar Sesión",
-      "subtitle": "Ingresa tus credenciales para acceder a AgriDron",
-      "username": "Nombre de usuario",
-      "usernamePlaceholder": "ej. jdoe",
-      "usernameRequired": "El nombre de usuario es obligatorio",
-      "password": "Contraseña",
-      "passwordRequired": "La contraseña es obligatoria",
-      "passwordMinLength": "Mínimo 4 caracteres",
-      "showPassword": "Mostrar contraseña",
-      "hidePassword": "Ocultar contraseña",
-      "signingIn": "Iniciando sesión...",
-      "submit": "Ingresar",
-      "noAccount": "¿No tienes una cuenta?",
-      "signUpLink": "Regístrate aquí",
-      "invalidCredentials": "Credenciales inválidas"
-    },
-    "signUp": {
-      "title": "Crear Cuenta",
-      "subtitle": "Regístrate en la plataforma AgriDron",
-      "username": "Nombre de usuario",
-      "usernamePlaceholder": "ej. jdoe",
-      "usernameRequired": "El nombre de usuario es obligatorio",
-      "usernameMinLength": "Mínimo 3 caracteres",
-      "email": "Correo electrónico",
-      "emailPlaceholder": "ej. usuario@ejemplo.com",
-      "emailRequired": "El correo electrónico es obligatorio",
-      "emailInvalid": "Formato de correo no válido",
-      "password": "Contraseña",
-      "passwordRequired": "La contraseña es obligatoria",
-      "passwordMinLength": "Mínimo 6 caracteres",
-      "showPassword": "Mostrar contraseña",
-      "hidePassword": "Ocultar contraseña",
-      "role": "Rol en el sistema",
-      "roleRequired": "Debes seleccionar un rol",
-      "signingUp": "Registrando cuenta...",
-      "submit": "Registrarse",
-      "hasAccount": "¿Ya tienes una cuenta?",
-      "signInLink": "Inicia sesión",
-      "signUpError": "Error al registrar usuario"
-    },
-    "profile": {
-      "title": "Perfil de Usuario",
-      "subtitle": "Información de la cuenta activa",
-      "username": "Usuario",
-      "email": "Correo electrónico",
-      "role": "Rol asignado",
-      "noSession": "No hay una sesión iniciada actualmente.",
-      "signIn": "Iniciar Sesión",
-      "goToFarms": "Ir a Fincas",
-      "signOut": "Cerrar Sesión"
-    }
-  },
-  "home": {
-    "greeting": "Hello {username}, welcome",
-    "subtitle": "Overview of your agricultural operation",
-    "metricsTitle": "Metrics",
-    "shortcutsTitle": "Quick access",
-    "metrics": {
-      "farms": "Farms",
-      "parcels": "Parcels",
-      "crops": "Crops",
-      "fumigationAreas": "Fumigation areas"
-    },
-    "actions": {
-      "farms": "View farms",
-      "analytics": "View reports"
-    }
-  },
-  "detail": {
-    "title": "Drone details",
-    "back": "Back to drones",
-    "status": "Operational status",
-    "lastService": "Last maintenance",
-    "notFound": "Drone not found",
-    "edit": "Edit drone"
-  },
-  "droneForm": {
-    "title": "Edit drone",
-    "createTitle": "New drone",
-    "loading": "Loading drone...",
-    "notFound": "Drone not found.",
-    "serialNumber": "Serial number",
-    "model": "Model",
-    "batteryLevel": "Battery level (%)",
-    "tankCapacity": "Tank capacity (L)",
-    "status": "Status",
-    "nozzle": "Nozzle",
-    "nozzleHint": "To change a registered drone's nozzle, use Change nozzle in its details.",
-    "lastMaintenance": "Last maintenance",
-    "nextMaintenance": "Next maintenance",
-    "imageUrl": "Image URL",
-    "cancel": "Cancel",
-    "save": "Save changes",
-    "create": "Register drone",
-    "errors": {
-      "serialRequired": "Serial number is required",
-      "serialDuplicate": "A drone with this serial number already exists",
-      "modelRequired": "Model is required",
-      "batteryRange": "Enter a value from 0 to 100",
-      "tankRange": "Enter a value from 1 to 100 liters",
-      "nozzleRequired": "Select a nozzle",
-      "invalidDates": "Next maintenance cannot be before last maintenance."
-    }
-  },
-  "maintenance": {
-    "title": "Maintenance history",
-    "loading": "Loading maintenance records...",
-    "empty": "This drone has no maintenance records yet.",
-    "date": "Date",
-    "description": "Description",
-    "technician": "Technician",
-    "viewDrone": "View drone details",
-    "type": {
-      "label": "Type",
-      "PREVENTIVE": "Preventive",
-      "CORRECTIVE": "Corrective"
-    }
-  },
-  "errors": {
-    "notFound": "Not found",
-    "network": "Cannot reach the server",
     "drone": {
-      "load": "Could not load drones",
-      "create": "Could not register the drone",
-      "update": "Could not update the drone",
-      "delete": "Could not delete the drone",
-      "changeNozzle": "Could not change the nozzle"
-    },
-    "nozzle": {
-      "create": "Could not register the nozzle",
-      "update": "Could not update the nozzle"
+      "title": "Drone fleet management",
+      "status": {
+        "AVAILABLE": "Available",
+        "IN-FLIGHT": "In flight",
+        "MAINTENANCE": "Maintenance",
+        "OUT-OF-SERVICE": "out of service"
+      },
+      "serial": "SN",
+      "battery": "Battery",
+      "nozzle": "Nozzle",
+      "tankCapacity": "Tank capacity",
+      "noNozzle": "No nozzle",
+      "compatible": "Compatible",
+      "nextService": "Next service",
+      "noPhoto": "No photo",
+      "loading": "Loading drones...",
+      "empty": "No drones to show",
+      "actions": {
+        "details": "View details",
+        "maintenance": "View maintenance",
+        "new": " Add New drone",
+        "nozzles": "Spray nozzles"
+      }
     },
     "agrochemical": {
-      "load": "Could not load agrochemicals",
-      "create": "Could not register the agrochemical"
+      "title": "Agrochemicals",
+      "loading": "Loading agrochemicals...",
+      "empty": "There are no agrochemicals registered yet.",
+      "name": "Commercial name",
+      "type": "Type",
+      "activeIngredient": "Active ingredient",
+      "recommendedDose": "Recommended dose (L/ha)",
+      "recommendedDoseShort": "Dose (L/ha)",
+      "stock": "Stock (L)",
+      "stockShort": "Stock (L)",
+      "minimumStock": "Minimum stock (L)",
+      "minimumStockShort": "Minimum (L)",
+      "expiration": "Expiration date",
+      "lowStock": "Low stock",
+      "expired": "Expired",
+      "types": {
+        "herbicide": "Herbicide",
+        "insecticide": "Insecticide",
+        "fungicide": "Fungicide",
+        "fertilizer": "Fertilizer",
+        "other": "Other"
+      },
+      "actions": {
+        "new": "New agrochemical"
+      },
+      "create": {
+        "title": "New agrochemical",
+        "confirm": "Register agrochemical"
+      },
+      "errors": {
+        "nameRequired": "Enter the commercial name (up to 60 characters)",
+        "typeRequired": "Select a type",
+        "activeIngredientRequired": "The active ingredient is required",
+        "doseRequired": "The recommended dose is required (0.01 to 100 L/ha)",
+        "stockInvalid": "Enter a quantity of 0 liters or more",
+        "expirationRequired": "Enter the expiration date",
+        "expired": "The expiration date cannot be in the past",
+        "duplicate": "A product with this commercial name already exists"
+      }
+    },
+    "nozzle": {
+      "title": "Nozzles",
+      "loading": "Loading nozzles...",
+      "empty": "There are no nozzles registered yet.",
+      "type": "Type",
+      "diameter": "Diameter",
+      "good": "Good",
+      "worn": "Worn",
+      "damaged": "Damaged",
+      "total": "Total",
+      "types": {
+        "flat-fan": "Flat fan",
+        "hollow-cone": "Hollow cone",
+        "full-cone": "Full cone",
+        "air-induction": "Air induction"
+      },
+      "actionsColumn": "Actions",
+      "actions": {
+        "new": "New nozzle",
+        "restock": "Restock",
+        "updateStatus": "Update status",
+        "change": "Change nozzle"
+      },
+      "create": {
+        "title": "New nozzle",
+        "diameter": "Diameter (mm)",
+        "units": "Initial good units",
+        "other": "Other...",
+        "customType": "Type name",
+        "confirm": "Register nozzle"
+      },
+      "restock": {
+        "title": "Restock",
+        "current": "Good units now",
+        "units": "Units to add",
+        "confirm": "Add stock"
+      },
+      "statusUpdate": {
+        "title": "Update status",
+        "from": "From state",
+        "to": "To state",
+        "quantity": "Units to move",
+        "confirm": "Update"
+      },
+      "change": {
+        "title": "Change nozzle",
+        "current": "Current nozzle",
+        "newNozzle": "New nozzle",
+        "noStock": "No stock",
+        "wornWarning": "No good units are left: a worn one will be installed.",
+        "retiredState": "State of the removed nozzle",
+        "retiredHint": "It goes back to the warehouse in this state.",
+        "inFlight": "A drone in flight cannot change its nozzle.",
+        "confirm": "Change nozzle"
+      },
+      "errors": {
+        "typeRequired": "Select a type",
+        "customInvalid": "Enter a name of up to 40 characters",
+        "diameterRange": "Enter a diameter from 0.1 to 50 mm",
+        "unitsInvalid": "Enter a whole number, 0 or more",
+        "restockRange": "Enter a whole number from 1 to 1000",
+        "duplicate": "This type and diameter already exist. Use Restock instead.",
+        "sameState": "Choose two different states",
+        "exceeds": "There are only {{max}} units in that state",
+        "retiredRequired": "Select the state of the removed nozzle"
+      }
+    },
+    "iam": {
+      "signIn": {
+        "title": "Iniciar Sesión",
+        "subtitle": "Ingresa tus credenciales para acceder a AgriDron",
+        "username": "Nombre de usuario",
+        "usernamePlaceholder": "ej. jdoe",
+        "usernameRequired": "El nombre de usuario es obligatorio",
+        "password": "Contraseña",
+        "passwordRequired": "La contraseña es obligatoria",
+        "passwordMinLength": "Mínimo 4 caracteres",
+        "showPassword": "Mostrar contraseña",
+        "hidePassword": "Ocultar contraseña",
+        "signingIn": "Iniciando sesión...",
+        "submit": "Ingresar",
+        "noAccount": "¿No tienes una cuenta?",
+        "signUpLink": "Regístrate aquí",
+        "invalidCredentials": "Credenciales inválidas"
+      },
+      "signUp": {
+        "title": "Crear Cuenta",
+        "subtitle": "Regístrate en la plataforma AgriDron",
+        "username": "Nombre de usuario",
+        "usernamePlaceholder": "ej. jdoe",
+        "usernameRequired": "El nombre de usuario es obligatorio",
+        "usernameMinLength": "Mínimo 3 caracteres",
+        "email": "Correo electrónico",
+        "emailPlaceholder": "ej. usuario@ejemplo.com",
+        "emailRequired": "El correo electrónico es obligatorio",
+        "emailInvalid": "Formato de correo no válido",
+        "password": "Contraseña",
+        "passwordRequired": "La contraseña es obligatoria",
+        "passwordMinLength": "Mínimo 6 caracteres",
+        "showPassword": "Mostrar contraseña",
+        "hidePassword": "Ocultar contraseña",
+        "role": "Rol en el sistema",
+        "roleRequired": "Debes seleccionar un rol",
+        "signingUp": "Registrando cuenta...",
+        "submit": "Registrarse",
+        "hasAccount": "¿Ya tienes una cuenta?",
+        "signInLink": "Inicia sesión",
+        "signUpError": "Error al registrar usuario"
+      },
+      "profile": {
+        "title": "Perfil de Usuario",
+        "subtitle": "Información de la cuenta activa",
+        "username": "Usuario",
+        "email": "Correo electrónico",
+        "role": "Rol asignado",
+        "noSession": "No hay una sesión iniciada actualmente.",
+        "signIn": "Iniciar Sesión",
+        "goToFarms": "Ir a Fincas",
+        "signOut": "Cerrar Sesión"
+      }
+    },
+    "home": {
+      "greeting": "Hello {username}, welcome",
+      "subtitle": "Overview of your agricultural operation",
+      "metricsTitle": "Metrics",
+      "shortcutsTitle": "Quick access",
+      "metrics": {
+        "farms": "Farms",
+        "parcels": "Parcels",
+        "crops": "Crops",
+        "fumigationAreas": "Fumigation areas"
+      },
+      "actions": {
+        "farms": "View farms",
+        "analytics": "View reports"
+      }
+    },
+    "detail": {
+      "title": "Drone details",
+      "back": "Back to drones",
+      "status": "Operational status",
+      "lastService": "Last maintenance",
+      "notFound": "Drone not found",
+      "edit": "Edit drone"
+    },
+    "droneForm": {
+      "title": "Edit drone",
+      "createTitle": "New drone",
+      "loading": "Loading drone...",
+      "notFound": "Drone not found.",
+      "serialNumber": "Serial number",
+      "model": "Model",
+      "batteryLevel": "Battery level (%)",
+      "tankCapacity": "Tank capacity (L)",
+      "status": "Status",
+      "nozzle": "Nozzle",
+      "nozzleHint": "To change a registered drone's nozzle, use Change nozzle in its details.",
+      "lastMaintenance": "Last maintenance",
+      "nextMaintenance": "Next maintenance",
+      "imageUrl": "Image URL",
+      "cancel": "Cancel",
+      "save": "Save changes",
+      "create": "Register drone",
+      "errors": {
+        "serialRequired": "Serial number is required",
+        "serialDuplicate": "A drone with this serial number already exists",
+        "modelRequired": "Model is required",
+        "batteryRange": "Enter a value from 0 to 100",
+        "tankRange": "Enter a value from 1 to 100 liters",
+        "nozzleRequired": "Select a nozzle",
+        "invalidDates": "Next maintenance cannot be before last maintenance."
+      }
     },
     "maintenance": {
-      "load": "Could not load maintenance records",
-      "create": "Could not register the maintenance record",
-      "update": "Could not update the maintenance record",
-      "delete": "Could not delete the maintenance record"
+      "title": "Maintenance history",
+      "loading": "Loading maintenance records...",
+      "empty": "This drone has no maintenance records yet.",
+      "date": "Date",
+      "description": "Description",
+      "technician": "Technician",
+      "viewDrone": "View drone details",
+      "type": {
+        "label": "Type",
+        "PREVENTIVE": "Preventive",
+        "CORRECTIVE": "Corrective"
+      }
+    },
+    "errors": {
+      "notFound": "Not found",
+      "network": "Cannot reach the server",
+      "drone": {
+        "load": "Could not load drones",
+        "create": "Could not register the drone",
+        "update": "Could not update the drone",
+        "delete": "Could not delete the drone",
+        "changeNozzle": "Could not change the nozzle"
+      },
+      "nozzle": {
+        "create": "Could not register the nozzle",
+        "update": "Could not update the nozzle"
+      },
+      "agrochemical": {
+        "load": "Could not load agrochemicals",
+        "create": "Could not register the agrochemical"
+      },
+      "maintenance": {
+        "load": "Could not load maintenance records",
+        "create": "Could not register the maintenance record",
+        "update": "Could not update the maintenance record",
+        "delete": "Could not delete the maintenance record"
+      }
     }
   }
 }
