@@ -180,6 +180,7 @@
     "actions": {
       "authorize": "Authorize mission",
       "start": "Start mission",
+      "startNow": "Start mission",
       "pause": "Pause mission",
       "resume": "Resume mission",
       "incident": "Report incident",
@@ -239,6 +240,8 @@
       "title": "Weather warning",
       "heading": "Weather conditions not recommended",
       "message": "Check the current conditions around the parcel. Rescheduling the mission or adjusting the flight window is recommended.",
+      "okHeading": "Favorable conditions",
+      "okMessage": "Wind, temperature and rain are within the recommended limits for spraying.",
       "rain": "Rain",
       "wind": "Wind",
       "temperature": "Temperature"
