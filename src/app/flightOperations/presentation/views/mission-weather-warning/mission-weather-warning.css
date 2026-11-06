@@ -28,3 +28,7 @@
     flex-direction: column;
     gap: 8px;
 }
+.warning__banner--ok {
+    background: #e8f6f1;
+    color: #1b463c;
+}

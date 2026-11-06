@@ -70,6 +70,7 @@ export class MissionComplete {
             this.reportStore.addReport(new MissionReport(
                 0,
                 this.missionId,
+                this.mission()?.parcelId ?? 0,
                 ReportType.PHYTOSANITARY,
                 result?.treatedArea ?? 0,
                 result?.appliedVolume ?? 0,

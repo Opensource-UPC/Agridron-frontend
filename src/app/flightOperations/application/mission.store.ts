@@ -179,9 +179,9 @@ export class MissionStore {
 
         this.missionResultStore.addMissionResult(new MissionResult(0, mission.id, area, volume, observations));
         this.missionHistoryStore.addHistory(
-            new MissionHistory(0, mission.id, MissionStatus.COMPLETED, completedAt));
+            new MissionHistory(0, mission.id, mission.parcelId, MissionStatus.COMPLETED, completedAt));
         this.missionReportStore.addReport(
-            new MissionReport(0, mission.id, ReportType.MISSION_SUMMARY, area ?? 0, volume ?? 0, observations, completedAt, []));
+            new MissionReport(0, mission.id, mission.parcelId, ReportType.MISSION_SUMMARY, area ?? 0, volume ?? 0, observations, completedAt, []));
     };
 
     /**

@@ -25,6 +25,11 @@ export class MissionWeatherWarning {
     private readonly farmStore = inject(FarmStore);
     private readonly weatherService = inject(WeatherService);
 
+    readonly suitable = computed(() => {
+        const c = this.condition();
+        return !!c && this.weatherService.isSuitable(c);
+    });
+
     readonly missionId = Number(this.route.snapshot.paramMap.get('id'));
     readonly store = inject(MissionStore);
     readonly mission = this.store.getMissionById(this.missionId);
