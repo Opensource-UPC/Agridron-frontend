@@ -224,9 +224,51 @@
   },
   "mission": {
     "title": "Missions",
+    "subtitle": "Flight operations and mission monitoring",
     "newMission": "New mission",
     "loading": "Loading missions...",
     "notFound": "Mission not found",
+    "empty": "No missions found.",
+    "emptyPrompt": "Start by planning your first fumigation mission.",
+    "deleteConfirm": "Are you sure you want to delete this mission?",
+    "next": "Next",
+    "back": "Back",
+    "save": "Save mission",
+    "filter": {
+      "all": "All",
+      "planned": "Planned",
+      "inProgress": "In progress",
+      "completed": "Completed",
+      "paused": "Paused"
+    },
+    "wizard": {
+      "step1": "Location & Parcel",
+      "step2": "Date & Drone",
+      "step3": "Supplies & Flight",
+      "step4": "Confirmation"
+    },
+    "summary": {
+      "title": "Mission Summary",
+      "areaSelected": "Selected area",
+      "farm": "Farm",
+      "parcel": "Parcel",
+      "crop": "Crop",
+      "dateTime": "Date and time",
+      "drone": "Assigned drone",
+      "agrochemical": "Agrochemical",
+      "dose": "Dose",
+      "flightHeight": "Flight height",
+      "flightSpeed": "Flight speed",
+      "sprayRate": "Spray rate",
+      "overlap": "Overlap",
+      "notes": "Notes and remarks"
+    },
+    "card": {
+      "crop": "Crop",
+      "drone": "Drone",
+      "date": "Date",
+      "progress": "Progress"
+    },
     "columns": {
       "id": "ID",
       "parcel": "Parcel",

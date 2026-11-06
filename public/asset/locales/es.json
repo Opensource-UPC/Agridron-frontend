@@ -224,9 +224,51 @@
   },
   "mission": {
     "title": "Misiones",
+    "subtitle": "Monitoreo y administración de vuelos y operaciones",
     "newMission": "Nueva misión",
     "loading": "Cargando misiones...",
     "notFound": "Misión no encontrada",
+    "empty": "No hay misiones registradas.",
+    "emptyPrompt": "Comienza planificando tu primera misión de fumigación.",
+    "deleteConfirm": "¿Estás seguro de que deseas eliminar esta misión?",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "save": "Guardar misión",
+    "filter": {
+      "all": "Todas",
+      "planned": "Planificadas",
+      "inProgress": "En progreso",
+      "completed": "Completadas",
+      "paused": "Pausadas"
+    },
+    "wizard": {
+      "step1": "Ubicación y Parcela",
+      "step2": "Fecha y Horario",
+      "step3": "Insumos y Parámetros",
+      "step4": "Confirmación"
+    },
+    "summary": {
+      "title": "Resumen de la misión",
+      "areaSelected": "Área seleccionada",
+      "farm": "Finca",
+      "parcel": "Parcela",
+      "crop": "Cultivo",
+      "dateTime": "Fecha y hora",
+      "drone": "Dron asignado",
+      "agrochemical": "Agroquímico",
+      "dose": "Dosis",
+      "flightHeight": "Altura de vuelo",
+      "flightSpeed": "Velocidad de vuelo",
+      "sprayRate": "Tasa de aspersión",
+      "overlap": "Solapamiento",
+      "notes": "Notas u observaciones"
+    },
+    "card": {
+      "crop": "Cultivo",
+      "drone": "Dron",
+      "date": "Fecha",
+      "progress": "Progreso"
+    },
     "columns": {
       "id": "ID",
       "parcel": "Parcela",
