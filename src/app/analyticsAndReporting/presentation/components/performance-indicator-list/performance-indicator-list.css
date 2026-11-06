@@ -5,13 +5,31 @@
   padding: 16px 0;
 }
 
+mat-card {
+  border-radius: var(--agd-radius-card);
+}
+
+mat-card-title {
+  font-size: var(--agd-font-size-body);
+  font-weight: var(--agd-font-weight-regular);
+  color: var(--agd-color-text-muted);
+}
+
+mat-card-subtitle {
+  font-size: var(--agd-font-size-label);
+  font-weight: var(--agd-font-weight-regular);
+  color: var(--agd-color-text-muted);
+}
+
 .indicator__value {
-  font-size: 2rem;
-  font-weight: 500;
-  margin: 8px 0 0;
+  margin: var(--agd-space-1) 0 0;
+  font-size: var(--agd-font-size-view-title);
+  font-weight: var(--agd-font-weight-medium);
+  color: var(--agd-color-primary);
 }
 
 .indicator__value span {
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: var(--agd-font-size-body);
+  font-weight: var(--agd-font-weight-regular);
+  color: var(--agd-color-text-muted);
 }

@@ -13,7 +13,7 @@ const SVG_ICONS = [
   'menu', 'home', 'farm', 'parcel', 'crop', 'mission', 'fumigation', 'analytics', 'drone', 'profile',
   'agrochemical', 'chevron-right', 'humidity', 'wind', 'precipitation', 'rain-probability', 'check-circle', 'alert',
   'lock', 'mail', 'eye', 'eye-off', 'role', 'logout',
-  'plus', 'location', 'chevron-left', 'edit', 'trash', 'image', 'area', 'polygon'
+  'plus', 'location', 'chevron-left', 'edit', 'trash', 'image', 'area', 'polygon', 'tag'
 ];
 
 export const appConfig: ApplicationConfig = {

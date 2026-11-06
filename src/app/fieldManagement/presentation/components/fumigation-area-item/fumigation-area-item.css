@@ -1,11 +1,81 @@
-.fumigation-card {
-  max-width: 100%;
-  height: 100%;
-  overflow: hidden;
+:host {
+  display: block;
+  min-width: 0;
 }
 
-.fumigation-card__bar {
-  height: 8px;
-  border-radius: 4px;
-  background-color: var(--mat-sys-primary, #179A7A);
+.fumigation-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: var(--agd-radius-card);
+}
+
+/* Content: icon + area / parcel */
+
+.fumigation-card__content {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--agd-space-2);
+  padding: var(--agd-space-2) var(--agd-space-2) 0;
+}
+
+.fumigation-card__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--agd-radius-card);
+  background: var(--agd-color-secondary-tint);
+  color: var(--agd-color-secondary);
+}
+
+.fumigation-card__icon mat-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.fumigation-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.fumigation-card__area,
+.fumigation-card__parcel {
+  margin: 0;
+}
+
+.fumigation-card__area {
+  font-size: var(--agd-font-size-section-title);
+  font-weight: var(--agd-font-weight-medium);
+  line-height: 24px;
+  color: var(--agd-color-primary);
+}
+
+.fumigation-card__parcel {
+  font-size: var(--agd-font-size-body);
+  font-weight: var(--agd-font-weight-medium);
+  color: var(--agd-color-primary);
+  overflow-wrap: anywhere;
+}
+
+.fumigation-card__parcel-label {
+  margin-right: 4px;
+  font-weight: var(--agd-font-weight-regular);
+  color: var(--agd-color-text-muted);
+}
+
+/* Actions: edit on one side, delete on the other */
+
+.fumigation-card__actions {
+  justify-content: space-between;
+  padding: var(--agd-space-1);
+}
+
+.fumigation-card__actions mat-icon {
+  width: 18px;
+  height: 18px;
 }

@@ -23,6 +23,6 @@
 .comparison__bar {
   height: 12px;
   border-radius: 6px;
-  background: #42a5f5;
+  background: var(--agd-color-secondary);
   min-width: 2px;
 }

@@ -1,33 +1,158 @@
-.fumigation-area-list__header {
+.fumigation-area-list {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 16px;
+  flex-direction: column;
+  gap: var(--agd-space-3);
 }
 
-.fumigation-area-list__header h2 {
+/* Header */
+
+.fumigation-area-list__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--agd-space-2);
+}
+
+.fumigation-area-list__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--agd-space-1);
+  min-width: 0;
+}
+
+.fumigation-area-list__title,
+.fumigation-area-list__subtitle,
+.fumigation-area-list__error,
+.fumigation-area-list__empty-text {
   margin: 0;
 }
 
-.fumigation-area-list__new-area {
-  --mat-button-filled-container-color: #179A7A;
-  --mat-button-filled-label-text-color: #FFFFFF;
+.fumigation-area-list__title {
+  font-size: var(--agd-font-size-view-title);
+  font-weight: var(--agd-font-weight-medium);
+  line-height: 36px;
+  color: var(--agd-color-primary);
 }
 
-.fumigation-area-list__parcel-select {
-  display: block;
-  width: 320px;
-  margin-bottom: 16px;
+.fumigation-area-list__subtitle {
+  font-size: var(--agd-font-size-body);
+  color: var(--agd-color-text-muted);
 }
+
+/* Parcel filter */
+
+.fumigation-area-list__filter {
+  width: 280px;
+}
+
+.fumigation-area-list__filter-icon {
+  width: 20px;
+  height: 20px;
+  margin: 0 4px 0 12px;
+  color: var(--agd-color-text-muted);
+}
+
+/* Error */
 
 .fumigation-area-list__error {
-  color: var(--mat-sys-error, #b3261e);
-  margin: 0 0 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--agd-space-1);
+  padding: 12px var(--agd-space-2);
+  border-radius: 8px;
+  background: var(--agd-alert-high-bg);
+  color: var(--agd-color-error);
+  font-size: var(--agd-font-size-body);
 }
+
+.fumigation-area-list__error-icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+/* Grid */
 
 .fumigation-area-list__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--agd-space-2);
+}
+
+/* Skeleton (same shape as a fumigation area card) */
+
+.fumigation-area-list__skeleton-card {
+  display: flex;
+  align-items: center;
+  gap: var(--agd-space-2);
+  padding: var(--agd-space-2) var(--agd-space-2) 56px;
+  border: 1px solid var(--agd-color-border);
+  border-radius: var(--agd-radius-card);
+  background: var(--agd-color-surface);
+}
+
+.fumigation-area-list__skeleton-icon {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--agd-radius-card);
+}
+
+.fumigation-area-list__skeleton-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--agd-space-1);
+}
+
+.fumigation-area-list__skeleton-line {
+  width: 50%;
+  height: 16px;
+}
+
+.fumigation-area-list__skeleton-line--title {
+  width: 40%;
+  height: 24px;
+}
+
+/* Empty states */
+
+.fumigation-area-list__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--agd-space-2);
+  padding: var(--agd-space-4) var(--agd-space-2);
+  border: 1px solid var(--agd-color-border);
+  border-radius: var(--agd-radius-card);
+  background: var(--agd-color-surface);
+  text-align: center;
+}
+
+.fumigation-area-list__empty-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--agd-color-secondary-tint);
+  color: var(--agd-color-secondary);
+}
+
+.fumigation-area-list__empty-icon mat-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.fumigation-area-list__empty-text {
+  font-size: var(--agd-font-size-body);
+  color: var(--agd-color-text-muted);
+}
+
+@media (max-width: 599px) {
+  .fumigation-area-list__header > button,
+  .fumigation-area-list__filter {
+    width: 100%;
+  }
 }

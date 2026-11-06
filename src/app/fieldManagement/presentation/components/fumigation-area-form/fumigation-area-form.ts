@@ -1,11 +1,12 @@
-import {Component, inject} from '@angular/core';
+import {Component, effect, inject, signal} from '@angular/core';
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {FumigationAreaStore} from '../../../application/fumigation-area.store';
 import {ParcelStore} from '../../../application/parcel.store';
 import {FumigationArea} from '../../../domain/model/fumigationArea.entity';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIcon} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {TranslatePipe} from '@ngx-translate/core';
@@ -15,7 +16,7 @@ import {TranslatePipe} from '@ngx-translate/core';
  */
 @Component({
   selector: 'app-fumigation-area-form',
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, ReactiveFormsModule, TranslatePipe],
+  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIcon, RouterLink, ReactiveFormsModule, TranslatePipe],
   templateUrl: './fumigation-area-form.html',
   styleUrl: './fumigation-area-form.css'
 })
@@ -51,22 +52,34 @@ export class FumigationAreaForm {
   fumigationAreaId: number | null = null;
 
   /**
+   * Fumigation area being edited; drives the form once the store has loaded it.
+   */
+  private readonly editingId = signal<number | null>(null);
+
+  private patched = false;
+
+  /**
    * Creates an instance of FumigationAreaForm and initializes the form based on route parameters.
    */
   constructor() {
     this.route.params.subscribe(params => {
       this.fumigationAreaId = params['id'] ? +params['id'] : null;
       this.isEdit = !!this.fumigationAreaId;
-      if (this.isEdit && this.fumigationAreaId) {
-        const id = this.fumigationAreaId;
-        const fumigationArea = this.store.getFumigationAreaById(id)();
-        if (fumigationArea) {
-          this.form.patchValue({
-            parcelId: fumigationArea.parcelId,
-            geometry: fumigationArea.geometry,
-            area: fumigationArea.area
-          });
-        }
+      this.patched = false;
+      this.editingId.set(this.fumigationAreaId);
+    });
+
+    // Fills the form as soon as the area is available (also when the page is opened directly).
+    effect(() => {
+      const id = this.editingId();
+      const fumigationArea = id ? this.store.getFumigationAreaById(id)() : undefined;
+      if (fumigationArea && !this.patched) {
+        this.patched = true;
+        this.form.patchValue({
+          parcelId: fumigationArea.parcelId,
+          geometry: fumigationArea.geometry,
+          area: fumigationArea.area
+        });
       }
     });
   }
@@ -75,7 +88,10 @@ export class FumigationAreaForm {
    * Submits the form to create or update the fumigation area.
    */
   submit() {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
     const value = this.form.getRawValue();
     const fumigationArea = new FumigationArea(

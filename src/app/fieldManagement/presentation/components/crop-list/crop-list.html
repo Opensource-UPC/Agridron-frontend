@@ -1,19 +1,48 @@
-<header class="crop-list__header">
-  <h2>{{ 'crop.title' | translate }}</h2>
-  <button matButton="filled" class="crop-list__new-crop" (click)="newCrop()">
-    <mat-icon>add_circle_outline</mat-icon>
-    {{ 'crop.newCrop' | translate }}
-  </button>
-</header>
+<section class="crop-list">
+  <header class="crop-list__header">
+    <div class="crop-list__intro">
+      <h1 class="crop-list__title">{{ 'crop.title' | translate }}</h1>
+      <p class="crop-list__subtitle">{{ 'crop.subtitle' | translate }}</p>
+    </div>
+    <button matButton="filled" type="button" (click)="newCrop()">
+      <mat-icon svgIcon="agd:plus" aria-hidden="true"/>
+      {{ 'crop.newCrop' | translate }}
+    </button>
+  </header>
 
-@if (error()) {
-  <p class="crop-list__error">{{ error() }}</p>
-}
-
-<div class="crop-list__grid">
-  @for (crop of crops(); track crop.id) {
-    <app-crop-item [crop]="crop" (edit)="editCrop($event)" (delete)="deleteCrop($event)"/>
-  } @empty {
-    <p>{{ emptyMessage() }}</p>
+  @if (error()) {
+    <p class="crop-list__error" role="alert">
+      <mat-icon class="crop-list__error-icon" svgIcon="agd:alert" aria-hidden="true"/>
+      <span>{{ error() }}</span>
+    </p>
   }
-</div>
+
+  @if (loading() && crops().length === 0) {
+    <div class="crop-list__grid" role="status" aria-busy="true" [attr.aria-label]="'crop.loading' | translate">
+      @for (placeholder of [1, 2, 3]; track placeholder) {
+        <div class="crop-list__skeleton-card" aria-hidden="true">
+          <span class="agd-skeleton crop-list__skeleton-icon"></span>
+          <div class="crop-list__skeleton-text">
+            <span class="agd-skeleton crop-list__skeleton-line crop-list__skeleton-line--title"></span>
+            <span class="agd-skeleton crop-list__skeleton-line"></span>
+          </div>
+        </div>
+      }
+    </div>
+  } @else if (crops().length === 0) {
+    <div class="crop-list__empty">
+      <span class="crop-list__empty-icon" aria-hidden="true"><mat-icon svgIcon="agd:crop"/></span>
+      <p class="crop-list__empty-text">{{ 'crop.empty' | translate }}</p>
+      <button matButton="filled" type="button" (click)="newCrop()">
+        <mat-icon svgIcon="agd:plus" aria-hidden="true"/>
+        {{ 'crop.newCrop' | translate }}
+      </button>
+    </div>
+  } @else {
+    <div class="crop-list__grid">
+      @for (crop of crops(); track crop.id) {
+        <app-crop-item [crop]="crop" (edit)="editCrop($event)" (delete)="deleteCrop($event)"/>
+      }
+    </div>
+  }
+</section>

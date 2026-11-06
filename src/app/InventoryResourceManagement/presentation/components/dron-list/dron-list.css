@@ -2,16 +2,17 @@
     display: block;
 }
 
-/* Cuadrícula responsiva: tantas columnas como quepan con un mínimo de 260px por tarjeta.
-   En pantalla ancha salen 3, como en tu diseño; en pantalla angosta baja a 2 o 1. */
+/* Cuadrícula responsiva: tantas columnas como quepan con un mínimo de 280px por tarjeta.
+   En pantalla ancha salen 3; en pantalla angosta baja a 2 o 1. */
 .drone-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--agd-space-2);
 }
 
 .drone-list__empty {
-    padding: 24px;
+    margin: 0;
+    padding: var(--agd-space-3);
     text-align: center;
-    color: #6b7280;
+    color: var(--agd-color-text-muted);
 }

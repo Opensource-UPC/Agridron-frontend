@@ -1,7 +1,16 @@
+:host {
+  display: block;
+  overflow-x: auto;
+  border: 1px solid var(--agd-color-border);
+  border-radius: var(--agd-radius-card);
+  background: var(--agd-color-surface);
+}
+
 .consumption-table {
   width: 100%;
+  min-width: 480px;
 }
 
 .consumption-table__total td {
-  font-weight: 600;
+  font-weight: var(--agd-font-weight-medium);
 }

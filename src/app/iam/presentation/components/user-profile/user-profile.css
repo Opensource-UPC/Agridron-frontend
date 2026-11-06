@@ -165,7 +165,11 @@
 }
 
 @media (max-width: 599px) {
+  .profile__actions {
+    flex-direction: column;
+  }
+
   .profile__actions > * {
-    flex: 1;
+    width: 100%;
   }
 }

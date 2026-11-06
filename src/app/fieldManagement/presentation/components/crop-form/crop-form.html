@@ -1,17 +1,63 @@
-<h1 class="title">{{ (isEdit ? 'crop.form.edit-title' : 'crop.form.new-title') | translate }}</h1>
-<form [formGroup]="form" (ngSubmit)="submit()">
-  <mat-form-field>
-    <mat-label>{{ 'crop.form.name' | translate }}</mat-label>
-    <input matInput formControlName="name" required>
-    @if (form.get('name')!.touched && form.get('name')!.hasError('required')) {
-      <mat-error>{{ 'crop.form.error.name-required' | translate }}</mat-error>
-    }
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>{{ 'crop.form.variety' | translate }}</mat-label>
-    <input matInput formControlName="variety">
-  </mat-form-field>
-  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
-    {{ (isEdit ? 'crop.form.update' : 'crop.form.create') | translate }}
-  </button>
-</form>
+<section class="crop-form">
+  <a matButton class="crop-form__back" routerLink="/crops">
+    <mat-icon svgIcon="agd:chevron-left" aria-hidden="true"/>
+    {{ 'crop.form.back' | translate }}
+  </a>
+
+  <header class="crop-form__header">
+    <h1 class="crop-form__title">{{ (isEdit ? 'crop.form.edit-title' : 'crop.form.new-title') | translate }}</h1>
+    <p class="crop-form__subtitle">{{ (isEdit ? 'crop.form.edit-subtitle' : 'crop.form.new-subtitle') | translate }}</p>
+  </header>
+
+  <div class="crop-form__layout">
+    <form class="crop-form__card" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <fieldset class="crop-form__section">
+        <legend class="crop-form__section-title">{{ 'crop.form.section-general' | translate }}</legend>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'crop.form.name' | translate }}</mat-label>
+          <mat-icon matPrefix class="crop-form__field-icon" svgIcon="agd:crop" aria-hidden="true"/>
+          <input matInput formControlName="name" required [placeholder]="'crop.form.namePlaceholder' | translate">
+          @if (form.get('name')!.touched && form.get('name')!.hasError('required')) {
+            <mat-error>{{ 'crop.form.error.name-required' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'crop.form.variety' | translate }}</mat-label>
+          <mat-icon matPrefix class="crop-form__field-icon" svgIcon="agd:tag" aria-hidden="true"/>
+          <input matInput formControlName="variety" [placeholder]="'crop.form.varietyPlaceholder' | translate">
+          <mat-hint>{{ 'crop.form.varietyHint' | translate }}</mat-hint>
+        </mat-form-field>
+      </fieldset>
+
+      <div class="crop-form__actions">
+        <a matButton="outlined" routerLink="/crops">{{ 'crop.form.cancel' | translate }}</a>
+        <button matButton="filled" type="submit">
+          {{ (isEdit ? 'crop.form.update' : 'crop.form.create') | translate }}
+        </button>
+      </div>
+    </form>
+
+    <aside class="crop-form__preview" [attr.aria-label]="'crop.form.preview' | translate">
+      <p class="crop-form__preview-title">{{ 'crop.form.preview' | translate }}</p>
+      <div class="crop-form__preview-card" aria-hidden="true">
+        <span class="crop-form__preview-icon"><mat-icon svgIcon="agd:crop"/></span>
+        <div class="crop-form__preview-text">
+          <p class="crop-form__preview-name" [class.crop-form__preview-empty]="!previewName">
+            {{ previewName || ('crop.form.name' | translate) }}
+          </p>
+          <p class="crop-form__preview-variety">
+            @if (previewVariety) {
+              <span class="crop-form__preview-variety-label">{{ 'crop.variety' | translate }}</span>
+              {{ previewVariety }}
+            } @else {
+              <span class="crop-form__preview-variety-label">{{ 'crop.noVariety' | translate }}</span>
+            }
+          </p>
+        </div>
+      </div>
+      <p class="crop-form__preview-hint">{{ 'crop.form.preview-hint' | translate }}</p>
+    </aside>
+  </div>
+</section>

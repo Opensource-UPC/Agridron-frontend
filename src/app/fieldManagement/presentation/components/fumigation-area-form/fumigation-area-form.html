@@ -1,34 +1,63 @@
-<h1 class="title">{{ (isEdit ? 'fumigationArea.form.edit-title' : 'fumigationArea.form.new-title') | translate }}</h1>
-<form [formGroup]="form" (ngSubmit)="submit()">
-  <mat-form-field>
-    <mat-label>{{ 'fumigationArea.form.parcel' | translate }}</mat-label>
-    <mat-select formControlName="parcelId" required>
-      @for (parcel of parcels(); track parcel.id) {
-        <mat-option [value]="parcel.id">{{ parcel.name }}</mat-option>
-      }
-    </mat-select>
-    @if (form.get('parcelId')!.touched && form.get('parcelId')!.hasError('required')) {
-      <mat-error>{{ 'fumigationArea.form.error.parcel-required' | translate }}</mat-error>
-    }
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>{{ 'fumigationArea.form.geometry' | translate }}</mat-label>
-    <textarea matInput rows="4" formControlName="geometry" required></textarea>
-    @if (form.get('geometry')!.touched && form.get('geometry')!.hasError('required')) {
-      <mat-error>{{ 'fumigationArea.form.error.geometry-required' | translate }}</mat-error>
-    }
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>{{ 'fumigationArea.form.area' | translate }}</mat-label>
-    <input matInput type="number" step="0.01" formControlName="area" required>
-    @if (form.get('area')!.touched && form.get('area')!.hasError('required')) {
-      <mat-error>{{ 'fumigationArea.form.error.area-required' | translate }}</mat-error>
-    }
-    @if (form.get('area')!.touched && form.get('area')!.hasError('min')) {
-      <mat-error>{{ 'fumigationArea.form.error.area-min' | translate }}</mat-error>
-    }
-  </mat-form-field>
-  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
-    {{ (isEdit ? 'fumigationArea.form.update' : 'fumigationArea.form.create') | translate }}
-  </button>
-</form>
+<section class="area-form">
+  <a matButton class="area-form__back" routerLink="/fumigation-areas">
+    <mat-icon svgIcon="agd:chevron-left" aria-hidden="true"/>
+    {{ 'fumigationArea.form.back' | translate }}
+  </a>
+
+  <header class="area-form__header">
+    <h1 class="area-form__title">{{ (isEdit ? 'fumigationArea.form.edit-title' : 'fumigationArea.form.new-title') | translate }}</h1>
+    <p class="area-form__subtitle">{{ (isEdit ? 'fumigationArea.form.edit-subtitle' : 'fumigationArea.form.new-subtitle') | translate }}</p>
+  </header>
+
+  <form class="area-form__card" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <fieldset class="area-form__section">
+      <legend class="area-form__section-title">{{ 'fumigationArea.form.section-general' | translate }}</legend>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'fumigationArea.form.parcel' | translate }}</mat-label>
+        <mat-icon matPrefix class="area-form__field-icon" svgIcon="agd:parcel" aria-hidden="true"/>
+        <mat-select formControlName="parcelId" required>
+          @for (parcel of parcels(); track parcel.id) {
+            <mat-option [value]="parcel.id">{{ parcel.name }}</mat-option>
+          }
+        </mat-select>
+        @if (form.get('parcelId')!.touched && form.get('parcelId')!.hasError('required')) {
+          <mat-error>{{ 'fumigationArea.form.error.parcel-required' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'fumigationArea.form.area' | translate }}</mat-label>
+        <mat-icon matPrefix class="area-form__field-icon" svgIcon="agd:area" aria-hidden="true"/>
+        <input matInput type="number" step="0.01" formControlName="area" required>
+        @if (form.get('area')!.touched && form.get('area')!.hasError('required')) {
+          <mat-error>{{ 'fumigationArea.form.error.area-required' | translate }}</mat-error>
+        }
+        @if (form.get('area')!.touched && form.get('area')!.hasError('min')) {
+          <mat-error>{{ 'fumigationArea.form.error.area-min' | translate }}</mat-error>
+        }
+      </mat-form-field>
+    </fieldset>
+
+    <fieldset class="area-form__section">
+      <legend class="area-form__section-title">{{ 'fumigationArea.form.section-location' | translate }}</legend>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'fumigationArea.form.geometry' | translate }}</mat-label>
+        <mat-icon matPrefix class="area-form__field-icon area-form__field-icon--top" svgIcon="agd:polygon" aria-hidden="true"/>
+        <textarea matInput rows="4" formControlName="geometry" required></textarea>
+        <mat-hint>{{ 'fumigationArea.form.geometryHint' | translate }}</mat-hint>
+        @if (form.get('geometry')!.touched && form.get('geometry')!.hasError('required')) {
+          <mat-error>{{ 'fumigationArea.form.error.geometry-required' | translate }}</mat-error>
+        }
+      </mat-form-field>
+    </fieldset>
+
+    <div class="area-form__actions">
+      <a matButton="outlined" routerLink="/fumigation-areas">{{ 'fumigationArea.form.cancel' | translate }}</a>
+      <button matButton="filled" type="submit">
+        {{ (isEdit ? 'fumigationArea.form.update' : 'fumigationArea.form.create') | translate }}
+      </button>
+    </div>
+  </form>
+</section>
