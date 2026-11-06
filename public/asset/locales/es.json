@@ -23,8 +23,11 @@
   },
   "farm": {
     "title": "Fincas",
+    "subtitle": "Administra tus predios agrícolas, su ubicación y superficie total",
     "newFarm": "Nueva finca",
+    "deleteTitle": "Eliminar finca",
     "delete-confirm": "¿Estás seguro de que deseas eliminar esta finca?",
+    "area": "{{ area }} ha",
     "empty": "No hay fincas registradas",
     "parcelCount": "{{ count }} parcelas",
     "imagePlaceholder": "https://material.angular.dev/assets/img/examples/shiba2.jpg",
@@ -42,6 +45,19 @@
       "ownerId": "ID del propietario",
       "image": "URL de la imagen",
       "imageHint": "Opcional",
+      "imagePreview": "Vista previa de la imagen",
+      "new-subtitle": "Registra un predio agrícola para gestionar sus parcelas",
+      "edit-subtitle": "Actualiza los datos de tu finca",
+      "section-general": "Datos generales",
+      "section-image": "Imagen",
+      "section-image-hint": "Una foto del predio ayuda a reconocerlo en tu lista",
+      "namePlaceholder": "Ej. Finca San Rafael",
+      "locationPlaceholder": "Ej. Ica, Perú",
+      "imageUrlPlaceholder": "https://",
+      "preview": "Vista previa",
+      "preview-hint": "Así se verá la finca en tu lista",
+      "back": "Volver a fincas",
+      "cancel": "Cancelar",
       "create": "Crear",
       "update": "Actualizar",
       "error": {
@@ -54,9 +70,24 @@
   },
   "parcel": {
     "title": "Parcelas",
+    "subtitle": "Consulta las parcelas de cada finca, su cultivo y superficie",
     "area": "Área",
+    "areaValue": "{{ area }} ha",
     "farm": "Finca",
+    "crop": "Cultivo",
     "noCrop": "Sin cultivo",
+    "deleteTitle": "Eliminar parcela",
+    "filter": {
+      "crop": "Cultivo",
+      "allCrops": "Todos los cultivos",
+      "surface": "Superficie",
+      "allSurfaces": "Cualquier superficie",
+      "small": "Menos de 5 ha",
+      "medium": "De 5 a 10 ha",
+      "large": "Más de 10 ha",
+      "noMatches": "No hay parcelas que coincidan con los filtros",
+      "clear": "Limpiar filtros"
+    },
     "imagePlaceholder": "https://material.angular.dev/assets/img/examples/shiba2.jpg",
     "newParcel": "Nueva parcela",
     "selectFarm": "Seleccionar finca",
@@ -68,10 +99,23 @@
       "name": "Nombre",
       "area": "Área (ha)",
       "geometry": "Geometría (GeoJSON)",
+      "geometryHint": "Contorno de la parcela como polígono GeoJSON",
       "farm": "Finca",
       "crop": "Cultivo",
       "image": "URL de la imagen",
       "imageHint": "Opcional",
+      "new-subtitle": "Registra una parcela de una de tus fincas",
+      "edit-subtitle": "Actualiza los datos de tu parcela",
+      "section-general": "Datos generales",
+      "section-location": "Ubicación",
+      "section-image": "Imagen",
+      "section-image-hint": "Una foto de la parcela ayuda a reconocerla en tu lista",
+      "namePlaceholder": "Ej. Parcela Norte",
+      "imageUrlPlaceholder": "https://",
+      "preview": "Vista previa",
+      "preview-hint": "Así se verá la parcela en tu lista",
+      "back": "Volver a parcelas",
+      "cancel": "Cancelar",
       "create": "Crear",
       "update": "Actualizar",
       "error": {
@@ -89,8 +133,11 @@
       "title": "Detalle de parcela",
       "name": "Nombre",
       "geometry": "Geometría",
+      "polygon": "Polígono · {{ count }} vértices",
+      "showCoordinates": "Ver coordenadas",
       "notFound": "Parcela no encontrada",
-      "back": "Volver"
+      "back": "Volver",
+      "backToList": "Volver a parcelas"
     },
     "button": {
       "seeMore": "Ver más",
@@ -290,6 +337,7 @@
     "observed": "Observado",
     "alerts": "Alertas",
     "empty": "Sin datos meteorológicos disponibles.",
+    "loading": "Cargando el clima...",
     "referenceLocation": "ubicación de referencia",
     "precipitationProbability": "Probabilidad de lluvia",
     "source": "Datos",
@@ -417,7 +465,7 @@
       "details": "Ver detalles",
       "maintenance": "Ver mantenimiento",
       "new": "Añadir Dron",
-      "nozzles": "Boquillas de de pulverización "
+      "nozzles": "Boquillas de pulverización"
     }
   },
   "agrochemical": {
@@ -472,10 +520,10 @@
     "damaged": "Dañadas",
     "total": "Total",
     "types": {
-      "flat-fan": "Flat fan",
-      "hollow-cone": "Hollow cone",
-      "full-cone": "Full cone",
-      "air-induction": "Air induction"
+      "flat-fan": "Abanico plano",
+      "hollow-cone": "Cono hueco",
+      "full-cone": "Cono lleno",
+      "air-induction": "Inducción de aire"
     },
     "actionsColumn": "Acciones",
     "actions": {
@@ -580,10 +628,15 @@
       "signIn": "Iniciar Sesión",
       "goToFarms": "Ir a Fincas",
       "signOut": "Cerrar Sesión"
+    },
+    "roles": {
+      "FARMER": "Agricultor",
+      "OPERATOR": "Operador de dron",
+      "TECHNICIAN": "Técnico agrícola"
     }
   },
   "home": {
-    "greeting": "Hola {username}, bienvenido",
+    "greeting": "Hola {{username}}, bienvenido",
     "subtitle": "Resumen de tu operación agrícola",
     "metricsTitle": "Métricas",
     "shortcutsTitle": "Acceso rápido",
@@ -632,20 +685,6 @@
       "tankRange": "Ingresa un valor entre 1 y 100 litros",
       "nozzleRequired": "Selecciona una boquilla",
       "invalidDates": "El próximo mantenimiento no puede ser anterior al último."
-    }
-  },
-  "maintenance": {
-    "title": "Historial de mantenimiento",
-    "loading": "Cargando mantenimientos...",
-    "empty": "Este dron aún no tiene mantenimientos registrados.",
-    "date": "Fecha",
-    "description": "Descripción",
-    "technician": "Técnico",
-    "viewDrone": "Ver detalles del dron",
-    "type": {
-      "label": "Tipo",
-      "PREVENTIVE": "Preventivo",
-      "CORRECTIVE": "Correctivo"
     }
   },
   "errors": {

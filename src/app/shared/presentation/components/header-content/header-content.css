@@ -1,3 +1,44 @@
+:host {
+  display: block;
+  position: relative;
+  z-index: 2;
+
+  --mat-toolbar-container-background-color: var(--agd-color-surface);
+  --mat-toolbar-container-text-color: var(--agd-color-primary);
+  --mat-toolbar-standard-height: 64px;
+  --mat-toolbar-mobile-height: 56px;
+}
+
+.header-content {
+  gap: var(--agd-space-1);
+  padding: 0 var(--agd-space-3) 0 var(--agd-space-1);
+  border-bottom: 1px solid var(--agd-color-border);
+}
+
+.header-content--no-menu {
+  padding-left: var(--agd-space-3);
+}
+
+.header-content__logo {
+  display: block;
+  height: 36px;
+  width: auto;
+}
+
 .header-content__spacer {
   flex: 1 1 auto;
+}
+
+@media (max-width: 959px) {
+  .header-content {
+    padding-right: var(--agd-space-2);
+  }
+
+  .header-content--no-menu {
+    padding-left: var(--agd-space-2);
+  }
+
+  .header-content__logo {
+    height: 32px;
+  }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -7,4 +7,10 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './footer-content.css',
   templateUrl: './footer-content.html',
 })
-export class FooterContent {}
+export class FooterContent {
+  /**
+   * `bar`: full-width green footer of the app layout.
+   * `inline`: transparent footer placed under the sign-in / sign-up card.
+   */
+  readonly variant = input<'bar' | 'inline'>('bar');
+}

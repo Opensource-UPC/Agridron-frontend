@@ -1,14 +1,49 @@
 :host {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
   width: 100%;
+  overflow: hidden;
+}
+
+app-header-content {
+  flex: none;
+}
+
+app-side-nav {
+  flex: 1;
+  min-height: 0;
+}
+
+.layout__public {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
   overflow-x: hidden;
+  overflow-y: auto;
+  background: var(--agd-color-background);
 }
 
 .layout__content {
-  flex: 1;
-  padding: 32px;
+  flex: 1 0 auto;
   min-width: 0;
-  box-sizing: border-box;
+  padding: var(--agd-space-4);
+}
+
+/* Aligns the footer divider with the content edges. */
+app-footer-content {
+  display: block;
+  padding: 0 var(--agd-space-4);
+}
+
+@media (max-width: 959px) {
+  .layout__content {
+    padding: var(--agd-space-2);
+  }
+
+  app-footer-content {
+    padding: 0 var(--agd-space-2);
+  }
 }

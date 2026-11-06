@@ -1,10 +1,10 @@
-<mat-toolbar color="primary">
-    <button mat-icon-button aria-label="Menu" (click)="menuToggle.emit()">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <span>AgriDron</span>
+<mat-toolbar class="header-content" [class.header-content--no-menu]="!showMenu()">
+    @if (showMenu()) {
+        <button mat-icon-button aria-label="Menu" (click)="menuToggle.emit()">
+            <mat-icon svgIcon="agd:menu" aria-hidden="true"/>
+        </button>
+    }
+    <img class="header-content__logo" src="asset/icons/agridron-logo.svg" alt="AgriDron Solutions" width="155" height="36"/>
     <span class="header-content__spacer"></span>
-    <span>
     <app-language-switcher/>
-  </span>
 </mat-toolbar>

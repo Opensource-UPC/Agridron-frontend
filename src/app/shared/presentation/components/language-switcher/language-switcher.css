@@ -1,0 +1,18 @@
+:host {
+  display: inline-flex;
+
+  --mat-button-toggle-shape: var(--agd-radius-pill);
+  --mat-button-toggle-height: 32px;
+  --mat-button-toggle-label-text-size: var(--agd-font-size-label);
+  --mat-button-toggle-label-text-weight: var(--agd-font-weight-medium);
+  --mat-button-toggle-text-color: var(--agd-color-text-muted);
+  --mat-button-toggle-background-color: transparent;
+  --mat-button-toggle-selected-state-background-color: var(--agd-color-secondary);
+  --mat-button-toggle-selected-state-text-color: var(--agd-color-on-brand);
+  --mat-button-toggle-divider-color: var(--agd-color-border);
+  --mat-button-toggle-state-layer-color: var(--agd-color-secondary);
+}
+
+.mat-button-toggle-group {
+  border-color: var(--agd-color-border);
+}

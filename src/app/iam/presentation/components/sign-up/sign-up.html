@@ -1,88 +1,91 @@
-<div class="auth-container">
-  <mat-card class="auth-card">
-    <mat-card-header class="auth-header">
-      <div class="auth-logo">
-        <mat-icon color="primary" class="auth-icon">person_add</mat-icon>
-      </div>
-      <mat-card-title>{{ 'iam.signUp.title' | translate }}</mat-card-title>
-      <mat-card-subtitle>{{ 'iam.signUp.subtitle' | translate }}</mat-card-subtitle>
-    </mat-card-header>
+<section class="auth">
+  <div class="auth__card">
+    <header class="auth__header">
+      <img class="auth__logo" src="asset/icons/agridron-icon.svg" alt="" width="64" height="64"/>
+      <h1 class="auth__title">{{ 'iam.signUp.title' | translate }}</h1>
+      <p class="auth__subtitle">{{ 'iam.signUp.subtitle' | translate }}</p>
+    </header>
 
-    <mat-card-content>
-      @if (authService.error()) {
-        <div class="error-banner">
-          <mat-icon>error_outline</mat-icon>
-          <span>{{ authService.error() }}</span>
-        </div>
-      }
+    @if (authService.error()) {
+      <p class="auth__error" role="alert">
+        <mat-icon class="auth__error-icon" svgIcon="agd:alert" aria-hidden="true"/>
+        <span>{{ authService.error() }}</span>
+      </p>
+    }
 
-      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>{{ 'iam.signUp.username' | translate }}</mat-label>
-          <input matInput formControlName="username" [placeholder]="'iam.signUp.usernamePlaceholder' | translate" autocomplete="username">
-          <mat-icon matPrefix>person</mat-icon>
-          @if (form.get('username')?.hasError('required') && form.get('username')?.touched) {
-            <mat-error>{{ 'iam.signUp.usernameRequired' | translate }}</mat-error>
-          }
-          @if (form.get('username')?.hasError('minlength') && form.get('username')?.touched) {
-            <mat-error>{{ 'iam.signUp.usernameMinLength' | translate }}</mat-error>
-          }
-        </mat-form-field>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth__form" novalidate>
+      <mat-form-field appearance="outline" class="auth__field">
+        <mat-label>{{ 'iam.signUp.username' | translate }}</mat-label>
+        <mat-icon matPrefix class="auth__field-icon" svgIcon="agd:profile" aria-hidden="true"/>
+        <input matInput formControlName="username" [placeholder]="'iam.signUp.usernamePlaceholder' | translate" autocomplete="username">
+        @if (form.get('username')?.hasError('required') && form.get('username')?.touched) {
+          <mat-error>{{ 'iam.signUp.usernameRequired' | translate }}</mat-error>
+        }
+        @if (form.get('username')?.hasError('minlength') && form.get('username')?.touched) {
+          <mat-error>{{ 'iam.signUp.usernameMinLength' | translate }}</mat-error>
+        }
+      </mat-form-field>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>{{ 'iam.signUp.email' | translate }}</mat-label>
-          <input matInput type="email" formControlName="email" [placeholder]="'iam.signUp.emailPlaceholder' | translate" autocomplete="email">
-          <mat-icon matPrefix>email</mat-icon>
-          @if (form.get('email')?.hasError('required') && form.get('email')?.touched) {
-            <mat-error>{{ 'iam.signUp.emailRequired' | translate }}</mat-error>
-          }
-          @if (form.get('email')?.hasError('email') && form.get('email')?.touched) {
-            <mat-error>{{ 'iam.signUp.emailInvalid' | translate }}</mat-error>
-          }
-        </mat-form-field>
+      <mat-form-field appearance="outline" class="auth__field">
+        <mat-label>{{ 'iam.signUp.email' | translate }}</mat-label>
+        <mat-icon matPrefix class="auth__field-icon" svgIcon="agd:mail" aria-hidden="true"/>
+        <input matInput type="email" formControlName="email" [placeholder]="'iam.signUp.emailPlaceholder' | translate" autocomplete="email">
+        @if (form.get('email')?.hasError('required') && form.get('email')?.touched) {
+          <mat-error>{{ 'iam.signUp.emailRequired' | translate }}</mat-error>
+        }
+        @if (form.get('email')?.hasError('email') && form.get('email')?.touched) {
+          <mat-error>{{ 'iam.signUp.emailInvalid' | translate }}</mat-error>
+        }
+      </mat-form-field>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>{{ 'iam.signUp.password' | translate }}</mat-label>
-          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="••••••••" autocomplete="new-password">
-          <mat-icon matPrefix>lock</mat-icon>
-          <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword" [attr.aria-label]="(hidePassword ? 'iam.signUp.hidePassword' : 'iam.signUp.showPassword') | translate">
-            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-          </button>
-          @if (form.get('password')?.hasError('required') && form.get('password')?.touched) {
-            <mat-error>{{ 'iam.signUp.passwordRequired' | translate }}</mat-error>
-          }
-          @if (form.get('password')?.hasError('minlength') && form.get('password')?.touched) {
-            <mat-error>{{ 'iam.signUp.passwordMinLength' | translate }}</mat-error>
-          }
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>{{ 'iam.signUp.role' | translate }}</mat-label>
-          <mat-select formControlName="role">
-            @for (roleOption of roles; track roleOption.value) {
-              <mat-option [value]="roleOption.value">{{ roleOption.label }}</mat-option>
-            }
-          </mat-select>
-          <mat-icon matPrefix>badge</mat-icon>
-          @if (form.get('role')?.hasError('required') && form.get('role')?.touched) {
-            <mat-error>{{ 'iam.signUp.roleRequired' | translate }}</mat-error>
-          }
-        </mat-form-field>
-
-        <button mat-raised-button color="primary" type="submit" class="submit-btn" [disabled]="authService.loading()">
-          @if (authService.loading()) {
-            <mat-spinner diameter="20" class="spinner-inline"></mat-spinner>
-            <span>{{ 'iam.signUp.signingUp' | translate }}</span>
-          } @else {
-            <span>{{ 'iam.signUp.submit' | translate }}</span>
-          }
+      <mat-form-field appearance="outline" class="auth__field">
+        <mat-label>{{ 'iam.signUp.password' | translate }}</mat-label>
+        <mat-icon matPrefix class="auth__field-icon" svgIcon="agd:lock" aria-hidden="true"/>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="••••••••" autocomplete="new-password">
+        <button mat-icon-button matSuffix type="button" class="auth__visibility"
+                (click)="hidePassword = !hidePassword"
+                [attr.aria-label]="(hidePassword ? 'iam.signUp.showPassword' : 'iam.signUp.hidePassword') | translate"
+                [attr.aria-pressed]="!hidePassword">
+          <mat-icon [svgIcon]="hidePassword ? 'agd:eye-off' : 'agd:eye'" aria-hidden="true"/>
         </button>
-      </form>
-    </mat-card-content>
+        @if (form.get('password')?.hasError('required') && form.get('password')?.touched) {
+          <mat-error>{{ 'iam.signUp.passwordRequired' | translate }}</mat-error>
+        }
+        @if (form.get('password')?.hasError('minlength') && form.get('password')?.touched) {
+          <mat-error>{{ 'iam.signUp.passwordMinLength' | translate }}</mat-error>
+        }
+      </mat-form-field>
 
-    <mat-card-actions class="auth-footer">
+      <mat-form-field appearance="outline" class="auth__field">
+        <mat-label>{{ 'iam.signUp.role' | translate }}</mat-label>
+        <mat-icon matPrefix class="auth__field-icon" svgIcon="agd:role" aria-hidden="true"/>
+        <mat-select formControlName="role">
+          @for (role of roles; track role) {
+            <mat-option [value]="role">{{ 'iam.roles.' + role | translate }}</mat-option>
+          }
+        </mat-select>
+        @if (form.get('role')?.hasError('required') && form.get('role')?.touched) {
+          <mat-error>{{ 'iam.signUp.roleRequired' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <button matButton="filled" type="submit" class="auth__submit" [disabled]="authService.loading()">
+        <span class="auth__submit-content">
+          @if (authService.loading()) {
+            <mat-spinner diameter="18" aria-hidden="true"/>
+            {{ 'iam.signUp.signingUp' | translate }}
+          } @else {
+            {{ 'iam.signUp.submit' | translate }}
+          }
+        </span>
+      </button>
+    </form>
+
+    <p class="auth__footer">
       <span>{{ 'iam.signUp.hasAccount' | translate }}</span>
-      <a mat-button color="primary" routerLink="/auth/sign-in">{{ 'iam.signUp.signInLink' | translate }}</a>
-    </mat-card-actions>
-  </mat-card>
-</div>
+      <a matButton routerLink="/auth/sign-in">{{ 'iam.signUp.signInLink' | translate }}</a>
+    </p>
+  </div>
+
+  <app-footer-content variant="inline"/>
+</section>

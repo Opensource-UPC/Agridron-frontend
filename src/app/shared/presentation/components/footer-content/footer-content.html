@@ -1,7 +1,7 @@
-<div class="footer-content">
-  <p>{{ 'footer.rights' | translate }}</p>
-  <p>
+<footer class="footer-content" [class.footer-content--inline]="variant() === 'inline'">
+  <p class="footer-content__text">{{ 'footer.rights' | translate }}</p>
+  <p class="footer-content__text">
     {{ 'footer.intro' | translate }}
     {{ 'footer.author' | translate }}
   </p>
-</div>
+</footer>

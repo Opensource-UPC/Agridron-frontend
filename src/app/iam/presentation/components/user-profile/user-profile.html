@@ -1,53 +1,61 @@
-<div class="profile-container">
-  <mat-card class="profile-card">
-    <mat-card-header class="profile-header">
-      <div class="profile-avatar">
-        <mat-icon>account_circle</mat-icon>
+<section class="profile">
+  <header class="profile__header">
+    <h1 class="profile__title">{{ 'iam.profile.title' | translate }}</h1>
+    <p class="profile__subtitle">{{ 'iam.profile.subtitle' | translate }}</p>
+  </header>
+
+  <div class="profile__card">
+    @if (user(); as currentUser) {
+      <div class="profile__identity">
+        <span class="profile__avatar" aria-hidden="true">{{ initial() }}</span>
+        <div class="profile__identity-text">
+          <p class="profile__name">{{ currentUser.username }}</p>
+          <span class="profile__role">{{ 'iam.roles.' + currentUser.role | translate }}</span>
+        </div>
       </div>
-      <mat-card-title>{{ 'iam.profile.title' | translate }}</mat-card-title>
-      <mat-card-subtitle>{{ 'iam.profile.subtitle' | translate }}</mat-card-subtitle>
-    </mat-card-header>
 
-    <mat-card-content class="profile-content">
-      @if (user(); as currentUser) {
-        <div class="info-group">
-          <div class="info-item">
-            <span class="info-label">{{ 'iam.profile.username' | translate }}</span>
-            <span class="info-value">{{ currentUser.username }}</span>
-          </div>
-          <mat-divider></mat-divider>
-
-          <div class="info-item">
-            <span class="info-label">{{ 'iam.profile.email' | translate }}</span>
-            <span class="info-value">{{ currentUser.email }}</span>
-          </div>
-          <mat-divider></mat-divider>
-
-          <div class="info-item">
-            <span class="info-label">{{ 'iam.profile.role' | translate }}</span>
-            <mat-chip highlighted color="accent" class="role-chip">{{ currentUser.role }}</mat-chip>
-          </div>
+      <dl class="profile__details">
+        <div class="profile__row">
+          <dt class="profile__label">
+            <mat-icon class="profile__row-icon" svgIcon="agd:profile" aria-hidden="true"/>
+            {{ 'iam.profile.username' | translate }}
+          </dt>
+          <dd class="profile__value">{{ currentUser.username }}</dd>
         </div>
-      } @else {
-        <div class="empty-state">
-          <mat-icon class="empty-icon">person_off</mat-icon>
-          <p>{{ 'iam.profile.noSession' | translate }}</p>
-          <a mat-raised-button color="primary" routerLink="/auth/sign-in">{{ 'iam.profile.signIn' | translate }}</a>
+        <div class="profile__row">
+          <dt class="profile__label">
+            <mat-icon class="profile__row-icon" svgIcon="agd:mail" aria-hidden="true"/>
+            {{ 'iam.profile.email' | translate }}
+          </dt>
+          <dd class="profile__value">{{ currentUser.email }}</dd>
         </div>
-      }
-    </mat-card-content>
+        <div class="profile__row">
+          <dt class="profile__label">
+            <mat-icon class="profile__row-icon" svgIcon="agd:role" aria-hidden="true"/>
+            {{ 'iam.profile.role' | translate }}
+          </dt>
+          <dd class="profile__value">{{ 'iam.roles.' + currentUser.role | translate }}</dd>
+        </div>
+      </dl>
 
-    @if (user()) {
-      <mat-card-actions class="profile-actions">
-        <a mat-stroked-button color="primary" routerLink="/farms">
-          <mat-icon>grass</mat-icon>
-          <span>{{ 'iam.profile.goToFarms' | translate }}</span>
+      <div class="profile__actions">
+        <a matButton="filled" routerLink="/farms">
+          <mat-icon svgIcon="agd:farm" aria-hidden="true"/>
+          {{ 'iam.profile.goToFarms' | translate }}
         </a>
-        <button mat-raised-button color="warn" (click)="onSignOut()">
-          <mat-icon>logout</mat-icon>
-          <span>{{ 'iam.profile.signOut' | translate }}</span>
+        <button matButton="outlined" type="button" (click)="onSignOut()">
+          <mat-icon svgIcon="agd:logout" aria-hidden="true"/>
+          {{ 'iam.profile.signOut' | translate }}
         </button>
-      </mat-card-actions>
+      </div>
+    } @else {
+      <div class="profile__empty">
+        <span class="profile__avatar profile__avatar--empty" aria-hidden="true">
+          <mat-icon svgIcon="agd:profile"/>
+        </span>
+        <p class="profile__empty-text">{{ 'iam.profile.noSession' | translate }}</p>
+        <a matButton="filled" routerLink="/auth/sign-in">{{ 'iam.profile.signIn' | translate }}</a>
+      </div>
     }
-  </mat-card>
-</div>
+  </div>
+</section>

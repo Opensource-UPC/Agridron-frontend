@@ -1,10 +1,217 @@
-.title {
-  margin: 16px;
-}
-form {
+.farm-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  max-width: 600px;
-  margin: 16px;
+  gap: var(--agd-space-2);
+}
+
+.farm-form__back {
+  align-self: flex-start;
+  margin-left: calc(-1 * var(--agd-space-1));
+}
+
+.farm-form__back mat-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Header */
+
+.farm-form__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--agd-space-1);
+}
+
+.farm-form__title,
+.farm-form__subtitle,
+.farm-form__section-hint,
+.farm-form__preview-title,
+.farm-form__preview-name,
+.farm-form__preview-location,
+.farm-form__preview-hint {
+  margin: 0;
+}
+
+.farm-form__title {
+  font-size: var(--agd-font-size-view-title);
+  font-weight: var(--agd-font-weight-medium);
+  line-height: 36px;
+  color: var(--agd-color-primary);
+}
+
+.farm-form__subtitle {
+  font-size: var(--agd-font-size-body);
+  color: var(--agd-color-text-muted);
+}
+
+/* Layout: form + live preview */
+
+.farm-form__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 560px) 320px;
+  align-items: start;
+  gap: var(--agd-space-3);
+  margin-top: var(--agd-space-1);
+}
+
+/* Form card */
+
+.farm-form__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--agd-space-3);
+  padding: var(--agd-space-3);
+  border: 1px solid var(--agd-color-border);
+  border-radius: var(--agd-radius-card);
+  background: var(--agd-color-surface);
+}
+
+.farm-form__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--agd-space-1);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.farm-form__section-title {
+  margin-bottom: var(--agd-space-1);
+  padding: 0;
+  font-size: var(--agd-font-size-section-title);
+  font-weight: var(--agd-font-weight-medium);
+  color: var(--agd-color-primary);
+}
+
+.farm-form__section-hint {
+  margin-top: calc(-1 * var(--agd-space-1));
+  margin-bottom: var(--agd-space-1);
+  font-size: var(--agd-font-size-label);
+  color: var(--agd-color-text-muted);
+}
+
+.farm-form__field-icon {
+  width: 20px;
+  height: 20px;
+  margin: 0 4px 0 12px;
+  color: var(--agd-color-text-muted);
+}
+
+.farm-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--agd-space-1);
+  padding-top: var(--agd-space-2);
+  border-top: 1px solid var(--agd-color-border);
+}
+
+/* Live preview (same look as the farm card in the list) */
+
+.farm-form__preview {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--agd-space-1);
+}
+
+.farm-form__preview-title {
+  font-size: var(--agd-font-size-label);
+  font-weight: var(--agd-font-weight-medium);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--agd-color-secondary);
+}
+
+.farm-form__preview-card {
+  overflow: hidden;
+  border: 1px solid var(--agd-color-border);
+  border-radius: var(--agd-radius-card);
+  background: var(--agd-color-surface);
+}
+
+.farm-form__preview-media {
+  display: block;
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.farm-form__preview-media--placeholder {
+  display: grid;
+  place-items: center;
+  background: var(--agd-color-secondary-tint);
+  color: var(--agd-color-secondary);
+}
+
+.farm-form__preview-media--placeholder mat-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.farm-form__preview-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--agd-space-2);
+}
+
+.farm-form__preview-name {
+  font-size: var(--agd-font-size-section-title);
+  font-weight: var(--agd-font-weight-medium);
+  line-height: 24px;
+  color: var(--agd-color-primary);
+  overflow-wrap: anywhere;
+}
+
+.farm-form__preview-location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--agd-font-size-body);
+  color: var(--agd-color-text-muted);
+}
+
+.farm-form__preview-location-icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+
+.farm-form__preview-empty {
+  opacity: 0.5;
+}
+
+.farm-form__preview-hint {
+  font-size: var(--agd-font-size-label);
+  color: var(--agd-color-text-muted);
+}
+
+/* Responsive */
+
+@media (max-width: 1199px) {
+  .farm-form__layout {
+    grid-template-columns: minmax(0, 560px);
+  }
+
+  .farm-form__preview {
+    position: static;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 599px) {
+  .farm-form__card {
+    padding: var(--agd-space-2);
+  }
+
+  .farm-form__actions > * {
+    flex: 1;
+  }
+
+  .farm-form__preview {
+    max-width: none;
+  }
 }

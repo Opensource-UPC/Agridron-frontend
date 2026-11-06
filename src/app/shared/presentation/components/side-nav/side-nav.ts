@@ -30,16 +30,16 @@ export class SideNav {
   readonly opened = computed(() => this.open());
 
   readonly options = [
-    { link: '/home', label: 'option.home', icon: 'home' },
-    { link: '/farms', label: 'option.farm', icon: 'agriculture' },
-    { link: '/parcels', label: 'option.parcel', icon: 'grid_view' },
-    { link: '/crops', label: 'option.crop', icon: 'grass' },
-    {link: '/flight-operations/missions', label: 'option.mission', icon: 'flight_takeoff'},
-    { link: '/fumigation-areas', label: 'option.fumigationArea', icon: 'science' },
-    { link: '/analytics', label: 'option.analytics', icon: 'insights' },
-    { link: '/drones', label: 'option.drone', icon: 'Drone' },
-    { link: '/agrochemicals', label: 'option.agrochemical', icon: 'science' },
-    { link: '/auth/profile', label: 'option.profile', icon: 'person' }
+    { link: '/home', label: 'option.home', icon: 'agd:home' },
+    { link: '/farms', label: 'option.farm', icon: 'agd:farm' },
+    { link: '/parcels', label: 'option.parcel', icon: 'agd:parcel' },
+    { link: '/crops', label: 'option.crop', icon: 'agd:crop' },
+    { link: '/flight-operations/missions', label: 'option.mission', icon: 'agd:mission' },
+    { link: '/fumigation-areas', label: 'option.fumigationArea', icon: 'agd:fumigation' },
+    { link: '/analytics', label: 'option.analytics', icon: 'agd:analytics' },
+    { link: '/drones', label: 'option.drone', icon: 'agd:drone' },
+    { link: '/agrochemicals', label: 'option.agrochemical', icon: 'agd:agrochemical' },
+    { link: '/auth/profile', label: 'option.profile', icon: 'agd:profile' }
   ];
 
   onNavigate = (): void => {

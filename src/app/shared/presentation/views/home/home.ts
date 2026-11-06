@@ -48,18 +48,30 @@ export class Home {
   readonly email = computed(() => this.currentUser()?.email ?? '');
 
   readonly metrics = computed(() => [
-    {icon: 'agriculture', label: 'home.metrics.farms', value: this.farmStore.farmCount()},
-    {icon: 'grid_view', label: 'home.metrics.parcels', value: this.parcelStore.parcelCount()},
-    {icon: 'grass', label: 'home.metrics.crops', value: this.cropStore.cropCount()},
-    {icon: 'science', label: 'home.metrics.fumigationAreas', value: this.fumigationAreaStore.fumigationAreaCount()}
+    {
+      icon: 'agd:farm', label: 'home.metrics.farms', loadingLabel: 'farm.loading',
+      value: this.farmStore.farmCount(), loading: this.farmStore.loading()
+    },
+    {
+      icon: 'agd:parcel', label: 'home.metrics.parcels', loadingLabel: 'parcel.loading',
+      value: this.parcelStore.parcelCount(), loading: this.parcelStore.loading()
+    },
+    {
+      icon: 'agd:crop', label: 'home.metrics.crops', loadingLabel: 'crop.loading',
+      value: this.cropStore.cropCount(), loading: this.cropStore.loading()
+    },
+    {
+      icon: 'agd:fumigation', label: 'home.metrics.fumigationAreas', loadingLabel: 'fumigationArea.loading',
+      value: this.fumigationAreaStore.fumigationAreaCount(), loading: this.fumigationAreaStore.loading()
+    }
   ]);
 
   readonly shortcuts = [
-    {link: '/farms', icon: 'agriculture', label: 'option.farm'},
-    {link: '/parcels', icon: 'grid_view', label: 'option.parcel'},
-    {link: '/crops', icon: 'grass', label: 'option.crop'},
-    {link: '/fumigation-areas', icon: 'science', label: 'option.fumigationArea'},
-    {link: '/analytics', icon: 'insights', label: 'option.analytics'},
-    {link: '/drones', icon: 'Drone', label: 'option.drone'}
+    {link: '/farms', icon: 'agd:farm', label: 'option.farm'},
+    {link: '/parcels', icon: 'agd:parcel', label: 'option.parcel'},
+    {link: '/crops', icon: 'agd:crop', label: 'option.crop'},
+    {link: '/fumigation-areas', icon: 'agd:fumigation', label: 'option.fumigationArea'},
+    {link: '/analytics', icon: 'agd:analytics', label: 'option.analytics'},
+    {link: '/drones', icon: 'agd:drone', label: 'option.drone'}
   ];
 }

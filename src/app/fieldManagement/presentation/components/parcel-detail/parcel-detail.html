@@ -1,11 +1,86 @@
-<h1 class="title">{{ 'parcel.detail.title' | translate }}</h1>
+<section class="parcel-detail">
+  <a matButton class="parcel-detail__back" routerLink="/parcels" [queryParams]="parcel() ? { farmId: parcel()!.farmId } : {}">
+    <mat-icon svgIcon="agd:chevron-left" aria-hidden="true"/>
+    {{ 'parcel.detail.backToList' | translate }}
+  </a>
 
-@if (parcel) {
-  <p>{{ 'parcel.detail.name' | translate }}: {{ parcel.name }}</p>
-  <p>{{ 'parcel.area' | translate }}: {{ parcel.area }} ha</p>
-  <p>{{ 'parcel.detail.geometry' | translate }}: {{ parcel.geometry }}</p>
-} @else {
-  <p>{{ 'parcel.detail.notFound' | translate }}</p>
-}
+  @if (parcel(); as parcel) {
+    <header class="parcel-detail__header">
+      <p class="parcel-detail__eyebrow">{{ 'parcel.detail.title' | translate }}</p>
+      <h1 class="parcel-detail__title">{{ parcel.name }}</h1>
+    </header>
 
-<button matButton (click)="back()">{{ 'parcel.detail.back' | translate }}</button>
+    <div class="parcel-detail__card">
+      @if (parcel.image && !imageFailed()) {
+        <img class="parcel-detail__media" [src]="parcel.image" alt="" (error)="imageFailed.set(true)">
+      } @else {
+        <div class="parcel-detail__media parcel-detail__media--placeholder" aria-hidden="true">
+          <mat-icon svgIcon="agd:parcel"/>
+        </div>
+      }
+
+      <dl class="parcel-detail__rows">
+        <div class="parcel-detail__row">
+          <dt class="parcel-detail__label">
+            <mat-icon class="parcel-detail__row-icon" svgIcon="agd:area" aria-hidden="true"/>
+            {{ 'parcel.area' | translate }}
+          </dt>
+          <dd class="parcel-detail__value">{{ 'parcel.areaValue' | translate:{ area: (parcel.area | number: '1.0-2') } }}</dd>
+        </div>
+        <div class="parcel-detail__row">
+          <dt class="parcel-detail__label">
+            <mat-icon class="parcel-detail__row-icon" svgIcon="agd:farm" aria-hidden="true"/>
+            {{ 'parcel.farm' | translate }}
+          </dt>
+          <dd class="parcel-detail__value">{{ farmName() ?? ('#' + parcel.farmId) }}</dd>
+        </div>
+        <div class="parcel-detail__row">
+          <dt class="parcel-detail__label">
+            <mat-icon class="parcel-detail__row-icon" svgIcon="agd:crop" aria-hidden="true"/>
+            {{ 'parcel.crop' | translate }}
+          </dt>
+          <dd class="parcel-detail__value">{{ parcel.crop?.name ?? ('parcel.noCrop' | translate) }}</dd>
+        </div>
+        <div class="parcel-detail__row">
+          <dt class="parcel-detail__label">
+            <mat-icon class="parcel-detail__row-icon" svgIcon="agd:polygon" aria-hidden="true"/>
+            {{ 'parcel.detail.geometry' | translate }}
+          </dt>
+          <dd class="parcel-detail__value">
+            @if (vertices().length) {
+              {{ 'parcel.detail.polygon' | translate:{ count: vertices().length } }}
+            } @else {
+              —
+            }
+          </dd>
+        </div>
+      </dl>
+
+      @if (vertices().length) {
+        <details class="parcel-detail__coordinates">
+          <summary class="parcel-detail__coordinates-toggle">{{ 'parcel.detail.showCoordinates' | translate }}</summary>
+          <ol class="parcel-detail__coordinates-list">
+            @for (vertex of vertices(); track $index) {
+              <li>{{ vertex[1] }}, {{ vertex[0] }}</li>
+            }
+          </ol>
+        </details>
+      }
+    </div>
+  } @else if (loading()) {
+    <div class="parcel-detail__card" role="status" aria-busy="true" [attr.aria-label]="'parcel.loading' | translate">
+      <span class="agd-skeleton parcel-detail__media" aria-hidden="true"></span>
+      <div class="parcel-detail__skeleton" aria-hidden="true">
+        @for (row of [1, 2, 3, 4]; track row) {
+          <span class="agd-skeleton parcel-detail__skeleton-row"></span>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="parcel-detail__card parcel-detail__empty">
+      <span class="parcel-detail__empty-icon" aria-hidden="true"><mat-icon svgIcon="agd:parcel"/></span>
+      <p class="parcel-detail__empty-text">{{ 'parcel.detail.notFound' | translate }}</p>
+      <button matButton="filled" type="button" (click)="back()">{{ 'parcel.detail.backToList' | translate }}</button>
+    </div>
+  }
+</section>

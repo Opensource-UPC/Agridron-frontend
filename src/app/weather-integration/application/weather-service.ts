@@ -18,10 +18,14 @@ export class WeatherService {
   /** True when the weather shown belongs to the reference location. */
   usingDefaultLocation = signal(false);
 
+  /** True while the weather is being requested (including the wait for the user's location). */
+  loading = signal(false);
+
   /**
    * Loads the weather of the user's location, or of the reference location if it is not shared.
    */
   loadWeatherConditions() {
+    this.loading.set(true);
     const useDefault = () => this.loadWeather(DEFAULT_LOCATION.latitude, DEFAULT_LOCATION.longitude, of(DEFAULT_LOCATION.name), true);
     if (!navigator.geolocation) return useDefault();
     navigator.geolocation.getCurrentPosition(({ coords }) => {
@@ -60,8 +64,12 @@ export class WeatherService {
         condition.alerts = this.evaluateConditions(condition);
         this.usingDefaultLocation.set(isDefault);
         this.weatherConditions.set([condition]);
+        this.loading.set(false);
       },
-      error: () => this.weatherConditions.set([]),
+      error: () => {
+        this.weatherConditions.set([]);
+        this.loading.set(false);
+      },
     });
   }
 }

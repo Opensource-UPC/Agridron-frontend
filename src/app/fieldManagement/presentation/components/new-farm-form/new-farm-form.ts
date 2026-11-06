@@ -1,10 +1,11 @@
 import {Component, inject} from '@angular/core';
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {FarmStore} from '../../../application/farm.store';
 import {Farm} from '../../../domain/model/farm.entity';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIcon} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {TranslatePipe} from '@ngx-translate/core';
 
@@ -13,7 +14,7 @@ import {TranslatePipe} from '@ngx-translate/core';
  */
 @Component({
   selector: 'app-new-farm-form',
-  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule, TranslatePipe],
+  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatIcon, RouterLink, ReactiveFormsModule, TranslatePipe],
   templateUrl: './new-farm-form.html',
   styleUrl: './new-farm-form.css'
 })
@@ -44,6 +45,19 @@ export class NewFarmForm {
   farmId: number | null = null;
 
   /**
+   * True when the image URL could not be loaded; hides the preview.
+   */
+  imageFailed = false;
+
+  /**
+   * Image URL to preview, only when it looks like a web address.
+   */
+  get imagePreviewUrl(): string | null {
+    const url = this.form.controls.image.value?.trim();
+    return url && /^https?:\/\/\S+$/i.test(url) ? url : null;
+  }
+
+  /**
    * Creates an instance of NewFarmForm and initializes the form based on route parameters.
    */
   constructor() {
@@ -64,7 +78,10 @@ export class NewFarmForm {
    * Submits the form to create or update the farm.
    */
   submit() {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
     const value = this.form.getRawValue();
     const existing = this.isEdit && this.farmId ? this.store.getFarmById(this.farmId)() : undefined;

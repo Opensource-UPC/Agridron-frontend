@@ -6,6 +6,7 @@ import {MatIcon} from '@angular/material/icon';
 import {Farm} from "../../../domain/model/farm.entity";
 import {FarmItem} from '../farm-item/farm-item';
 import {FarmStore} from '../../../application/farm.store';
+import {ConfirmDialogService} from '../../../../shared/presentation/components/confirm-dialog/confirm-dialog.service';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class FarmList {
   private readonly router = inject(Router);
   private readonly farmStore = inject(FarmStore);
   private readonly translate = inject(TranslateService);
+  private readonly confirmDialog = inject(ConfirmDialogService);
 
   farms: InputSignal<Farm[]> = input.required<Farm[]>();
 
@@ -35,9 +37,15 @@ export class FarmList {
   };
 
   deleteFarm = (id: number): void => {
-    if (!window.confirm(this.translate.instant('farm.delete-confirm'))) {
-      return;
-    }
-    this.farmStore.deleteFarm(id);
+    this.confirmDialog.confirm({
+      title: this.translate.instant('farm.deleteTitle'),
+      message: this.translate.instant('farm.delete-confirm'),
+      confirmLabel: this.translate.instant('farm.button.delete'),
+      cancelLabel: this.translate.instant('farm.form.cancel')
+    }).subscribe(confirmed => {
+      if (confirmed) {
+        this.farmStore.deleteFarm(id);
+      }
+    });
   };
 }
