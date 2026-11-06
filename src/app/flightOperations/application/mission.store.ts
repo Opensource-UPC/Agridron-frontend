@@ -164,6 +164,18 @@ export class MissionStore {
     };
 
     /**
+     * Cancels a mission that has not been completed.
+     * @param mission - The mission to cancel.
+     */
+    cancelMission = (mission: Mission): void => {
+        mission.cancel();
+        this.updateMission(mission);
+        this.recordOperationStatus(mission, 'CANCELLED');
+        this.missionHistoryStore.addHistory(
+            new MissionHistory(0, mission.id, mission.parcelId, MissionStatus.CANCELLED, new Date().toISOString()));
+    };
+
+    /**
      * Completes a mission in progress and registers its result, history and summary report.
      * @param mission - The mission to complete.
      */

@@ -13,6 +13,7 @@ import {MissionStatusBadge} from '../../components/mission-status-badge/mission-
 import {MissionStepper} from '../../components/mission-stepper/mission-stepper';
 import {MissionTelemetry} from '../../components/mission-telemetry/mission-telemetry';
 import {injectNow} from "../../mission.time";
+import {TranslateService} from '@ngx-translate/core';
 
 /**
  * Shows the monitoring view of a mission with its lifecycle actions.
@@ -25,7 +26,7 @@ import {injectNow} from "../../mission.time";
         TranslatePipe,
         MissionStatusBadge,
         MissionStepper,
-        MissionTelemetry
+        MissionTelemetry,
     ],
     templateUrl: './mission-detail.html',
     styleUrl: './mission-detail.css'
@@ -36,6 +37,7 @@ export class MissionDetail {
     private readonly parcelStore = inject(ParcelStore);
     private readonly farmStore = inject(FarmStore);
     private readonly droneStore = inject(DroneStore);
+    private readonly translate = inject(TranslateService);
     private readonly now = injectNow();
 
     readonly missionId = Number(this.route.snapshot.paramMap.get('id'));
@@ -74,6 +76,25 @@ export class MissionDetail {
             ? this.now()
             : (entries[entries.length - 1].timestamp?.getTime() ?? start);
         return end - start;
+    });
+
+
+    /**
+     * Cancels the mission after asking for confirmation.
+     */
+    cancel() {
+        const mission = this.mission();
+        if (!mission) return;
+        if (!window.confirm(this.translate.instant('mission.cancel-confirm'))) return;
+        this.store.cancelMission(mission);
+    }
+
+    /**
+     * A mission can be cancelled until it is completed or already cancelled.
+     */
+    readonly canCancel = computed(() => {
+        const status = this.mission()?.status;
+        return status !== MissionStatus.COMPLETED && status !== MissionStatus.CANCELLED;
     });
 
     /**

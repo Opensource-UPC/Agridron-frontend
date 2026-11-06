@@ -6,6 +6,9 @@
         @if (form.get('requestedDate')?.touched && form.get('requestedDate')!.hasError('required')) {
             <mat-error>{{ 'mission.form.error.date-required' | translate }}</mat-error>
         }
+        @if (form.get('requestedDate')?.touched && form.get('requestedDate')!.hasError('pastDate')) {
+            <mat-error>{{ 'mission.form.error.date-past' | translate }}</mat-error>
+        }
     </mat-form-field>
 
     <mat-form-field>
@@ -27,6 +30,9 @@
                 <mat-option [value]="agrochemical.id">{{ agrochemical.name }}</mat-option>
             }
         </mat-select>
+        @if (agrochemicals().length === 0) {
+            <mat-hint>{{ 'mission.form.noAgrochemicals' | translate }}</mat-hint>
+        }
         @if (form.get('agrochemicalId')?.touched && form.get('agrochemicalId')!.hasError('required')) {
             <mat-error>{{ 'mission.form.error.agrochemical-required' | translate }}</mat-error>
         }
@@ -39,6 +45,9 @@
                 <mat-option [value]="drone.id">{{ drone.model }} · {{ drone.serialNumber }}</mat-option>
             }
         </mat-select>
+        @if (drones().length === 0) {
+            <mat-hint>{{ 'mission.form.noDrones' | translate }}</mat-hint>
+        }
         @if (form.get('droneId')?.touched && form.get('droneId')!.hasError('required')) {
             <mat-error>{{ 'mission.form.error.drone-required' | translate }}</mat-error>
         }
@@ -75,6 +84,10 @@
             <mat-error>{{ 'mission.form.error.overlap' | translate }}</mat-error>
         }
     </mat-form-field>
+
+    @if (form.hasError('insufficientStock')) {
+        <p class="form-error" role="alert">{{ 'mission.form.error.insufficient-stock' | translate }}</p>
+    }
 
     <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
         {{ (isEdit ? 'mission.form.update' : 'mission.form.create') | translate }}

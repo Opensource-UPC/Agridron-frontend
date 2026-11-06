@@ -9,3 +9,8 @@ form {
     max-width: 600px;
     margin: 16px;
 }
+
+.form-error {
+    color: var(--mat-sys-error, #b3261e);
+    margin: 0;
+}

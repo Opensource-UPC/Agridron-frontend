@@ -1,5 +1,13 @@
-import {Component, inject} from '@angular/core';
-import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Component, computed, DestroyRef, inject} from '@angular/core';
+import {takeUntilDestroyed, toSignal} from '@angular/core/rxjs-interop';
+import {
+    AbstractControl,
+    FormBuilder,
+    FormControl,
+    ReactiveFormsModule,
+    ValidationErrors,
+    Validators
+} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
@@ -11,8 +19,8 @@ import {Mission} from '../../../domain/model/mission.entity';
 import {MissionStatus} from '../../../domain/model/mission-status.enum';
 import {ParcelStore} from '../../../../fieldManagement/application/parcel.store';
 import {DroneStore} from '../../../../InventoryResourceManagement/application/dron-store';
+import {AgrochemicalStore} from '../../../../InventoryResourceManagement/application/agrochemical-store';
 import {AuthenticationService} from '../../../../iam/application/authentication.service';
-import {AgrochemicalStore} from "../../../application/agrochemical.store";
 
 /**
  * Formats a date as the value expected by a datetime-local input.
@@ -20,6 +28,22 @@ import {AgrochemicalStore} from "../../../application/agrochemical.store";
  */
 const toLocalInput = (date: Date | null): string =>
     date ? new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().slice(0, 16) : '';
+
+/**
+ * Today as YYYY-MM-DD in local time.
+ */
+const todayString = (): string => {
+    const d = new Date();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${d.getFullYear()}-${month}-${day}`;
+};
+
+/**
+ * The mission date cannot be in the past (1 minute of tolerance).
+ */
+const notPast = (control: AbstractControl): ValidationErrors | null =>
+    control.value && new Date(control.value).getTime() < Date.now() - 60000 ? {pastDate: true} : null;
 
 /**
  * Creates and edits mission entities.
@@ -41,29 +65,66 @@ export class MissionForm {
     private fb = inject(FormBuilder);
     private route = inject(ActivatedRoute);
     private router = inject(Router);
+    private destroyRef = inject(DestroyRef);
     private store = inject(MissionStore);
     private auth = inject(AuthenticationService);
+    private droneStore = inject(DroneStore);
+    private agrochemicalStore = inject(AgrochemicalStore);
+
+    /**
+     * Parcels available in the select.
+     */
+    parcels = inject(ParcelStore).parcels;
+
+    private readonly today = todayString();
 
     /**
      * Form-group for the mission form.
+     * It must be declared after the stores, because the group validator reads them.
      */
     form = this.fb.group({
-        requestedDate: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
-        parcelId: new FormControl<number | null>(null, { validators: [Validators.required] }),
-        agrochemicalId: new FormControl<number | null>(null, { validators: [Validators.required] }),
-        droneId: new FormControl<number | null>(null, { validators: [Validators.required] }),
-        flightHeight: new FormControl<number | null>(null, { validators: [Validators.min(1)] }),
-        flightSpeed: new FormControl<number | null>(null, { validators: [Validators.min(1)] }),
-        sprayRate: new FormControl<number | null>(null, { validators: [Validators.min(0.1)] }),
-        overlap: new FormControl<number | null>(null, { validators: [Validators.min(0), Validators.max(100)] })
+        requestedDate: new FormControl<string>('', {nonNullable: true, validators: [Validators.required, notPast]}),
+        parcelId: new FormControl<number | null>(null, {validators: [Validators.required]}),
+        agrochemicalId: new FormControl<number | null>(null, {validators: [Validators.required]}),
+        droneId: new FormControl<number | null>(null, {validators: [Validators.required]}),
+        flightHeight: new FormControl<number | null>(null, {validators: [Validators.min(1)]}),
+        flightSpeed: new FormControl<number | null>(null, {validators: [Validators.min(1)]}),
+        sprayRate: new FormControl<number | null>(null, {validators: [Validators.min(0.1)]}),
+        overlap: new FormControl<number | null>(null, {validators: [Validators.min(0), Validators.max(100)]})
+    }, {
+        // Parcel area x spray rate cannot exceed the stock of the chosen agrochemical.
+        validators: (group: AbstractControl): ValidationErrors | null => {
+            const parcel = this.parcels().find(p => p.id === group.get('parcelId')?.value);
+            const chemical = this.agrochemicalStore.agrochemicals()
+                .find(a => a.id === group.get('agrochemicalId')?.value);
+            const rate = group.get('sprayRate')?.value;
+            if (!parcel || !chemical || !rate) return null;
+            return parcel.area * rate > chemical.stockLiters ? {insufficientStock: true} : null;
+        }
+    });
+
+    private readonly selectedDroneId = toSignal(this.form.controls.droneId.valueChanges,
+        {initialValue: this.form.controls.droneId.value});
+
+    private readonly selectedAgrochemicalId = toSignal(this.form.controls.agrochemicalId.valueChanges,
+        {initialValue: this.form.controls.agrochemicalId.value});
+
+    /**
+     * Only available drones (the one already assigned is kept when editing).
+     */
+    drones = computed(() => {
+        const current = this.selectedDroneId();
+        return this.droneStore.drones().filter(d => d.status === 'available' || d.id === current);
     });
 
     /**
-     * Signals for the lists used by the selects.
+     * Only non-expired agrochemicals with stock (the one already assigned is kept when editing).
      */
-    parcels = inject(ParcelStore).parcels;
-    drones = inject(DroneStore).drones;
-    agrochemicals = inject(AgrochemicalStore).agrochemicals;
+    agrochemicals = computed(() => {
+        const current = this.selectedAgrochemicalId();
+        return this.agrochemicalStore.agrochemicals()
+            .filter(a => a.id === current || (!a.isExpired(this.today) && a.stockLiters > 0));
+    });
 
     /**
      * Indicates if the form is in edit mode.
@@ -83,8 +144,10 @@ export class MissionForm {
             this.missionId = params['id'] ? +params['id'] : null;
             this.isEdit = !!this.missionId;
             if (this.isEdit && this.missionId) {
-                const id = this.missionId;
-                const mission = this.store.getMissionById(id)();
+                // An existing mission may have a past date.
+                this.form.controls.requestedDate.removeValidators(notPast);
+                this.form.controls.requestedDate.updateValueAndValidity();
+                const mission = this.store.getMissionById(this.missionId)();
                 if (mission) {
                     this.form.patchValue({
                         requestedDate: toLocalInput(mission.requestedDate),
@@ -99,13 +162,26 @@ export class MissionForm {
                 }
             }
         });
+
+        // When creating, the spray rate defaults to the recommended dose of the product.
+        this.form.controls.agrochemicalId.valueChanges
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(id => {
+                const chemical = this.agrochemicalStore.agrochemicals().find(a => a.id === id);
+                if (chemical && !this.isEdit && !this.form.controls.sprayRate.value) {
+                    this.form.controls.sprayRate.setValue(chemical.recommendedDoseLitersPerHa);
+                }
+            });
     }
 
     /**
      * Submits the form to create or update the mission.
      */
     submit() {
-        if (this.form.invalid) return;
+        if (this.form.invalid) {
+            this.form.markAllAsTouched();
+            return;
+        }
         const value = this.form.getRawValue();
         const existing = this.missionId ? this.store.getMissionById(this.missionId)() : undefined;
         const mission = new Mission(

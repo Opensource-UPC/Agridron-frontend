@@ -34,6 +34,9 @@
                     <button mat-raised-button color="primary" (click)="viewSummary()">{{ 'mission.actions.summary' | translate }}</button>
                 }
             }
+            @if (canCancel()) {
+                <button mat-button color="warn" (click)="cancel()">{{ 'mission.actions.cancel' | translate }}</button>
+            }
             <button mat-button (click)="back()">{{ 'mission.actions.back' | translate }}</button>
         </mat-card-actions>
     </mat-card>

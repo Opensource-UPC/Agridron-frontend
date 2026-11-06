@@ -24,7 +24,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {MissionStore} from '../../../application/mission.store';
 import {ParcelStore} from '../../../../fieldManagement/application/parcel.store';
 import {MissionStatusBadge} from '../../components/mission-status-badge/mission-status-badge';
-
+import {TranslateService} from '@ngx-translate/core';
 /**
  * Displays the mission collection with table actions.
  */
@@ -51,7 +51,7 @@ import {MissionStatusBadge} from '../../components/mission-status-badge/mission-
         MatSortHeader,
         MatPaginator,
         DatePipe,
-        MissionStatusBadge
+        MissionStatusBadge,
     ],
     templateUrl: './mission-list.html',
     styleUrl: './mission-list.css'
@@ -59,6 +59,7 @@ import {MissionStatusBadge} from '../../components/mission-status-badge/mission-
 export class MissionList {
     readonly store = inject(MissionStore);
     private readonly parcelStore = inject(ParcelStore);
+    private readonly translate = inject(TranslateService);
     protected router = inject(Router);
 
     /**
@@ -111,10 +112,13 @@ export class MissionList {
     }
 
     /**
-     * Deletes a mission by ID.
+     * Deletes a mission by ID after asking for confirmation.
      * @param id - The ID of the mission to delete.
      */
     deleteMission(id: number) {
+        if (!window.confirm(this.translate.instant('mission.delete-confirm'))) {
+            return;
+        }
         this.store.deleteMission(id);
     }
 
