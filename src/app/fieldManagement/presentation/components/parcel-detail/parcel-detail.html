@@ -71,6 +71,27 @@
 
       <app-polygon-map class="parcel-detail__map" [geometry]="parcel.geometry"/>
     </div>
+
+    <!-- CL-001: weather at the center of the parcel -->
+    <section class="parcel-detail__weather">
+      <button matButton="outlined" type="button" [disabled]="!vertices().length || weatherLoading()" (click)="showWeather()">
+        <mat-icon svgIcon="agd:rain-probability" aria-hidden="true"/>
+        {{ 'parcel.detail.weather.button' | translate }}
+      </button>
+
+      @if (!vertices().length) {
+        <p class="parcel-detail__weather-text">{{ 'parcel.detail.weather.noGeometry' | translate }}</p>
+      } @else if (weatherLoading()) {
+        <p class="parcel-detail__weather-text" role="status">{{ 'weather.loading' | translate }}</p>
+      } @else if (weatherFailed()) {
+        <p class="parcel-detail__weather-error" role="alert">
+          <mat-icon svgIcon="agd:alert" aria-hidden="true"/>
+          {{ 'parcel.detail.weather.unavailable' | translate }}
+        </p>
+      } @else if (weather(); as condition) {
+        <app-weather-widget [condition]="condition"/>
+      }
+    </section>
   } @else if (loading()) {
     <div class="parcel-detail__card" role="status" aria-busy="true" [attr.aria-label]="'parcel.loading' | translate">
       <span class="agd-skeleton parcel-detail__media" aria-hidden="true"></span>

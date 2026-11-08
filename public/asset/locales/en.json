@@ -137,7 +137,12 @@
       "showCoordinates": "Show coordinates",
       "notFound": "Parcel not found",
       "back": "Back",
-      "backToList": "Back to parcels"
+      "backToList": "Back to parcels",
+      "weather": {
+        "button": "View parcel weather",
+        "unavailable": "Weather data is not available at the moment.",
+        "noGeometry": "The parcel has no drawn polygon, so its weather cannot be checked."
+      }
     },
     "button": {
       "seeMore": "See more",
@@ -328,7 +333,8 @@
         "agrochemical-required": "You must select an agrochemical",
         "drone-required": "You must select a drone",
         "min": "Value must be greater than 0",
-        "overlap": "Overlap must be between 0 and 100"
+        "overlap": "Overlap must be between 0 and 100",
+        "notEditable": "This mission has already started or finished, so it cannot be edited."
       }
     },
     "monitor": {

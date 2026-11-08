@@ -137,7 +137,12 @@
       "showCoordinates": "Ver coordenadas",
       "notFound": "Parcela no encontrada",
       "back": "Volver",
-      "backToList": "Volver a parcelas"
+      "backToList": "Volver a parcelas",
+      "weather": {
+        "button": "Ver clima de la parcela",
+        "unavailable": "Los datos meteorológicos no están disponibles en este momento.",
+        "noGeometry": "La parcela no tiene un polígono trazado, por eso no se puede consultar su clima."
+      }
     },
     "button": {
       "seeMore": "Ver más",
@@ -328,7 +333,8 @@
         "agrochemical-required": "Debes seleccionar un agroquímico",
         "drone-required": "Debes seleccionar un dron",
         "min": "El valor debe ser mayor a 0",
-        "overlap": "El solapamiento debe estar entre 0 y 100"
+        "overlap": "El solapamiento debe estar entre 0 y 100",
+        "notEditable": "Esta misión ya inició o terminó, por eso no se puede editar."
       }
     },
     "monitor": {

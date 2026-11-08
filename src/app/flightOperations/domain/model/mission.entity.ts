@@ -115,6 +115,11 @@ export class Mission {
         this.#status = value;
     }
 
+    /** MI-006: a mission can be edited (rescheduled) only while it has not started. */
+    canBeEdited(): boolean {
+        return this.#status === MissionStatus.PLANNED || this.#status === MissionStatus.AUTHORIZED;
+    }
+
     authorize(): void { if (this.#status === MissionStatus.PLANNED) this.#status = MissionStatus.AUTHORIZED; }
     start(): void     { if (this.#status === MissionStatus.AUTHORIZED) this.#status = MissionStatus.IN_PROGRESS; }
     pause(): void     { if (this.#status === MissionStatus.IN_PROGRESS) this.#status = MissionStatus.PAUSED; }

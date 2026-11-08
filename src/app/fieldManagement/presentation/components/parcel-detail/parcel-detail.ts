@@ -7,13 +7,16 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {ParcelStore} from '../../../application/parcel.store';
 import {FarmStore} from '../../../application/farm.store';
 import {PolygonMap} from '../../../../shared/presentation/components/polygon-map/polygon-map';
+import {WeatherWidget} from '../../../../shared/presentation/components/weather-widget/weather-widget';
+import {WeatherService} from '../../../../weather-integration/application/weather-service';
+import {WeatherCondition} from '../../../../weather-integration/domain/model/weather-condition.entity';
 
 /**
  * Shows the detail view of a single parcel.
  */
 @Component({
   selector: 'app-parcel-detail',
-  imports: [MatButtonModule, MatIcon, RouterLink, DecimalPipe, TranslatePipe, PolygonMap],
+  imports: [MatButtonModule, MatIcon, RouterLink, DecimalPipe, TranslatePipe, PolygonMap, WeatherWidget],
   templateUrl: './parcel-detail.html',
   styleUrl: './parcel-detail.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -23,6 +26,7 @@ export class ParcelDetail {
   private readonly router = inject(Router);
   private readonly parcelStore = inject(ParcelStore);
   private readonly farmStore = inject(FarmStore);
+  private readonly weatherService = inject(WeatherService);
 
   readonly parcelId: number | null = this.route.snapshot.paramMap.get('id')
     ? +this.route.snapshot.paramMap.get('id')!
@@ -57,7 +61,39 @@ export class ParcelDetail {
     }
   });
 
+  /** Weather at the center of the parcel, once requested (CL-001). */
+  readonly weather = signal<WeatherCondition | null>(null);
+
+  /** True while the weather is being requested. */
+  readonly weatherLoading = signal(false);
+
+  /** True when the weather service did not answer (CL-001, scenario 2). */
+  readonly weatherFailed = signal(false);
+
   back = (): void => {
     this.router.navigate(['/parcels']).then();
   };
+
+  /**
+   * Requests the weather at the geographic center of the parcel polygon (CL-001).
+   */
+  showWeather(): void {
+    const parcel = this.parcel();
+    if (!parcel) return;
+
+    const {latitude, longitude} = parcel.centroid();
+    this.weatherLoading.set(true);
+    this.weatherFailed.set(false);
+    this.weatherService.getWeatherAt(latitude, longitude, parcel.name).subscribe({
+      next: weather => {
+        this.weather.set(weather);
+        this.weatherLoading.set(false);
+      },
+      error: () => {
+        this.weather.set(null);
+        this.weatherFailed.set(true);
+        this.weatherLoading.set(false);
+      }
+    });
+  }
 }

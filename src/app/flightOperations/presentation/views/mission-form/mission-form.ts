@@ -71,6 +71,9 @@ export class MissionForm implements OnInit {
     readonly saving = signal<boolean>(false);
     readonly feedbackMessage = signal<string>('');
 
+    /** True when the edited mission already started, so it cannot be saved (MI-006). */
+    readonly notEditable = signal<boolean>(false);
+
     /** Wizard steps metadata */
     readonly steps = [
         { num: 1, labelKey: 'mission.wizard.step1' },
@@ -184,6 +187,12 @@ export class MissionForm implements OnInit {
     }
 
     private populateFromMission(mission: Mission): void {
+        // MI-006: a mission that already started cannot be edited (e.g. when the URL is typed by hand).
+        if (!mission.canBeEdited()) {
+            this.notEditable.set(true);
+            this.feedbackMessage.set(this.translate.instant('mission.form.error.notEditable'));
+        }
+
         const parcel = this.parcels().find(p => p.id === mission.parcelId);
         const reqDate = mission.requestedDate ? new Date(mission.requestedDate) : new Date();
         const pad = (n: number) => String(n).padStart(2, '0');
@@ -261,6 +270,11 @@ export class MissionForm implements OnInit {
     }
 
     submit(): void {
+        if (this.notEditable()) {
+            this.router.navigate(['flight-operations/missions', this.missionId]).then();
+            return;
+        }
+
         if (this.form.invalid) {
             this.feedbackMessage.set('Por favor completa todos los campos requeridos.');
             return;
@@ -283,7 +297,7 @@ export class MissionForm implements OnInit {
             val.flightHeight ? Number(val.flightHeight) : 3,
             val.flightSpeed ? Number(val.flightSpeed) : 5,
             val.sprayRate ? Number(val.sprayRate) : 2.0,
-            val.overlap ? Number(val.overlap) : 20,
+            Number(val.overlap ?? 20), // ?? keeps a valid 0; only an empty value becomes 20
             MissionStatus.PLANNED
         );
 

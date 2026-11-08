@@ -75,6 +75,47 @@
   }
 }
 
+/* Weather of the parcel (CL-001) */
+
+.parcel-detail__weather {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--agd-space-2);
+  width: 100%;
+  max-width: 560px;
+}
+
+.parcel-detail__weather app-weather-widget {
+  display: block;
+  width: 100%;
+}
+
+.parcel-detail__weather-text {
+  margin: 0;
+  font-size: var(--agd-font-size-body);
+  color: var(--agd-color-text-muted);
+}
+
+.parcel-detail__weather-error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--agd-space-1);
+  width: 100%;
+  margin: 0;
+  padding: 12px var(--agd-space-2);
+  border-radius: 8px;
+  background: var(--agd-alert-high-bg);
+  color: var(--agd-color-error);
+  font-size: var(--agd-font-size-body);
+}
+
+.parcel-detail__weather mat-icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
 .parcel-detail__media {
   display: block;
   width: 100%;

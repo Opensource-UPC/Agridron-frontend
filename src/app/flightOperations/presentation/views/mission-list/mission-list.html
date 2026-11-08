@@ -110,10 +110,12 @@
           </div>
 
           <div class="mission-card__actions">
-            <button matButton type="button" (click)="editMission(mission.id)">
-              <mat-icon svgIcon="agd:edit" aria-hidden="true"/>
-              {{ 'mission.button.edit' | translate }}
-            </button>
+            @if (mission.canBeEdited()) {
+              <button matButton type="button" (click)="editMission(mission.id)">
+                <mat-icon svgIcon="agd:edit" aria-hidden="true"/>
+                {{ 'mission.button.edit' | translate }}
+              </button>
+            }
             <button matButton type="button" (click)="deleteMission(mission.id)">
               <mat-icon svgIcon="agd:trash" aria-hidden="true"/>
               {{ 'mission.button.delete' | translate }}

@@ -260,6 +260,11 @@
   padding: var(--agd-space-1);
 }
 
+/* Delete stays on the right also when Edit is hidden (missions that already started) */
+.mission-card__actions > :last-child {
+  margin-left: auto;
+}
+
 .mission-card mat-icon {
   width: 18px;
   height: 18px;
