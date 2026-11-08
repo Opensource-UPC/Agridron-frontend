@@ -8,6 +8,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {TranslatePipe} from '@ngx-translate/core';
 import {FarmStore} from '../../../../fieldManagement/application/farm.store';
 import {ParcelStore} from '../../../../fieldManagement/application/parcel.store';
+import {MissionStore} from '../../../../flightOperations/application/mission.store';
+import {AgrochemicalStore} from '../../../../flightOperations/application/agrochemical.store';
 import {MissionHistoryStore} from '../../../application/mission-history.store';
 import {MissionReportStore} from '../../../application/mission-report.store';
 import {PerformanceIndicatorStore} from '../../../application/performance-indicator.store';
@@ -38,6 +40,8 @@ export class ReportsPage {
   private readonly indicatorStore = inject(PerformanceIndicatorStore);
   private readonly farmStore = inject(FarmStore);
   private readonly parcelStore = inject(ParcelStore);
+  private readonly missionStore = inject(MissionStore);
+  private readonly agrochemicalStore = inject(AgrochemicalStore);
 
   protected readonly loading = computed(() =>
     this.reportStore.loading() || this.historyStore.loading() || this.indicatorStore.loading());
@@ -108,12 +112,30 @@ export class ReportsPage {
       });
   });
 
+  /**
+   * Mission id -> name of the agrochemical sprayed in that mission (RP-005).
+   * A report only knows its mission, and the mission knows its agrochemical.
+   */
+  private readonly productByMission = computed(() => {
+    const productNames = new Map(this.agrochemicalStore.agrochemicals().map(product => [product.id, product.name]));
+    return new Map(this.missionStore.missions().map(mission => [
+      mission.id,
+      productNames.get(mission.agrochemicalId) ?? '—'
+    ]));
+  });
+
   protected readonly reportRows = computed<ReportRow[]>(() =>
     this.reportStore.reports()
       .filter(report => this.inRange(report.generatedAt) && this.matchesFarm(report.parcelId))
       .map(report => {
         const parcel = this.resolveParcel(report.parcelId);
-        return {report, parcelName: parcel.parcelName, farmId: parcel.farmId, farmName: parcel.farmName};
+        return {
+          report,
+          parcelName: parcel.parcelName,
+          farmId: parcel.farmId,
+          farmName: parcel.farmName,
+          productName: this.productByMission().get(report.missionId) ?? '—'
+        };
       }));
 
   protected readonly parcelOptions = computed<ParcelOption[]>(() =>

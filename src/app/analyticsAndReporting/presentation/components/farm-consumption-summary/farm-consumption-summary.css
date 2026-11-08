@@ -14,3 +14,11 @@
 .consumption-table__total td {
   font-weight: var(--agd-font-weight-medium);
 }
+
+.consumption-table__empty {
+  margin: 0;
+  padding: var(--agd-space-2);
+  font-size: var(--agd-font-size-body);
+  text-align: center;
+  color: var(--agd-color-text-muted);
+}

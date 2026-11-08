@@ -60,6 +60,9 @@ export class MissionForm implements OnInit {
     readonly drones = this.droneStore.drones;
     readonly agrochemicals = this.agrochemicalStore.agrochemicals;
 
+    /** Drones that can be assigned: the ones out of service by a fault are excluded (DR-006). */
+    readonly availableDrones = computed(() => this.drones().filter(drone => drone.canBeAssignedToMission()));
+
     /** Active wizard step: 1 | 2 | 3 | 4 */
     readonly activeStep = signal<number>(1);
 
@@ -159,7 +162,7 @@ export class MissionForm implements OnInit {
         const step = this.activeStep();
         const value = this.formValue();
         if (step === 1) return Boolean(value.farmId && value.parcelId);
-        if (step === 2) return Boolean(value.date && value.time && value.droneId);
+        if (step === 2) return Boolean(value.date && value.time && this.selectedDrone()?.canBeAssignedToMission());
         if (step === 3) return Boolean(value.agrochemicalId && this.form.controls.sprayRate.valid);
         return true;
     });
@@ -226,8 +229,8 @@ export class MissionForm implements OnInit {
         }
 
         // Auto-select first drone if available
-        if (this.drones().length > 0 && !this.form.get('droneId')?.value) {
-            this.form.get('droneId')?.setValue(this.drones()[0].id);
+        if (this.availableDrones().length > 0 && !this.form.get('droneId')?.value) {
+            this.form.get('droneId')?.setValue(this.availableDrones()[0].id);
         }
 
         // Auto-select first agrochemical if available

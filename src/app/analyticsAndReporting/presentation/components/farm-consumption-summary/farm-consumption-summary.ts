@@ -5,10 +5,11 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {ReportRow, uniqueByMission} from '../../report-row.model';
 
 /**
- * Aggregated supply consumption of one farm.
+ * Aggregated consumption of one agrochemical product in one farm (RP-005).
  */
 export interface FarmConsumption {
   farmName: string;
+  productName: string;
   missions: number;
   treatedArea: number;
   appliedVolume: number;
@@ -25,19 +26,23 @@ export interface FarmConsumption {
 export class FarmConsumptionSummary {
   rows: InputSignal<ReportRow[]> = input.required<ReportRow[]>();
 
-  protected readonly displayedColumns = ['farm', 'missions', 'area', 'volume', 'density'];
+  protected readonly displayedColumns = ['farm', 'product', 'missions', 'area', 'volume', 'density'];
 
+  /** One row per farm and product, adding up the volume sprayed in each completed mission. */
   protected readonly groups = computed<FarmConsumption[]>(() => {
-    const byFarm = new Map<string, FarmConsumption>();
+    const byFarmAndProduct = new Map<string, FarmConsumption>();
     for (const row of uniqueByMission(this.rows())) {
-      const key = row.farmName;
-      const group = byFarm.get(key) ?? {farmName: key, missions: 0, treatedArea: 0, appliedVolume: 0, density: null};
+      const key = `${row.farmName}|${row.productName}`;
+      const group = byFarmAndProduct.get(key) ?? {
+        farmName: row.farmName, productName: row.productName,
+        missions: 0, treatedArea: 0, appliedVolume: 0, density: null
+      };
       group.missions += 1;
       group.treatedArea += row.report.treatedArea;
       group.appliedVolume += row.report.appliedVolume;
-      byFarm.set(key, group);
+      byFarmAndProduct.set(key, group);
     }
-    return [...byFarm.values()]
+    return [...byFarmAndProduct.values()]
       .map(g => ({...g, density: g.treatedArea > 0 ? g.appliedVolume / g.treatedArea : null}))
       .sort((a, b) => b.appliedVolume - a.appliedVolume);
   });

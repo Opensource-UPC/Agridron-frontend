@@ -334,7 +334,8 @@
         "drone-required": "Debes seleccionar un dron",
         "min": "El valor debe ser mayor a 0",
         "overlap": "El solapamiento debe estar entre 0 y 100",
-        "notEditable": "Esta misión ya inició o terminó, por eso no se puede editar."
+        "notEditable": "Esta misión ya inició o terminó, por eso no se puede editar.",
+        "droneOutOfService": "El dron seleccionado está fuera de servicio por una falla. Elige otro dron; este podrá asignarse cuando se registre su reparación."
       }
     },
     "monitor": {
@@ -396,6 +397,17 @@
       "serviceReport": "Ver registro de servicio",
       "dashboard": "Volver al panel",
       "viewReport": "Ver reporte fitosanitario"
+    },
+    "calendar": {
+      "title": "Calendario",
+      "subtitle": "Misiones programadas por semana o por mes, con su estado",
+      "back": "Volver a misiones",
+      "week": "Semana",
+      "month": "Mes",
+      "previous": "Periodo anterior",
+      "next": "Periodo siguiente",
+      "today": "Hoy",
+      "empty": "No hay misiones programadas en este periodo."
     }
   },
   "weather": {
@@ -464,7 +476,8 @@
       "parcel": "Parcela",
       "farm": "Finca",
       "missions": "Misiones",
-      "total": "Total"
+      "total": "Total",
+      "product": "Producto"
     },
     "status": {
       "PLANNED": "Planificada",
@@ -500,8 +513,9 @@
     "empty": "No se encontraron registros.",
     "loading": "Cargando...",
     "consumption": {
-      "byFarm": "Consumo por finca",
-      "details": "Detalle de reportes"
+      "byFarm": "Consumo de agroquímicos por finca y producto",
+      "details": "Detalle de reportes",
+      "empty": "No hay consumos registrados: la finca no tiene misiones completadas."
     },
     "compare": {
       "select": "Parcelas a comparar",

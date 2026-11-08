@@ -4,10 +4,15 @@
       <h1 class="mission-list__title">{{ 'mission.title' | translate }}</h1>
       <p class="mission-list__subtitle">{{ 'mission.subtitle' | translate }}</p>
     </div>
-    <button matButton="filled" type="button" (click)="navigateToNew()">
-      <mat-icon svgIcon="agd:plus" aria-hidden="true"/>
-      {{ 'mission.newMission' | translate }}
-    </button>
+    <div class="mission-list__actions">
+      <button matButton="outlined" type="button" (click)="navigateToCalendar()">
+        {{ 'mission.calendar.title' | translate }}
+      </button>
+      <button matButton="filled" type="button" (click)="navigateToNew()">
+        <mat-icon svgIcon="agd:plus" aria-hidden="true"/>
+        {{ 'mission.newMission' | translate }}
+      </button>
+    </div>
   </header>
 
   <div class="mission-list__toolbar">

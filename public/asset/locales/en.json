@@ -334,7 +334,8 @@
         "drone-required": "You must select a drone",
         "min": "Value must be greater than 0",
         "overlap": "Overlap must be between 0 and 100",
-        "notEditable": "This mission has already started or finished, so it cannot be edited."
+        "notEditable": "This mission has already started or finished, so it cannot be edited.",
+        "droneOutOfService": "The selected drone is out of service due to a fault. Choose another drone; this one can be assigned once its repair is registered."
       }
     },
     "monitor": {
@@ -396,6 +397,17 @@
       "viewReport": "View phytosanitary report",
       "serviceReport": "View service record",
       "dashboard": "Back to dashboard"
+    },
+    "calendar": {
+      "title": "Calendar",
+      "subtitle": "Scheduled missions by week or month, with their status",
+      "back": "Back to missions",
+      "week": "Week",
+      "month": "Month",
+      "previous": "Previous period",
+      "next": "Next period",
+      "today": "Today",
+      "empty": "There are no missions scheduled in this period."
     }
   },
   "weather": {
@@ -464,7 +476,8 @@
       "parcel": "Parcel",
       "farm": "Farm",
       "missions": "Missions",
-      "total": "Total"
+      "total": "Total",
+      "product": "Product"
     },
     "status": {
       "PLANNED": "Planned",
@@ -500,8 +513,9 @@
     "empty": "No records found.",
     "loading": "Loading...",
     "consumption": {
-      "byFarm": "Consumption by farm",
-      "details": "Report details"
+      "byFarm": "Agrochemical consumption by farm and product",
+      "details": "Report details",
+      "empty": "No consumption recorded: the farm has no completed missions."
     },
     "compare": {
       "select": "Parcels to compare",

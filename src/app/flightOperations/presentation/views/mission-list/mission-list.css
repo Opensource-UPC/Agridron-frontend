@@ -326,8 +326,15 @@
   color: var(--agd-color-text-muted);
 }
 
+.mission-list__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--agd-space-1);
+}
+
 @media (max-width: 599px) {
-  .mission-list__header > button,
+  .mission-list__actions,
+  .mission-list__actions > button,
   .mission-list__search {
     width: 100%;
   }

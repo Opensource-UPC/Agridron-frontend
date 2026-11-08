@@ -1,0 +1,153 @@
+.calendar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--agd-space-2);
+  max-width: 800px;
+}
+
+.calendar__back {
+  align-self: flex-start;
+  margin-left: calc(-1 * var(--agd-space-1));
+}
+
+.calendar mat-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.calendar__title,
+.calendar__subtitle,
+.calendar__text,
+.calendar__day-title {
+  margin: 0;
+}
+
+/* Header */
+
+.calendar__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--agd-space-1);
+}
+
+.calendar__title {
+  font-size: var(--agd-font-size-view-title);
+  font-weight: var(--agd-font-weight-medium);
+  line-height: 36px;
+  color: var(--agd-color-primary);
+}
+
+.calendar__subtitle,
+.calendar__text {
+  font-size: var(--agd-font-size-body);
+  color: var(--agd-color-text-muted);
+}
+
+/* Toolbar: week / month and previous / next */
+
+.calendar__toolbar,
+.calendar__periods,
+.calendar__navigation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--agd-space-1);
+}
+
+.calendar__toolbar {
+  justify-content: space-between;
+}
+
+.calendar__range {
+  font-size: var(--agd-font-size-body);
+  font-weight: var(--agd-font-weight-medium);
+  color: var(--agd-color-primary);
+}
+
+/* One card per day */
+
+.calendar__day {
+  padding: var(--agd-space-2) var(--agd-space-3);
+  border: 1px solid var(--agd-color-border);
+  border-radius: var(--agd-radius-card);
+  background: var(--agd-color-surface);
+}
+
+.calendar__day-title {
+  font-size: var(--agd-font-size-section-title);
+  font-weight: var(--agd-font-weight-medium);
+  color: var(--agd-color-primary);
+}
+
+.calendar__missions {
+  margin: var(--agd-space-1) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.calendar__mission {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--agd-space-2);
+  min-height: 48px;
+  border-bottom: 1px solid var(--agd-color-border);
+  font-size: var(--agd-font-size-body);
+}
+
+.calendar__mission:last-child {
+  border-bottom: none;
+}
+
+.calendar__time {
+  min-width: 48px;
+  font-weight: var(--agd-font-weight-medium);
+  color: var(--agd-color-primary);
+}
+
+.calendar__name {
+  flex: 1;
+  min-width: 0;
+  color: var(--agd-color-primary);
+}
+
+.calendar__name small {
+  margin-left: 4px;
+  font-size: var(--agd-font-size-label);
+  color: var(--agd-color-text-muted);
+}
+
+/* Empty state (same look as the other lists) */
+
+.calendar__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--agd-space-2);
+  padding: var(--agd-space-4) var(--agd-space-2);
+  border: 1px solid var(--agd-color-border);
+  border-radius: var(--agd-radius-card);
+  background: var(--agd-color-surface);
+  text-align: center;
+}
+
+.calendar__empty-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--agd-color-secondary-tint);
+  color: var(--agd-color-secondary);
+}
+
+.calendar__empty-icon mat-icon {
+  width: 32px;
+  height: 32px;
+}
+
+@media (max-width: 599px) {
+  .calendar__day {
+    padding: var(--agd-space-2);
+  }
+}

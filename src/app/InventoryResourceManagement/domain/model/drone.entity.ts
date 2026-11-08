@@ -48,6 +48,11 @@ export class Drone {
    getStatus():string {
        return this.status;
    }
+    /** DR-006: un dron fuera de servicio por una falla no se puede asignar a misiones hasta su reparación. */
+    canBeAssignedToMission(): boolean {
+        return this.status !== DroneStatus.OUT_OF_SERVICE;
+    }
+
     /** Copia del dron con otro estado operativo (el resto de los datos no cambia). */
     withStatus(status: DroneStatus): Drone {
         return new Drone(this.id, this.serialNumber, this.model, this.batteryLevel, status,

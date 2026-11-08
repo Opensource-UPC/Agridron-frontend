@@ -180,4 +180,9 @@ export class MissionList {
     navigateToNew(): void {
         this.router.navigate(['flight-operations/missions/new']).then();
     }
+
+    /** Opens the calendar of scheduled missions (MI-005). */
+    navigateToCalendar(): void {
+        this.router.navigate(['flight-operations/missions/calendar']).then();
+    }
 }

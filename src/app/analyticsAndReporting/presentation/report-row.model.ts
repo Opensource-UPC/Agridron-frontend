@@ -2,13 +2,15 @@ import {MissionReport} from '../domain/model/mission-report.entity';
 import {ReportType} from '../domain/model/report-type.enum';
 
 /**
- * Mission report enriched with the names of its parcel and farm (resolved from field management data).
+ * Mission report enriched with the names of its parcel and farm (resolved from field management data)
+ * and of the agrochemical sprayed in its mission.
  */
 export interface ReportRow {
   report: MissionReport;
   parcelName: string;
   farmId: number | null;
   farmName: string;
+  productName: string;
 }
 
 /**

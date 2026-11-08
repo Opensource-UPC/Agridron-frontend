@@ -63,7 +63,7 @@
             <mat-form-field appearance="outline" class="mission-form__full">
               <mat-label>{{ 'mission.form.drone' | translate }}</mat-label>
               <mat-select formControlName="droneId">
-                @for (drone of drones(); track drone.id) {
+                @for (drone of availableDrones(); track drone.id) {
                   <mat-option [value]="drone.id">
                     {{ drone.model }} · S/N: {{ drone.serialNumber }} ({{ drone.batteryLevel }}%)
                   </mat-option>
@@ -71,6 +71,13 @@
               </mat-select>
             </mat-form-field>
           </div>
+
+          @if (selectedDrone() && !selectedDrone()!.canBeAssignedToMission()) {
+            <p class="mission-form__error" role="alert">
+              <mat-icon svgIcon="agd:alert" aria-hidden="true"/>
+              <span>{{ 'mission.form.error.droneOutOfService' | translate }}</span>
+            </p>
+          }
         }
 
         @case (3) {
