@@ -12,13 +12,14 @@ import {MatIcon} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {TranslatePipe} from '@ngx-translate/core';
+import {PolygonMap} from '../../../../shared/presentation/components/polygon-map/polygon-map';
 
 /**
  * Creates and edits parcel entities.
  */
 @Component({
   selector: 'app-parcel-form',
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIcon, RouterLink, DecimalPipe, ReactiveFormsModule, TranslatePipe],
+  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIcon, RouterLink, DecimalPipe, ReactiveFormsModule, TranslatePipe, PolygonMap],
   templateUrl: './parcel-form.html',
   styleUrl: './parcel-form.css'
 })
@@ -122,6 +123,13 @@ export class ParcelForm {
   get previewCropName(): string | null {
     const cropId = this.form.controls.cropId.value;
     return this.crops().find(crop => crop.id === cropId)?.name ?? null;
+  }
+
+  /**
+   * The map gives the area in m²; parcels store it in hectares (1 ha = 10 000 m²), rounded to 2 decimals.
+   */
+  onAreaChange(squareMeters: number) {
+    this.form.controls.area.setValue(Math.round(squareMeters / 100) / 100);
   }
 
   /**

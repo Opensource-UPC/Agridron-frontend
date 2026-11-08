@@ -852,5 +852,17 @@
       "technicianRequired": "El técnico es obligatorio",
       "repairDescriptionRequired": "Describe qué se reparó (máximo 200 caracteres)"
     }
+  },
+  "map": {
+    "hint": "Haz clic en el mapa para marcar cada esquina (mínimo 3).",
+    "undo": "Deshacer",
+    "clear": "Limpiar",
+    "area": "Área: {{ hectares }} ha ({{ squareMeters }} m²)",
+    "areaHint": "Se calcula automáticamente al trazar el polígono en el mapa",
+    "layers": {
+      "satellite": "Satelital",
+      "topographic": "Topográfico",
+      "hybrid": "Híbrido"
+    }
   }
 }

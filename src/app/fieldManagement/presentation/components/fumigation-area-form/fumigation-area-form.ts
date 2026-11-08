@@ -10,13 +10,14 @@ import {MatIcon} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {TranslatePipe} from '@ngx-translate/core';
+import {PolygonMap} from '../../../../shared/presentation/components/polygon-map/polygon-map';
 
 /**
  * Creates and edits fumigation area entities.
  */
 @Component({
   selector: 'app-fumigation-area-form',
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIcon, RouterLink, ReactiveFormsModule, TranslatePipe],
+  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIcon, RouterLink, ReactiveFormsModule, TranslatePipe, PolygonMap],
   templateUrl: './fumigation-area-form.html',
   styleUrl: './fumigation-area-form.css'
 })
@@ -82,6 +83,14 @@ export class FumigationAreaForm {
         });
       }
     });
+  }
+
+  /**
+   * Outline of the selected parcel, drawn on the map as a reference for the fumigation area.
+   */
+  get selectedParcelGeometry(): string {
+    const parcelId = this.form.controls.parcelId.value;
+    return this.parcels().find(parcel => parcel.id === parcelId)?.geometry ?? '';
   }
 
   /**

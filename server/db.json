@@ -81,6 +81,22 @@
       "farmId": 3,
       "cropId": 3,
       "image": "https://previews.123rf.com/images/golf609/golf6091807/golf609180700046/105479724-cassava-field-plantation.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Parcela Testeo",
+      "area": 2.26,
+      "geometry": "{\"type\":\"Polygon\",\"coordinates\":[[[-76.36049551105073,-13.100650078414272],[-76.35807269432068,-13.100556031988312],[-76.35807269432068,-13.100556031988312],[-76.35766531805635,-13.101005364588119],[-76.35766531805635,-13.101005364588119],[-76.35912329626557,-13.101120310005179],[-76.35912329626557,-13.101120310005179],[-76.35891960813342,-13.101626069138876],[-76.35989516708223,-13.101772362927887],[-76.36049551105073,-13.100650078414272]]]}",
+      "farmId": 2,
+      "cropId": 2
+    },
+    {
+      "id": 7,
+      "name": "Testing para el grupo",
+      "area": 1.15,
+      "geometry": "{\"type\":\"Polygon\",\"coordinates\":[[[-76.37147021908632,-13.08388207802269],[-76.37082699340579,-13.083714872971898],[-76.3703874558574,-13.085000258884671],[-76.37095563854189,-13.085334667129153],[-76.37147021908632,-13.08388207802269]]]}",
+      "farmId": 5,
+      "cropId": 2
     }
   ],
   "fumigation-areas": [
@@ -258,6 +274,116 @@
       "appliedVolume": 24.6,
       "observations": "Pausada una vez por viento",
       "generatedAt": "2026-10-31T13:43:10.321Z"
+    },
+    {
+      "id": 6,
+      "missionId": 4,
+      "parcelId": 1,
+      "type": "PHYTOSANITARY",
+      "treatedArea": 12.5,
+      "appliedVolume": 25,
+      "observations": "",
+      "generatedAt": "2026-11-07T19:30:40.780Z"
+    },
+    {
+      "id": 7,
+      "missionId": 5,
+      "parcelId": 2,
+      "type": "PHYTOSANITARY",
+      "treatedArea": 0,
+      "appliedVolume": 0,
+      "observations": "",
+      "generatedAt": "2026-11-07T19:31:48.452Z"
+    },
+    {
+      "id": 8,
+      "missionId": 6,
+      "parcelId": 4,
+      "type": "MISSION_SUMMARY",
+      "treatedArea": 5.4,
+      "appliedVolume": 16.200000000000003,
+      "observations": "Mission completed without incidents.",
+      "generatedAt": "2026-11-07T20:14:51.071Z"
+    },
+    {
+      "id": 9,
+      "missionId": 6,
+      "parcelId": 4,
+      "type": "PHYTOSANITARY",
+      "treatedArea": 5.4,
+      "appliedVolume": 16.200000000000003,
+      "observations": "Mission completed without incidents.",
+      "generatedAt": "2026-11-07T20:14:52.657Z"
+    },
+    {
+      "id": 10,
+      "missionId": 7,
+      "parcelId": 2,
+      "type": "MISSION_SUMMARY",
+      "treatedArea": 8.3,
+      "appliedVolume": 16.6,
+      "observations": "Mission completed without incidents.",
+      "generatedAt": "2026-11-07T20:16:37.934Z"
+    },
+    {
+      "id": 11,
+      "missionId": 10,
+      "parcelId": 6,
+      "type": "MISSION_SUMMARY",
+      "treatedArea": 2.26,
+      "appliedVolume": 4.52,
+      "observations": "Mission completed without incidents.",
+      "generatedAt": "2026-11-07T20:51:57.792Z"
+    },
+    {
+      "id": 12,
+      "missionId": 10,
+      "parcelId": 6,
+      "type": "PHYTOSANITARY",
+      "treatedArea": 2.26,
+      "appliedVolume": 4.52,
+      "observations": "Mission completed without incidents.",
+      "generatedAt": "2026-11-07T20:51:59.072Z"
+    },
+    {
+      "id": 13,
+      "missionId": 14,
+      "parcelId": 7,
+      "type": "MISSION_SUMMARY",
+      "treatedArea": 1.15,
+      "appliedVolume": 2.3,
+      "observations": "Mission completed without incidents.",
+      "generatedAt": "2026-11-07T21:31:52.162Z"
+    },
+    {
+      "id": 14,
+      "missionId": 15,
+      "parcelId": 1,
+      "type": "MISSION_SUMMARY",
+      "treatedArea": 12.5,
+      "appliedVolume": 25,
+      "observations": "Mission completed without incidents.",
+      "generatedAt": "2026-11-07T21:41:36.481Z"
+    },
+    {
+      "id": 15,
+      "missionId": 15,
+      "parcelId": 1,
+      "type": "PHYTOSANITARY",
+      "treatedArea": 12.5,
+      "appliedVolume": 25,
+      "observations": "Mission completed without incidents.",
+      "generatedAt": "2026-11-07T21:41:39.713Z"
+    },
+    {
+      "id": 16,
+      "missionId": 11,
+      "parcelId": 4,
+      "type": "MISSION_SUMMARY",
+      "treatedArea": 5.4,
+      "appliedVolume": 10.8,
+      "observations": "Mission completed without incidents.",
+      "generatedAt": "2026-11-07T22:29:25.751Z"
     }
   ],
   "mission-histories": [
@@ -276,13 +402,6 @@
       "completedAt": "2026-09-25T11:00:00"
     },
     {
-      "id": 3,
-      "missionId": 3,
-      "parcelId": 2,
-      "finalStatus": "CANCELLED",
-      "completedAt": "2026-09-28T09:15:00"
-    },
-    {
       "id": 4,
       "missionId": 4,
       "parcelId": 2,
@@ -295,6 +414,48 @@
       "parcelId": 5,
       "finalStatus": "COMPLETED",
       "completedAt": "2026-10-01T09:30:00"
+    },
+    {
+      "id": 6,
+      "missionId": 6,
+      "parcelId": 4,
+      "finalStatus": "COMPLETED",
+      "completedAt": "2026-11-07T20:14:51.071Z"
+    },
+    {
+      "id": 7,
+      "missionId": 7,
+      "parcelId": 2,
+      "finalStatus": "COMPLETED",
+      "completedAt": "2026-11-07T20:16:37.934Z"
+    },
+    {
+      "id": 8,
+      "missionId": 10,
+      "parcelId": 6,
+      "finalStatus": "COMPLETED",
+      "completedAt": "2026-11-07T20:51:57.792Z"
+    },
+    {
+      "id": 9,
+      "missionId": 14,
+      "parcelId": 7,
+      "finalStatus": "COMPLETED",
+      "completedAt": "2026-11-07T21:31:52.162Z"
+    },
+    {
+      "id": 10,
+      "missionId": 15,
+      "parcelId": 1,
+      "finalStatus": "COMPLETED",
+      "completedAt": "2026-11-07T21:41:36.481Z"
+    },
+    {
+      "id": 11,
+      "missionId": 11,
+      "parcelId": 4,
+      "finalStatus": "COMPLETED",
+      "completedAt": "2026-11-07T22:29:25.751Z"
     }
   ],
   "missions": [
@@ -325,24 +486,11 @@
       "status": "COMPLETED"
     },
     {
-      "id": 3,
-      "requestedDate": "2026-09-28T09:00:00",
-      "parcelId": 3,
-      "agrochemicalId": 1,
-      "droneId": 5,
-      "operatorId": 1,
-      "flightHeight": 4,
-      "flightSpeed": 6,
-      "sprayRate": 2.5,
-      "overlap": 15,
-      "status": "CANCELLED"
-    },
-    {
       "id": 4,
       "requestedDate": "2026-11-05T12:00:00.000Z",
       "parcelId": 1,
-      "agrochemicalId": 6,
-      "droneId": 1,
+      "agrochemicalId": 3,
+      "droneId": 4,
       "operatorId": 1,
       "flightHeight": 3,
       "flightSpeed": 5,
@@ -352,7 +500,7 @@
     },
     {
       "id": 5,
-      "requestedDate": "2026-11-06T07:30:00",
+      "requestedDate": "2026-11-06T12:30:00.000Z",
       "parcelId": 2,
       "agrochemicalId": 4,
       "droneId": 4,
@@ -361,11 +509,11 @@
       "flightSpeed": 5,
       "sprayRate": 2,
       "overlap": 20,
-      "status": "AUTHORIZED"
+      "status": "COMPLETED"
     },
     {
       "id": 6,
-      "requestedDate": "2026-10-30T09:00:00",
+      "requestedDate": "2026-10-30T14:00:00.000Z",
       "parcelId": 4,
       "agrochemicalId": 3,
       "droneId": 2,
@@ -374,7 +522,124 @@
       "flightSpeed": 6,
       "sprayRate": 3,
       "overlap": 20,
-      "status": "IN_PROGRESS"
+      "status": "COMPLETED"
+    },
+    {
+      "id": 7,
+      "requestedDate": "2026-11-07T13:00:00.000Z",
+      "parcelId": 2,
+      "agrochemicalId": 3,
+      "droneId": 1,
+      "operatorId": 1,
+      "flightHeight": 3,
+      "flightSpeed": 5,
+      "sprayRate": 2,
+      "overlap": 20,
+      "status": "COMPLETED"
+    },
+    {
+      "id": 8,
+      "requestedDate": "2026-11-07T13:00:00.000Z",
+      "parcelId": 2,
+      "agrochemicalId": 1,
+      "droneId": 4,
+      "operatorId": 1,
+      "flightHeight": 3,
+      "flightSpeed": 5,
+      "sprayRate": 2,
+      "overlap": 20,
+      "status": "PLANNED"
+    },
+    {
+      "id": 9,
+      "requestedDate": "2026-11-07T13:00:00.000Z",
+      "parcelId": 1,
+      "agrochemicalId": 2,
+      "droneId": 1,
+      "operatorId": 1,
+      "flightHeight": 3,
+      "flightSpeed": 5,
+      "sprayRate": 2,
+      "overlap": 20,
+      "status": "AUTHORIZED"
+    },
+    {
+      "id": 10,
+      "requestedDate": "2026-11-07T13:00:00.000Z",
+      "parcelId": 6,
+      "agrochemicalId": 1,
+      "droneId": 1,
+      "operatorId": 1,
+      "flightHeight": 3,
+      "flightSpeed": 5,
+      "sprayRate": 2,
+      "overlap": 20,
+      "status": "COMPLETED"
+    },
+    {
+      "id": 11,
+      "requestedDate": "2026-11-07T13:00:00.000Z",
+      "parcelId": 4,
+      "agrochemicalId": 1,
+      "droneId": 1,
+      "operatorId": 1,
+      "flightHeight": 3,
+      "flightSpeed": 5,
+      "sprayRate": 2,
+      "overlap": 20,
+      "status": "COMPLETED"
+    },
+    {
+      "id": 12,
+      "requestedDate": "2026-11-07T13:00:00.000Z",
+      "parcelId": 1,
+      "agrochemicalId": 1,
+      "droneId": 1,
+      "operatorId": 1,
+      "flightHeight": 3,
+      "flightSpeed": 5,
+      "sprayRate": 2,
+      "overlap": 20,
+      "status": "AUTHORIZED"
+    },
+    {
+      "id": 13,
+      "requestedDate": "2026-11-07T13:00:00.000Z",
+      "parcelId": 1,
+      "agrochemicalId": 1,
+      "droneId": 1,
+      "operatorId": 1,
+      "flightHeight": 3,
+      "flightSpeed": 5,
+      "sprayRate": 2,
+      "overlap": 20,
+      "status": "AUTHORIZED"
+    },
+    {
+      "id": 14,
+      "requestedDate": "2026-11-07T13:00:00.000Z",
+      "parcelId": 7,
+      "agrochemicalId": 1,
+      "droneId": 1,
+      "operatorId": 1,
+      "flightHeight": 3,
+      "flightSpeed": 5,
+      "sprayRate": 2,
+      "overlap": 20,
+      "status": "COMPLETED"
+    },
+    {
+      "id": 15,
+      "requestedDate": "2026-11-07T13:00:00.000Z",
+      "parcelId": 1,
+      "agrochemicalId": 1,
+      "droneId": 1,
+      "operatorId": 1,
+      "flightHeight": 3,
+      "flightSpeed": 5,
+      "sprayRate": 2,
+      "overlap": 20,
+      "status": "COMPLETED"
     }
   ],
   "mission-results": [
@@ -398,6 +663,48 @@
       "treatedArea": 12.5,
       "appliedVolume": 25,
       "observations": null
+    },
+    {
+      "id": 4,
+      "missionId": 6,
+      "treatedArea": 5.4,
+      "appliedVolume": 16.200000000000003,
+      "observations": "Mission completed without incidents."
+    },
+    {
+      "id": 5,
+      "missionId": 7,
+      "treatedArea": 8.3,
+      "appliedVolume": 16.6,
+      "observations": "Mission completed without incidents."
+    },
+    {
+      "id": 6,
+      "missionId": 10,
+      "treatedArea": 2.26,
+      "appliedVolume": 4.52,
+      "observations": "Mission completed without incidents."
+    },
+    {
+      "id": 7,
+      "missionId": 14,
+      "treatedArea": 1.15,
+      "appliedVolume": 2.3,
+      "observations": "Mission completed without incidents."
+    },
+    {
+      "id": 8,
+      "missionId": 15,
+      "treatedArea": 12.5,
+      "appliedVolume": 25,
+      "observations": "Mission completed without incidents."
+    },
+    {
+      "id": 9,
+      "missionId": 11,
+      "treatedArea": 5.4,
+      "appliedVolume": 10.8,
+      "observations": "Mission completed without incidents."
     }
   ],
   "incidents": [
@@ -414,6 +721,13 @@
       "type": "SAFETY",
       "description": "incident test ",
       "occurredAt": "2026-10-31T12:53:38.901Z"
+    },
+    {
+      "id": 3,
+      "missionId": 4,
+      "type": "TECHNICAL",
+      "description": "test",
+      "occurredAt": "2026-11-07T19:30:26.816Z"
     }
   ],
   "operation-status": [
@@ -456,6 +770,142 @@
       "latitude": -14.065000000000001,
       "longitude": -76.13499999999999,
       "timestamp": "2026-10-31T12:53:41.904Z"
+    },
+    {
+      "id": 6,
+      "missionId": 4,
+      "status": "IN_PROGRESS",
+      "latitude": -14.065000000000001,
+      "longitude": -76.13499999999999,
+      "timestamp": "2026-11-07T19:30:10.670Z"
+    },
+    {
+      "id": 7,
+      "missionId": 4,
+      "status": "PAUSED",
+      "latitude": -14.065000000000001,
+      "longitude": -76.13499999999999,
+      "timestamp": "2026-11-07T19:30:29.881Z"
+    },
+    {
+      "id": 8,
+      "missionId": 4,
+      "status": "IN_PROGRESS",
+      "latitude": -14.065000000000001,
+      "longitude": -76.13499999999999,
+      "timestamp": "2026-11-07T19:30:37.715Z"
+    },
+    {
+      "id": 9,
+      "missionId": 4,
+      "status": "COMPLETED",
+      "latitude": -14.065000000000001,
+      "longitude": -76.13499999999999,
+      "timestamp": "2026-11-07T19:30:38.998Z"
+    },
+    {
+      "id": 10,
+      "missionId": 5,
+      "status": "IN_PROGRESS",
+      "latitude": -14.075,
+      "longitude": -76.13499999999999,
+      "timestamp": "2026-11-07T19:31:45.693Z"
+    },
+    {
+      "id": 11,
+      "missionId": 5,
+      "status": "COMPLETED",
+      "latitude": -14.075,
+      "longitude": -76.13499999999999,
+      "timestamp": "2026-11-07T19:31:47.292Z"
+    },
+    {
+      "id": 12,
+      "missionId": 6,
+      "status": "COMPLETED",
+      "latitude": -14.075,
+      "longitude": -76.13499999999999,
+      "timestamp": "2026-11-07T20:14:51.071Z"
+    },
+    {
+      "id": 13,
+      "missionId": 7,
+      "status": "IN_PROGRESS",
+      "latitude": -14.075,
+      "longitude": -76.13499999999999,
+      "timestamp": "2026-11-07T20:16:36.189Z"
+    },
+    {
+      "id": 14,
+      "missionId": 7,
+      "status": "COMPLETED",
+      "latitude": -14.075,
+      "longitude": -76.13499999999999,
+      "timestamp": "2026-11-07T20:16:37.934Z"
+    },
+    {
+      "id": 15,
+      "missionId": 10,
+      "status": "IN_PROGRESS",
+      "latitude": -13.101045769293806,
+      "longitude": -76.35878143372796,
+      "timestamp": "2026-11-07T20:51:04.136Z"
+    },
+    {
+      "id": 16,
+      "missionId": 10,
+      "status": "COMPLETED",
+      "latitude": -13.101045769293806,
+      "longitude": -76.35878143372796,
+      "timestamp": "2026-11-07T20:51:57.791Z"
+    },
+    {
+      "id": 17,
+      "missionId": 14,
+      "status": "IN_PROGRESS",
+      "latitude": -13.084482969252102,
+      "longitude": -76.37091007672285,
+      "timestamp": "2026-11-07T21:31:38.385Z"
+    },
+    {
+      "id": 18,
+      "missionId": 14,
+      "status": "COMPLETED",
+      "latitude": -13.084482969252102,
+      "longitude": -76.37091007672285,
+      "timestamp": "2026-11-07T21:31:52.161Z"
+    },
+    {
+      "id": 19,
+      "missionId": 15,
+      "status": "IN_PROGRESS",
+      "latitude": -14.065000000000001,
+      "longitude": -76.13499999999999,
+      "timestamp": "2026-11-07T21:41:35.047Z"
+    },
+    {
+      "id": 20,
+      "missionId": 15,
+      "status": "COMPLETED",
+      "latitude": -14.065000000000001,
+      "longitude": -76.13499999999999,
+      "timestamp": "2026-11-07T21:41:36.481Z"
+    },
+    {
+      "id": 21,
+      "missionId": 11,
+      "status": "IN_PROGRESS",
+      "latitude": -14.075,
+      "longitude": -76.13499999999999,
+      "timestamp": "2026-11-07T22:29:21.928Z"
+    },
+    {
+      "id": 22,
+      "missionId": 11,
+      "status": "COMPLETED",
+      "latitude": -14.075,
+      "longitude": -76.13499999999999,
+      "timestamp": "2026-11-07T22:29:25.750Z"
     }
   ],
   "operational-metrics": [

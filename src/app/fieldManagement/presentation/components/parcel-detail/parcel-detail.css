@@ -59,6 +59,22 @@
   background: var(--agd-color-surface);
 }
 
+/* Card and map side by side; the map goes below the card on narrow screens */
+
+.parcel-detail__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 560px) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--agd-space-3);
+  width: 100%;
+}
+
+@media (max-width: 1023px) {
+  .parcel-detail__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .parcel-detail__media {
   display: block;
   width: 100%;

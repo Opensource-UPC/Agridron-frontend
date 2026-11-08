@@ -1,0 +1,29 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: var(--agd-space-1);
+}
+
+/* Leaflet needs a fixed height. isolation keeps its layers (z-index up to 1000) inside the map,
+   so menus and dialogs of the page are never drawn behind it. */
+.polygon-map__canvas {
+    height: 320px;
+    border: 1px solid var(--agd-color-border);
+    border-radius: 8px;
+    isolation: isolate;
+}
+
+.polygon-map__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--agd-space-1);
+}
+
+.polygon-map__info {
+    flex: 1;
+    min-width: 200px;
+    margin: 0;
+    font-size: var(--agd-font-size-label);
+    color: var(--agd-color-text-muted);
+}

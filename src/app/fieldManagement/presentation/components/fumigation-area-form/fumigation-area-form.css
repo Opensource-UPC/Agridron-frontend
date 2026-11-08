@@ -73,9 +73,10 @@
   color: var(--agd-color-text-muted);
 }
 
-.area-form__field-icon--top {
-  align-self: flex-start;
-  margin-top: 16px;
+.area-form__map-error {
+  margin: 0;
+  font-size: var(--agd-font-size-label);
+  color: var(--agd-color-error);
 }
 
 .area-form__actions {

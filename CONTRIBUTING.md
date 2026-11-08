@@ -264,7 +264,7 @@ npm start
 
 # Start fake REST API (json-server at localhost:3000)
 npm run server
-# or: cd server && npx json-server --watch db.json --routes routes.json --port 3000
+# or: cd server && npx json-server db.json --routes routes.json --port 3000
 
 # Run both concurrently (requires concurrently)
 npm install -g concurrently

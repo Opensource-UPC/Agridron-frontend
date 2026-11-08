@@ -1,30 +1,96 @@
-.title {
-    margin: 16px;
-}
-
 .warning {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: var(--agd-space-2);
     max-width: 720px;
-    margin: 16px;
 }
 
+.warning__title {
+    margin: 0;
+    font-size: var(--agd-font-size-view-title);
+    font-weight: var(--agd-font-weight-medium);
+    line-height: 36px;
+    color: var(--agd-color-primary);
+}
+
+/* Medium weather alert: documented amber on its tinted background */
 .warning__banner {
     display: flex;
-    gap: 12px;
-    padding: 16px;
-    border-radius: 12px;
-    background: #fff3e0;
-    color: #b45309;
+    align-items: flex-start;
+    gap: var(--agd-space-1);
+    padding: 12px var(--agd-space-2);
+    border-radius: 8px;
+    background: var(--agd-alert-medium-bg);
+    color: var(--agd-alert-medium);
+    font-size: var(--agd-font-size-body);
 }
 
-.warning__banner p {
+.warning__banner mat-icon {
+    flex: none;
+    width: 20px;
+    height: 20px;
+}
+
+.warning__banner strong {
+    font-weight: var(--agd-font-weight-medium);
+}
+
+.warning__banner p,
+.warning__banner ul {
     margin: 4px 0 0;
+    color: var(--agd-color-primary);
+}
+
+.warning__banner ul {
+    padding-left: var(--agd-space-2);
+}
+
+.warning__loading {
+    margin: 0;
+    font-size: var(--agd-font-size-body);
+    color: var(--agd-color-text-muted);
+}
+
+/* Mission place and weather data source: label / value rows in a white card */
+.warning__place {
+    margin: 0;
+    padding: var(--agd-space-1) var(--agd-space-2);
+    border: 1px solid var(--agd-color-border);
+    border-radius: var(--agd-radius-card);
+    background: var(--agd-color-surface);
+    font-size: var(--agd-font-size-body);
+}
+
+.warning__place div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--agd-space-2);
+    min-height: 48px;
+    border-bottom: 1px solid var(--agd-color-border);
+}
+
+.warning__place div:last-child {
+    border-bottom: none;
+}
+
+.warning__place dt {
+    flex: none;
+    color: var(--agd-color-text-muted);
+}
+
+.warning__place dd {
+    margin: 0;
+    min-width: 0;
+    font-weight: var(--agd-font-weight-medium);
+    color: var(--agd-color-primary);
+    text-align: right;
+    overflow-wrap: anywhere;
 }
 
 .warning__actions {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--agd-space-1);
 }

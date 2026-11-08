@@ -1,16 +1,18 @@
+/* Status label: tinted pill (web_style_guide.png) */
 .badge {
     display: inline-block;
-    padding: 2px 10px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    --badge: #9e9e9e;
-    color: var(--badge);
-    background: color-mix(in srgb, var(--badge) 22%, transparent);
+    padding: 2px var(--agd-space-1);
+    border-radius: var(--agd-radius-pill);
+    background: var(--agd-status-none-bg);
+    color: var(--agd-status-none-text);
+    font-size: var(--agd-font-size-label);
+    font-weight: var(--agd-font-weight-medium);
+    white-space: nowrap;
 }
 
-.badge--completed { --badge: #4caf50; }
-.badge--in_progress { --badge: #42a5f5; }
+.badge--completed { background: var(--agd-status-completed-bg); color: var(--agd-status-completed-text); }
+.badge--in_progress { background: var(--agd-status-in-progress-bg); color: var(--agd-status-in-progress-text); }
 .badge--planned,
-.badge--authorized { --badge: #ffa726; }
+.badge--authorized { background: var(--agd-status-pending-bg); color: var(--agd-status-pending-text); }
 .badge--paused,
-.badge--cancelled { --badge: #ef5350; }
+.badge--cancelled { background: var(--agd-status-paused-bg); color: var(--agd-status-paused-text); }

@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { catchError, forkJoin, map, Observable, of } from 'rxjs';
 import { WeatherApi } from '../infrastructure/weather-api';
 import { WeatherAssembler } from '../infrastructure/weather-assembler';
+import { WeatherConditionResponse } from '../infrastructure/weather-condition-response';
 import { WeatherCondition } from '../domain/model/weather-condition.entity';
 import { WeatherAlert } from '../domain/model/weather-alert.entity';
 import { ALERT_RULES, isSuitable as isSuitableForSpraying } from '../domain/model/weather-rules';
@@ -57,11 +58,27 @@ export class WeatherService {
     return isSuitableForSpraying(weather);
   }
 
+  /**
+   * Gets the weather of a given point, e.g. the center of a mission parcel.
+   * It does not change weatherConditions, so the Home widget keeps showing the user's location.
+   */
+  getWeatherAt(latitude: number, longitude: number, name: string): Observable<WeatherCondition> {
+    return this.weatherApi.getWeather(latitude, longitude).pipe(
+      map(response => this.toCondition(response, name, latitude, longitude)),
+    );
+  }
+
+  /** Builds the weather condition of the API response and evaluates its alerts. */
+  private toCondition(response: WeatherConditionResponse, name: string, latitude: number, longitude: number): WeatherCondition {
+    const condition = WeatherAssembler.toEntityFromResponse(response, name, latitude, longitude);
+    condition.alerts = this.evaluateConditions(condition);
+    return condition;
+  }
+
   private loadWeather(latitude: number, longitude: number, location: Observable<string>, isDefault: boolean) {
     forkJoin([this.weatherApi.getWeather(latitude, longitude), location]).subscribe({
       next: ([response, name]) => {
-        const condition = WeatherAssembler.toEntityFromResponse(response, name);
-        condition.alerts = this.evaluateConditions(condition);
+        const condition = this.toCondition(response, name, latitude, longitude);
         this.usingDefaultLocation.set(isDefault);
         this.weatherConditions.set([condition]);
         this.loading.set(false);

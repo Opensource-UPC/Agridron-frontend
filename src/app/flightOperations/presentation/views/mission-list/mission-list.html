@@ -1,207 +1,126 @@
-<div class="mission-list-view">
-  <div class="mission-shell">
-    <!-- Header Section -->
-    <header class="header-section">
-      <div class="header-titles">
-        <h1 class="view-title">{{ 'mission.title' | translate }}</h1>
-        <p class="view-subtitle">{{ 'mission.subtitle' | translate }}</p>
-      </div>
+<section class="mission-list">
+  <header class="mission-list__header">
+    <div class="mission-list__intro">
+      <h1 class="mission-list__title">{{ 'mission.title' | translate }}</h1>
+      <p class="mission-list__subtitle">{{ 'mission.subtitle' | translate }}</p>
+    </div>
+    <button matButton="filled" type="button" (click)="navigateToNew()">
+      <mat-icon svgIcon="agd:plus" aria-hidden="true"/>
+      {{ 'mission.newMission' | translate }}
+    </button>
+  </header>
 
-      <button mat-flat-button class="new-mission-button" (click)="navigateToNew()">
-        <mat-icon>add</mat-icon>
-        <span>{{ 'mission.newMission' | translate }}</span>
-      </button>
-    </header>
-
-    <!-- Filters & Search Toolbar -->
-    <div class="toolbar-section">
-      <div class="filter-chips" role="tablist">
-        <button
-          type="button"
-          class="filter-chip"
-          [class.active]="selectedFilter() === 'ALL'"
-          (click)="setFilter('ALL')"
-        >
-          {{ 'mission.filter.all' | translate }}
-          <span class="chip-count">{{ counts().all }}</span>
+  <div class="mission-list__toolbar">
+    <div class="mission-list__filters">
+      @for (filter of [
+        { value: 'ALL', label: 'all', count: counts().all },
+        { value: 'PLANNED', label: 'planned', count: counts().planned },
+        { value: 'IN_PROGRESS', label: 'inProgress', count: counts().inProgress },
+        { value: 'COMPLETED', label: 'completed', count: counts().completed },
+        { value: 'PAUSED', label: 'paused', count: counts().paused }
+      ]; track filter.value) {
+        <button type="button" [matButton]="selectedFilter() === filter.value ? 'filled' : 'outlined'"
+                [attr.aria-pressed]="selectedFilter() === filter.value"
+                (click)="setFilter(filter.value)">
+          {{ 'mission.filter.' + filter.label | translate }} · {{ filter.count }}
         </button>
-
-        <button
-          type="button"
-          class="filter-chip"
-          [class.active]="selectedFilter() === 'PLANNED'"
-          (click)="setFilter('PLANNED')"
-        >
-          {{ 'mission.filter.planned' | translate }}
-          <span class="chip-count">{{ counts().planned }}</span>
-        </button>
-
-        <button
-          type="button"
-          class="filter-chip"
-          [class.active]="selectedFilter() === 'IN_PROGRESS'"
-          (click)="setFilter('IN_PROGRESS')"
-        >
-          {{ 'mission.filter.inProgress' | translate }}
-          <span class="chip-count">{{ counts().inProgress }}</span>
-        </button>
-
-        <button
-          type="button"
-          class="filter-chip"
-          [class.active]="selectedFilter() === 'COMPLETED'"
-          (click)="setFilter('COMPLETED')"
-        >
-          {{ 'mission.filter.completed' | translate }}
-          <span class="chip-count">{{ counts().completed }}</span>
-        </button>
-
-        <button
-          type="button"
-          class="filter-chip"
-          [class.active]="selectedFilter() === 'PAUSED'"
-          (click)="setFilter('PAUSED')"
-        >
-          {{ 'mission.filter.paused' | translate }}
-          <span class="chip-count">{{ counts().paused }}</span>
-        </button>
-      </div>
-
-      <div class="search-box">
-        <mat-icon class="search-icon">search</mat-icon>
-        <input
-          type="text"
-          class="search-input"
-          placeholder="Buscar por lote, finca, cultivo..."
-          [value]="searchQuery()"
-          (input)="onSearchChange($event)"
-        />
-        @if (searchQuery()) {
-          <button type="button" class="search-clear" (click)="searchQuery.set('')">✕</button>
-        }
-      </div>
+      }
     </div>
 
-    <!-- Loading State -->
-    @if (store.loading()) {
-      <div class="loading-state">
-        <mat-spinner diameter="44"></mat-spinner>
-        <p>{{ 'mission.loading' | translate }}</p>
-      </div>
-    }
-
-    <!-- Error State -->
-    @if (store.error(); as err) {
-      <div class="error-banner">
-        <mat-icon>error_outline</mat-icon>
-        <span>{{ err }}</span>
-      </div>
-    }
-
-    <!-- Empty State -->
-    @if (!store.loading() && filteredMissions().length === 0) {
-      <div class="empty-state">
-        <div class="empty-icon-circle">
-          <mat-icon>flight_takeoff</mat-icon>
-        </div>
-        <h3>{{ 'mission.empty' | translate }}</h3>
-        <p>{{ 'mission.emptyPrompt' | translate }}</p>
-        <button mat-flat-button class="new-mission-button empty-btn" (click)="navigateToNew()">
-          <mat-icon>add</mat-icon>
-          <span>{{ 'mission.newMission' | translate }}</span>
-        </button>
-      </div>
-    }
-
-    <!-- Cards Grid -->
-    @if (!store.loading() && filteredMissions().length > 0) {
-      <div class="mission-card-grid">
-        @for (mission of filteredMissions(); track mission.id) {
-          <article class="mission-card">
-            <!-- Top bar: Badge & ID -->
-            <div class="mission-card-top">
-              <app-mission-status-badge [status]="mission.status" />
-              <span class="mission-id">#MS-{{ mission.id }}</span>
-            </div>
-
-            <!-- Card Heading -->
-            <div class="card-heading">
-              <h3 class="card-title">{{ parcelName(mission.parcelId) }}</h3>
-              <p class="card-subtitle">
-                <mat-icon class="inline-icon">location_on</mat-icon>
-                <span>{{ farmName(mission.parcelId) }}</span>
-                <span class="dot-separator">·</span>
-                <span>{{ parcelArea(mission.parcelId) }} ha</span>
-              </p>
-            </div>
-
-            <!-- Card Details -->
-            <div class="card-details">
-              <div class="detail-item">
-                <span class="detail-label">{{ 'mission.card.crop' | translate }}</span>
-                <span class="detail-value highlight-crop">{{ cropName(mission.parcelId) }}</span>
-              </div>
-
-              <div class="detail-item">
-                <span class="detail-label">{{ 'mission.card.drone' | translate }}</span>
-                <span class="detail-value">{{ droneInfo(mission.droneId) }}</span>
-              </div>
-
-              <div class="detail-item">
-                <span class="detail-label">{{ 'mission.card.date' | translate }}</span>
-                <span class="detail-value">{{ mission.requestedDate | date: 'dd/MM/yyyy · HH:mm' }}</span>
-              </div>
-            </div>
-
-            <!-- Progress Bar Block -->
-            <div class="progress-block">
-              <div class="progress-meta">
-                <span>{{ 'mission.card.progress' | translate }}</span>
-                <strong class="progress-percent">{{ getMissionProgress(mission) }}%</strong>
-              </div>
-              <div class="progress-track">
-                <div
-                  class="progress-fill"
-                  [class]="progressBarClass(mission.status)"
-                  [style.width.%]="getMissionProgress(mission)"
-                ></div>
-              </div>
-            </div>
-
-            <!-- Action Buttons Footer -->
-            <div class="mission-card-actions">
-              <button
-                type="button"
-                class="action-btn btn-monitor"
-                (click)="viewMission(mission.id)"
-              >
-                <mat-icon>visibility</mat-icon>
-                <span>{{ 'mission.button.seeMore' | translate }}</span>
-              </button>
-
-              <div class="secondary-actions">
-                <button
-                  type="button"
-                  class="icon-action-btn btn-edit"
-                  (click)="editMission(mission.id)"
-                  [title]="'mission.button.edit' | translate"
-                >
-                  <mat-icon>edit</mat-icon>
-                </button>
-
-                <button
-                  type="button"
-                  class="icon-action-btn btn-delete"
-                  (click)="deleteMission(mission.id)"
-                  [title]="'mission.button.delete' | translate"
-                >
-                  <mat-icon>delete_outline</mat-icon>
-                </button>
-              </div>
-            </div>
-          </article>
-        }
-      </div>
-    }
+    <label class="mission-list__search">
+      <mat-icon class="mission-list__search-icon" aria-hidden="true">search</mat-icon>
+      <input type="search" placeholder="Buscar por lote, finca, cultivo..."
+             [value]="searchQuery()" (input)="onSearchChange($event)"/>
+    </label>
   </div>
-</div>
+
+  @if (store.error(); as err) {
+    <p class="mission-list__error" role="alert">
+      <mat-icon class="mission-list__error-icon" svgIcon="agd:alert" aria-hidden="true"/>
+      <span>{{ err }}</span>
+    </p>
+  }
+
+  @if (store.loading()) {
+    <div class="mission-list__grid" role="status" aria-busy="true" [attr.aria-label]="'mission.loading' | translate">
+      @for (placeholder of [1, 2, 3]; track placeholder) {
+        <div class="mission-card mission-list__skeleton-card" aria-hidden="true">
+          <span class="agd-skeleton mission-list__skeleton-line mission-list__skeleton-line--badge"></span>
+          <span class="agd-skeleton mission-list__skeleton-line mission-list__skeleton-line--title"></span>
+          <span class="agd-skeleton mission-list__skeleton-line"></span>
+          <span class="agd-skeleton mission-list__skeleton-line"></span>
+        </div>
+      }
+    </div>
+  } @else if (filteredMissions().length === 0) {
+    <div class="mission-list__empty">
+      <span class="mission-list__empty-icon" aria-hidden="true"><mat-icon svgIcon="agd:mission"/></span>
+      <p class="mission-list__empty-text">{{ 'mission.empty' | translate }} {{ 'mission.emptyPrompt' | translate }}</p>
+      <button matButton="filled" type="button" (click)="navigateToNew()">
+        <mat-icon svgIcon="agd:plus" aria-hidden="true"/>
+        {{ 'mission.newMission' | translate }}
+      </button>
+    </div>
+  } @else {
+    <div class="mission-list__grid">
+      @for (mission of filteredMissions(); track mission.id) {
+        <article class="mission-card">
+          <div class="mission-card__content">
+            <div class="mission-card__top">
+              <app-mission-status-badge [status]="mission.status"/>
+              <span class="mission-card__id">#MS-{{ mission.id }}</span>
+            </div>
+
+            <h3 class="mission-card__name">{{ parcelName(mission.parcelId) }}</h3>
+            <p class="mission-card__location">
+              <mat-icon class="mission-card__location-icon" svgIcon="agd:location" aria-hidden="true"/>
+              {{ farmName(mission.parcelId) }}
+              <span aria-hidden="true">·</span>
+              {{ parcelArea(mission.parcelId) }} ha
+            </p>
+
+            <dl class="mission-card__rows">
+              <div class="mission-card__row">
+                <dt>{{ 'mission.card.crop' | translate }}</dt>
+                <dd>{{ cropName(mission.parcelId) }}</dd>
+              </div>
+              <div class="mission-card__row">
+                <dt>{{ 'mission.card.drone' | translate }}</dt>
+                <dd>{{ droneInfo(mission.droneId) }}</dd>
+              </div>
+              <div class="mission-card__row">
+                <dt>{{ 'mission.card.date' | translate }}</dt>
+                <dd>{{ mission.requestedDate | date: 'dd/MM/yyyy · HH:mm' }}</dd>
+              </div>
+            </dl>
+
+            <div class="mission-card__progress">
+              <span>{{ 'mission.card.progress' | translate }}</span>
+              <strong>{{ getMissionProgress(mission) }}%</strong>
+              <div class="mission-card__track">
+                <div class="mission-card__fill" [class]="progressBarClass(mission.status)"
+                     [style.width.%]="getMissionProgress(mission)"></div>
+              </div>
+            </div>
+
+            <button matButton type="button" class="mission-card__see-more" (click)="viewMission(mission.id)">
+              <mat-icon svgIcon="agd:eye" aria-hidden="true"/>
+              {{ 'mission.button.seeMore' | translate }}
+            </button>
+          </div>
+
+          <div class="mission-card__actions">
+            <button matButton type="button" (click)="editMission(mission.id)">
+              <mat-icon svgIcon="agd:edit" aria-hidden="true"/>
+              {{ 'mission.button.edit' | translate }}
+            </button>
+            <button matButton type="button" (click)="deleteMission(mission.id)">
+              <mat-icon svgIcon="agd:trash" aria-hidden="true"/>
+              {{ 'mission.button.delete' | translate }}
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  }
+</section>

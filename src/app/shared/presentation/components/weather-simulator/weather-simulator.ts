@@ -6,7 +6,7 @@ import { WeatherWidget } from '../weather-widget/weather-widget';
 
 /** Values used when the real weather could not be loaded. */
 const BASELINE: WeatherCondition = {
-  id: 0, location: 'Simulación', temperature: 20, humidity: 60, windSpeed: 5,
+  id: 0, location: 'Simulación', latitude: 0, longitude: 0, temperature: 20, humidity: 60, windSpeed: 5,
   precipitation: 0, precipitationProbability: 0, observedAt: new Date().toISOString(), alerts: [],
 };
 

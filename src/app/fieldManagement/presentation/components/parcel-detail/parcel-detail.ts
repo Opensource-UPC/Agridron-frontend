@@ -6,13 +6,14 @@ import {MatIcon} from '@angular/material/icon';
 import {TranslatePipe} from '@ngx-translate/core';
 import {ParcelStore} from '../../../application/parcel.store';
 import {FarmStore} from '../../../application/farm.store';
+import {PolygonMap} from '../../../../shared/presentation/components/polygon-map/polygon-map';
 
 /**
  * Shows the detail view of a single parcel.
  */
 @Component({
   selector: 'app-parcel-detail',
-  imports: [MatButtonModule, MatIcon, RouterLink, DecimalPipe, TranslatePipe],
+  imports: [MatButtonModule, MatIcon, RouterLink, DecimalPipe, TranslatePipe, PolygonMap],
   templateUrl: './parcel-detail.html',
   styleUrl: './parcel-detail.css',
   changeDetection: ChangeDetectionStrategy.OnPush

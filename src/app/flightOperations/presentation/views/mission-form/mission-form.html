@@ -1,307 +1,174 @@
-<div class="mission-management-view">
-  <div class="mission-shell">
-    <!-- Top Navigation & Header -->
-    <div class="top-nav">
-      <button type="button" class="back-link" (click)="cancel()">
-        <mat-icon>arrow_back</mat-icon>
-        <span>Volver a misiones</span>
-      </button>
-    </div>
+<section class="mission-form">
+  <button matButton type="button" class="mission-form__back" (click)="cancel()">
+    <mat-icon svgIcon="agd:chevron-left" aria-hidden="true"/>
+    Volver a misiones
+  </button>
 
-    <h1 class="mission-title">
-      {{ (isEdit ? 'mission.form.edit-title' : 'mission.form.new-title') | translate }}
-    </h1>
+  <h1 class="mission-form__title">{{ (isEdit ? 'mission.form.edit-title' : 'mission.form.new-title') | translate }}</h1>
 
-    <!-- Stepper wizard bar matching Vue design -->
-    <div class="stepper" aria-label="Mission wizard">
-      @for (step of steps; track step.num; let i = $index) {
-        <div class="step-item" (click)="setStep(step.num)">
-          <div
-            class="step-bullet"
-            [class.active]="activeStep() === step.num"
-            [class.done]="activeStep() > step.num"
-          >
-            {{ step.num }}
+  <ol class="mission-form__steps">
+    @for (step of steps; track step.num) {
+      <li [class.mission-form__step--done]="activeStep() >= step.num" (click)="setStep(step.num)">
+        {{ step.labelKey | translate }}
+      </li>
+    }
+  </ol>
+
+  <div class="mission-form__layout">
+    <form class="mission-form__card" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <h2 class="mission-form__section-title">{{ steps[activeStep() - 1].labelKey | translate }}</h2>
+
+      @switch (activeStep()) {
+        @case (1) {
+          <div class="mission-form__grid">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'mission.place.farm' | translate }}</mat-label>
+              <mat-select formControlName="farmId" (selectionChange)="onFarmChange()">
+                @for (farm of farms(); track farm.id) {
+                  <mat-option [value]="farm.id">{{ farm.name }} ({{ farm.location }})</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'mission.place.parcel' | translate }}</mat-label>
+              <mat-select formControlName="parcelId">
+                @for (parcel of filteredParcels(); track parcel.id) {
+                  <mat-option [value]="parcel.id">{{ parcel.name }} ({{ parcel.area }} ha)</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
           </div>
-          <span class="step-label">{{ step.labelKey | translate }}</span>
-          @if (i < steps.length - 1) {
-            <span class="step-line"></span>
-          }
-        </div>
-      }
-    </div>
 
-    <!-- Main Two-Column Panel -->
-    <div class="mission-panel" [formGroup]="form">
-      <!-- Left Column: Step Forms -->
-      <div class="mission-form-panel">
-        <!-- Step 1: Ubicación y Lote -->
-        @if (activeStep() === 1) {
-          <h2 class="panel-title">{{ 'mission.wizard.step1' | translate }}</h2>
-
-          <div class="step-content">
-            <div class="selector-row">
-              <div class="select-group">
-                <label>{{ 'mission.place.farm' | translate }}</label>
-                <select formControlName="farmId" (change)="onFarmChange()">
-                  @for (farm of farms(); track farm.id) {
-                    <option [value]="farm.id">{{ farm.name }} ({{ farm.location }})</option>
-                  }
-                </select>
-              </div>
-
-              <div class="select-group">
-                <label>{{ 'mission.place.parcel' | translate }}</label>
-                <select formControlName="parcelId">
-                  @for (parcel of filteredParcels(); track parcel.id) {
-                    <option [value]="parcel.id">{{ parcel.name }} ({{ parcel.area }} ha)</option>
-                  }
-                </select>
-              </div>
-            </div>
-
-            <!-- Visual Map/Image Frame with Zoom Controls -->
-            <div class="mission-image-frame">
-              <img
-                [src]="currentImage()"
-                [style.transform]="'scale(' + zoomLevel() + ')'"
-                [alt]="selectedParcel()?.name || 'Parcela'"
-              />
-
-              <div class="map-toolbar">
-                <button type="button" class="map-tool" (click)="zoomIn()" title="Acercar">+</button>
-                <button type="button" class="map-tool" (click)="zoomOut()" title="Alejar">−</button>
-                <button type="button" class="map-tool" (click)="resetZoom()" title="Restablecer">◎</button>
-              </div>
-
-              <div class="map-badges">
-                <span class="badge-pill">
-                  <mat-icon>crop_free</mat-icon>
-                  {{ selectedParcel()?.area ?? 0 }} ha
-                </span>
-                <span class="badge-pill highlight">
-                  <mat-icon>grass</mat-icon>
-                  {{ selectedCrop() }}
-                </span>
-              </div>
-            </div>
-          </div>
+          <app-polygon-map [geometry]="selectedParcel()?.geometry ?? ''"/>
+          <p class="mission-form__meta">
+            <mat-icon svgIcon="agd:area" aria-hidden="true"/> {{ selectedParcel()?.area ?? 0 }} ha
+            <span aria-hidden="true">·</span>
+            <mat-icon svgIcon="agd:crop" aria-hidden="true"/> {{ selectedCrop() }}
+          </p>
         }
 
-        <!-- Step 2: Fecha, Hora y Dron -->
-        @if (activeStep() === 2) {
-          <h2 class="panel-title">{{ 'mission.wizard.step2' | translate }}</h2>
+        @case (2) {
+          <div class="mission-form__grid">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'mission.card.date' | translate }}</mat-label>
+              <input matInput type="date" formControlName="date">
+            </mat-form-field>
 
-          <div class="step-content compact-grid">
-            <div class="field-group">
-              <label>{{ 'mission.summary.dateTime' | translate }} (Fecha)</label>
-              <input type="date" formControlName="date" />
-            </div>
+            <mat-form-field appearance="outline">
+              <mat-label>Hora de vuelo</mat-label>
+              <input matInput type="time" formControlName="time">
+            </mat-form-field>
 
-            <div class="field-group">
-              <label>Hora de vuelo</label>
-              <input type="time" formControlName="time" />
-            </div>
-
-            <div class="field-group full-width">
-              <label>{{ 'mission.form.drone' | translate }}</label>
-              <select formControlName="droneId">
+            <mat-form-field appearance="outline" class="mission-form__full">
+              <mat-label>{{ 'mission.form.drone' | translate }}</mat-label>
+              <mat-select formControlName="droneId">
                 @for (drone of drones(); track drone.id) {
-                  <option [value]="drone.id">
-                    {{ drone.model }} · S/N: {{ drone.serialNumber }} (Batería: {{ drone.batteryLevel }}%)
-                  </option>
+                  <mat-option [value]="drone.id">
+                    {{ drone.model }} · S/N: {{ drone.serialNumber }} ({{ drone.batteryLevel }}%)
+                  </mat-option>
                 }
-              </select>
-            </div>
-
-            @if (selectedDrone(); as drone) {
-              <div class="drone-preview-card full-width">
-                <div class="drone-preview-icon">
-                  <mat-icon>flight</mat-icon>
-                </div>
-                <div class="drone-preview-info">
-                  <strong>{{ drone.model }}</strong>
-                  <span class="muted">S/N: {{ drone.serialNumber }} · Capacidad: {{ drone.tankCapacityLiters }} L</span>
-                </div>
-                <div class="drone-preview-battery">
-                  <mat-icon>battery_charging_full</mat-icon>
-                  <span>{{ drone.batteryLevel }}%</span>
-                </div>
-              </div>
-            }
+              </mat-select>
+            </mat-form-field>
           </div>
         }
 
-        <!-- Step 3: Insumos y Parámetros -->
-        @if (activeStep() === 3) {
-          <h2 class="panel-title">{{ 'mission.wizard.step3' | translate }}</h2>
-
-          <div class="step-content compact-grid">
-            <div class="field-group">
-              <label>{{ 'mission.form.agrochemical' | translate }}</label>
-              <select formControlName="agrochemicalId">
+        @case (3) {
+          <div class="mission-form__grid">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'mission.form.agrochemical' | translate }}</mat-label>
+              <mat-select formControlName="agrochemicalId">
                 @for (agro of agrochemicals(); track agro.id) {
-                  <option [value]="agro.id">{{ agro.name }} ({{ agro.activeIngredient }})</option>
+                  <mat-option [value]="agro.id">{{ agro.name }} ({{ agro.activeIngredient }})</mat-option>
                 }
-              </select>
-            </div>
+              </mat-select>
+            </mat-form-field>
 
-            <div class="field-group">
-              <label>{{ 'mission.form.sprayRate' | translate }}</label>
-              <input type="number" step="0.1" min="0.1" formControlName="sprayRate" />
-            </div>
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'mission.form.sprayRate' | translate }}</mat-label>
+              <input matInput type="number" step="0.1" min="0.1" formControlName="sprayRate">
+              <mat-error>{{ 'mission.form.error.min' | translate }}</mat-error>
+            </mat-form-field>
 
-            <div class="field-group">
-              <label>{{ 'mission.form.flightHeight' | translate }}</label>
-              <input type="number" min="1" formControlName="flightHeight" />
-            </div>
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'mission.form.flightHeight' | translate }}</mat-label>
+              <input matInput type="number" min="1" formControlName="flightHeight">
+              <mat-error>{{ 'mission.form.error.min' | translate }}</mat-error>
+            </mat-form-field>
 
-            <div class="field-group">
-              <label>{{ 'mission.form.flightSpeed' | translate }}</label>
-              <input type="number" min="1" formControlName="flightSpeed" />
-            </div>
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'mission.form.flightSpeed' | translate }}</mat-label>
+              <input matInput type="number" min="1" formControlName="flightSpeed">
+              <mat-error>{{ 'mission.form.error.min' | translate }}</mat-error>
+            </mat-form-field>
 
-            <div class="field-group full-width">
-              <label>{{ 'mission.form.overlap' | translate }}</label>
-              <input type="number" min="0" max="100" formControlName="overlap" />
-            </div>
+            <mat-form-field appearance="outline" class="mission-form__full">
+              <mat-label>{{ 'mission.form.overlap' | translate }}</mat-label>
+              <input matInput type="number" min="0" max="100" formControlName="overlap">
+              <mat-error>{{ 'mission.form.error.overlap' | translate }}</mat-error>
+            </mat-form-field>
 
-            <div class="field-group full-width">
-              <label>{{ 'mission.summary.notes' | translate }}</label>
-              <textarea
-                formControlName="notes"
-                rows="4"
-                placeholder="Instrucciones especiales para el operador o notas de aplicación..."
-              ></textarea>
-            </div>
+            <mat-form-field appearance="outline" class="mission-form__full">
+              <mat-label>{{ 'mission.summary.notes' | translate }}</mat-label>
+              <textarea matInput rows="4" formControlName="notes"></textarea>
+            </mat-form-field>
           </div>
         }
 
-        <!-- Step 4: Confirmación y Resumen -->
+        @case (4) {
+          <dl class="mission-form__rows">
+            <div><dt>{{ 'mission.summary.farm' | translate }}</dt><dd>{{ selectedFarm()?.name ?? '—' }}</dd></div>
+            <div><dt>{{ 'mission.summary.parcel' | translate }}</dt><dd>{{ selectedParcel()?.name ?? '—' }}</dd></div>
+            <div><dt>{{ 'mission.summary.crop' | translate }}</dt><dd>{{ selectedCrop() }}</dd></div>
+            <div><dt>{{ 'mission.summary.area' | translate }}</dt><dd>{{ selectedParcel()?.area ?? 0 }} ha</dd></div>
+            <div><dt>{{ 'mission.summary.dateTime' | translate }}</dt><dd>{{ summaryDateTime() }}</dd></div>
+            <div><dt>{{ 'mission.summary.drone' | translate }}</dt><dd>{{ selectedDrone()?.model ?? '—' }} ({{ selectedDrone()?.serialNumber }})</dd></div>
+            <div><dt>{{ 'mission.summary.agrochemical' | translate }}</dt><dd>{{ selectedAgrochemical()?.name ?? '—' }}</dd></div>
+            <div><dt>{{ 'mission.summary.dose' | translate }}</dt><dd>{{ form.value.sprayRate }} L/ha</dd></div>
+            <div><dt>{{ 'mission.summary.flightHeight' | translate }}</dt><dd>{{ form.value.flightHeight }} m</dd></div>
+            <div><dt>{{ 'mission.summary.flightSpeed' | translate }}</dt><dd>{{ form.value.flightSpeed }} km/h</dd></div>
+            <div><dt>{{ 'mission.summary.overlap' | translate }}</dt><dd>{{ form.value.overlap }}%</dd></div>
+          </dl>
+        }
+      }
+
+      @if (feedbackMessage()) {
+        <p class="mission-form__error" role="alert">
+          <mat-icon svgIcon="agd:alert" aria-hidden="true"/>
+          <span>{{ feedbackMessage() }}</span>
+        </p>
+      }
+
+      <div class="mission-form__actions">
+        @if (activeStep() > 1) {
+          <button matButton="outlined" type="button" (click)="prevStep()">{{ 'mission.back' | translate }}</button>
+        } @else {
+          <button matButton="outlined" type="button" (click)="cancel()">Cancelar</button>
+        }
+
         @if (activeStep() === 4) {
-          <h2 class="panel-title">{{ 'mission.wizard.step4' | translate }}</h2>
-
-          <div class="step-content summary-content">
-            <div class="list-row">
-              <span>{{ 'mission.summary.farm' | translate }}</span>
-              <strong>{{ selectedFarm()?.name ?? '—' }}</strong>
-            </div>
-
-            <div class="list-row">
-              <span>{{ 'mission.summary.parcel' | translate }}</span>
-              <strong>{{ selectedParcel()?.name ?? '—' }}</strong>
-            </div>
-
-            <div class="list-row">
-              <span>{{ 'mission.summary.crop' | translate }}</span>
-              <strong class="highlight-crop">{{ selectedCrop() }}</strong>
-            </div>
-
-            <div class="list-row">
-              <span>{{ 'mission.summary.area' | translate }}</span>
-              <strong>{{ selectedParcel()?.area ?? '0' }} ha</strong>
-            </div>
-
-            <div class="list-row">
-              <span>{{ 'mission.summary.dateTime' | translate }}</span>
-              <strong>{{ summaryDateTime() }}</strong>
-            </div>
-
-            <div class="list-row">
-              <span>{{ 'mission.summary.drone' | translate }}</span>
-              <strong>{{ selectedDrone()?.model }} ({{ selectedDrone()?.serialNumber }})</strong>
-            </div>
-
-            <div class="list-row">
-              <span>{{ 'mission.summary.agrochemical' | translate }}</span>
-              <strong>{{ selectedAgrochemical()?.name ?? '—' }}</strong>
-            </div>
-
-            <div class="list-row">
-              <span>{{ 'mission.summary.dose' | translate }}</span>
-              <strong>{{ form.get('sprayRate')?.value }} L/ha</strong>
-            </div>
-
-            <div class="list-row">
-              <span>{{ 'mission.summary.flightParameters' | translate }}</span>
-              <strong>
-                Alt: {{ form.get('flightHeight')?.value }}m · Vel: {{ form.get('flightSpeed')?.value }}km/h · Solap: {{ form.get('overlap')?.value }}%
-              </strong>
-            </div>
-          </div>
+          <button matButton="filled" type="submit" [disabled]="saving()">
+            {{ (isEdit ? 'mission.form.update' : 'mission.form.create') | translate }}
+          </button>
+        } @else {
+          <button matButton="filled" type="button" [disabled]="!canMoveForward()" (click)="nextStep()">
+            {{ 'mission.next' | translate }}
+          </button>
         }
       </div>
+    </form>
 
-      <!-- Right Column: Real-time Summary Card (Aside) -->
-      <aside class="summary-panel">
-        <div class="summary-header">
-          <h3>{{ 'mission.summary.areaSelected' | translate }}</h3>
-          <div class="summary-area">{{ selectedParcel()?.area ?? '0' }} ha</div>
-        </div>
-
-        <div class="summary-field">
-          <span class="summary-label">{{ 'mission.summary.crop' | translate }}</span>
-          <strong>{{ selectedCrop() }}</strong>
-        </div>
-
-        <div class="summary-field">
-          <span class="summary-label">{{ 'mission.summary.dateTime' | translate }}</span>
-          <strong>{{ summaryDateTime() }}</strong>
-        </div>
-
-        <div class="summary-field">
-          <span class="summary-label">{{ 'mission.summary.drone' | translate }}</span>
-          <strong>{{ selectedDrone()?.model || '—' }}</strong>
-        </div>
-
-        <div class="summary-field">
-          <span class="summary-label">{{ 'mission.summary.agrochemical' | translate }}</span>
-          <strong>{{ selectedAgrochemical()?.name || '—' }}</strong>
-        </div>
-
-        <!-- Action Stack -->
-        <div class="action-stack">
-          @if (activeStep() === 4) {
-            <button
-              type="button"
-              class="continue-button"
-              (click)="submit()"
-              [disabled]="saving()"
-            >
-              <mat-icon>check_circle</mat-icon>
-              <span>{{ (isEdit ? 'mission.form.update' : 'mission.form.create') | translate }}</span>
-            </button>
-          } @else {
-            <button
-              type="button"
-              class="continue-button"
-              (click)="nextStep()"
-              [disabled]="!canMoveForward()"
-            >
-              <span>{{ 'mission.next' | translate }}</span>
-              <mat-icon>arrow_forward</mat-icon>
-            </button>
-          }
-
-          @if (activeStep() > 1) {
-            <button type="button" class="back-button" (click)="prevStep()">
-              <mat-icon>arrow_back</mat-icon>
-              <span>{{ 'mission.back' | translate }}</span>
-            </button>
-          } @else {
-            <button type="button" class="back-button" (click)="cancel()">
-              <mat-icon>close</mat-icon>
-              <span>Cancelar</span>
-            </button>
-          }
-        </div>
-
-        @if (feedbackMessage()) {
-          <div class="feedback-msg">
-            {{ feedbackMessage() }}
-          </div>
-        }
-      </aside>
-    </div>
+    <aside class="mission-form__summary">
+      <p class="mission-form__summary-title">{{ 'mission.summary.title' | translate }}</p>
+      <div class="mission-form__summary-card">
+        <dl class="mission-form__rows">
+          <div><dt>{{ 'mission.summary.areaSelected' | translate }}</dt><dd>{{ selectedParcel()?.area ?? 0 }} ha</dd></div>
+          <div><dt>{{ 'mission.summary.crop' | translate }}</dt><dd>{{ selectedCrop() }}</dd></div>
+          <div><dt>{{ 'mission.summary.dateTime' | translate }}</dt><dd>{{ summaryDateTime() }}</dd></div>
+          <div><dt>{{ 'mission.summary.drone' | translate }}</dt><dd>{{ selectedDrone()?.model || '—' }}</dd></div>
+          <div><dt>{{ 'mission.summary.agrochemical' | translate }}</dt><dd>{{ selectedAgrochemical()?.name || '—' }}</dd></div>
+        </dl>
+      </div>
+    </aside>
   </div>
-</div>
+</section>

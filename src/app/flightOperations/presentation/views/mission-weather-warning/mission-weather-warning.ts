@@ -1,4 +1,4 @@
-import {Component, computed, inject} from '@angular/core';
+import {Component, computed, effect, inject, signal} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
@@ -7,7 +7,9 @@ import {MissionStore} from '../../../application/mission.store';
 import {ParcelStore} from '../../../../fieldManagement/application/parcel.store';
 import {FarmStore} from '../../../../fieldManagement/application/farm.store';
 import {WeatherService} from '../../../../weather-integration/application/weather-service';
+import {WeatherCondition} from '../../../../weather-integration/domain/model/weather-condition.entity';
 import {MissionWeatherMetrics} from '../../components/mission-weather-metrics/mission-weather-metrics';
+import {blockingAlerts} from '../../mission.weather';
 
 /**
  * Shows the current weather before take-off and lets the user reschedule or continue.
@@ -33,19 +35,36 @@ export class MissionWeatherWarning {
     readonly farm = computed(() => this.farmStore.farms().find(f => f.id === this.parcel()?.farmId));
 
     /**
-     * Weather condition of the farm location, or the first available one.
+     * Weather at the center of the mission parcel; undefined while loading or if the service fails.
      */
-    readonly condition = computed(() => {
-        const conditions = this.weatherService.weatherConditions();
-        const location = this.farm()?.location.toLowerCase() ?? '';
-        return conditions.find(c => location.includes(c.location.toLowerCase())) ?? conditions[0];
+    readonly condition = signal<WeatherCondition | undefined>(undefined);
+
+    /** True until the weather service answers. */
+    readonly loading = signal(true);
+
+    /** High alerts that explain why the mission was stopped (CL-002). */
+    readonly highAlerts = computed(() => {
+        const condition = this.condition();
+        return condition ? blockingAlerts(condition) : [];
     });
 
     /**
-     * Creates an instance of MissionWeatherWarning and loads the weather data.
+     * Creates an instance of MissionWeatherWarning and requests the weather of the parcel.
      */
     constructor() {
-        this.weatherService.loadWeatherConditions();
+        // The parcel comes from a store, so the request waits until it is available.
+        effect(() => {
+            const parcel = this.parcel();
+            if (!parcel) return;
+            const {latitude, longitude} = parcel.centroid();
+            this.weatherService.getWeatherAt(latitude, longitude, parcel.name).subscribe({
+                next: condition => {
+                    this.condition.set(condition);
+                    this.loading.set(false);
+                },
+                error: () => this.loading.set(false)
+            });
+        });
     }
 
     /**

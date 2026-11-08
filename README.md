@@ -211,7 +211,7 @@ npm install
 # Terminal 1: Fake REST API
 npm run server
 # or manually:
-cd server && npx json-server --watch db.json --routes routes.json --port 3000
+cd server && npx json-server db.json --routes routes.json --port 3000
 
 # Terminal 2: Frontend Dev Server
 npm start
@@ -285,7 +285,7 @@ For local development, start the fake API first and then start the Angular appli
 
 ```bash
 # Terminal 1: Fake REST API
-cd server && npx json-server --watch db.json --routes routes.json --port 3000
+cd server && npx json-server db.json --routes routes.json --port 3000
 
 # Terminal 2: Angular Dev Server
 ng serve

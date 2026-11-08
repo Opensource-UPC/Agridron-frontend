@@ -1,9 +1,31 @@
+/* Label / value rows separated by thin dividers */
 .telemetry {
     display: grid;
-    grid-template-columns: max-content 1fr;
-    gap: 8px 24px;
+    grid-template-columns: max-content minmax(0, 1fr);
     margin: 0;
+    font-size: var(--agd-font-size-body);
 }
 
-.telemetry dt { font-weight: 500; }
-.telemetry dd { margin: 0; }
+.telemetry dt,
+.telemetry dd {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--agd-color-border);
+}
+
+.telemetry dt {
+    padding-right: var(--agd-space-2);
+    color: var(--agd-color-text-muted);
+}
+
+.telemetry dd {
+    margin: 0;
+    font-weight: var(--agd-font-weight-medium);
+    color: var(--agd-color-primary);
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.telemetry dt:last-of-type,
+.telemetry dd:last-of-type {
+    border-bottom: none;
+}

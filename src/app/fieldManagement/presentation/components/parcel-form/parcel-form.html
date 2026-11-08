@@ -26,7 +26,8 @@
         <mat-form-field appearance="outline">
           <mat-label>{{ 'parcel.form.area' | translate }}</mat-label>
           <mat-icon matPrefix class="parcel-form__field-icon" svgIcon="agd:area" aria-hidden="true"/>
-          <input matInput type="number" step="0.01" formControlName="area" required>
+          <input matInput type="number" formControlName="area" required readonly>
+          <mat-hint>{{ 'map.areaHint' | translate }}</mat-hint>
           @if (form.get('area')!.touched && form.get('area')!.hasError('required')) {
             <mat-error>{{ 'parcel.form.error.area-required' | translate }}</mat-error>
           }
@@ -65,15 +66,12 @@
           }
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'parcel.form.geometry' | translate }}</mat-label>
-          <mat-icon matPrefix class="parcel-form__field-icon parcel-form__field-icon--top" svgIcon="agd:polygon" aria-hidden="true"/>
-          <textarea matInput rows="4" formControlName="geometry" required></textarea>
-          <mat-hint>{{ 'parcel.form.geometryHint' | translate }}</mat-hint>
-          @if (form.get('geometry')!.touched && form.get('geometry')!.hasError('required')) {
-            <mat-error>{{ 'parcel.form.error.geometry-required' | translate }}</mat-error>
-          }
-        </mat-form-field>
+        <app-polygon-map [geometry]="form.controls.geometry.value" [editable]="true"
+                         (geometryChange)="form.controls.geometry.setValue($event)"
+                         (areaChange)="onAreaChange($event)"/>
+        @if (form.controls.geometry.touched && form.controls.geometry.hasError('required')) {
+          <p class="parcel-form__map-error" role="alert">{{ 'parcel.form.error.geometry-required' | translate }}</p>
+        }
       </fieldset>
 
       <fieldset class="parcel-form__section">

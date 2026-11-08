@@ -530,7 +530,7 @@
       "details": "View details",
       "maintenance": "View maintenance",
       "new": " Add New drone",
-      "nozzles" : "Spray nozzles"
+      "nozzles": "Spray nozzles"
     }
   },
   "agrochemical": {
@@ -851,6 +851,18 @@
       "dateBeforeReport": "The repair cannot be before the report date ({{date}})",
       "technicianRequired": "The technician is required",
       "repairDescriptionRequired": "Describe what was repaired (up to 200 characters)"
+    }
+  },
+  "map": {
+    "hint": "Click on the map to mark each corner (at least 3).",
+    "undo": "Undo",
+    "clear": "Clear",
+    "area": "Area: {{ hectares }} ha ({{ squareMeters }} m²)",
+    "areaHint": "Calculated automatically when drawing the polygon on the map",
+    "layers": {
+      "satellite": "Satellite",
+      "topographic": "Topographic",
+      "hybrid": "Hybrid"
     }
   }
 }

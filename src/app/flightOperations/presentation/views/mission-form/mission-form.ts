@@ -1,9 +1,14 @@
 import {Component, computed, inject, OnInit, signal} from '@angular/core';
+import {toSignal} from '@angular/core/rxjs-interop';
 import {CommonModule} from '@angular/common';
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {PolygonMap} from '../../../../shared/presentation/components/polygon-map/polygon-map';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {MissionStore} from '../../../application/mission.store';
 import {ParcelStore} from '../../../../fieldManagement/application/parcel.store';
@@ -26,7 +31,11 @@ import {MissionStatus} from '../../../domain/model/mission-status.enum';
         ReactiveFormsModule,
         TranslatePipe,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        PolygonMap
     ],
     templateUrl: './mission-form.html',
     styleUrl: './mission-form.css'
@@ -53,9 +62,6 @@ export class MissionForm implements OnInit {
 
     /** Active wizard step: 1 | 2 | 3 | 4 */
     readonly activeStep = signal<number>(1);
-
-    /** Zoom level simulation for map frame */
-    readonly zoomLevel = signal<number>(1);
 
     /** Indicates edit mode */
     isEdit = false;
@@ -88,23 +94,29 @@ export class MissionForm implements OnInit {
         notes: new FormControl<string>('')
     });
 
+    /**
+     * Current form values as a signal. Reading the form directly inside computed() does not
+     * update the view, because the form is not a signal; this one emits on every change.
+     */
+    private readonly formValue = toSignal(this.form.valueChanges, { initialValue: this.form.value });
+
     /** Parcels filtered by selected farm */
     readonly filteredParcels = computed(() => {
-        const farmId = this.form.get('farmId')?.value;
+        const farmId = this.formValue().farmId;
         if (!farmId) return this.parcels();
         return this.parcels().filter(p => Number(p.farmId) === Number(farmId));
     });
 
     /** Selected farm model */
     readonly selectedFarm = computed(() => {
-        const farmId = this.form.get('farmId')?.value;
+        const farmId = this.formValue().farmId;
         if (!farmId) return null;
         return this.farms().find(f => Number(f.id) === Number(farmId)) ?? null;
     });
 
     /** Selected parcel model */
     readonly selectedParcel = computed(() => {
-        const parcelId = this.form.get('parcelId')?.value;
+        const parcelId = this.formValue().parcelId;
         if (!parcelId) return null;
         return this.parcels().find(p => Number(p.id) === Number(parcelId)) ?? null;
     });
@@ -119,31 +131,22 @@ export class MissionForm implements OnInit {
 
     /** Selected drone model */
     readonly selectedDrone = computed(() => {
-        const droneId = this.form.get('droneId')?.value;
+        const droneId = this.formValue().droneId;
         if (!droneId) return null;
         return this.drones().find(d => Number(d.id) === Number(droneId)) ?? null;
     });
 
     /** Selected agrochemical model */
     readonly selectedAgrochemical = computed(() => {
-        const agroId = this.form.get('agrochemicalId')?.value;
+        const agroId = this.formValue().agrochemicalId;
         if (!agroId) return null;
         return this.agrochemicals().find(a => Number(a.id) === Number(agroId)) ?? null;
     });
 
-    /** Image for preview */
-    readonly currentImage = computed(() => {
-        const parcel = this.selectedParcel();
-        if (parcel?.image) return parcel.image;
-        const farm = this.selectedFarm();
-        if (farm?.image) return farm.image;
-        return 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1200';
-    });
-
     /** Formatted date & time string for summary */
     readonly summaryDateTime = computed(() => {
-        const date = this.form.get('date')?.value;
-        const time = this.form.get('time')?.value;
+        const date = this.formValue().date;
+        const time = this.formValue().time;
         if (!date || !time) return 'No programada';
         return `${date} · ${time}`;
     });
@@ -151,10 +154,10 @@ export class MissionForm implements OnInit {
     /** Validation check for step transition */
     readonly canMoveForward = computed(() => {
         const step = this.activeStep();
-        const f = this.form;
-        if (step === 1) return Boolean(f.get('farmId')?.value && f.get('parcelId')?.value);
-        if (step === 2) return Boolean(f.get('date')?.value && f.get('time')?.value && f.get('droneId')?.value);
-        if (step === 3) return Boolean(f.get('agrochemicalId')?.value && f.get('sprayRate')?.valid);
+        const value = this.formValue();
+        if (step === 1) return Boolean(value.farmId && value.parcelId);
+        if (step === 2) return Boolean(value.date && value.time && value.droneId);
+        if (step === 3) return Boolean(value.agrochemicalId && this.form.controls.sprayRate.valid);
         return true;
     });
 
@@ -232,18 +235,6 @@ export class MissionForm implements OnInit {
         } else {
             this.form.get('parcelId')?.setValue(null);
         }
-    }
-
-    zoomIn(): void {
-        this.zoomLevel.update(z => Math.min(z + 0.25, 2.0));
-    }
-
-    zoomOut(): void {
-        this.zoomLevel.update(z => Math.max(z - 0.25, 0.75));
-    }
-
-    resetZoom(): void {
-        this.zoomLevel.set(1);
     }
 
     setStep(stepNum: number): void {

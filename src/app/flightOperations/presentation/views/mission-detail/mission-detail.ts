@@ -1,4 +1,4 @@
-import {Component, computed, inject} from '@angular/core';
+import {Component, computed, inject, signal} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -13,6 +13,8 @@ import {MissionStatusBadge} from '../../components/mission-status-badge/mission-
 import {MissionStepper} from '../../components/mission-stepper/mission-stepper';
 import {MissionTelemetry} from '../../components/mission-telemetry/mission-telemetry';
 import {injectNow} from "../../mission.time";
+import {blockingAlerts} from '../../mission.weather';
+import {WeatherService} from '../../../../weather-integration/application/weather-service';
 
 /**
  * Shows the monitoring view of a mission with its lifecycle actions.
@@ -37,6 +39,10 @@ export class MissionDetail {
     private readonly farmStore = inject(FarmStore);
     private readonly droneStore = inject(DroneStore);
     private readonly now = injectNow();
+    private readonly weatherService = inject(WeatherService);
+
+    /** True while the weather is checked before starting the mission. */
+    readonly checkingWeather = signal(false);
 
     readonly missionId = Number(this.route.snapshot.paramMap.get('id'));
     readonly store = inject(MissionStore);
@@ -85,10 +91,31 @@ export class MissionDetail {
     }
 
     /**
-     * Opens the weather warning before starting the mission.
+     * Checks the weather at the center of the parcel before starting (CL-002).
+     * With a high alert (wind over 15 km/h or rain), or if the weather service fails, it opens
+     * the weather warning; otherwise the mission starts directly.
      */
     start() {
-        this.navigateTo('weather-warning');
+        const mission = this.mission();
+        const parcel = this.parcel();
+        if (!mission || !parcel) return;
+
+        const {latitude, longitude} = parcel.centroid();
+        this.checkingWeather.set(true);
+        this.weatherService.getWeatherAt(latitude, longitude, parcel.name).subscribe({
+            next: weather => {
+                this.checkingWeather.set(false);
+                if (blockingAlerts(weather).length > 0) {
+                    this.navigateTo('weather-warning');
+                } else {
+                    this.store.startMission(mission);
+                }
+            },
+            error: () => {
+                this.checkingWeather.set(false);
+                this.navigateTo('weather-warning');
+            }
+        });
     }
 
     /**

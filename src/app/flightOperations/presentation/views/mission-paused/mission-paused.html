@@ -1,9 +1,9 @@
 <section class="paused">
-    <mat-card appearance="outlined">
-        <mat-card-content>
-            <mat-icon class="paused__icon">rainy</mat-icon>
-            <h2>{{ 'mission.paused.message' | translate }}</h2>
-            <p>{{ 'mission.paused.description' | translate }}</p>
+    <mat-card appearance="outlined" class="paused__card">
+        <mat-card-content class="paused__content">
+            <span class="paused__icon" aria-hidden="true"><mat-icon>rainy</mat-icon></span>
+            <h1 class="paused__title">{{ 'mission.paused.message' | translate }}</h1>
+            <p class="paused__text">{{ 'mission.paused.description' | translate }}</p>
 
             @if (mission(); as m) {
                 <div class="paused__details">
@@ -17,10 +17,11 @@
                 </div>
             }
         </mat-card-content>
-        <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="resume()">{{ 'mission.actions.resume' | translate }}</button>
-            <button mat-button (click)="details()">{{ 'mission.actions.details' | translate }}</button>
-            <button mat-button (click)="home()">{{ 'mission.actions.home' | translate }}</button>
+
+        <mat-card-actions class="paused__actions">
+            <button matButton type="button" (click)="home()">{{ 'mission.actions.home' | translate }}</button>
+            <button matButton="outlined" type="button" (click)="details()">{{ 'mission.actions.details' | translate }}</button>
+            <button matButton="filled" type="button" (click)="resume()">{{ 'mission.actions.resume' | translate }}</button>
         </mat-card-actions>
     </mat-card>
 </section>

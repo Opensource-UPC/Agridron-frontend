@@ -9,7 +9,7 @@ const GEOCODING_URL = 'https://api.bigdatacloud.net/data/reverse-geocode-client'
 
 /** Neutral condition: favorable and without alerts. Each test changes only what it checks. */
 const weather = (changes: Partial<WeatherCondition> = {}): WeatherCondition => ({
-  id: 1, location: 'Cañete', temperature: 22, humidity: 70, windSpeed: 5, precipitation: 0,
+  id: 1, location: 'Cañete', latitude: -13.08, longitude: -76.39, temperature: 22, humidity: 70, windSpeed: 5, precipitation: 0,
   precipitationProbability: 0, observedAt: '2026-11-02T10:00', alerts: [], ...changes,
 });
 
