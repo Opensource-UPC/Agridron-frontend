@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  AgriDronProviderApiBaseUrl: 'https://6ac44bc6ae53bf25b80f549f.mockapi.io',
+  AgriDronProviderApiBaseUrl: 'https://agridron-mock-api.onrender.com',
   ///AgriDronProviderApiBaseUrl: 'http://localhost:3000/api/v1',
   AgriDronProviderProductsEndpointPath: '/products',
   AgriDronProviderCartsEndpointPath: '/carts',
