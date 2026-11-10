@@ -1,28 +1,63 @@
-<header class="fumigation-area-list__header">
-  <h2>{{ 'fumigationArea.title' | translate }}</h2>
-  <button matButton="filled" class="fumigation-area-list__new-area" (click)="newFumigationArea()">
-    <mat-icon>add_circle_outline</mat-icon>
-    {{ 'fumigationArea.newFumigationArea' | translate }}
-  </button>
-</header>
+<section class="fumigation-area-list">
+  <header class="fumigation-area-list__header">
+    <div class="fumigation-area-list__intro">
+      <h1 class="fumigation-area-list__title">{{ 'fumigationArea.title' | translate }}</h1>
+      <p class="fumigation-area-list__subtitle">{{ 'fumigationArea.subtitle' | translate }}</p>
+    </div>
+    <button matButton="filled" type="button" (click)="newFumigationArea()">
+      <mat-icon svgIcon="agd:plus" aria-hidden="true"/>
+      {{ 'fumigationArea.newFumigationArea' | translate }}
+    </button>
+  </header>
 
-@if (error()) {
-  <p class="fumigation-area-list__error">{{ error() }}</p>
-}
+  <mat-form-field appearance="outline" class="fumigation-area-list__filter" subscriptSizing="dynamic">
+    <mat-label>{{ 'fumigationArea.selectParcel' | translate }}</mat-label>
+    <mat-icon matPrefix class="fumigation-area-list__filter-icon" svgIcon="agd:parcel" aria-hidden="true"/>
+    <mat-select [value]="selectedParcelId()" (selectionChange)="onParcelSelected($event.value)">
+      @for (parcel of parcels(); track parcel.id) {
+        <mat-option [value]="parcel.id">{{ parcel.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
 
-<mat-form-field class="fumigation-area-list__parcel-select">
-  <mat-label>{{ 'fumigationArea.selectParcel' | translate }}</mat-label>
-  <mat-select [value]="selectedParcelId()" (selectionChange)="onParcelSelected($event.value)">
-    @for (parcel of parcels(); track parcel.id) {
-      <mat-option [value]="parcel.id">{{ parcel.name }}</mat-option>
-    }
-  </mat-select>
-</mat-form-field>
-
-<div class="fumigation-area-list__grid">
-  @for (fumigationArea of fumigationAreas(); track fumigationArea.id) {
-    <app-fumigation-area-item [fumigationArea]="fumigationArea" (edit)="onEdit($event)" (delete)="onDelete($event)"/>
-  } @empty {
-    <p>{{ emptyMessage() }}</p>
+  @if (error()) {
+    <p class="fumigation-area-list__error" role="alert">
+      <mat-icon class="fumigation-area-list__error-icon" svgIcon="agd:alert" aria-hidden="true"/>
+      <span>{{ error() }}</span>
+    </p>
   }
-</div>
+
+  @if (!selectedParcelId()) {
+    <div class="fumigation-area-list__empty">
+      <span class="fumigation-area-list__empty-icon" aria-hidden="true"><mat-icon svgIcon="agd:parcel"/></span>
+      <p class="fumigation-area-list__empty-text">{{ 'fumigationArea.selectParcelPrompt' | translate }}</p>
+    </div>
+  } @else if (loading() && fumigationAreas().length === 0) {
+    <div class="fumigation-area-list__grid" role="status" aria-busy="true" [attr.aria-label]="'fumigationArea.loading' | translate">
+      @for (placeholder of [1, 2, 3]; track placeholder) {
+        <div class="fumigation-area-list__skeleton-card" aria-hidden="true">
+          <span class="agd-skeleton fumigation-area-list__skeleton-icon"></span>
+          <div class="fumigation-area-list__skeleton-text">
+            <span class="agd-skeleton fumigation-area-list__skeleton-line fumigation-area-list__skeleton-line--title"></span>
+            <span class="agd-skeleton fumigation-area-list__skeleton-line"></span>
+          </div>
+        </div>
+      }
+    </div>
+  } @else if (fumigationAreas().length === 0) {
+    <div class="fumigation-area-list__empty">
+      <span class="fumigation-area-list__empty-icon" aria-hidden="true"><mat-icon svgIcon="agd:fumigation"/></span>
+      <p class="fumigation-area-list__empty-text">{{ 'fumigationArea.empty' | translate }}</p>
+      <button matButton="filled" type="button" (click)="newFumigationArea()">
+        <mat-icon svgIcon="agd:plus" aria-hidden="true"/>
+        {{ 'fumigationArea.newFumigationArea' | translate }}
+      </button>
+    </div>
+  } @else {
+    <div class="fumigation-area-list__grid">
+      @for (fumigationArea of fumigationAreas(); track fumigationArea.id) {
+        <app-fumigation-area-item [fumigationArea]="fumigationArea" (edit)="onEdit($event)" (delete)="onDelete($event)"/>
+      }
+    </div>
+  }
+</section>

@@ -1,0 +1,50 @@
+.incident {
+    display: flex;
+    flex-direction: column;
+    gap: var(--agd-space-2);
+    max-width: 600px;
+}
+
+.incident__title,
+.incident__section-title {
+    margin: 0;
+    font-weight: var(--agd-font-weight-medium);
+    color: var(--agd-color-primary);
+}
+
+.incident__title {
+    font-size: var(--agd-font-size-view-title);
+    line-height: 36px;
+}
+
+/* Form inside a white card (style guidelines: cards with 12 px radius) */
+.incident__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--agd-space-1);
+    padding: var(--agd-space-3);
+    border: 1px solid var(--agd-color-border);
+    border-radius: var(--agd-radius-card);
+    background: var(--agd-color-surface);
+}
+
+.incident__section-title {
+    margin-bottom: var(--agd-space-1);
+    font-size: var(--agd-font-size-section-title);
+}
+
+.incident__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--agd-space-1);
+    margin-top: var(--agd-space-1);
+    padding-top: var(--agd-space-2);
+    border-top: 1px solid var(--agd-color-border);
+}
+
+@media (max-width: 599px) {
+    .incident__card {
+        padding: var(--agd-space-2);
+    }
+}

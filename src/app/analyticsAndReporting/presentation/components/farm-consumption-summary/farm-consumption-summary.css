@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  overflow-x: auto;
+  border: 1px solid var(--agd-color-border);
+  border-radius: var(--agd-radius-card);
+  background: var(--agd-color-surface);
+}
+
+.consumption-table {
+  width: 100%;
+  min-width: 480px;
+}
+
+.consumption-table__total td {
+  font-weight: var(--agd-font-weight-medium);
+}
+
+.consumption-table__empty {
+  margin: 0;
+  padding: var(--agd-space-2);
+  font-size: var(--agd-font-size-body);
+  text-align: center;
+  color: var(--agd-color-text-muted);
+}

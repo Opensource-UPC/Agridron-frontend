@@ -8,6 +8,7 @@ import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {ParcelStore} from '../../../application/parcel.store';
 import {FumigationAreaStore} from '../../../application/fumigation-area.store';
 import {FumigationAreaItem} from '../fumigation-area-item/fumigation-area-item';
+import {ConfirmDialogService} from '../../../../shared/presentation/components/confirm-dialog/confirm-dialog.service';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class FumigationAreaList {
   private readonly parcelStore = inject(ParcelStore);
   private readonly fumigationAreaStore = inject(FumigationAreaStore);
   private readonly translate = inject(TranslateService);
+  private readonly confirmDialog = inject(ConfirmDialogService);
 
   readonly parcels = this.parcelStore.parcels;
 
@@ -36,13 +38,6 @@ export class FumigationAreaList {
 
   readonly error = computed(() => this.parcelStore.error() ?? this.fumigationAreaStore.error());
 
-  readonly emptyMessage = computed(() => {
-    if (this.loading()) {
-      return this.translate.instant('fumigationArea.loading');
-    }
-    return this.selectedParcelId() ? this.translate.instant('fumigationArea.empty') : this.translate.instant('fumigationArea.selectParcelPrompt');
-  });
-
   onParcelSelected = (parcelId: number | null): void => {
     this.selectedParcelId.set(parcelId);
   };
@@ -56,9 +51,15 @@ export class FumigationAreaList {
   };
 
   onDelete = (id: number): void => {
-    if (!window.confirm(this.translate.instant('fumigationArea.delete-confirm'))) {
-      return;
-    }
-    this.fumigationAreaStore.deleteFumigationArea(id);
+    this.confirmDialog.confirm({
+      title: this.translate.instant('fumigationArea.deleteTitle'),
+      message: this.translate.instant('fumigationArea.delete-confirm'),
+      confirmLabel: this.translate.instant('fumigationArea.button.delete'),
+      cancelLabel: this.translate.instant('fumigationArea.form.cancel')
+    }).subscribe(confirmed => {
+      if (confirmed) {
+        this.fumigationAreaStore.deleteFumigationArea(id);
+      }
+    });
   };
 }

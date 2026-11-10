@@ -1,10 +1,26 @@
+/* Discreet footer: branding defers to content (no colored band). */
 .footer-content {
-  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
   width: 100%;
-  height: 90px;
-  background-color: #1B463C;
-  color: white;
+  padding: var(--agd-space-3) var(--agd-space-2);
+  border-top: 1px solid var(--agd-color-border);
+  background: transparent;
+  color: var(--agd-color-text-muted);
   text-align: center;
+}
+
+/* Under the sign-in / sign-up card, over the background photo. */
+.footer-content--inline {
+  padding: 0;
+  border-top: none;
+  color: var(--agd-color-on-brand);
+}
+
+.footer-content__text {
   margin: 0;
-  padding: 5px;
+  font-size: var(--agd-font-size-label);
+  line-height: 16px;
 }

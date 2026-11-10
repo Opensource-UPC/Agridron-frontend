@@ -5,7 +5,16 @@
         {{ 'detail.back' | translate }}
     </button>
 
-    <h2>{{ 'maintenance.title' | translate }}</h2>
+    <div class="maintenance-page__header">
+        <h2>{{ 'maintenance.title' | translate }}</h2>
+
+        @if (drone()) {
+            <button mat-flat-button type="button" (click)="openRegister()">
+                <mat-icon>add</mat-icon>
+                {{ 'maintenance.actions.register' | translate }}
+            </button>
+        }
+    </div>
 
     @if (drone(); as selectedDrone) {
         <p class="maintenance-page__drone">
@@ -18,6 +27,7 @@
             {{ selectedDrone.lastMaintenanceDate | date:'dd/MM/yyyy' }}
             · {{ 'drone.nextService' | translate }}:
             {{ selectedDrone.nextMaintenanceDate | date:'dd/MM/yyyy' }}
+            · {{ 'drone.flightHours' | translate }}: {{ selectedDrone.flightHours }} h
         </p>
     }
 

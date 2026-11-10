@@ -1,0 +1,10 @@
+<dl class="place">
+    <dt>{{ 'mission.place.farm' | translate }}</dt>
+    <dd>{{ farm()?.name ?? '—' }}</dd>
+    <dt>{{ 'mission.place.parcel' | translate }}</dt>
+    <dd>{{ parcel()?.name ?? '—' }}</dd>
+    @if (showCoordinates() && center(); as c) {
+        <dt>{{ 'mission.place.coordinates' | translate }}</dt>
+        <dd>{{ c.latitude | number: '1.4-4' }}, {{ c.longitude | number: '1.4-4' }}</dd>
+    }
+</dl>

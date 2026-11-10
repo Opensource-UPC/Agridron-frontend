@@ -1,17 +1,41 @@
-
 <mat-card class="parcel-card" appearance="outlined">
-    <mat-card-header>
-        <mat-card-title>{{ parcel().name }}</mat-card-title>
-        <mat-card-subtitle>{{ parcel().crop?.name ?? ('parcel.noCrop' | translate) }}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image [src]="parcel().image ?? ('parcel.imagePlaceholder' | translate)" [alt]="parcel().name">
-    <mat-card-content>
-        <p>{{ 'parcel.area' | translate }}: {{ parcel().area }} ha</p>
-        <p>{{ 'parcel.farm' | translate }}: #{{ parcel().farmId }}</p>
+    @if (parcel().image && !imageFailed()) {
+        <img class="parcel-card__media" [src]="parcel().image" alt="" loading="lazy" (error)="imageFailed.set(true)">
+    } @else {
+        <div class="parcel-card__media parcel-card__media--placeholder" aria-hidden="true">
+            <mat-icon svgIcon="agd:parcel"/>
+        </div>
+    }
+
+    <mat-card-content class="parcel-card__content">
+        <h3 class="parcel-card__name">{{ parcel().name }}</h3>
+        <span class="parcel-card__crop" [class.parcel-card__crop--none]="!parcel().crop?.name">
+            <mat-icon class="parcel-card__crop-icon" svgIcon="agd:crop" aria-hidden="true"/>
+            {{ parcel().crop?.name ?? ('parcel.noCrop' | translate) }}
+        </span>
+
+        <div class="parcel-card__summary">
+            <p class="parcel-card__meta">
+                {{ 'parcel.areaValue' | translate:{ area: (parcel().area | number: '1.0-2') } }}
+                @if (farmName()) {
+                    <span aria-hidden="true">·</span>
+                    {{ farmName() }}
+                }
+            </p>
+            <button matButton type="button" class="parcel-card__see-more" (click)="seeMore.emit(parcel().id)">
+                {{ 'parcel.button.seeMore' | translate }}
+            </button>
+        </div>
     </mat-card-content>
-    <mat-card-actions>
-        <button matButton (click)="seeMore.emit(parcel().id)">{{ 'parcel.button.seeMore' | translate }} <mat-icon>arrow_right_alt</mat-icon></button>
-        <button matButton (click)="edit.emit(parcel().id)">{{ 'parcel.button.edit' | translate }} <mat-icon>edit</mat-icon></button>
-        <button matButton (click)="delete.emit(parcel().id)">{{ 'parcel.button.delete' | translate }} <mat-icon>delete</mat-icon></button>
+
+    <mat-card-actions class="parcel-card__actions">
+        <button matButton type="button" (click)="edit.emit(parcel().id)">
+            <mat-icon svgIcon="agd:edit" aria-hidden="true"/>
+            {{ 'parcel.button.edit' | translate }}
+        </button>
+        <button matButton type="button" (click)="delete.emit(parcel().id)">
+            <mat-icon svgIcon="agd:trash" aria-hidden="true"/>
+            {{ 'parcel.button.delete' | translate }}
+        </button>
     </mat-card-actions>
 </mat-card>

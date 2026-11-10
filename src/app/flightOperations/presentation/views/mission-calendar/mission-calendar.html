@@ -1,0 +1,65 @@
+<section class="calendar">
+  <button matButton type="button" class="calendar__back" (click)="back()">
+    <mat-icon svgIcon="agd:chevron-left" aria-hidden="true"/>
+    {{ 'mission.calendar.back' | translate }}
+  </button>
+
+  <header class="calendar__header">
+    <h1 class="calendar__title">{{ 'mission.calendar.title' | translate }}</h1>
+    <p class="calendar__subtitle">{{ 'mission.calendar.subtitle' | translate }}</p>
+  </header>
+
+  <div class="calendar__toolbar">
+    <div class="calendar__periods">
+      <button type="button" [matButton]="period() === 'week' ? 'filled' : 'outlined'" (click)="setPeriod('week')">
+        {{ 'mission.calendar.week' | translate }}
+      </button>
+      <button type="button" [matButton]="period() === 'month' ? 'filled' : 'outlined'" (click)="setPeriod('month')">
+        {{ 'mission.calendar.month' | translate }}
+      </button>
+    </div>
+
+    <div class="calendar__navigation">
+      <button matIconButton type="button" (click)="move(-1)" [attr.aria-label]="'mission.calendar.previous' | translate">
+        <mat-icon svgIcon="agd:chevron-left"/>
+      </button>
+      <span class="calendar__range">{{ range().start | date: 'dd/MM/yyyy' }} – {{ range().end | date: 'dd/MM/yyyy' }}</span>
+      <button matIconButton type="button" (click)="move(1)" [attr.aria-label]="'mission.calendar.next' | translate">
+        <mat-icon svgIcon="agd:chevron-right"/>
+      </button>
+      <button matButton type="button" (click)="goToToday()">{{ 'mission.calendar.today' | translate }}</button>
+    </div>
+  </div>
+
+  @if (store.loading()) {
+    <p class="calendar__text" role="status">{{ 'mission.loading' | translate }}</p>
+  } @else if (days().length === 0) {
+    <!-- MI-005, scenario 2 -->
+    <div class="calendar__empty">
+      <span class="calendar__empty-icon" aria-hidden="true"><mat-icon svgIcon="agd:mission"/></span>
+      <p class="calendar__text">{{ 'mission.calendar.empty' | translate }}</p>
+    </div>
+  } @else {
+    <!-- MI-005, scenario 1: one card per day with its missions and their status -->
+    @for (day of days(); track day.date.getTime()) {
+      <article class="calendar__day">
+        <h2 class="calendar__day-title">{{ day.date | date: 'dd/MM/yyyy' }}</h2>
+        <ul class="calendar__missions">
+          @for (mission of day.missions; track mission.id) {
+            <li class="calendar__mission">
+              <span class="calendar__time">{{ mission.requestedDate | date: 'HH:mm' }}</span>
+              <span class="calendar__name">
+                {{ parcelName(mission.parcelId) }}
+                <small>#MS-{{ mission.id }}</small>
+              </span>
+              <app-mission-status-badge [status]="mission.status"/>
+              <button matButton type="button" (click)="viewMission(mission.id)">
+                {{ 'mission.button.seeMore' | translate }}
+              </button>
+            </li>
+          }
+        </ul>
+      </article>
+    }
+  }
+</section>

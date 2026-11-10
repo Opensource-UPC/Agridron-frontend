@@ -1,14 +1,32 @@
-.drone-page { padding: 16px; }
-.drone-page__error { color: #b00020; }
+.drone-page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--agd-space-3);
+}
+
+.drone-page h2 {
+    margin: 0;
+    font-size: var(--agd-font-size-view-title);
+    font-weight: var(--agd-font-weight-medium);
+    line-height: 36px;
+    color: var(--agd-color-primary);
+}
+
+.drone-page__error {
+    margin: 0;
+    color: var(--agd-color-error);
+}
 
 .drone-page__header {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: var(--agd-space-2);
 }
 
 .drone-page__actions {
     display: flex;
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: var(--agd-space-1);
 }

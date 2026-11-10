@@ -1,0 +1,91 @@
+.paused {
+    max-width: 720px;
+}
+
+.paused__card {
+    border-radius: var(--agd-radius-card);
+}
+
+.paused__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--agd-space-1);
+    padding: var(--agd-space-4) var(--agd-space-3) var(--agd-space-3);
+    text-align: center;
+}
+
+/* Icon circle tinted with the medium weather alert tone */
+.paused__icon {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    margin-bottom: var(--agd-space-1);
+    border-radius: 50%;
+    background: var(--agd-alert-medium-bg);
+    color: var(--agd-alert-medium);
+}
+
+.paused__icon mat-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 32px;
+}
+
+.paused__title,
+.paused__text {
+    margin: 0;
+}
+
+.paused__title {
+    font-size: var(--agd-font-size-view-title);
+    font-weight: var(--agd-font-weight-medium);
+    line-height: 36px;
+    color: var(--agd-color-primary);
+}
+
+.paused__text {
+    font-size: var(--agd-font-size-body);
+    color: var(--agd-color-text-muted);
+}
+
+.paused__details {
+    align-self: stretch;
+    margin-top: var(--agd-space-2);
+    text-align: left;
+}
+
+/* Same label / value rows as app-mission-place */
+.paused__fields {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    margin: 0;
+    font-size: var(--agd-font-size-body);
+}
+
+.paused__fields dt,
+.paused__fields dd {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--agd-color-border);
+}
+
+.paused__fields dt {
+    padding-right: var(--agd-space-2);
+    color: var(--agd-color-text-muted);
+}
+
+.paused__fields dd {
+    margin: 0;
+    font-weight: var(--agd-font-weight-medium);
+    color: var(--agd-color-primary);
+    text-align: right;
+}
+
+.paused__actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--agd-space-1);
+    padding: var(--agd-space-2) var(--agd-space-3);
+    border-top: 1px solid var(--agd-color-border);
+}

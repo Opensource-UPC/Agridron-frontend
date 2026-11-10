@@ -1,0 +1,133 @@
+<section class="mission-list">
+  <header class="mission-list__header">
+    <div class="mission-list__intro">
+      <h1 class="mission-list__title">{{ 'mission.title' | translate }}</h1>
+      <p class="mission-list__subtitle">{{ 'mission.subtitle' | translate }}</p>
+    </div>
+    <div class="mission-list__actions">
+      <button matButton="outlined" type="button" (click)="navigateToCalendar()">
+        {{ 'mission.calendar.title' | translate }}
+      </button>
+      <button matButton="filled" type="button" (click)="navigateToNew()">
+        <mat-icon svgIcon="agd:plus" aria-hidden="true"/>
+        {{ 'mission.newMission' | translate }}
+      </button>
+    </div>
+  </header>
+
+  <div class="mission-list__toolbar">
+    <div class="mission-list__filters">
+      @for (filter of [
+        { value: 'ALL', label: 'all', count: counts().all },
+        { value: 'PLANNED', label: 'planned', count: counts().planned },
+        { value: 'IN_PROGRESS', label: 'inProgress', count: counts().inProgress },
+        { value: 'COMPLETED', label: 'completed', count: counts().completed },
+        { value: 'PAUSED', label: 'paused', count: counts().paused }
+      ]; track filter.value) {
+        <button type="button" [matButton]="selectedFilter() === filter.value ? 'filled' : 'outlined'"
+                [attr.aria-pressed]="selectedFilter() === filter.value"
+                (click)="setFilter(filter.value)">
+          {{ 'mission.filter.' + filter.label | translate }} · {{ filter.count }}
+        </button>
+      }
+    </div>
+
+    <label class="mission-list__search">
+      <mat-icon class="mission-list__search-icon" aria-hidden="true">search</mat-icon>
+      <input type="search" placeholder="Buscar por lote, finca, cultivo..."
+             [value]="searchQuery()" (input)="onSearchChange($event)"/>
+    </label>
+  </div>
+
+  @if (store.error(); as err) {
+    <p class="mission-list__error" role="alert">
+      <mat-icon class="mission-list__error-icon" svgIcon="agd:alert" aria-hidden="true"/>
+      <span>{{ err }}</span>
+    </p>
+  }
+
+  @if (store.loading()) {
+    <div class="mission-list__grid" role="status" aria-busy="true" [attr.aria-label]="'mission.loading' | translate">
+      @for (placeholder of [1, 2, 3]; track placeholder) {
+        <div class="mission-card mission-list__skeleton-card" aria-hidden="true">
+          <span class="agd-skeleton mission-list__skeleton-line mission-list__skeleton-line--badge"></span>
+          <span class="agd-skeleton mission-list__skeleton-line mission-list__skeleton-line--title"></span>
+          <span class="agd-skeleton mission-list__skeleton-line"></span>
+          <span class="agd-skeleton mission-list__skeleton-line"></span>
+        </div>
+      }
+    </div>
+  } @else if (filteredMissions().length === 0) {
+    <div class="mission-list__empty">
+      <span class="mission-list__empty-icon" aria-hidden="true"><mat-icon svgIcon="agd:mission"/></span>
+      <p class="mission-list__empty-text">{{ 'mission.empty' | translate }} {{ 'mission.emptyPrompt' | translate }}</p>
+      <button matButton="filled" type="button" (click)="navigateToNew()">
+        <mat-icon svgIcon="agd:plus" aria-hidden="true"/>
+        {{ 'mission.newMission' | translate }}
+      </button>
+    </div>
+  } @else {
+    <div class="mission-list__grid">
+      @for (mission of filteredMissions(); track mission.id) {
+        <article class="mission-card">
+          <div class="mission-card__content">
+            <div class="mission-card__top">
+              <app-mission-status-badge [status]="mission.status"/>
+              <span class="mission-card__id">#MS-{{ mission.id }}</span>
+            </div>
+
+            <h3 class="mission-card__name">{{ parcelName(mission.parcelId) }}</h3>
+            <p class="mission-card__location">
+              <mat-icon class="mission-card__location-icon" svgIcon="agd:location" aria-hidden="true"/>
+              {{ farmName(mission.parcelId) }}
+              <span aria-hidden="true">·</span>
+              {{ parcelArea(mission.parcelId) }} ha
+            </p>
+
+            <dl class="mission-card__rows">
+              <div class="mission-card__row">
+                <dt>{{ 'mission.card.crop' | translate }}</dt>
+                <dd>{{ cropName(mission.parcelId) }}</dd>
+              </div>
+              <div class="mission-card__row">
+                <dt>{{ 'mission.card.drone' | translate }}</dt>
+                <dd>{{ droneInfo(mission.droneId) }}</dd>
+              </div>
+              <div class="mission-card__row">
+                <dt>{{ 'mission.card.date' | translate }}</dt>
+                <dd>{{ mission.requestedDate | date: 'dd/MM/yyyy · HH:mm' }}</dd>
+              </div>
+            </dl>
+
+            <div class="mission-card__progress">
+              <span>{{ 'mission.card.progress' | translate }}</span>
+              <strong>{{ getMissionProgress(mission) }}%</strong>
+              <div class="mission-card__track">
+                <div class="mission-card__fill" [class]="progressBarClass(mission.status)"
+                     [style.width.%]="getMissionProgress(mission)"></div>
+              </div>
+            </div>
+
+            <button matButton type="button" class="mission-card__see-more" (click)="viewMission(mission.id)">
+              <mat-icon svgIcon="agd:eye" aria-hidden="true"/>
+              {{ 'mission.button.seeMore' | translate }}
+            </button>
+          </div>
+
+          <div class="mission-card__actions">
+            @if (mission.canBeEdited()) {
+              <button matButton type="button" (click)="editMission(mission.id)">
+                <mat-icon svgIcon="agd:edit" aria-hidden="true"/>
+                {{ 'mission.button.edit' | translate }}
+              </button>
+            }
+            <button matButton type="button" (click)="deleteMission(mission.id)">
+              <mat-icon svgIcon="agd:trash" aria-hidden="true"/>
+              {{ 'mission.button.delete' | translate }}
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  }
+</section>

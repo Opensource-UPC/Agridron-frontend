@@ -1,0 +1,26 @@
+/* Label / value rows separated by thin dividers */
+.place {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    margin: 0;
+    font-size: var(--agd-font-size-body);
+}
+
+.place dt,
+.place dd {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--agd-color-border);
+}
+
+.place dt {
+    padding-right: var(--agd-space-2);
+    color: var(--agd-color-text-muted);
+}
+
+.place dd {
+    margin: 0;
+    font-weight: var(--agd-font-weight-medium);
+    color: var(--agd-color-primary);
+    text-align: right;
+    overflow-wrap: anywhere;
+}

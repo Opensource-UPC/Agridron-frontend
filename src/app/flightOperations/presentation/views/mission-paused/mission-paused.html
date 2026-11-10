@@ -1,0 +1,27 @@
+<section class="paused">
+    <mat-card appearance="outlined" class="paused__card">
+        <mat-card-content class="paused__content">
+            <span class="paused__icon" aria-hidden="true"><mat-icon>rainy</mat-icon></span>
+            <h1 class="paused__title">{{ 'mission.paused.message' | translate }}</h1>
+            <p class="paused__text">{{ 'mission.paused.description' | translate }}</p>
+
+            @if (mission(); as m) {
+                <div class="paused__details">
+                    <app-mission-place [parcelId]="m.parcelId"/>
+                    <dl class="paused__fields">
+                        <dt>{{ 'mission.paused.start' | translate }}</dt>
+                        <dd>{{ m.requestedDate | date: 'dd/MM/yyyy HH:mm' }}</dd>
+                        <dt>{{ 'mission.paused.pausedFor' | translate }}</dt>
+                        <dd>{{ format(pausedFor()) }}</dd>
+                    </dl>
+                </div>
+            }
+        </mat-card-content>
+
+        <mat-card-actions class="paused__actions">
+            <button matButton type="button" (click)="home()">{{ 'mission.actions.home' | translate }}</button>
+            <button matButton="outlined" type="button" (click)="details()">{{ 'mission.actions.details' | translate }}</button>
+            <button matButton="filled" type="button" (click)="resume()">{{ 'mission.actions.resume' | translate }}</button>
+        </mat-card-actions>
+    </mat-card>
+</section>

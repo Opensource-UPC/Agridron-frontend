@@ -1,0 +1,319 @@
+import {Component, computed, inject, OnInit, signal} from '@angular/core';
+import {toSignal} from '@angular/core/rxjs-interop';
+import {CommonModule} from '@angular/common';
+import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {PolygonMap} from '../../../../shared/presentation/components/polygon-map/polygon-map';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
+import {MissionStore} from '../../../application/mission.store';
+import {ParcelStore} from '../../../../fieldManagement/application/parcel.store';
+import {FarmStore} from '../../../../fieldManagement/application/farm.store';
+import {CropStore} from '../../../../fieldManagement/application/crop.store';
+import {DroneStore} from '../../../../InventoryResourceManagement/application/dron-store';
+import {AgrochemicalStore} from '../../../application/agrochemical.store';
+import {AuthenticationService} from '../../../../iam/application/authentication.service';
+import {Mission} from '../../../domain/model/mission.entity';
+import {MissionStatus} from '../../../domain/model/mission-status.enum';
+
+/**
+ * Multi-step wizard form matching the Vue design for creating and editing missions.
+ */
+@Component({
+    selector: 'app-mission-form',
+    standalone: true,
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        TranslatePipe,
+        MatButtonModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        PolygonMap
+    ],
+    templateUrl: './mission-form.html',
+    styleUrl: './mission-form.css'
+})
+export class MissionForm implements OnInit {
+    private readonly fb = inject(FormBuilder);
+    private readonly route = inject(ActivatedRoute);
+    private readonly router = inject(Router);
+    private readonly store = inject(MissionStore);
+    private readonly auth = inject(AuthenticationService);
+    private readonly farmStore = inject(FarmStore);
+    private readonly parcelStore = inject(ParcelStore);
+    private readonly cropStore = inject(CropStore);
+    private readonly droneStore = inject(DroneStore);
+    private readonly agrochemicalStore = inject(AgrochemicalStore);
+    private readonly translate = inject(TranslateService);
+
+    /** Stores data */
+    readonly farms = this.farmStore.farms;
+    readonly parcels = this.parcelStore.parcels;
+    readonly crops = this.cropStore.crops;
+    readonly drones = this.droneStore.drones;
+    readonly agrochemicals = this.agrochemicalStore.agrochemicals;
+
+    /** Drones that can be assigned: the ones out of service by a fault are excluded (DR-006). */
+    readonly availableDrones = computed(() => this.drones().filter(drone => drone.canBeAssignedToMission()));
+
+    /** Active wizard step: 1 | 2 | 3 | 4 */
+    readonly activeStep = signal<number>(1);
+
+    /** Indicates edit mode */
+    isEdit = false;
+    missionId: number | null = null;
+
+    /** Loading / saving state */
+    readonly saving = signal<boolean>(false);
+    readonly feedbackMessage = signal<string>('');
+
+    /** True when the edited mission already started, so it cannot be saved (MI-006). */
+    readonly notEditable = signal<boolean>(false);
+
+    /** Wizard steps metadata */
+    readonly steps = [
+        { num: 1, labelKey: 'mission.wizard.step1' },
+        { num: 2, labelKey: 'mission.wizard.step2' },
+        { num: 3, labelKey: 'mission.wizard.step3' },
+        { num: 4, labelKey: 'mission.wizard.step4' }
+    ];
+
+    /** Reactive Form structure */
+    form = this.fb.group({
+        farmId: new FormControl<number | null>(null, { validators: [Validators.required] }),
+        parcelId: new FormControl<number | null>(null, { validators: [Validators.required] }),
+        date: new FormControl<string>(new Date().toISOString().slice(0, 10), { nonNullable: true, validators: [Validators.required] }),
+        time: new FormControl<string>('08:00', { nonNullable: true, validators: [Validators.required] }),
+        droneId: new FormControl<number | null>(null, { validators: [Validators.required] }),
+        agrochemicalId: new FormControl<number | null>(null, { validators: [Validators.required] }),
+        sprayRate: new FormControl<number | null>(2.0, { validators: [Validators.required, Validators.min(0.1)] }),
+        flightHeight: new FormControl<number | null>(3, { validators: [Validators.min(1)] }),
+        flightSpeed: new FormControl<number | null>(5, { validators: [Validators.min(1)] }),
+        overlap: new FormControl<number | null>(20, { validators: [Validators.min(0), Validators.max(100)] }),
+        notes: new FormControl<string>('')
+    });
+
+    /**
+     * Current form values as a signal. Reading the form directly inside computed() does not
+     * update the view, because the form is not a signal; this one emits on every change.
+     */
+    private readonly formValue = toSignal(this.form.valueChanges, { initialValue: this.form.value });
+
+    /** Parcels filtered by selected farm */
+    readonly filteredParcels = computed(() => {
+        const farmId = this.formValue().farmId;
+        if (!farmId) return this.parcels();
+        return this.parcels().filter(p => Number(p.farmId) === Number(farmId));
+    });
+
+    /** Selected farm model */
+    readonly selectedFarm = computed(() => {
+        const farmId = this.formValue().farmId;
+        if (!farmId) return null;
+        return this.farms().find(f => Number(f.id) === Number(farmId)) ?? null;
+    });
+
+    /** Selected parcel model */
+    readonly selectedParcel = computed(() => {
+        const parcelId = this.formValue().parcelId;
+        if (!parcelId) return null;
+        return this.parcels().find(p => Number(p.id) === Number(parcelId)) ?? null;
+    });
+
+    /** Selected crop name */
+    readonly selectedCrop = computed(() => {
+        const parcel = this.selectedParcel();
+        if (!parcel || !parcel.cropId) return 'Sin cultivo asignado';
+        const crop = this.crops().find(c => Number(c.id) === Number(parcel.cropId));
+        return crop?.name ?? 'Sin cultivo asignado';
+    });
+
+    /** Selected drone model */
+    readonly selectedDrone = computed(() => {
+        const droneId = this.formValue().droneId;
+        if (!droneId) return null;
+        return this.drones().find(d => Number(d.id) === Number(droneId)) ?? null;
+    });
+
+    /** Selected agrochemical model */
+    readonly selectedAgrochemical = computed(() => {
+        const agroId = this.formValue().agrochemicalId;
+        if (!agroId) return null;
+        return this.agrochemicals().find(a => Number(a.id) === Number(agroId)) ?? null;
+    });
+
+    /** Formatted date & time string for summary */
+    readonly summaryDateTime = computed(() => {
+        const date = this.formValue().date;
+        const time = this.formValue().time;
+        if (!date || !time) return 'No programada';
+        return `${date} · ${time}`;
+    });
+
+    /** Validation check for step transition */
+    readonly canMoveForward = computed(() => {
+        const step = this.activeStep();
+        const value = this.formValue();
+        if (step === 1) return Boolean(value.farmId && value.parcelId);
+        if (step === 2) return Boolean(value.date && value.time && this.selectedDrone()?.canBeAssignedToMission());
+        if (step === 3) return Boolean(value.agrochemicalId && this.form.controls.sprayRate.valid);
+        return true;
+    });
+
+    ngOnInit(): void {
+        this.route.params.subscribe(params => {
+            this.missionId = params['id'] ? +params['id'] : null;
+            this.isEdit = !!this.missionId;
+
+            if (this.isEdit && this.missionId) {
+                const mission = this.store.getMissionById(this.missionId)();
+                if (mission) {
+                    this.populateFromMission(mission);
+                } else {
+                    // Retry once missions load if not yet populated
+                    setTimeout(() => {
+                        const m = this.store.getMissionById(this.missionId!)();
+                        if (m) this.populateFromMission(m);
+                    }, 500);
+                }
+            } else {
+                this.initializeNewDefaults();
+            }
+        });
+    }
+
+    private populateFromMission(mission: Mission): void {
+        // MI-006: a mission that already started cannot be edited (e.g. when the URL is typed by hand).
+        if (!mission.canBeEdited()) {
+            this.notEditable.set(true);
+            this.feedbackMessage.set(this.translate.instant('mission.form.error.notEditable'));
+        }
+
+        const parcel = this.parcels().find(p => p.id === mission.parcelId);
+        const reqDate = mission.requestedDate ? new Date(mission.requestedDate) : new Date();
+        const pad = (n: number) => String(n).padStart(2, '0');
+        const dateStr = `${reqDate.getFullYear()}-${pad(reqDate.getMonth() + 1)}-${pad(reqDate.getDate())}`;
+        const timeStr = `${pad(reqDate.getHours())}:${pad(reqDate.getMinutes())}`;
+
+        this.form.patchValue({
+            farmId: parcel?.farmId ?? null,
+            parcelId: mission.parcelId,
+            date: dateStr,
+            time: timeStr,
+            droneId: mission.droneId,
+            agrochemicalId: mission.agrochemicalId,
+            flightHeight: mission.flightHeight ?? 3,
+            flightSpeed: mission.flightSpeed ?? 5,
+            sprayRate: mission.sprayRate ?? 2.0,
+            overlap: mission.overlap ?? 20
+        });
+    }
+
+    private initializeNewDefaults(): void {
+        // Auto-select first farm and parcel if available
+        if (this.farms().length > 0 && !this.form.get('farmId')?.value) {
+            const firstFarm = this.farms()[0];
+            this.form.get('farmId')?.setValue(firstFarm.id);
+
+            const parcelsOfFarm = this.parcels().filter(p => Number(p.farmId) === Number(firstFarm.id));
+            if (parcelsOfFarm.length > 0) {
+                this.form.get('parcelId')?.setValue(parcelsOfFarm[0].id);
+            }
+        }
+
+        // Auto-select first drone if available
+        if (this.availableDrones().length > 0 && !this.form.get('droneId')?.value) {
+            this.form.get('droneId')?.setValue(this.availableDrones()[0].id);
+        }
+
+        // Auto-select first agrochemical if available
+        if (this.agrochemicals().length > 0 && !this.form.get('agrochemicalId')?.value) {
+            this.form.get('agrochemicalId')?.setValue(this.agrochemicals()[0].id);
+        }
+    }
+
+    onFarmChange(): void {
+        const farmId = this.form.get('farmId')?.value;
+        const matchingParcels = this.parcels().filter(p => Number(p.farmId) === Number(farmId));
+        if (matchingParcels.length > 0) {
+            this.form.get('parcelId')?.setValue(matchingParcels[0].id);
+        } else {
+            this.form.get('parcelId')?.setValue(null);
+        }
+    }
+
+    setStep(stepNum: number): void {
+        if (stepNum < this.activeStep() || this.canMoveForward()) {
+            this.activeStep.set(stepNum);
+        }
+    }
+
+    nextStep(): void {
+        if (!this.canMoveForward()) return;
+        if (this.activeStep() < 4) {
+            this.activeStep.update(s => s + 1);
+        }
+    }
+
+    prevStep(): void {
+        if (this.activeStep() > 1) {
+            this.activeStep.update(s => s - 1);
+        }
+    }
+
+    cancel(): void {
+        this.router.navigate(['flight-operations/missions']).then();
+    }
+
+    submit(): void {
+        if (this.notEditable()) {
+            this.router.navigate(['flight-operations/missions', this.missionId]).then();
+            return;
+        }
+
+        if (this.form.invalid) {
+            this.feedbackMessage.set('Por favor completa todos los campos requeridos.');
+            return;
+        }
+
+        this.saving.set(true);
+        this.feedbackMessage.set('');
+
+        const val = this.form.value;
+        const dateTimeStr = `${val.date}T${val.time || '08:00'}:00`;
+        const requestedDate = new Date(dateTimeStr);
+
+        const mission = new Mission(
+            this.missionId ?? 0,
+            requestedDate,
+            Number(val.parcelId),
+            Number(val.agrochemicalId),
+            Number(val.droneId),
+            this.auth.currentUser()?.id ?? 1,
+            val.flightHeight ? Number(val.flightHeight) : 3,
+            val.flightSpeed ? Number(val.flightSpeed) : 5,
+            val.sprayRate ? Number(val.sprayRate) : 2.0,
+            Number(val.overlap ?? 20), // ?? keeps a valid 0; only an empty value becomes 20
+            MissionStatus.PLANNED
+        );
+
+        try {
+            if (this.isEdit) {
+                this.store.updateMission(mission);
+            } else {
+                this.store.addMission(mission);
+            }
+            this.router.navigate(['flight-operations/missions']).then();
+        } catch (error: any) {
+            this.feedbackMessage.set(error?.message || 'Error al guardar la misión.');
+            this.saving.set(false);
+        }
+    }
+}

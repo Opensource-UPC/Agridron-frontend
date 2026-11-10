@@ -1,0 +1,341 @@
+.mission-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--agd-space-3);
+}
+
+/* Header */
+
+.mission-list__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--agd-space-2);
+}
+
+.mission-list__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--agd-space-1);
+  min-width: 0;
+}
+
+.mission-list__title,
+.mission-list__subtitle,
+.mission-list__error,
+.mission-list__empty-text {
+  margin: 0;
+}
+
+.mission-list__title {
+  font-size: var(--agd-font-size-view-title);
+  font-weight: var(--agd-font-weight-medium);
+  line-height: 36px;
+  color: var(--agd-color-primary);
+}
+
+.mission-list__subtitle {
+  font-size: var(--agd-font-size-body);
+  color: var(--agd-color-text-muted);
+}
+
+/* Toolbar: status chips + search */
+
+.mission-list__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--agd-space-2);
+}
+
+.mission-list__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--agd-space-1);
+}
+
+.mission-list__search:focus-within {
+  outline: 2px solid var(--agd-color-secondary);
+  outline-offset: 2px;
+}
+
+.mission-list__search {
+  display: flex;
+  align-items: center;
+  gap: var(--agd-space-1);
+  width: 280px;
+  max-width: 100%;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--agd-color-border);
+  border-radius: 8px;
+  background: var(--agd-color-surface);
+}
+
+.mission-list__search-icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  color: var(--agd-color-text-muted);
+}
+
+.mission-list__search input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--agd-color-primary);
+  font: inherit;
+  font-size: var(--agd-font-size-body);
+}
+
+/* Error */
+
+.mission-list__error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--agd-space-1);
+  padding: 12px var(--agd-space-2);
+  border-radius: 8px;
+  background: var(--agd-alert-high-bg);
+  color: var(--agd-color-error);
+  font-size: var(--agd-font-size-body);
+}
+
+.mission-list__error-icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+/* Grid */
+
+.mission-list__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--agd-space-2);
+}
+
+/* Card */
+
+.mission-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid var(--agd-color-border);
+  border-radius: var(--agd-radius-card);
+  background: var(--agd-color-surface);
+}
+
+.mission-card__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--agd-space-2) var(--agd-space-2) 0;
+}
+
+.mission-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--agd-space-1);
+  margin-bottom: 4px;
+}
+
+.mission-card__id {
+  font-size: var(--agd-font-size-label);
+  font-weight: var(--agd-font-weight-medium);
+  color: var(--agd-color-text-muted);
+}
+
+.mission-card__name,
+.mission-card__location,
+.mission-card__rows {
+  margin: 0;
+}
+
+.mission-card__name {
+  font-size: var(--agd-font-size-section-title);
+  font-weight: var(--agd-font-weight-medium);
+  line-height: 24px;
+  color: var(--agd-color-primary);
+  overflow-wrap: anywhere;
+}
+
+.mission-card__location {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--agd-font-size-body);
+  color: var(--agd-color-text-muted);
+}
+
+.mission-card__location-icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+
+/* Label / value rows */
+
+.mission-card__rows {
+  margin-top: var(--agd-space-1);
+  border-top: 1px solid var(--agd-color-border);
+  font-size: var(--agd-font-size-body);
+}
+
+.mission-card__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--agd-space-2);
+  min-height: 40px;
+  border-bottom: 1px solid var(--agd-color-border);
+}
+
+.mission-card__row dt {
+  flex: none;
+  color: var(--agd-color-text-muted);
+}
+
+.mission-card__row dd {
+  margin: 0;
+  min-width: 0;
+  font-weight: var(--agd-font-weight-medium);
+  color: var(--agd-color-primary);
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+/* Progress */
+
+.mission-card__progress {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px;
+  margin-top: 12px;
+  font-size: var(--agd-font-size-label);
+  color: var(--agd-color-text-muted);
+}
+
+.mission-card__progress strong {
+  font-weight: var(--agd-font-weight-medium);
+  color: var(--agd-color-primary);
+}
+
+.mission-card__track {
+  grid-column: 1 / -1;
+  height: 8px;
+  overflow: hidden;
+  border-radius: var(--agd-radius-pill);
+  background: var(--agd-color-border);
+}
+
+.mission-card__fill {
+  height: 100%;
+  border-radius: var(--agd-radius-pill);
+  background: var(--agd-status-none);
+}
+
+.progress-bar--completed   { background: var(--agd-status-completed); }
+.progress-bar--in-progress { background: var(--agd-status-in-progress); }
+.progress-bar--paused      { background: var(--agd-status-paused); }
+
+.mission-card__see-more {
+  align-self: flex-end;
+  margin: 4px calc(-1 * var(--agd-space-1)) 0 0;
+}
+
+/* Actions: edit on one side, delete on the other */
+
+.mission-card__actions {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--agd-space-1);
+}
+
+/* Delete stays on the right also when Edit is hidden (missions that already started) */
+.mission-card__actions > :last-child {
+  margin-left: auto;
+}
+
+.mission-card mat-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Skeleton (same shape as a mission card) */
+
+.mission-list__skeleton-card {
+  gap: var(--agd-space-1);
+  padding: var(--agd-space-2) var(--agd-space-2) 64px;
+}
+
+.mission-list__skeleton-line {
+  width: 60%;
+  height: 16px;
+}
+
+.mission-list__skeleton-line--badge {
+  width: 30%;
+  border-radius: var(--agd-radius-pill);
+}
+
+.mission-list__skeleton-line--title {
+  width: 70%;
+  height: 24px;
+}
+
+/* Empty state */
+
+.mission-list__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--agd-space-2);
+  padding: var(--agd-space-4) var(--agd-space-2);
+  border: 1px solid var(--agd-color-border);
+  border-radius: var(--agd-radius-card);
+  background: var(--agd-color-surface);
+  text-align: center;
+}
+
+.mission-list__empty-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--agd-color-secondary-tint);
+  color: var(--agd-color-secondary);
+}
+
+.mission-list__empty-icon mat-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.mission-list__empty-text {
+  font-size: var(--agd-font-size-body);
+  color: var(--agd-color-text-muted);
+}
+
+.mission-list__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--agd-space-1);
+}
+
+@media (max-width: 599px) {
+  .mission-list__actions,
+  .mission-list__actions > button,
+  .mission-list__search {
+    width: 100%;
+  }
+}

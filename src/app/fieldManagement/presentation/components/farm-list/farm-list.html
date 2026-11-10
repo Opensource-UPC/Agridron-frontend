@@ -1,19 +1,51 @@
-<header class="farm-list__header">
-  <h2>{{ 'farm.title' | translate }}</h2>
-  <button matButton="filled" class="farm-list__new-farm" (click)="newFarm()">
-    <mat-icon>add_circle_outline</mat-icon>
-    {{ 'farm.newFarm' | translate }}
-  </button>
-</header>
+<section class="farm-list">
+  <header class="farm-list__header">
+    <div class="farm-list__intro">
+      <h1 class="farm-list__title">{{ 'farm.title' | translate }}</h1>
+      <p class="farm-list__subtitle">{{ 'farm.subtitle' | translate }}</p>
+    </div>
+    <button matButton="filled" type="button" (click)="newFarm()">
+      <mat-icon svgIcon="agd:plus" aria-hidden="true"/>
+      {{ 'farm.newFarm' | translate }}
+    </button>
+  </header>
 
-@if (error()) {
-  <p class="farm-list__error">{{ error() }}</p>
-}
-
-<div class="farm-list__grid">
-  @for (farm of farms(); track farm.id) {
-    <app-farm-item [farm]="farm" (edit)="editFarm($event)" (delete)="deleteFarm($event)"/>
-  } @empty {
-    <p>{{ loading() ? ('farm.loading' | translate) : ('farm.empty' | translate) }}</p>
+  @if (error()) {
+    <p class="farm-list__error" role="alert">
+      <mat-icon class="farm-list__error-icon" svgIcon="agd:alert" aria-hidden="true"/>
+      <span>{{ error() }}</span>
+    </p>
   }
-</div>
+
+  @if (loading() && farms().length === 0) {
+    <div class="farm-list__grid" role="status" aria-busy="true" [attr.aria-label]="'farm.loading' | translate">
+      @for (placeholder of [1, 2, 3]; track placeholder) {
+        <div class="farm-list__skeleton-card" aria-hidden="true">
+          <span class="agd-skeleton farm-list__skeleton-media"></span>
+          <div class="farm-list__skeleton-body">
+            <span class="agd-skeleton farm-list__skeleton-line farm-list__skeleton-line--title"></span>
+            <span class="agd-skeleton farm-list__skeleton-line farm-list__skeleton-line--short"></span>
+            <span class="agd-skeleton farm-list__skeleton-line farm-list__skeleton-line--meta"></span>
+          </div>
+        </div>
+      }
+    </div>
+  } @else if (farms().length === 0) {
+    <div class="farm-list__empty">
+      <span class="farm-list__empty-icon" aria-hidden="true">
+        <mat-icon svgIcon="agd:farm"/>
+      </span>
+      <p class="farm-list__empty-text">{{ 'farm.empty' | translate }}</p>
+      <button matButton="filled" type="button" (click)="newFarm()">
+        <mat-icon svgIcon="agd:plus" aria-hidden="true"/>
+        {{ 'farm.newFarm' | translate }}
+      </button>
+    </div>
+  } @else {
+    <div class="farm-list__grid">
+      @for (farm of farms(); track farm.id) {
+        <app-farm-item [farm]="farm" (edit)="editFarm($event)" (delete)="deleteFarm($event)"/>
+      }
+    </div>
+  }
+</section>

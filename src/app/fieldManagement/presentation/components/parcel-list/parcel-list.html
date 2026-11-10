@@ -1,28 +1,101 @@
-<header class="parcel-list__header">
-  <h2>{{ 'parcel.title' | translate }}</h2>
-  <button matButton="filled" class="parcel-list__new-parcel" (click)="newParcel()">
-    <mat-icon>add_circle_outline</mat-icon>
-    {{ 'parcel.newParcel' | translate }}
-  </button>
-</header>
+<section class="parcel-list">
+  <header class="parcel-list__header">
+    <div class="parcel-list__intro">
+      <h1 class="parcel-list__title">{{ 'parcel.title' | translate }}</h1>
+      <p class="parcel-list__subtitle">{{ 'parcel.subtitle' | translate }}</p>
+    </div>
+    <button matButton="filled" type="button" (click)="newParcel()">
+      <mat-icon svgIcon="agd:plus" aria-hidden="true"/>
+      {{ 'parcel.newParcel' | translate }}
+    </button>
+  </header>
 
-@if (error()) {
-  <p class="parcel-list__error">{{ error() }}</p>
-}
+  <div class="parcel-list__filters">
+    <mat-form-field appearance="outline" class="parcel-list__filter" subscriptSizing="dynamic">
+      <mat-label>{{ 'parcel.selectFarm' | translate }}</mat-label>
+      <mat-icon matPrefix class="parcel-list__filter-icon" svgIcon="agd:farm" aria-hidden="true"/>
+      <mat-select [value]="selectedFarmId()" (selectionChange)="onFarmSelected($event.value)">
+        @for (farm of farms(); track farm.id) {
+          <mat-option [value]="farm.id">{{ farm.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
 
-<mat-form-field class="parcel-list__farm-select">
-  <mat-label>{{ 'parcel.selectFarm' | translate }}</mat-label>
-  <mat-select [value]="selectedFarmId()" (selectionChange)="onFarmSelected($event.value)">
-    @for (farm of farms(); track farm.id) {
-      <mat-option [value]="farm.id">{{ farm.name }}</mat-option>
+    <mat-form-field appearance="outline" class="parcel-list__filter" subscriptSizing="dynamic">
+      <mat-label>{{ 'parcel.filter.crop' | translate }}</mat-label>
+      <mat-icon matPrefix class="parcel-list__filter-icon" svgIcon="agd:crop" aria-hidden="true"/>
+      <mat-select [value]="selectedCropId()" (selectionChange)="selectedCropId.set($event.value)">
+        <mat-option value="all">{{ 'parcel.filter.allCrops' | translate }}</mat-option>
+        @for (crop of crops(); track crop.id) {
+          <mat-option [value]="crop.id">{{ crop.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="parcel-list__filter" subscriptSizing="dynamic">
+      <mat-label>{{ 'parcel.filter.surface' | translate }}</mat-label>
+      <mat-icon matPrefix class="parcel-list__filter-icon" svgIcon="agd:area" aria-hidden="true"/>
+      <mat-select [value]="selectedSurface()" (selectionChange)="selectedSurface.set($event.value)">
+        <mat-option value="all">{{ 'parcel.filter.allSurfaces' | translate }}</mat-option>
+        @for (range of surfaceRanges; track range) {
+          <mat-option [value]="range">{{ 'parcel.filter.' + range | translate }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    @if (hasActiveFilters()) {
+      <button matButton type="button" class="parcel-list__clear" (click)="clearFilters()">
+        {{ 'parcel.filter.clear' | translate }}
+      </button>
     }
-  </mat-select>
-</mat-form-field>
+  </div>
 
-<div class="parcel-list__grid">
-  @for (parcel of parcels(); track parcel.id) {
-    <app-parcel-item [parcel]="parcel" (seeMore)="seeMoreParcel($event)" (edit)="editParcel($event)" (delete)="deleteParcel($event)"/>
-  } @empty {
-    <p>{{ emptyMessage() }}</p>
+  @if (error()) {
+    <p class="parcel-list__error" role="alert">
+      <mat-icon class="parcel-list__error-icon" svgIcon="agd:alert" aria-hidden="true"/>
+      <span>{{ error() }}</span>
+    </p>
   }
-</div>
+
+  @if (!selectedFarmId()) {
+    <div class="parcel-list__empty">
+      <span class="parcel-list__empty-icon" aria-hidden="true"><mat-icon svgIcon="agd:farm"/></span>
+      <p class="parcel-list__empty-text">{{ 'parcel.selectFarmPrompt' | translate }}</p>
+    </div>
+  } @else if (loading() && farmParcels().length === 0) {
+    <div class="parcel-list__grid" role="status" aria-busy="true" [attr.aria-label]="'parcel.loading' | translate">
+      @for (placeholder of [1, 2, 3]; track placeholder) {
+        <div class="parcel-list__skeleton-card" aria-hidden="true">
+          <span class="agd-skeleton parcel-list__skeleton-media"></span>
+          <div class="parcel-list__skeleton-body">
+            <span class="agd-skeleton parcel-list__skeleton-line parcel-list__skeleton-line--title"></span>
+            <span class="agd-skeleton parcel-list__skeleton-line parcel-list__skeleton-line--short"></span>
+            <span class="agd-skeleton parcel-list__skeleton-line parcel-list__skeleton-line--meta"></span>
+          </div>
+        </div>
+      }
+    </div>
+  } @else if (farmParcels().length === 0) {
+    <div class="parcel-list__empty">
+      <span class="parcel-list__empty-icon" aria-hidden="true"><mat-icon svgIcon="agd:parcel"/></span>
+      <p class="parcel-list__empty-text">{{ 'parcel.empty' | translate }}</p>
+      <button matButton="filled" type="button" (click)="newParcel()">
+        <mat-icon svgIcon="agd:plus" aria-hidden="true"/>
+        {{ 'parcel.newParcel' | translate }}
+      </button>
+    </div>
+  } @else if (parcels().length === 0) {
+    <div class="parcel-list__empty" role="status">
+      <span class="parcel-list__empty-icon" aria-hidden="true"><mat-icon svgIcon="agd:area"/></span>
+      <p class="parcel-list__empty-text">{{ 'parcel.filter.noMatches' | translate }}</p>
+      <button matButton="outlined" type="button" (click)="clearFilters()">{{ 'parcel.filter.clear' | translate }}</button>
+    </div>
+  } @else {
+    <div class="parcel-list__grid">
+      @for (parcel of parcels(); track parcel.id) {
+        <app-parcel-item [parcel]="parcel" [farmName]="farmName(parcel.farmId)"
+                         (seeMore)="seeMoreParcel($event)" (edit)="editParcel($event)" (delete)="deleteParcel($event)"/>
+      }
+    </div>
+  }
+</section>

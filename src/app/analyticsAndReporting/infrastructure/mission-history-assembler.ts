@@ -7,11 +7,12 @@ export class MissionHistoryAssembler implements BaseAssembler<MissionHistory, Mi
         response.missionHistories.map(resource => this.toEntityFromResource(resource));
 
     toEntityFromResource = (resource: MissionHistoryResource): MissionHistory =>
-        new MissionHistory(resource.id, resource.missionId, resource.finalStatus, resource.completedAt);
+        new MissionHistory(resource.id, resource.missionId, resource.parcelId, resource.finalStatus, resource.completedAt);
 
     toResourceFromEntity = (entity: MissionHistory): MissionHistoryResource => ({
         id: entity.id,
         missionId: entity.missionId,
+        parcelId: entity.parcelId,
         finalStatus: entity.finalStatus,
         completedAt: entity.completedAt
     });

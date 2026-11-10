@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  AgriDronProviderApiBaseUrl: 'https://6ac44bc6ae53bf25b80f549f.mockapi.io',
+  AgriDronProviderApiBaseUrl: 'https://agridron-mock-api.onrender.com',
   ///AgriDronProviderApiBaseUrl: 'http://localhost:3000/api/v1',
   AgriDronProviderProductsEndpointPath: '/products',
   AgriDronProviderCartsEndpointPath: '/carts',
@@ -12,7 +12,7 @@ export const environment = {
   AgriDronProviderParcelsEndpointPath: '/parcels',
   AgriDronProviderFumigationAreasEndpointPath: '/fumigation-areas',
   AgriDronProviderCropsEndpointPath: '/crops',
-AgriDronProviderMissionReportsEndpointPath: '/mission-reports',
+  AgriDronProviderMissionReportsEndpointPath: '/mission-reports',
   AgriDronProviderMissionHistoriesEndpointPath: '/mission-histories',
   AgriDronProviderOperationalMetricsEndpointPath: '/operational-metrics',
   AgriDronProviderPerformanceIndicatorsEndpointPath: '/performance-indicators',
@@ -22,7 +22,13 @@ AgriDronProviderMissionReportsEndpointPath: '/mission-reports',
 
   ////De Edwin
   AgriDronProviderDronesMetricsEndpointPath: '/drones',
-  AgriDronProvideChemicalsEndpointPath: '/agrochemicals',
+  AgriDronProvideChemicalsEndpointPath: '/chemicals',
   AgriDronProvideNozzlesEndpointPath: '/nozzles',
-  AgriDronProvideMaintenanceRecordEndpointPath: '/maintenanceRecords',
+  AgriDronProvideMaintenanceRecordEndpointPath: '/maintenance-records',
+  AgriDronProviderDroneIncidentsEndpointPath: '/drone-incidents',
+
+  AgriDronProviderMissionsEndpointPath: '/missions',
+  AgriDronProviderMissionResultsEndpointPath: '/mission-results',
+  AgriDronProviderIncidentsEndpointPath: '/incidents',
+  AgriDronProviderOperationStatusesEndpointPath: '/operation-status',
 };

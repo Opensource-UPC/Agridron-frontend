@@ -1,15 +1,118 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
 .parcel-card {
-  max-width: 100%;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   overflow: hidden;
+  border-radius: var(--agd-radius-card);
 }
 
-.parcel-card img {
+/* Media */
+
+.parcel-card__media {
+  display: block;
+  width: 100%;
   height: 140px;
-  object-fit: scale-down;
-  padding: 16px;
+  object-fit: cover;
 }
 
-.parcel-card mat-card-content p {
-  margin: 4px 0;
+.parcel-card__media--placeholder {
+  display: grid;
+  place-items: center;
+  background: var(--agd-color-secondary-tint);
+  color: var(--agd-color-secondary);
+}
+
+.parcel-card__media--placeholder mat-icon {
+  width: 40px;
+  height: 40px;
+}
+
+/* Content */
+
+.parcel-card__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--agd-space-1);
+  padding: var(--agd-space-2) var(--agd-space-2) 0;
+}
+
+.parcel-card__name,
+.parcel-card__meta {
+  margin: 0;
+}
+
+.parcel-card__name {
+  font-size: var(--agd-font-size-section-title);
+  font-weight: var(--agd-font-weight-medium);
+  line-height: 24px;
+  color: var(--agd-color-primary);
+  overflow-wrap: anywhere;
+}
+
+/* Crop label (pill) */
+
+.parcel-card__crop {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px var(--agd-space-1);
+  border-radius: var(--agd-radius-pill);
+  background: var(--agd-color-secondary-tint);
+  color: var(--agd-color-secondary-strong);
+  font-size: var(--agd-font-size-label);
+  font-weight: var(--agd-font-weight-medium);
+}
+
+.parcel-card__crop--none {
+  background: var(--agd-color-background);
+  color: var(--agd-color-text-muted);
+}
+
+.parcel-card__crop-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* Summary row: area · farm on the left, "See more" on the right */
+
+.parcel-card__summary {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--agd-space-1);
+}
+
+.parcel-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+  font-size: var(--agd-font-size-body);
+  font-weight: var(--agd-font-weight-medium);
+  color: var(--agd-color-primary);
+}
+
+.parcel-card__see-more {
+  flex: none;
+  margin-right: calc(-1 * var(--agd-space-1));
+}
+
+/* Actions: edit on one side, delete on the other */
+
+.parcel-card__actions {
+  justify-content: space-between;
+  padding: var(--agd-space-1);
+}
+
+.parcel-card__actions mat-icon {
+  width: 18px;
+  height: 18px;
 }

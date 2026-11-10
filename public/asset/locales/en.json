@@ -13,17 +13,21 @@
     "farm": "Farms",
     "parcel": "Parcels",
     "crop": "Crops",
+    "mission": "Missions",
     "fumigationArea": "Fumigation areas",
     "analytics": "Reports",
     "drone": "Drones",
     "agrochemical": "Agrochemicals",
     "profile": "Profile",
-    "home": "Inicio"
+    "home": "Home"
   },
   "farm": {
     "title": "Farms",
+    "subtitle": "Manage your farmland, its location and total area",
     "newFarm": "New farm",
+    "deleteTitle": "Delete farm",
     "delete-confirm": "Are you sure you want to delete this farm?",
+    "area": "{{ area }} ha",
     "empty": "No farms registered",
     "parcelCount": "{{ count }} parcels",
     "imagePlaceholder": "https://material.angular.dev/assets/img/examples/shiba2.jpg",
@@ -41,6 +45,19 @@
       "ownerId": "Owner ID",
       "image": "Image URL",
       "imageHint": "Optional",
+      "imagePreview": "Image preview",
+      "new-subtitle": "Register a farm to manage its parcels",
+      "edit-subtitle": "Update your farm's details",
+      "section-general": "General details",
+      "section-image": "Image",
+      "section-image-hint": "A photo of the farm helps you recognize it in your list",
+      "namePlaceholder": "e.g. San Rafael Farm",
+      "locationPlaceholder": "e.g. Ica, Peru",
+      "imageUrlPlaceholder": "https://",
+      "preview": "Preview",
+      "preview-hint": "This is how the farm will look in your list",
+      "back": "Back to farms",
+      "cancel": "Cancel",
       "create": "Create",
       "update": "Update",
       "error": {
@@ -53,9 +70,24 @@
   },
   "parcel": {
     "title": "Parcels",
+    "subtitle": "Browse each farm's parcels, their crop and area",
     "area": "Area",
+    "areaValue": "{{ area }} ha",
     "farm": "Farm",
+    "crop": "Crop",
     "noCrop": "No crop",
+    "deleteTitle": "Delete parcel",
+    "filter": {
+      "crop": "Crop",
+      "allCrops": "All crops",
+      "surface": "Area",
+      "allSurfaces": "Any area",
+      "small": "Less than 5 ha",
+      "medium": "5 to 10 ha",
+      "large": "More than 10 ha",
+      "noMatches": "No parcels match the selected filters",
+      "clear": "Clear filters"
+    },
     "imagePlaceholder": "https://material.angular.dev/assets/img/examples/shiba2.jpg",
     "newParcel": "New parcel",
     "selectFarm": "Select farm",
@@ -67,10 +99,23 @@
       "name": "Name",
       "area": "Area (ha)",
       "geometry": "Geometry (GeoJSON)",
+      "geometryHint": "Parcel outline as a GeoJSON polygon",
       "farm": "Farm",
       "crop": "Crop",
       "image": "Image URL",
       "imageHint": "Optional",
+      "new-subtitle": "Register a parcel of one of your farms",
+      "edit-subtitle": "Update your parcel's details",
+      "section-general": "General details",
+      "section-location": "Location",
+      "section-image": "Image",
+      "section-image-hint": "A photo of the parcel helps you recognize it in your list",
+      "namePlaceholder": "e.g. North Parcel",
+      "imageUrlPlaceholder": "https://",
+      "preview": "Preview",
+      "preview-hint": "This is how the parcel will look in your list",
+      "back": "Back to parcels",
+      "cancel": "Cancel",
       "create": "Create",
       "update": "Update",
       "error": {
@@ -88,8 +133,16 @@
       "title": "Parcel detail",
       "name": "Name",
       "geometry": "Geometry",
+      "polygon": "Polygon · {{ count }} vertices",
+      "showCoordinates": "Show coordinates",
       "notFound": "Parcel not found",
-      "back": "Back"
+      "back": "Back",
+      "backToList": "Back to parcels",
+      "weather": {
+        "button": "View parcel weather",
+        "unavailable": "Weather data is not available at the moment.",
+        "noGeometry": "The parcel has no drawn polygon, so its weather cannot be checked."
+      }
     },
     "button": {
       "seeMore": "See more",
@@ -99,10 +152,11 @@
   },
   "crop": {
     "title": "Crops",
+    "subtitle": "Manage the crops and varieties you grow on your parcels",
     "newCrop": "New crop",
     "variety": "Variety",
     "noVariety": "No variety",
-    "information": "Crop information",
+    "deleteTitle": "Delete crop",
     "delete-confirm": "Are you sure you want to delete this crop?",
     "empty": "No crops registered",
     "loading": "Loading crops...",
@@ -113,6 +167,16 @@
     "form": {
       "new-title": "New crop",
       "edit-title": "Edit crop",
+      "new-subtitle": "Register a crop to assign it to your parcels",
+      "edit-subtitle": "Update your crop's details",
+      "section-general": "Crop details",
+      "namePlaceholder": "e.g. Corn",
+      "varietyPlaceholder": "e.g. Amber",
+      "varietyHint": "Optional",
+      "preview": "Preview",
+      "preview-hint": "This is how the crop will look in your list",
+      "back": "Back to crops",
+      "cancel": "Cancel",
       "name": "Name",
       "variety": "Variety",
       "create": "Create",
@@ -124,6 +188,8 @@
   },
   "fumigationArea": {
     "title": "Fumigation areas",
+    "subtitle": "Define the areas of each parcel that will be sprayed",
+    "deleteTitle": "Delete fumigation area",
     "parcel": "Parcel",
     "selectParcel": "Select parcel",
     "newFumigationArea": "New fumigation area",
@@ -138,6 +204,16 @@
     "form": {
       "new-title": "New fumigation area",
       "edit-title": "Edit fumigation area",
+      "new-subtitle": "Register an area of a parcel to be sprayed",
+      "edit-subtitle": "Update the fumigation area details",
+      "section-general": "Area details",
+      "section-location": "Location",
+      "geometryHint": "Outline of the area as a GeoJSON polygon",
+      "areaValue": "{{ area }} m²",
+      "preview": "Preview",
+      "preview-hint": "This is how the area will look in your list",
+      "back": "Back to fumigation areas",
+      "cancel": "Cancel",
       "parcel": "Parcel",
       "geometry": "Geometry (GeoJSON)",
       "area": "Area (m²)",
@@ -151,6 +227,189 @@
       }
     }
   },
+  "mission": {
+    "title": "Missions",
+    "subtitle": "Flight operations and mission monitoring",
+    "newMission": "New mission",
+    "loading": "Loading missions...",
+    "notFound": "Mission not found",
+    "empty": "No missions found.",
+    "emptyPrompt": "Start by planning your first fumigation mission.",
+    "deleteConfirm": "Are you sure you want to delete this mission?",
+    "next": "Next",
+    "back": "Back",
+    "save": "Save mission",
+    "filter": {
+      "all": "All",
+      "planned": "Planned",
+      "inProgress": "In progress",
+      "completed": "Completed",
+      "paused": "Paused"
+    },
+    "wizard": {
+      "step1": "Location & Parcel",
+      "step2": "Date & Drone",
+      "step3": "Supplies & Flight",
+      "step4": "Confirmation"
+    },
+    "summary": {
+      "title": "Mission Summary",
+      "areaSelected": "Selected area",
+      "farm": "Farm",
+      "parcel": "Parcel",
+      "crop": "Crop",
+      "dateTime": "Date and time",
+      "drone": "Assigned drone",
+      "agrochemical": "Agrochemical",
+      "dose": "Dose",
+      "flightHeight": "Flight height",
+      "flightSpeed": "Flight speed",
+      "sprayRate": "Spray rate",
+      "overlap": "Overlap",
+      "notes": "Notes and remarks"
+    },
+    "card": {
+      "crop": "Crop",
+      "drone": "Drone",
+      "date": "Date",
+      "progress": "Progress"
+    },
+    "columns": {
+      "id": "ID",
+      "parcel": "Parcel",
+      "requestedDate": "Requested date",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "status": {
+      "PLANNED": "Planned",
+      "AUTHORIZED": "Authorized",
+      "IN_PROGRESS": "In progress",
+      "PAUSED": "Paused",
+      "COMPLETED": "Completed",
+      "CANCELLED": "Cancelled"
+    },
+    "button": {
+      "seeMore": "View detail",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "actions": {
+      "authorize": "Authorize mission",
+      "start": "Start mission",
+      "pause": "Pause mission",
+      "resume": "Resume mission",
+      "incident": "Report incident",
+      "finish": "Finish mission",
+      "summary": "View summary",
+      "back": "Back",
+      "reschedule": "Reschedule mission",
+      "forecast": "View detailed forecast",
+      "continueAnyway": "Continue anyway",
+      "details": "View details",
+      "home": "Back to home"
+    },
+    "place": {
+      "farm": "Farm",
+      "parcel": "Parcel",
+      "coordinates": "Coordinates"
+    },
+    "form": {
+      "new-title": "New mission",
+      "edit-title": "Edit mission",
+      "requestedDate": "Date and time",
+      "parcel": "Parcel",
+      "agrochemical": "Agrochemical",
+      "drone": "Drone",
+      "flightHeight": "Flight height (m)",
+      "flightSpeed": "Flight speed (km/h)",
+      "sprayRate": "Spray rate (L/ha)",
+      "overlap": "Overlap (%)",
+      "create": "Create",
+      "update": "Update",
+      "error": {
+        "date-required": "Date is required",
+        "parcel-required": "You must select a parcel",
+        "agrochemical-required": "You must select an agrochemical",
+        "drone-required": "You must select a drone",
+        "min": "Value must be greater than 0",
+        "overlap": "Overlap must be between 0 and 100",
+        "notEditable": "This mission has already started or finished, so it cannot be edited.",
+        "droneOutOfService": "The selected drone is out of service due to a fault. Choose another drone; this one can be assigned once its repair is registered."
+      }
+    },
+    "monitor": {
+      "title": "Mission monitoring",
+      "steps": {
+        "preparation": "Preparation",
+        "takeoff": "Take-off",
+        "flying": "In flight",
+        "finish": "Finish"
+      },
+      "drone": "Drone",
+      "altitude": "Altitude",
+      "speed": "Speed",
+      "battery": "Battery",
+      "area": "Parcel area",
+      "elapsed": "Elapsed time",
+      "position": "Last position"
+    },
+    "weatherWarning": {
+      "title": "Weather warning",
+      "heading": "Weather conditions not recommended",
+      "message": "Check the current conditions around the parcel. Rescheduling the mission or adjusting the flight window is recommended.",
+      "rain": "Rain",
+      "wind": "Wind",
+      "temperature": "Temperature"
+    },
+    "paused": {
+      "message": "The mission has been paused",
+      "description": "You can resume it when conditions are safe.",
+      "start": "Start",
+      "pausedFor": "Paused for"
+    },
+    "incident": {
+      "title": "Report incident",
+      "type": "Incident type",
+      "description": "Description",
+      "location": "Location",
+      "save": "Save incident",
+      "cancel": "Cancel",
+      "types": {
+        "TECHNICAL": "Technical",
+        "WEATHER": "Weather",
+        "SAFETY": "Safety",
+        "OTHER": "Other"
+      },
+      "error": {
+        "type-required": "Type is required",
+        "description-required": "Description is required"
+      }
+    },
+    "complete": {
+      "title": "Finish mission",
+      "success": "The mission was completed successfully",
+      "treatedArea": "Treated area",
+      "totalTime": "Total time",
+      "date": "Date",
+      "whatNext": "What would you like to do next?",
+      "generateReport": "Generate phytosanitary report",
+      "viewReport": "View phytosanitary report",
+      "serviceReport": "View service record",
+      "dashboard": "Back to dashboard"
+    },
+    "calendar": {
+      "title": "Calendar",
+      "subtitle": "Scheduled missions by week or month, with their status",
+      "back": "Back to missions",
+      "week": "Week",
+      "month": "Month",
+      "previous": "Previous period",
+      "next": "Next period",
+      "today": "Today",
+      "empty": "There are no missions scheduled in this period."
+    }
+  },
   "weather": {
     "title": "Weather status",
     "subtitle": "Current conditions by location",
@@ -161,6 +420,7 @@
     "observed": "Observed",
     "alerts": "Alerts",
     "empty": "No weather data available.",
+    "loading": "Loading weather...",
     "referenceLocation": "reference location",
     "precipitationProbability": "Rain probability",
     "source": "Data",
@@ -191,13 +451,16 @@
     "tabs": {
       "missions": "Missions",
       "supplyUsage": "Supply usage",
-      "indicators": "Indicators"
+      "indicators": "Indicators",
+      "compare": "Compare parcels"
     },
     "filter": {
       "from": "From",
       "to": "To",
       "apply": "Filter",
-      "clear": "Clear"
+      "clear": "Clear",
+      "farm": "Farm",
+      "allFarms": "All farms"
     },
     "columns": {
       "id": "ID",
@@ -209,7 +472,12 @@
       "type": "Type",
       "volume": "Volume (L)",
       "density": "L/ha",
-      "generatedAt": "Generated"
+      "generatedAt": "Generated",
+      "parcel": "Parcel",
+      "farm": "Farm",
+      "missions": "Missions",
+      "total": "Total",
+      "product": "Product"
     },
     "status": {
       "PLANNED": "Planned",
@@ -228,7 +496,8 @@
       "detail": "View detail",
       "back": "Back to reports",
       "exportJson": "Export JSON",
-      "exportCsv": "Export CSV"
+      "exportCsv": "Export CSV",
+      "exportPdf": "Export PDF"
     },
     "indicators": {
       "period": "Period",
@@ -242,7 +511,20 @@
       "notFound": "Report not found."
     },
     "empty": "No records found.",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "consumption": {
+      "byFarm": "Agrochemical consumption by farm and product",
+      "details": "Report details",
+      "empty": "No consumption recorded: the farm has no completed missions."
+    },
+    "compare": {
+      "select": "Parcels to compare",
+      "hint": "Select at least two parcels to compare them.",
+      "intensity": "L/ha (relative)"
+    },
+    "pdf": {
+      "title": "AgriDron - Mission report"
+    }
   },
   "drone": {
     "title": "Drone fleet management",
@@ -250,6 +532,7 @@
       "AVAILABLE": "Available",
       "IN-FLIGHT": "In flight",
       "MAINTENANCE": "Maintenance",
+      "MAINTENANCE_SOON": "Maintenance soon",
       "OUT-OF-SERVICE": "out of service"
     },
     "serial": "SN",
@@ -262,11 +545,12 @@
     "noPhoto": "No photo",
     "loading": "Loading drones...",
     "empty": "No drones to show",
+    "flightHours": "Flight hours since last service",
     "actions": {
       "details": "View details",
       "maintenance": "View maintenance",
       "new": " Add New drone",
-      "nozzles" : "Spray nozzles"
+      "nozzles": "Spray nozzles"
     }
   },
   "agrochemical": {
@@ -379,60 +663,65 @@
   },
   "iam": {
     "signIn": {
-      "title": "Iniciar Sesión",
-      "subtitle": "Ingresa tus credenciales para acceder a AgriDron",
-      "username": "Nombre de usuario",
-      "usernamePlaceholder": "ej. jdoe",
-      "usernameRequired": "El nombre de usuario es obligatorio",
-      "password": "Contraseña",
-      "passwordRequired": "La contraseña es obligatoria",
-      "passwordMinLength": "Mínimo 4 caracteres",
-      "showPassword": "Mostrar contraseña",
-      "hidePassword": "Ocultar contraseña",
-      "signingIn": "Iniciando sesión...",
-      "submit": "Ingresar",
-      "noAccount": "¿No tienes una cuenta?",
-      "signUpLink": "Regístrate aquí",
-      "invalidCredentials": "Credenciales inválidas"
+      "title": "Sign In",
+      "subtitle": "Enter your credentials to access AgriDron",
+      "username": "Username",
+      "usernamePlaceholder": "e.g. jdoe",
+      "usernameRequired": "Username is required",
+      "password": "Password",
+      "passwordRequired": "Password is required",
+      "passwordMinLength": "Minimum 4 characters",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password",
+      "signingIn": "Signing in...",
+      "submit": "Sign in",
+      "noAccount": "Don't have an account?",
+      "signUpLink": "Sign up here",
+      "invalidCredentials": "Invalid credentials"
     },
     "signUp": {
-      "title": "Crear Cuenta",
-      "subtitle": "Regístrate en la plataforma AgriDron",
-      "username": "Nombre de usuario",
-      "usernamePlaceholder": "ej. jdoe",
-      "usernameRequired": "El nombre de usuario es obligatorio",
-      "usernameMinLength": "Mínimo 3 caracteres",
-      "email": "Correo electrónico",
-      "emailPlaceholder": "ej. usuario@ejemplo.com",
-      "emailRequired": "El correo electrónico es obligatorio",
-      "emailInvalid": "Formato de correo no válido",
-      "password": "Contraseña",
-      "passwordRequired": "La contraseña es obligatoria",
-      "passwordMinLength": "Mínimo 6 caracteres",
-      "showPassword": "Mostrar contraseña",
-      "hidePassword": "Ocultar contraseña",
-      "role": "Rol en el sistema",
-      "roleRequired": "Debes seleccionar un rol",
-      "signingUp": "Registrando cuenta...",
-      "submit": "Registrarse",
-      "hasAccount": "¿Ya tienes una cuenta?",
-      "signInLink": "Inicia sesión",
-      "signUpError": "Error al registrar usuario"
+      "title": "Create Account",
+      "subtitle": "Sign up for the AgriDron platform",
+      "username": "Username",
+      "usernamePlaceholder": "e.g. jdoe",
+      "usernameRequired": "Username is required",
+      "usernameMinLength": "Minimum 3 characters",
+      "email": "Email",
+      "emailPlaceholder": "e.g. user@example.com",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email format",
+      "password": "Password",
+      "passwordRequired": "Password is required",
+      "passwordMinLength": "Minimum 6 characters",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password",
+      "role": "System role",
+      "roleRequired": "You must select a role",
+      "signingUp": "Creating account...",
+      "submit": "Sign up",
+      "hasAccount": "Already have an account?",
+      "signInLink": "Sign in",
+      "signUpError": "Error registering user"
     },
     "profile": {
-      "title": "Perfil de Usuario",
-      "subtitle": "Información de la cuenta activa",
-      "username": "Usuario",
-      "email": "Correo electrónico",
-      "role": "Rol asignado",
-      "noSession": "No hay una sesión iniciada actualmente.",
-      "signIn": "Iniciar Sesión",
-      "goToFarms": "Ir a Fincas",
-      "signOut": "Cerrar Sesión"
+      "title": "User Profile",
+      "subtitle": "Active account information",
+      "username": "Username",
+      "email": "Email",
+      "role": "Assigned role",
+      "noSession": "There is no active session.",
+      "signIn": "Sign In",
+      "goToFarms": "Go to Farms",
+      "signOut": "Sign Out"
+    },
+    "roles": {
+      "FARMER": "Farmer",
+      "OPERATOR": "Drone operator",
+      "TECHNICIAN": "Agricultural technician"
     }
   },
   "home": {
-    "greeting": "Hello {username}, welcome",
+    "greeting": "Hello {{username}}, welcome",
     "subtitle": "Overview of your agricultural operation",
     "metricsTitle": "Metrics",
     "shortcutsTitle": "Quick access",
@@ -483,20 +772,6 @@
       "invalidDates": "Next maintenance cannot be before last maintenance."
     }
   },
-  "maintenance": {
-    "title": "Maintenance history",
-    "loading": "Loading maintenance records...",
-    "empty": "This drone has no maintenance records yet.",
-    "date": "Date",
-    "description": "Description",
-    "technician": "Technician",
-    "viewDrone": "View drone details",
-    "type": {
-      "label": "Type",
-      "PREVENTIVE": "Preventive",
-      "CORRECTIVE": "Corrective"
-    }
-  },
   "errors": {
     "notFound": "Not found",
     "network": "Cannot reach the server",
@@ -520,6 +795,94 @@
       "create": "Could not register the maintenance record",
       "update": "Could not update the maintenance record",
       "delete": "Could not delete the maintenance record"
+    },
+    "incident": {
+      "load": "Could not load incidents",
+      "report": "Could not report the fault",
+      "repair": "Could not register the repair"
+    }
+  },
+  "maintenance": {
+    "title": "Maintenance history",
+    "loading": "Loading maintenance records...",
+    "empty": "This drone has no maintenance records yet.",
+    "date": "Date",
+    "description": "Description",
+    "technician": "Technician",
+    "viewDrone": "View drone details",
+    "repairTag": "Repair",
+    "type": {
+      "label": "Type",
+      "PREVENTIVE": "Preventive",
+      "CORRECTIVE": "Corrective"
+    },
+    "actions": {
+      "register": "Register maintenance"
+    },
+    "register": {
+      "title": "Register maintenance",
+      "nextMaintenance": "Next maintenance date",
+      "preventiveHint": "A preventive maintenance updates the drone's last and next service dates and resets its flight hours.",
+      "confirm": "Register"
+    },
+    "errors": {
+      "dateRequired": "Select the maintenance date",
+      "dateFuture": "The date cannot be in the future",
+      "beforeLast": "A preventive maintenance cannot be dated before the last one ({{date}})",
+      "descriptionRequired": "Enter a description (up to 200 characters)",
+      "technicianRequired": "Enter the technician's name (up to 60 characters)",
+      "nextRequired": "Enter the date of the next maintenance",
+      "nextBeforeDate": "The next maintenance must be after this one"
+    }
+  },
+  "incident": {
+    "title": "Incidents",
+    "none": "There are no faults pending repair.",
+    "history": "Repaired faults",
+    "since": "since",
+    "reported": "Reported",
+    "outOfServiceHint": "The drone is already out of service, so a new fault cannot be reported.",
+    "status": {
+      "reported": "Pending repair",
+      "resolved": "Repaired"
+    },
+    "actions": {
+      "report": "Report fault",
+      "repair": "Register repair"
+    },
+    "report": {
+      "title": "Report fault",
+      "description": "Fault description",
+      "hint": "Reporting a fault takes the drone out of service until its repair is registered.",
+      "confirm": "Report fault"
+    },
+    "repair": {
+      "title": "Register repair",
+      "date": "Repair date",
+      "description": "What was repaired",
+      "technician": "Technician",
+      "hint": "A corrective maintenance record will be created and the drone will become available again.",
+      "confirm": "Register repair"
+    },
+    "errors": {
+      "descriptionRequired": "Describe the fault (up to 200 characters)",
+      "dateRequired": "The repair date is required",
+      "dateFuture": "The date cannot be in the future",
+      "dateBeforeReport": "The repair cannot be before the report date ({{date}})",
+      "technicianRequired": "The technician is required",
+      "repairDescriptionRequired": "Describe what was repaired (up to 200 characters)"
+    }
+  },
+  "map": {
+    "hint": "Click on the map to mark each corner (at least 3).",
+    "undo": "Undo",
+    "clear": "Clear",
+    "area": "Area: {{ hectares }} ha ({{ squareMeters }} m²)",
+    "areaHint": "Calculated automatically when drawing the polygon on the map",
+    "layers": {
+      "satellite": "Satellite",
+      "topographic": "Topographic",
+      "hybrid": "Hybrid"
     }
   }
 }

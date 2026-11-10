@@ -1,0 +1,18 @@
+<div #map class="polygon-map__canvas"></div>
+
+@if (editable()) {
+    <div class="polygon-map__toolbar">
+        <p class="polygon-map__info">
+            @if (points().length >= 3) {
+                {{ 'map.area' | translate:{
+                    hectares: (squareMeters() / 10000 | number: '1.2-2'),
+                    squareMeters: (squareMeters() | number: '1.0-0')
+                } }}
+            } @else {
+                {{ 'map.hint' | translate }}
+            }
+        </p>
+        <button matButton type="button" [disabled]="points().length === 0" (click)="undo()">{{ 'map.undo' | translate }}</button>
+        <button matButton type="button" [disabled]="points().length === 0" (click)="clear()">{{ 'map.clear' | translate }}</button>
+    </div>
+}

@@ -1,11 +1,22 @@
-.reports {
-  padding: 16px;
+.reports h2 {
+  margin: 0 0 var(--agd-space-2);
+  font-size: var(--agd-font-size-view-title);
+  font-weight: var(--agd-font-weight-medium);
+  line-height: 36px;
+  color: var(--agd-color-primary);
+}
+
+.reports h3 {
+  margin: var(--agd-space-3) 0 var(--agd-space-2);
+  font-size: var(--agd-font-size-section-title);
+  font-weight: var(--agd-font-weight-medium);
+  color: var(--agd-color-primary);
 }
 
 .reports__filter {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--agd-space-2);
   align-items: center;
-  padding: 16px 0 0;
+  padding: var(--agd-space-2) 0 var(--agd-space-1);
 }

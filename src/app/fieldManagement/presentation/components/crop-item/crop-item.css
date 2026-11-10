@@ -1,9 +1,87 @@
-.crop-card {
-  max-width: 100%;
-  height: 100%;
-  overflow: hidden;
+:host {
+  display: block;
+  min-width: 0;
 }
 
-.crop-card mat-card-content {
-  font-size: var(--mat-sys-body-small, 0.875rem);
+.crop-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: var(--agd-radius-card);
+}
+
+/* Content: icon + name / variety */
+
+.crop-card__content {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--agd-space-2);
+  padding: var(--agd-space-2) var(--agd-space-2) 0;
+}
+
+.crop-card__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--agd-radius-card);
+  background: var(--agd-color-secondary-tint);
+  color: var(--agd-color-secondary);
+}
+
+.crop-card__icon mat-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.crop-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.crop-card__name,
+.crop-card__variety {
+  margin: 0;
+}
+
+.crop-card__name {
+  font-size: var(--agd-font-size-section-title);
+  font-weight: var(--agd-font-weight-medium);
+  line-height: 24px;
+  color: var(--agd-color-primary);
+  overflow-wrap: anywhere;
+}
+
+.crop-card__variety {
+  font-size: var(--agd-font-size-body);
+  font-weight: var(--agd-font-weight-medium);
+  color: var(--agd-color-primary);
+  overflow-wrap: anywhere;
+}
+
+.crop-card__variety-label {
+  margin-right: 4px;
+  font-weight: var(--agd-font-weight-regular);
+  color: var(--agd-color-text-muted);
+}
+
+.crop-card__variety--none {
+  font-weight: var(--agd-font-weight-regular);
+  color: var(--agd-color-text-muted);
+}
+
+/* Actions: edit on one side, delete on the other */
+
+.crop-card__actions {
+  justify-content: space-between;
+  padding: var(--agd-space-1);
+}
+
+.crop-card__actions mat-icon {
+  width: 18px;
+  height: 18px;
 }

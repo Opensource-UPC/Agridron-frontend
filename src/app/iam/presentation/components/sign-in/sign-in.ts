@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslatePipe } from '@ngx-translate/core';
+import { FooterContent } from '../../../../shared/presentation/components/footer-content/footer-content';
 import { AuthenticationService } from '../../../application/authentication.service';
 import { SignInCommand } from '../../../domain/model/sign-in.command';
 
@@ -16,17 +16,16 @@ import { SignInCommand } from '../../../domain/model/sign-in.command';
   imports: [
     ReactiveFormsModule,
     RouterLink,
-    MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatProgressSpinnerModule
-  ,
-    TranslatePipe
+    MatProgressSpinnerModule,
+    TranslatePipe,
+    FooterContent
   ],
   templateUrl: './sign-in.html',
-  styleUrl: './sign-in.css',
+  styleUrl: '../auth-card.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignIn {

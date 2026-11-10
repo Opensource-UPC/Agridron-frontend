@@ -1,35 +1,60 @@
 @if (shownCondition(); as condition) {
-  <article>
-    <h2>{{ 'weather.title' | translate }}</h2>
-    <h3>
-      {{ condition.location }}
-      @if (weatherService.usingDefaultLocation()) {
-        <small>({{ 'weather.referenceLocation' | translate }})</small>
+  <article class="weather" [attr.aria-label]="'weather.title' | translate">
+    <header class="weather__header">
+      <h2 class="weather__title">{{ 'weather.title' | translate }}</h2>
+      <p class="weather__location">
+        {{ condition.location }}
+        @if (weatherService.usingDefaultLocation()) {
+          <span class="weather__reference">({{ 'weather.referenceLocation' | translate }})</span>
+        }
+      </p>
+      <p class="weather__observed">{{ 'weather.observed' | translate }}: {{ condition.observedAt | date: 'dd/MM/yyyy · HH:mm' }}</p>
+    </header>
+
+    <p class="weather__temperature" [attr.aria-label]="'weather.temperature' | translate">{{ condition.temperature }}°C</p>
+
+    <dl class="weather__readings">
+      @for (reading of readings(); track reading.label) {
+        <div class="weather__reading">
+          <mat-icon class="weather__reading-icon" [svgIcon]="reading.icon" aria-hidden="true"/>
+          <dt class="weather__reading-label">{{ reading.label | translate }}</dt>
+          <dd class="weather__reading-value">{{ reading.value }}</dd>
+        </div>
       }
-    </h3>
-    <small>{{ 'weather.observed' | translate }}: {{ condition.observedAt | date: 'dd/MM/yyyy · HH:mm' }}</small>
-
-    <p [attr.aria-label]="'weather.temperature' | translate">{{ condition.temperature }}°C</p>
-
-    <ul>
-      <li>{{ 'weather.humidity' | translate }}: <b>{{ condition.humidity }}%</b></li>
-      <li>{{ 'weather.wind' | translate }}: <b>{{ condition.windSpeed }} km/h</b></li>
-      <li>{{ 'weather.precipitation' | translate }}: <b>{{ condition.precipitation }} mm</b></li>
-      <li>{{ 'weather.precipitationProbability' | translate }}: <b>{{ condition.precipitationProbability }}%</b></li>
-    </ul>
+    </dl>
 
     @if (weatherService.isSuitable(condition)) {
-      <div class="favorable">{{ 'weather.favorable' | translate }}</div>
+      <p class="weather__notice weather__notice--favorable">
+        <mat-icon class="weather__notice-icon" svgIcon="agd:check-circle" aria-hidden="true"/>
+        <span>{{ 'weather.favorable' | translate }}</span>
+      </p>
     }
 
     @for (alert of condition.alerts; track alert.id) {
-      <div class="alert {{ alert.severity.toLowerCase() }}">
-        <b>{{ 'weather.severity.' + alert.severity | translate }}</b>: {{ alert.message | translate }}
-      </div>
+      <p class="weather__notice weather__notice--{{ alert.severity.toLowerCase() }}" role="status">
+        <mat-icon class="weather__notice-icon" svgIcon="agd:alert" aria-hidden="true"/>
+        <span><b>{{ 'weather.severity.' + alert.severity | translate }}</b>: {{ alert.message | translate }}</span>
+      </p>
     }
 
-    <small>{{ 'weather.source' | translate }}: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a></small>
+    <p class="weather__source">{{ 'weather.source' | translate }}: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a></p>
   </article>
+} @else if (weatherService.loading()) {
+  <div class="weather" role="status" aria-busy="true" [attr.aria-label]="'weather.loading' | translate">
+    <div class="weather__header" aria-hidden="true">
+      <span class="agd-skeleton weather__skeleton-title"></span>
+      <span class="agd-skeleton weather__skeleton-location"></span>
+      <span class="agd-skeleton weather__skeleton-observed"></span>
+    </div>
+    <span class="agd-skeleton weather__skeleton-temperature" aria-hidden="true"></span>
+    <div class="weather__readings" aria-hidden="true">
+      @for (reading of [1, 2, 3, 4]; track reading) {
+        <span class="agd-skeleton weather__skeleton-reading"></span>
+      }
+    </div>
+    <span class="agd-skeleton weather__skeleton-notice" aria-hidden="true"></span>
+    <span class="agd-skeleton weather__skeleton-source" aria-hidden="true"></span>
+  </div>
 } @else {
-  <p>{{ 'weather.empty' | translate }}</p>
+  <p class="weather weather--empty">{{ 'weather.empty' | translate }}</p>
 }

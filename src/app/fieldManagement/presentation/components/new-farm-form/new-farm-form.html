@@ -1,35 +1,92 @@
-<h1 class="title">{{ (isEdit ? 'farm.form.edit-title' : 'farm.form.new-title') | translate }}</h1>
-<form [formGroup]="form" (ngSubmit)="submit()">
-  <mat-form-field>
-    <mat-label>{{ 'farm.form.name' | translate }}</mat-label>
-    <input matInput formControlName="name" required>
-    @if (form.get('name')!.touched && form.get('name')!.hasError('required')) {
-      <mat-error>{{ 'farm.form.error.name-required' | translate }}</mat-error>
-    }
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>{{ 'farm.form.location' | translate }}</mat-label>
-    <input matInput formControlName="location" required>
-    @if (form.get('location')!.touched && form.get('location')!.hasError('required')) {
-      <mat-error>{{ 'farm.form.error.location-required' | translate }}</mat-error>
-    }
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>{{ 'farm.form.ownerId' | translate }}</mat-label>
-    <input matInput type="number" formControlName="ownerId" required min="1">
-    @if (form.get('ownerId')!.touched && form.get('ownerId')!.hasError('required')) {
-      <mat-error>{{ 'farm.form.error.ownerId-required' | translate }}</mat-error>
-    }
-    @if (form.get('ownerId')!.touched && form.get('ownerId')!.hasError('min')) {
-      <mat-error>{{ 'farm.form.error.ownerId-min' | translate }}</mat-error>
-    }
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>{{ 'farm.form.image' | translate }}</mat-label>
-    <input matInput type="url" formControlName="image">
-    <mat-hint>{{ 'farm.form.imageHint' | translate }}</mat-hint>
-  </mat-form-field>
-  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
-    {{ (isEdit ? 'farm.form.update' : 'farm.form.create') | translate }}
-  </button>
-</form>
+<section class="farm-form">
+  <a matButton class="farm-form__back" routerLink="/farms">
+    <mat-icon svgIcon="agd:chevron-left" aria-hidden="true"/>
+    {{ 'farm.form.back' | translate }}
+  </a>
+
+  <header class="farm-form__header">
+    <h1 class="farm-form__title">{{ (isEdit ? 'farm.form.edit-title' : 'farm.form.new-title') | translate }}</h1>
+    <p class="farm-form__subtitle">{{ (isEdit ? 'farm.form.edit-subtitle' : 'farm.form.new-subtitle') | translate }}</p>
+  </header>
+
+  <div class="farm-form__layout">
+    <form class="farm-form__card" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <fieldset class="farm-form__section">
+        <legend class="farm-form__section-title">{{ 'farm.form.section-general' | translate }}</legend>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'farm.form.name' | translate }}</mat-label>
+          <mat-icon matPrefix class="farm-form__field-icon" svgIcon="agd:farm" aria-hidden="true"/>
+          <input matInput formControlName="name" required [placeholder]="'farm.form.namePlaceholder' | translate">
+          @if (form.get('name')!.touched && form.get('name')!.hasError('required')) {
+            <mat-error>{{ 'farm.form.error.name-required' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'farm.form.location' | translate }}</mat-label>
+          <mat-icon matPrefix class="farm-form__field-icon" svgIcon="agd:location" aria-hidden="true"/>
+          <input matInput formControlName="location" required [placeholder]="'farm.form.locationPlaceholder' | translate">
+          @if (form.get('location')!.touched && form.get('location')!.hasError('required')) {
+            <mat-error>{{ 'farm.form.error.location-required' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'farm.form.ownerId' | translate }}</mat-label>
+          <mat-icon matPrefix class="farm-form__field-icon" svgIcon="agd:profile" aria-hidden="true"/>
+          <input matInput type="number" formControlName="ownerId" required min="1">
+          @if (form.get('ownerId')!.touched && form.get('ownerId')!.hasError('required')) {
+            <mat-error>{{ 'farm.form.error.ownerId-required' | translate }}</mat-error>
+          }
+          @if (form.get('ownerId')!.touched && form.get('ownerId')!.hasError('min')) {
+            <mat-error>{{ 'farm.form.error.ownerId-min' | translate }}</mat-error>
+          }
+        </mat-form-field>
+      </fieldset>
+
+      <fieldset class="farm-form__section">
+        <legend class="farm-form__section-title">{{ 'farm.form.section-image' | translate }}</legend>
+        <p class="farm-form__section-hint">{{ 'farm.form.section-image-hint' | translate }}</p>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'farm.form.image' | translate }}</mat-label>
+          <mat-icon matPrefix class="farm-form__field-icon" svgIcon="agd:image" aria-hidden="true"/>
+          <input matInput type="url" formControlName="image" (input)="imageFailed = false"
+                 [placeholder]="'farm.form.imageUrlPlaceholder' | translate">
+          <mat-hint>{{ 'farm.form.imageHint' | translate }}</mat-hint>
+        </mat-form-field>
+      </fieldset>
+
+      <div class="farm-form__actions">
+        <a matButton="outlined" routerLink="/farms">{{ 'farm.form.cancel' | translate }}</a>
+        <button matButton="filled" type="submit">
+          {{ (isEdit ? 'farm.form.update' : 'farm.form.create') | translate }}
+        </button>
+      </div>
+    </form>
+
+    <aside class="farm-form__preview" [attr.aria-label]="'farm.form.preview' | translate">
+      <p class="farm-form__preview-title">{{ 'farm.form.preview' | translate }}</p>
+      <div class="farm-form__preview-card" aria-hidden="true">
+        @if (imagePreviewUrl && !imageFailed) {
+          <img class="farm-form__preview-media" [src]="imagePreviewUrl" alt="" (error)="imageFailed = true">
+        } @else {
+          <div class="farm-form__preview-media farm-form__preview-media--placeholder">
+            <mat-icon svgIcon="agd:farm"/>
+          </div>
+        }
+        <div class="farm-form__preview-body">
+          <p class="farm-form__preview-name" [class.farm-form__preview-empty]="!form.controls.name.value.trim()">
+            {{ form.controls.name.value.trim() || ('farm.form.name' | translate) }}
+          </p>
+          <p class="farm-form__preview-location" [class.farm-form__preview-empty]="!form.controls.location.value.trim()">
+            <mat-icon class="farm-form__preview-location-icon" svgIcon="agd:location"/>
+            {{ form.controls.location.value.trim() || ('farm.form.location' | translate) }}
+          </p>
+        </div>
+      </div>
+      <p class="farm-form__preview-hint">{{ 'farm.form.preview-hint' | translate }}</p>
+    </aside>
+  </div>
+</section>

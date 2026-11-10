@@ -1,0 +1,15 @@
+.confirm-dialog__title {
+  font-size: var(--agd-font-size-section-title);
+  font-weight: var(--agd-font-weight-medium);
+}
+
+.confirm-dialog__message {
+  margin: 0;
+  font-size: var(--agd-font-size-body);
+}
+
+/* Destructive confirmation uses the documented error color. */
+.confirm-dialog__confirm {
+  --mat-button-filled-container-color: var(--agd-color-error);
+  --mat-button-filled-label-text-color: var(--agd-color-on-brand);
+}

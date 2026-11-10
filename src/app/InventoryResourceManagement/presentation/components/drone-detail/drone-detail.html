@@ -85,11 +85,72 @@
                         <dd>
                             {{ selectedDrone.nextMaintenanceDate | date:'dd/MM/yyyy' }}
                         </dd>
+
+                        <dt>{{ 'drone.flightHours' | translate }}</dt>
+                        <dd>{{ selectedDrone.flightHours }} h</dd>
                     </dl>
 
                 </div>
             </mat-card-content>
         </mat-card>
+
+        <!-- Incidentes y fallas (DR-006) -->
+        <section class="incidents">
+
+            <div class="incidents__header">
+                <h3>{{ 'incident.title' | translate }}</h3>
+
+                @if (pendingIncident(); as pendingForButton) {
+                    <button mat-flat-button type="button" (click)="registerRepair(pendingForButton)">
+                        <mat-icon>build</mat-icon>
+                        {{ 'incident.actions.repair' | translate }}
+                    </button>
+                } @else {
+                    <button mat-stroked-button type="button"
+                            [disabled]="!canReport()" (click)="reportFault()">
+                        <mat-icon>report_problem</mat-icon>
+                        {{ 'incident.actions.report' | translate }}
+                    </button>
+                }
+            </div>
+
+            @if (incidentError()) {
+                <p class="detail-error" role="alert">{{ incidentError() }}</p>
+            }
+
+            @if (pendingIncident(); as pending) {
+                <div class="incident incident--pending">
+                    <strong>
+                        <mat-icon>warning</mat-icon>
+                        {{ 'incident.status.reported' | translate }}
+                        · {{ 'incident.since' | translate }} {{ pending.reportedAt | date:'dd/MM/yyyy' }}
+                    </strong>
+                    <p>{{ pending.description }}</p>
+                </div>
+            } @else {
+                <p class="incidents__empty">{{ 'incident.none' | translate }}</p>
+
+                @if (isOutOfService()) {
+                    <small class="incidents__hint">{{ 'incident.outOfServiceHint' | translate }}</small>
+                }
+            }
+
+            @if (resolvedIncidents().length > 0) {
+                <h4>{{ 'incident.history' | translate }}</h4>
+                <ul class="incidents__history">
+                    @for (incident of resolvedIncidents(); track incident.id) {
+                        <li>
+                            <span>{{ incident.description }}</span>
+                            <small>
+                                {{ 'incident.reported' | translate }} {{ incident.reportedAt | date:'dd/MM/yyyy' }}
+                                → {{ 'incident.status.resolved' | translate }} {{ incident.resolvedAt | date:'dd/MM/yyyy' }}
+                            </small>
+                        </li>
+                    }
+                </ul>
+            }
+
+        </section>
 
     } @else {
         <p role="alert">

@@ -1,9 +1,21 @@
-<app-header-content [menuToggle]="toggleSidebar"/>
+<app-header-content [showMenu]="isAuthenticated()" (menuToggle)="toggleSidebar()"/>
 
-<app-side-nav [open]="sidebarOpen()" [close]="closeSidebar">
-  <main class="layout__content">
-    <router-outlet/>
-  </main>
-</app-side-nav>
-
-<app-footer-content/>
+@if (isAuthenticated()) {
+    <app-side-nav [open]="sidebarOpen()" (close)="closeSidebar()">
+        <main class="layout__content">
+            <router-outlet/>
+        </main>
+        @if (!isAuthPage()) {
+            <app-footer-content/>
+        }
+    </app-side-nav>
+} @else {
+    <div class="layout__public">
+        <main class="layout__content">
+            <router-outlet/>
+        </main>
+        @if (!isAuthPage()) {
+            <app-footer-content/>
+        }
+    </div>
+}

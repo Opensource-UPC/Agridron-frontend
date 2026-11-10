@@ -1,0 +1,38 @@
+<section class="warning">
+    <h1 class="warning__title">{{ 'mission.weatherWarning.title' | translate }}</h1>
+
+    <div class="warning__banner" role="alert">
+        <mat-icon svgIcon="agd:alert" aria-hidden="true"/>
+        <div>
+            <strong>{{ 'mission.weatherWarning.heading' | translate }}</strong>
+            <p>{{ 'mission.weatherWarning.message' | translate }}</p>
+            @if (highAlerts().length) {
+                <ul>
+                    @for (alert of highAlerts(); track alert.id) {
+                        <li>{{ alert.message | translate }}</li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+
+    <dl class="warning__place">
+        <div><dt>{{ 'mission.place.farm' | translate }}</dt><dd>{{ farm()?.name ?? '—' }} · {{ farm()?.location ?? '—' }}</dd></div>
+        <div><dt>{{ 'mission.place.parcel' | translate }}</dt><dd>{{ parcel()?.name ?? '—' }}</dd></div>
+        @if (condition(); as c) {
+            <div><dt>{{ 'mission.place.coordinates' | translate }}</dt><dd>{{ c.latitude.toFixed(4) }}, {{ c.longitude.toFixed(4) }}</dd></div>
+        }
+    </dl>
+
+    @if (loading()) {
+        <p class="warning__loading">{{ 'weather.loading' | translate }}</p>
+    } @else {
+        <app-mission-weather-metrics [condition]="condition()"/>
+    }
+
+    <div class="warning__actions">
+        <button matButton type="button" (click)="continueAnyway()">{{ 'mission.actions.continueAnyway' | translate }}</button>
+        <button matButton="outlined" type="button" (click)="forecast()">{{ 'mission.actions.forecast' | translate }}</button>
+        <button matButton="filled" type="button" (click)="reschedule()">{{ 'mission.actions.reschedule' | translate }}</button>
+    </div>
+</section>

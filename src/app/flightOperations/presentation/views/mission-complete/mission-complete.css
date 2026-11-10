@@ -1,0 +1,90 @@
+.complete {
+    display: flex;
+    flex-direction: column;
+    gap: var(--agd-space-2);
+    max-width: 720px;
+}
+
+.complete__title,
+.complete__success,
+.complete__subtitle {
+    margin: 0;
+}
+
+.complete__title {
+    font-size: var(--agd-font-size-view-title);
+    font-weight: var(--agd-font-weight-medium);
+    line-height: 36px;
+    color: var(--agd-color-primary);
+}
+
+.complete__card {
+    border-radius: var(--agd-radius-card);
+}
+
+.complete__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--agd-space-2);
+    padding: var(--agd-space-3);
+}
+
+/* Success banner: completed status tone on its tinted background */
+.complete__success {
+    display: flex;
+    align-items: center;
+    gap: var(--agd-space-1);
+    padding: 12px var(--agd-space-2);
+    border-radius: 8px;
+    background: var(--agd-status-completed-bg);
+    color: var(--agd-status-completed-text);
+    font-size: var(--agd-font-size-body);
+    font-weight: var(--agd-font-weight-medium);
+}
+
+.complete__success mat-icon {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+}
+
+/* Same label / value rows as app-mission-place */
+.complete__fields {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    margin: 0;
+    font-size: var(--agd-font-size-body);
+}
+
+.complete__fields dt,
+.complete__fields dd {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--agd-color-border);
+}
+
+.complete__fields dt {
+    padding-right: var(--agd-space-2);
+    color: var(--agd-color-text-muted);
+}
+
+.complete__fields dd {
+    margin: 0;
+    font-weight: var(--agd-font-weight-medium);
+    color: var(--agd-color-primary);
+    text-align: right;
+}
+
+.complete__subtitle {
+    font-size: var(--agd-font-size-section-title);
+    font-weight: var(--agd-font-weight-medium);
+    color: var(--agd-color-primary);
+}
+
+.complete__actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--agd-space-1);
+    padding: var(--agd-space-2) var(--agd-space-3);
+    border-top: 1px solid var(--agd-color-border);
+}

@@ -1,13 +1,29 @@
 <mat-card class="crop-card" appearance="outlined">
-    <mat-card-header>
-        <mat-card-title>{{ crop().name }}</mat-card-title>
-        <mat-card-subtitle>{{ 'crop.variety' | translate }}: {{ crop().variety ?? ('crop.noVariety' | translate) }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-        {{ 'crop.information' | translate }}
+    <mat-card-content class="crop-card__content">
+        <span class="crop-card__icon" aria-hidden="true">
+            <mat-icon svgIcon="agd:crop"/>
+        </span>
+        <div class="crop-card__text">
+            <h3 class="crop-card__name">{{ crop().name }}</h3>
+            <p class="crop-card__variety" [class.crop-card__variety--none]="!crop().variety">
+                @if (crop().variety) {
+                    <span class="crop-card__variety-label">{{ 'crop.variety' | translate }}</span>
+                    {{ crop().variety }}
+                } @else {
+                    {{ 'crop.noVariety' | translate }}
+                }
+            </p>
+        </div>
     </mat-card-content>
-    <mat-card-actions>
-        <button matButton (click)="edit.emit(crop().id)">{{ 'crop.button.edit' | translate }} <mat-icon>edit</mat-icon></button>
-        <button matButton (click)="delete.emit(crop().id)">{{ 'crop.button.delete' | translate }} <mat-icon>delete</mat-icon></button>
+
+    <mat-card-actions class="crop-card__actions">
+        <button matButton type="button" (click)="edit.emit(crop().id)">
+            <mat-icon svgIcon="agd:edit" aria-hidden="true"/>
+            {{ 'crop.button.edit' | translate }}
+        </button>
+        <button matButton type="button" (click)="delete.emit(crop().id)">
+            <mat-icon svgIcon="agd:trash" aria-hidden="true"/>
+            {{ 'crop.button.delete' | translate }}
+        </button>
     </mat-card-actions>
 </mat-card>

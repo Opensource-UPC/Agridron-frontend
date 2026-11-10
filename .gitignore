@@ -39,3 +39,11 @@ Thumbs.db
 logs
 *.log
 npm-debug.log*.mcp.json
+
+# Archivos que no deben subirse al repositorio
+/colors.png
+/typography.png
+/web_style_guide.png
+/README_DOC.md
+/implementacion-leaflet.md
+misions-changes.tgz

@@ -23,10 +23,13 @@ export const environment = {
 
 ////De Edwin
   AgriDronProviderDronesMetricsEndpointPath: '/drones',
-  AgriDronProvideChemicalsEndpointPath: '/agrochemicals',
+  AgriDronProvideChemicalsEndpointPath: '/chemicals',
   AgriDronProvideNozzlesEndpointPath: '/nozzles',
   AgriDronProvideMaintenanceRecordEndpointPath: '/maintenance-records',
+  AgriDronProviderDroneIncidentsEndpointPath: '/drone-incidents',
+
+  AgriDronProviderMissionsEndpointPath: '/missions',
+  AgriDronProviderMissionResultsEndpointPath: '/mission-results',
+  AgriDronProviderIncidentsEndpointPath: '/incidents',
+  AgriDronProviderOperationStatusesEndpointPath: '/operation-status',
 };
-
-
-

@@ -1,10 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatDividerModule } from '@angular/material/divider';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AuthenticationService } from '../../../application/authentication.service';
 
@@ -12,12 +9,8 @@ import { AuthenticationService } from '../../../application/authentication.servi
   selector: 'app-user-profile',
   imports: [
     RouterLink,
-    MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatChipsModule,
-    MatDividerModule
-  ,
     TranslatePipe
   ],
   templateUrl: './user-profile.html',
@@ -30,6 +23,9 @@ export class UserProfile {
   readonly user = this.authService.currentUser;
   readonly role = this.authService.currentRole;
   readonly isAuthenticated = this.authService.isAuthenticated;
+
+  /** First letter of the username, shown in the avatar. */
+  readonly initial = computed(() => this.user()?.username?.charAt(0).toUpperCase() ?? '');
 
   onSignOut(): void {
     this.authService.signOut();
