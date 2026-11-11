@@ -7,7 +7,7 @@ export const environment = {
    * Cambia esta URL por la URL real de tu backend desplegado en Render u otro servicio.
    * (Si estuvieras probando con Spring Boot local en tu máquina, usarías: 'http://localhost:8080/api/v1')
    */
-  realBackendApiUrl: 'https://agridron-backend.onrender.com/api/v1',
+  realBackendApiUrl: 'https://os-agridronbackend.onrender.com/api/v1',
 
   /**
    * 🟡 FAKE API (60%): Endpoints simulados (Misiones, IAM/Usuarios, etc.).
