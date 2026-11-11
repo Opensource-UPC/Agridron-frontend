@@ -9,6 +9,7 @@ import {DroneStatus} from '../domain/model/drone-status';
 import {Nozzle, NozzleState} from '../domain/model/nozzle.entity';
 import {DronApiEndpoint} from '../infrastructure/dron-api-endpoint';
 import {NozzleApiEndpoint} from '../infrastructure/nozzle-api-endpoint';
+import {map} from 'rxjs';
 import {
     Observable,
     catchError,
@@ -53,38 +54,25 @@ export class DroneStore {
         computed(() => this.nozzles().find(n => n.id === id));
 
     /**
-     * Registra un dron NUEVO. Registrarlo instala una boquilla, así que se descuenta
-     * una unidad del stock de la boquilla elegida (primero se guarda la boquilla y,
-     * si la creación del dron falla, se deshace ese cambio).
+     * Registra un dron NUEVO. El backend descuenta por sí mismo una unidad
+     * de la boquilla elegida, así que aquí solo se crea el dron y luego
+     * se recargan las boquillas para mostrar el stock actualizado.
      */
     addDrone = (drone: Drone): Observable<Drone> => {
-        let original: Nozzle | null = null;   // boquilla antes de descontar
-        let nozzleSaved = false;              // ¿ya se guardó el descuento en el servidor?
-        let savedNozzle: Nozzle | null = null;
+        this.loadingSignal.set(true);
+        this.errorSignal.set(null);
 
-        return defer(() => {
-            this.loadingSignal.set(true);
-            this.errorSignal.set(null);
-
-            const target = this.nozzles().find(n => n.id === drone.nozzleId);
-            if (!target) throw new Error('Nozzle not found');
-            original = target;
-
-            return this.nozzleEndpoint.update(target.withUnitTaken(), target.id).pipe(
-                tap(saved => {
-                    nozzleSaved = true;
-                    savedNozzle = saved;
-                }),
-                switchMap(() => this.droneEndpoint.create(drone)),
-                tap(created => {
-                    this.nozzlesSignal.update(list =>
-                        list.map(n => n.id === savedNozzle!.id ? savedNozzle! : n));
-                    this.dronesSignal.update(drones => [...drones, created]);
-                })
-            );
-        }).pipe(
-            catchError(err => this.rollbackNozzles(
-                nozzleSaved && original ? [original] : [], err, 'errors.drone.create')),
+        return this.droneEndpoint.create(drone).pipe(
+            tap(created => this.dronesSignal.update(drones => [...drones, created])),
+            switchMap(created => this.nozzleEndpoint.getAll().pipe(
+                tap(nozzles => this.nozzlesSignal.set(nozzles)),
+                map(() => created),
+                catchError(() => of(created))   // si falla la recarga, el dron igual quedó creado
+            )),
+            catchError(err => {
+                this.setError(err, 'errors.drone.create');
+                return throwError(() => err);
+            }),
             finalize(() => this.loadingSignal.set(false))
         );
     };
