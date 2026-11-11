@@ -6,7 +6,7 @@ export const environment = {
    * 🟢 BACKEND REAL (40%): Endpoints desplegados en Spring Boot.
    * Cambia esta URL por la URL real de tu backend desplegado en Render u otro servicio.
    */
-  realBackendApiUrl: 'https://agridron-backend.onrender.com/api/v1',
+  realBackendApiUrl: 'https://os-agridronbackend.onrender.com/api/v1',
 
   /**
    * 🟡 FAKE API (60%): Endpoints simulados (Misiones, IAM/Usuarios, etc.).

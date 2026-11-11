@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "agridronwebapp"
-  }
+    "default": "os-agridronfrontend",
+    "os-agridronFrontend": "os-agridronfrontend"
+  },
+  "targets": {},
+  "etags": {}
 }
