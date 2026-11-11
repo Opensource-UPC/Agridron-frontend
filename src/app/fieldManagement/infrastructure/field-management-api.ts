@@ -101,11 +101,12 @@ export class FieldManagementApi extends BaseApi {
         this.parcelEndpoint.delete(id);
 
     /**
-     * Retrieves all fumigation areas.
+     * Retrieves the fumigation areas delimited inside a parcel.
+     * @param parcelId - The ID of the parcel.
      * @returns Stream with the fumigation area collection.
      */
-    getAllFumigationAreas = (): Observable<FumigationArea[]> =>
-        this.fumigationAreaEndpoint.getAll();
+    getFumigationAreasByParcel = (parcelId: number): Observable<FumigationArea[]> =>
+        this.fumigationAreaEndpoint.getByParcel(parcelId);
 
     /**
      * Retrieves a single fumigation area by ID.

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, computed, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, effect, inject} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -33,10 +33,17 @@ export class Home {
   readonly debugMode = environment.debugMode;
 
   /**
-   * Creates an instance of Home and loads the initial weather data.
+   * Creates an instance of Home and loads the initial data.
+   *
+   * <p>Fumigation areas are only exposed per parcel by the backend, so the metric is fed by
+   * requesting the areas of every known parcel once the parcel collection is available.</p>
    */
   constructor() {
     this.weatherService.loadWeatherConditions();
+    effect(() => {
+      const parcelIds = this.parcelStore.parcels().map(parcel => parcel.id);
+      this.fumigationAreaStore.loadFumigationAreasForParcels(parcelIds);
+    });
   }
 
   readonly currentUser = this.authService.currentUser;

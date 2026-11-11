@@ -6,6 +6,9 @@ import {retry} from 'rxjs';
 
 /**
  * Holds fumigation area application state and coordinates fumigation area application layer behavior.
+ *
+ * <p>The backend only exposes fumigation areas per parcel ({@code GET /fumigation-areas?parcelId=}),
+ * so the store keeps a cache keyed by parcel and loads each parcel on demand.</p>
  */
 @Injectable({
     providedIn: 'root'
@@ -14,17 +17,27 @@ export class FumigationAreaStore {
     private readonly fieldManagementApi = inject(FieldManagementApi);
     private readonly destroyRef = inject(DestroyRef);
 
+    private readonly areasByParcelSignal = signal<ReadonlyMap<number, FumigationArea[]>>(new Map());
+
+    /** Parcels whose areas were already requested, so they are not fetched twice. */
+    private readonly requestedParcelIds = new Set<number>();
+
+    /** Individual areas already requested by ID (used when editing by direct URL). */
+    private readonly requestedAreaIds = new Set<number>();
+
+    /** Number of in-flight requests, used to derive the loading flag. */
+    private pendingRequests = 0;
+
+    /**
+     * Computed signal with every fumigation area currently cached.
+     */
+    readonly fumigationAreas = computed(() =>
+        [...this.areasByParcelSignal().values()].flat());
+
     /**
      * Computed signal for the count of fumigation areas.
      */
     readonly fumigationAreaCount = computed(() => this.fumigationAreas().length);
-
-    private readonly fumigationAreasSignal = signal<FumigationArea[]>([]);
-
-    /**
-     * Readonly signal for the list of fumigation areas.
-     */
-    readonly fumigationAreas = this.fumigationAreasSignal.asReadonly();
 
     private readonly loadingSignal = signal<boolean>(false);
 
@@ -41,13 +54,6 @@ export class FumigationAreaStore {
     readonly error = this.errorSignal.asReadonly();
 
     /**
-     * Creates an instance of FumigationAreaStore and loads initial data.
-     */
-    constructor() {
-        this.loadFumigationAreas();
-    }
-
-    /**
      * Selects a fumigation area by identifier.
      * @param id - Fumigation area identifier.
      * @returns Reactive selection for the requested fumigation area.
@@ -61,23 +67,83 @@ export class FumigationAreaStore {
      * @returns Reactive selection with the fumigation areas of the parcel.
      */
     getFumigationAreasByParcelId = (parcelId: number): Signal<FumigationArea[]> =>
-        computed(() => this.fumigationAreas().filter(a => a.parcelId === parcelId));
+        computed(() => this.areasByParcelSignal().get(parcelId) ?? []);
+
+    /**
+     * Loads the fumigation areas of a parcel from the API.
+     * @param parcelId - Parcel identifier.
+     * @param force - When true, re-fetches the parcel even if it was already loaded.
+     */
+    loadFumigationAreas = (parcelId: number, force = false): void => {
+        if (!parcelId || (!force && this.requestedParcelIds.has(parcelId))) {
+            return;
+        }
+        this.requestedParcelIds.add(parcelId);
+        this.startRequest();
+        this.fieldManagementApi.getFumigationAreasByParcel(parcelId).pipe(
+            retry(2),
+            takeUntilDestroyed(this.destroyRef)
+        ).subscribe({
+            next: fumigationAreas => {
+                this.setAreasForParcel(parcelId, fumigationAreas);
+                this.endRequest();
+            },
+            error: err => {
+                this.requestedParcelIds.delete(parcelId);
+                this.errorSignal.set(this.formatError(err, 'Failed to load fumigation areas'));
+                this.endRequest();
+            }
+        });
+    };
+
+    /**
+     * Loads the fumigation areas of every given parcel that is not cached yet.
+     * @param parcelIds - Parcel identifiers.
+     */
+    loadFumigationAreasForParcels = (parcelIds: number[]): void => {
+        parcelIds.forEach(parcelId => this.loadFumigationAreas(parcelId));
+    };
+
+    /**
+     * Loads a single fumigation area by ID. Used when the form is opened directly by URL.
+     * @param id - Fumigation area identifier.
+     */
+    loadFumigationAreaById = (id: number): void => {
+        if (!id || this.containsArea(id) || this.requestedAreaIds.has(id)) {
+            return;
+        }
+        this.requestedAreaIds.add(id);
+        this.startRequest();
+        this.fieldManagementApi.getFumigationAreaById(id).pipe(
+            retry(2),
+            takeUntilDestroyed(this.destroyRef)
+        ).subscribe({
+            next: fumigationArea => {
+                this.upsertArea(fumigationArea);
+                this.endRequest();
+            },
+            error: err => {
+                this.requestedAreaIds.delete(id);
+                this.errorSignal.set(this.formatError(err, 'Failed to load fumigation area'));
+                this.endRequest();
+            }
+        });
+    };
 
     /**
      * Adds a new fumigation area.
      * @param fumigationArea - The fumigation area to add.
      */
     addFumigationArea = (fumigationArea: FumigationArea): void => {
-        this.loadingSignal.set(true);
-        this.errorSignal.set(null);
+        this.startRequest();
         this.fieldManagementApi.createFumigationArea(fumigationArea).pipe(retry(2)).subscribe({
             next: createdFumigationArea => {
-                this.fumigationAreasSignal.update(areas => [...areas, createdFumigationArea]);
-                this.loadingSignal.set(false);
+                this.upsertArea(createdFumigationArea);
+                this.endRequest();
             },
             error: err => {
                 this.errorSignal.set(this.formatError(err, 'Failed to create fumigation area'));
-                this.loadingSignal.set(false);
+                this.endRequest();
             }
         });
     };
@@ -87,18 +153,16 @@ export class FumigationAreaStore {
      * @param updatedFumigationArea - The fumigation area to update.
      */
     updateFumigationArea = (updatedFumigationArea: FumigationArea): void => {
-        this.loadingSignal.set(true);
-        this.errorSignal.set(null);
+        this.startRequest();
         this.fieldManagementApi.updateFumigationArea(updatedFumigationArea).pipe(retry(2)).subscribe({
             next: fumigationArea => {
-                this.fumigationAreasSignal.update(areas =>
-                    areas.map(a => a.id === fumigationArea.id ? fumigationArea : a)
-                );
-                this.loadingSignal.set(false);
+                this.removeArea(fumigationArea.id);
+                this.upsertArea(fumigationArea);
+                this.endRequest();
             },
             error: err => {
                 this.errorSignal.set(this.formatError(err, 'Failed to update fumigation area'));
-                this.loadingSignal.set(false);
+                this.endRequest();
             }
         });
     };
@@ -108,44 +172,66 @@ export class FumigationAreaStore {
      * @param id - The ID of the fumigation area to delete.
      */
     deleteFumigationArea = (id: number): void => {
-        this.loadingSignal.set(true);
-        this.errorSignal.set(null);
+        this.startRequest();
         this.fieldManagementApi.deleteFumigationArea(id).pipe(retry(2)).subscribe({
             next: () => {
-                this.fumigationAreasSignal.update(areas => areas.filter(a => a.id !== id));
-                this.loadingSignal.set(false);
+                this.removeArea(id);
+                this.endRequest();
             },
             error: err => {
                 this.errorSignal.set(this.formatError(err, 'Failed to delete fumigation area'));
-                this.loadingSignal.set(false);
+                this.endRequest();
             }
         });
     };
 
     /**
-     * Reloads all fumigation areas from the API.
+     * Reloads the fumigation areas of a parcel from the API.
+     * @param parcelId - Parcel identifier.
      */
-    reloadFumigationAreas = (): void => {
-        this.loadFumigationAreas();
+    reloadFumigationAreas = (parcelId: number): void => {
+        this.requestedParcelIds.delete(parcelId);
+        this.loadFumigationAreas(parcelId);
     };
 
-    /**
-     * Loads all fumigation areas from the API.
-     */
-    private loadFumigationAreas = (): void => {
+    private containsArea = (id: number): boolean =>
+        this.fumigationAreas().some(area => area.id === id);
+
+    private setAreasForParcel = (parcelId: number, fumigationAreas: FumigationArea[]): void => {
+        const updated = new Map(this.areasByParcelSignal());
+        updated.set(parcelId, fumigationAreas);
+        this.areasByParcelSignal.set(updated);
+    };
+
+    private upsertArea = (fumigationArea: FumigationArea): void => {
+        const current = this.areasByParcelSignal();
+        const parcelAreas = current.get(fumigationArea.parcelId) ?? [];
+        const updated = new Map(current);
+        updated.set(fumigationArea.parcelId, [
+            ...parcelAreas.filter(area => area.id !== fumigationArea.id),
+            fumigationArea
+        ]);
+        this.areasByParcelSignal.set(updated);
+        this.requestedAreaIds.delete(fumigationArea.id);
+    };
+
+    private removeArea = (id: number): void => {
+        const updated = new Map<number, FumigationArea[]>();
+        this.areasByParcelSignal().forEach((areas, parcelId) =>
+            updated.set(parcelId, areas.filter(area => area.id !== id)));
+        this.areasByParcelSignal.set(updated);
+        this.requestedAreaIds.delete(id);
+    };
+
+    private startRequest = (): void => {
+        this.pendingRequests += 1;
         this.loadingSignal.set(true);
         this.errorSignal.set(null);
-        this.fieldManagementApi.getAllFumigationAreas().pipe(retry(2), takeUntilDestroyed(this.destroyRef)).subscribe({
-            next: fumigationAreas => {
-                this.fumigationAreasSignal.set(fumigationAreas);
-                this.loadingSignal.set(false);
-                this.errorSignal.set(null);
-            },
-            error: err => {
-                this.errorSignal.set(this.formatError(err, 'Failed to load fumigation areas'));
-                this.loadingSignal.set(false);
-            }
-        });
+    };
+
+    private endRequest = (): void => {
+        this.pendingRequests = Math.max(0, this.pendingRequests - 1);
+        this.loadingSignal.set(this.pendingRequests > 0);
     };
 
     /**

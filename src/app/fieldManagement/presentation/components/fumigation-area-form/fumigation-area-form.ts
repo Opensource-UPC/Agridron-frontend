@@ -68,6 +68,9 @@ export class FumigationAreaForm {
       this.isEdit = !!this.fumigationAreaId;
       this.patched = false;
       this.editingId.set(this.fumigationAreaId);
+      if (this.fumigationAreaId) {
+        this.store.loadFumigationAreaById(this.fumigationAreaId);
+      }
     });
 
     // Fills the form as soon as the area is available (also when the page is opened directly).

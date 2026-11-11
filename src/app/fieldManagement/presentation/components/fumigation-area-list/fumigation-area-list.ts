@@ -40,6 +40,9 @@ export class FumigationAreaList {
 
   onParcelSelected = (parcelId: number | null): void => {
     this.selectedParcelId.set(parcelId);
+    if (parcelId) {
+      this.fumigationAreaStore.loadFumigationAreas(parcelId);
+    }
   };
 
   onEdit = (id: number): void => {
