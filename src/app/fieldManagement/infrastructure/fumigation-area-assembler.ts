@@ -7,8 +7,18 @@ export class FumigationAreaAssembler implements BaseAssembler<FumigationArea, Fu
         response.fumigationAreas.map(resource => this.toEntityFromResource(resource));
 
     toEntityFromResource = (resource: FumigationAreaResource): FumigationArea =>
-        new FumigationArea(resource.id, resource.parcelId, resource.geometry, resource.area);
+        new FumigationArea(
+            resource.id,
+            resource.parcelId,
+            typeof resource.geometry === 'string' ? resource.geometry : JSON.stringify(resource.geometry),
+            resource.areaHectares ?? 0
+        );
 
     toResourceFromEntity = (entity: FumigationArea): FumigationAreaResource =>
-        ({id: entity.id, parcelId: entity.parcelId, geometry: entity.geometry, area: entity.area});
+        ({
+            id: entity.id,
+            parcelId: entity.parcelId,
+            geometry: entity.geometry,
+            areaHectares: entity.area
+        });
 }

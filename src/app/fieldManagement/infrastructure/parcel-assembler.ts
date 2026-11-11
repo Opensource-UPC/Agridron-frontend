@@ -7,8 +7,24 @@ export class ParcelAssembler implements BaseAssembler<Parcel, ParcelResource, Pa
         response.parcels.map(resource => this.toEntityFromResource(resource));
 
     toEntityFromResource = (resource: ParcelResource): Parcel =>
-        new Parcel(resource.id, resource.name, resource.area, resource.geometry, resource.farmId, resource.cropId, resource.image ?? null);
+        new Parcel(
+            resource.id,
+            resource.name,
+            resource.areaHectares ?? 0,
+            typeof resource.geometry === 'string' ? resource.geometry : JSON.stringify(resource.geometry),
+            resource.farmId,
+            resource.cropId,
+            resource.image ?? null
+        );
 
     toResourceFromEntity = (entity: Parcel): ParcelResource =>
-        ({id: entity.id, name: entity.name, area: entity.area, geometry: entity.geometry, farmId: entity.farmId, cropId: entity.cropId, image: entity.image ?? undefined});
+        ({
+            id: entity.id,
+            name: entity.name,
+            areaHectares: entity.area,
+            geometry: entity.geometry,
+            farmId: entity.farmId,
+            cropId: entity.cropId,
+            image: entity.image ?? undefined
+        });
 }

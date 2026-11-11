@@ -56,6 +56,18 @@ export const hybridApiInterceptor: HttpInterceptorFn = (req, next) => {
 
   // Adaptaciones automáticas para cumplir con las validaciones de Spring Boot:
   if (isReal) {
+    const isCollection = (path: string, method: string) => cleanPath === path && req.method === method;
+    const isItem = (path: string, method: string) =>
+      new RegExp(`^${path}/\\d+$`).test(cleanPath) && req.method === method;
+    const parseGeometry = (value: unknown): unknown => {
+      if (typeof value !== 'string') return value;
+      try {
+        return JSON.parse(value);
+      } catch {
+        return value;
+      }
+    };
+
     // 1. GET /farms: Spring Boot requiere @RequestParam Long ownerId
     const isFarmsList = (cleanPath === '/farms' || cleanPath.startsWith('/farms?')) && req.method === 'GET';
     if (isFarmsList && !req.params.has('ownerId')) {
@@ -74,14 +86,14 @@ export const hybridApiInterceptor: HttpInterceptorFn = (req, next) => {
       });
     }
 
-    // 2. POST /farms: Spring Boot requiere department y ownerId positivo
-    if (cleanPath === '/farms' && req.method === 'POST' && req.body && typeof req.body === 'object') {
+    // 2. POST/PUT /farms: Spring Boot requiere name, location, department y ownerId positivo
+    if ((isCollection('/farms', 'POST') || isItem('/farms', 'PUT')) && req.body && typeof req.body === 'object') {
       const body = { ...(req.body as Record<string, unknown>) };
       if (!body['department']) {
         const loc = String(body['location'] || '');
         body['department'] = loc.includes(',') ? loc.split(',')[0].trim() : 'Lima';
       }
-      if (!body['ownerId'] || Number(body['ownerId']) <= 0) {
+      if (isCollection('/farms', 'POST') && (!body['ownerId'] || Number(body['ownerId']) <= 0)) {
         const storedUser = localStorage.getItem('user');
         body['ownerId'] = storedUser ? JSON.parse(storedUser).id || 1 : 1;
       }
@@ -89,22 +101,42 @@ export const hybridApiInterceptor: HttpInterceptorFn = (req, next) => {
       modifiedReq = modifiedReq.clone({ body });
     }
 
-    // 3. POST /parcels: Spring Boot requiere geometry como objeto GeoJSON y phenologicalStage si hay cropId
-    if (cleanPath === '/parcels' && req.method === 'POST' && req.body && typeof req.body === 'object') {
+    // 3. POST/PUT /parcels: Spring Boot requiere geometry como objeto GeoJSON y
+    //    phenologicalStage cuando hay cropId
+    if ((isCollection('/parcels', 'POST') || isItem('/parcels', 'PUT')) && req.body && typeof req.body === 'object') {
       const body = { ...(req.body as Record<string, unknown>) };
-      if (typeof body['geometry'] === 'string') {
-        try {
-          body['geometry'] = JSON.parse(body['geometry'] as string);
-        } catch {
-          // Ignorar si ya viene en otro formato
-        }
-      }
+      body['geometry'] = parseGeometry(body['geometry']);
       if (body['cropId'] && !body['phenologicalStage']) {
         body['phenologicalStage'] = 'VEGETATIVE';
       }
+      if (!body['cropId']) {
+        delete body['cropId'];
+        delete body['phenologicalStage'];
+      }
       delete body['id'];
       delete body['area'];
+      delete body['areaHectares'];
+      if (isItem('/parcels', 'PUT')) {
+        delete body['farmId'];
+      }
       modifiedReq = modifiedReq.clone({ body });
+    }
+
+    // 4. POST/PUT /fumigation-areas: Spring Boot espera la geometría como objeto y,
+    //    en la actualización, el cuerpo es directamente el GeoJSON del polígono
+    if (isCollection('/fumigation-areas', 'POST') && req.body && typeof req.body === 'object') {
+      const body = { ...(req.body as Record<string, unknown>) };
+      body['geometry'] = parseGeometry(body['geometry']);
+      delete body['id'];
+      delete body['area'];
+      delete body['areaHectares'];
+      modifiedReq = modifiedReq.clone({ body });
+    }
+
+    if (isItem('/fumigation-areas', 'PUT') && req.body && typeof req.body === 'object') {
+      const body = req.body as Record<string, unknown>;
+      const geometry = parseGeometry(body['geometry'] ?? body);
+      modifiedReq = modifiedReq.clone({ body: geometry });
     }
   }
 

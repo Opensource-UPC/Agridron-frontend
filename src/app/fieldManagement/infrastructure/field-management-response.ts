@@ -49,13 +49,13 @@ export interface ParcelResource extends BaseResource {
      */
     name: string;
     /**
-     * Area of the parcel.
+     * Area of the parcel in hectares, calculated by the backend.
      */
-    area: number;
+    areaHectares: number;
     /**
-     * Geometry of the parcel (GeoJSON as string).
+     * Geometry of the parcel (GeoJSON as string or object).
      */
-    geometry: string;
+    geometry: string | object;
     /**
      * Identifier of the farm this parcel belongs to.
      */
@@ -93,13 +93,13 @@ export interface FumigationAreaResource extends BaseResource {
      */
     parcelId: number;
     /**
-     * Geometry of the fumigation area (GeoJSON as string).
+     * Geometry of the fumigation area (GeoJSON as string or object).
      */
-    geometry: string;
+    geometry: string | object;
     /**
-     * Area of the fumigation area.
+     * Area of the fumigation area in hectares, calculated by the backend.
      */
-    area: number;
+    areaHectares: number;
 }
 
 /**
