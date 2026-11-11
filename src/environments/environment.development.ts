@@ -1,9 +1,20 @@
-import {HttpClient} from "@angular/common/http";
-import {DronAssembler} from "../app/InventoryResourceManagement/infrastructure/dron-assembler";
-
 export const environment = {
   production: false,
-  AgriDronProviderApiBaseUrl: 'http://localhost:3000/api/v1',
+  AgriDronProviderApiBaseUrl: 'http://api-gateway',
+
+  /**
+   * 🟢 BACKEND REAL (40%): Endpoints desplegados en Spring Boot.
+   * Cambia esta URL por la URL real de tu backend desplegado en Render u otro servicio.
+   * (Si estuvieras probando con Spring Boot local en tu máquina, usarías: 'http://localhost:8080/api/v1')
+   */
+  realBackendApiUrl: 'https://agridron-backend.onrender.com/api/v1',
+
+  /**
+   * 🟡 FAKE API (60%): Endpoints simulados (Misiones, IAM/Usuarios, etc.).
+   * Puedes usar la API simulada desplegada en Render o localmente 'http://localhost:3000/api/v1'.
+   */
+  fakeApiUrl: 'https://agridron-mock-api.onrender.com',
+
   AgriDronProviderProductsEndpointPath: '/products',
   AgriDronProviderCartsEndpointPath: '/carts',
   AgriDronProviderUsersEndpointPath: '/users',
@@ -21,7 +32,7 @@ export const environment = {
   weatherApiBaseUrl: 'https://api.open-meteo.com',
   weatherEndpointPath: '/v1/forecast',
 
-////De Edwin
+  ////De Edwin
   AgriDronProviderDronesMetricsEndpointPath: '/drones',
   AgriDronProvideChemicalsEndpointPath: '/chemicals',
   AgriDronProvideNozzlesEndpointPath: '/nozzles',

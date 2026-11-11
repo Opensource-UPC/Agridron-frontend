@@ -2,12 +2,13 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAppInitializer, inject } from '@angular/core';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { firstValueFrom } from 'rxjs';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { hybridApiInterceptor } from './shared/infrastructure/hybrid-api.interceptor';
 
 const SVG_ICONS = [
   'menu', 'home', 'farm', 'parcel', 'crop', 'mission', 'fumigation', 'analytics', 'drone', 'profile',
@@ -20,7 +21,9 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideHttpClient(),
+    provideHttpClient(
+      withInterceptors([hybridApiInterceptor])
+    ),
     provideTranslateService({
       loader: provideTranslateHttpLoader({ prefix: './asset/locales/', suffix: '.json' }),
       fallbackLang: 'en',

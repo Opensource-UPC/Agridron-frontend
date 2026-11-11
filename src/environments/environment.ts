@@ -1,7 +1,18 @@
 export const environment = {
   production: true,
-  AgriDronProviderApiBaseUrl: 'https://agridron-mock-api.onrender.com',
-  ///AgriDronProviderApiBaseUrl: 'http://localhost:3000/api/v1',
+  AgriDronProviderApiBaseUrl: 'http://api-gateway',
+
+  /**
+   * 🟢 BACKEND REAL (40%): Endpoints desplegados en Spring Boot.
+   * Cambia esta URL por la URL real de tu backend desplegado en Render u otro servicio.
+   */
+  realBackendApiUrl: 'https://agridron-backend.onrender.com/api/v1',
+
+  /**
+   * 🟡 FAKE API (60%): Endpoints simulados (Misiones, IAM/Usuarios, etc.).
+   */
+  fakeApiUrl: 'https://agridron-mock-api.onrender.com',
+
   AgriDronProviderProductsEndpointPath: '/products',
   AgriDronProviderCartsEndpointPath: '/carts',
   AgriDronProviderUsersEndpointPath: '/users',
@@ -16,7 +27,6 @@ export const environment = {
   AgriDronProviderMissionHistoriesEndpointPath: '/mission-histories',
   AgriDronProviderOperationalMetricsEndpointPath: '/operational-metrics',
   AgriDronProviderPerformanceIndicatorsEndpointPath: '/performance-indicators',
-  // TODO: Replace with real weather API (cannot use localhost in production)
   weatherApiBaseUrl: 'https://api.open-meteo.com',
   weatherEndpointPath: '/v1/forecast',
 
